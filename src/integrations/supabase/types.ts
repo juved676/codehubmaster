@@ -14,7 +14,282 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      answers: {
+        Row: {
+          ai_provider: string | null
+          ai_response_raw: Json | null
+          answer_text: string
+          confidence_score: number | null
+          created_at: string
+          id: string
+          published: boolean
+          question_id: string
+          requires_review: boolean
+          sources_used: Json | null
+          summary_text: string | null
+          updated_at: string
+        }
+        Insert: {
+          ai_provider?: string | null
+          ai_response_raw?: Json | null
+          answer_text: string
+          confidence_score?: number | null
+          created_at?: string
+          id?: string
+          published?: boolean
+          question_id: string
+          requires_review?: boolean
+          sources_used?: Json | null
+          summary_text?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ai_provider?: string | null
+          ai_response_raw?: Json | null
+          answer_text?: string
+          confidence_score?: number | null
+          created_at?: string
+          id?: string
+          published?: boolean
+          question_id?: string
+          requires_review?: boolean
+          sources_used?: Json | null
+          summary_text?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      logs: {
+        Row: {
+          created_at: string
+          details: Json | null
+          event_type: string
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          details?: Json | null
+          event_type: string
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          details?: Json | null
+          event_type?: string
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+          verified: boolean
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+          verified?: boolean
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+          verified?: boolean
+        }
+        Relationships: []
+      }
+      questions: {
+        Row: {
+          audience_level: Database["public"]["Enums"]["audience_level"]
+          body: string
+          created_at: string
+          id: string
+          language: Database["public"]["Enums"]["language_type"]
+          status: Database["public"]["Enums"]["question_status"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          audience_level?: Database["public"]["Enums"]["audience_level"]
+          body: string
+          created_at?: string
+          id?: string
+          language?: Database["public"]["Enums"]["language_type"]
+          status?: Database["public"]["Enums"]["question_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          audience_level?: Database["public"]["Enums"]["audience_level"]
+          body?: string
+          created_at?: string
+          id?: string
+          language?: Database["public"]["Enums"]["language_type"]
+          status?: Database["public"]["Enums"]["question_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "questions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          answer_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          reviewer_id: string
+          verdict: Database["public"]["Enums"]["review_verdict"] | null
+        }
+        Insert: {
+          answer_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewer_id: string
+          verdict?: Database["public"]["Enums"]["review_verdict"] | null
+        }
+        Update: {
+          answer_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reviewer_id?: string
+          verdict?: Database["public"]["Enums"]["review_verdict"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_answer_id_fkey"
+            columns: ["answer_id"]
+            isOneToOne: false
+            referencedRelation: "answers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      sources: {
+        Row: {
+          citation: string | null
+          contributor: string | null
+          created_at: string
+          id: string
+          text_snippet: string
+          title: string
+          trust_level: string | null
+          type: Database["public"]["Enums"]["source_type"]
+          updated_at: string
+        }
+        Insert: {
+          citation?: string | null
+          contributor?: string | null
+          created_at?: string
+          id?: string
+          text_snippet: string
+          title: string
+          trust_level?: string | null
+          type: Database["public"]["Enums"]["source_type"]
+          updated_at?: string
+        }
+        Update: {
+          citation?: string | null
+          contributor?: string | null
+          created_at?: string
+          id?: string
+          text_snippet?: string
+          title?: string
+          trust_level?: string | null
+          type?: Database["public"]["Enums"]["source_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      topics: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          seo_meta: string | null
+          seo_title: string | null
+          slug: string
+          tags: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          seo_meta?: string | null
+          seo_title?: string | null
+          slug: string
+          tags?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          seo_meta?: string | null
+          seo_title?: string | null
+          slug?: string
+          tags?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +298,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      audience_level: "school" | "college" | "research"
+      language_type: "english" | "urdu" | "arabic"
+      question_status: "draft" | "published" | "pending_review" | "flagged"
+      review_verdict: "approve" | "reject" | "edit"
+      source_type: "quran" | "hadith" | "tafsir" | "book" | "url"
+      user_role: "user" | "reviewer" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +430,13 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      audience_level: ["school", "college", "research"],
+      language_type: ["english", "urdu", "arabic"],
+      question_status: ["draft", "published", "pending_review", "flagged"],
+      review_verdict: ["approve", "reject", "edit"],
+      source_type: ["quran", "hadith", "tafsir", "book", "url"],
+      user_role: ["user", "reviewer", "admin"],
+    },
   },
 } as const
