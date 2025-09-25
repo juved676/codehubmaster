@@ -1,106 +1,196 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, BookOpen, MessageCircle } from "lucide-react";
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, BookOpen, User, LogOut, Shield, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
 
-const Navigation = () => {
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut, loading } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <div className="mr-4 hidden md:flex">
+          <Link to="/" className="mr-6 flex items-center space-x-2">
+            <BookOpen className="h-6 w-6 text-primary" />
+            <span className="hidden font-bold sm:inline-block">
               Islamic Study Hub
             </span>
-            <span className="text-sm text-muted-foreground hidden sm:block">
-              اسلامی مطالعاتی مرکز
-            </span>
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
               to="/"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/") ? "text-primary" : "text-muted-foreground"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              Home
+              Home / ہوم
             </Link>
             <Link
               to="/topics"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/topics") ? "text-primary" : "text-muted-foreground"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/topics') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              Topics / مواضیع
+              Topics / موضوعات
             </Link>
             <Link
               to="/ask"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/ask") ? "text-primary" : "text-muted-foreground"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/ask') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
               Ask Question / سوال پوچھیں
             </Link>
-            <Button variant="default" size="sm" asChild>
-              <Link to="/ask">
-                <MessageCircle className="h-4 w-4 mr-2" />
-                Ask Now
-              </Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+            
+            {/* Auth Navigation */}
+            {!loading && user && (
+              <>
+                <Link
+                  to="/admin"
+                  className={`transition-colors hover:text-foreground/80 ${
+                    isActive('/admin') ? 'text-foreground' : 'text-foreground/60'
+                  }`}
+                >
+                  <Shield className="h-4 w-4 inline mr-1" />
+                  Admin
+                </Link>
+                <Link
+                  to="/review-queue"
+                  className={`transition-colors hover:text-foreground/80 ${
+                    isActive('/review-queue') ? 'text-foreground' : 'text-foreground/60'
+                  }`}
+                >
+                  <Users className="h-4 w-4 inline mr-1" />
+                  Reviews
+                </Link>
+              </>
+            )}
+          </nav>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col space-y-4">
-              <Link
-                to="/"
-                className="text-sm font-medium text-muted-foreground hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                to="/topics"
-                className="text-sm font-medium text-muted-foreground hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                Topics / مواضیع
-              </Link>
-              <Link
-                to="/ask"
-                className="text-sm font-medium text-muted-foreground hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                Ask Question / سوال پوچھیں
-              </Link>
-            </div>
+        <Button
+          variant="ghost"
+          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <Menu className="h-6 w-6" />
+          <span className="sr-only">Toggle Menu</span>
+        </Button>
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="w-full flex-1 md:w-auto md:flex-none">
+            {/* Mobile Logo */}
+            <Link to="/" className="flex items-center space-x-2 md:hidden">
+              <BookOpen className="h-6 w-6 text-primary" />
+              <span className="font-bold">Islamic Study Hub</span>
+            </Link>
           </div>
-        )}
+          <nav className="hidden md:flex items-center space-x-2">
+            {!loading && (
+              <>
+                {user ? (
+                  <Button variant="ghost" size="sm" onClick={signOut}>
+                    <LogOut className="h-4 w-4 mr-1" />
+                    Sign Out
+                  </Button>
+                ) : (
+                  <Link to="/auth">
+                    <Button variant="default" size="sm">
+                      <User className="h-4 w-4 mr-1" />
+                      Sign In / لاگ ان
+                    </Button>
+                  </Link>
+                )}
+              </>
+            )}
+          </nav>
+        </div>
       </div>
-    </nav>
+      {isOpen && (
+        <div className="border-t md:hidden">
+          <nav className="grid gap-2 p-4">
+            <Link
+              to="/"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Home / ہوم
+            </Link>
+            <Link
+              to="/topics"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/topics') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Topics / موضوعات
+            </Link>
+            <Link
+              to="/ask"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/ask') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Ask Question / سوال پوچھیں
+            </Link>
+            
+            {/* Mobile Auth Navigation */}
+            {!loading && (
+              <div className="border-t pt-2 mt-2">
+                {user ? (
+                  <>
+                    <Link
+                      to="/admin"
+                      className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                        isActive('/admin') ? 'bg-accent text-accent-foreground' : ''
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Shield className="h-4 w-4 inline mr-2" />
+                      Admin Dashboard
+                    </Link>
+                    <Link
+                      to="/review-queue"
+                      className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                        isActive('/review-queue') ? 'bg-accent text-accent-foreground' : ''
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Users className="h-4 w-4 inline mr-2" />
+                      Review Queue
+                    </Link>
+                    <button
+                      onClick={() => {
+                        signOut();
+                        setIsOpen(false);
+                      }}
+                      className="w-full text-left block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <LogOut className="h-4 w-4 inline mr-2" />
+                      Sign Out / لاگ آؤٹ
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/auth"
+                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <User className="h-4 w-4 inline mr-2" />
+                    Sign In / لاگ ان
+                  </Link>
+                )}
+              </div>
+            )}
+          </nav>
+        </div>
+      )}
+    </header>
   );
-};
-
-export default Navigation;
+}
