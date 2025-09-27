@@ -28,7 +28,7 @@ serve(async (req) => {
       .from('questions')
       .select('*')
       .eq('id', questionId)
-      .single();
+      .maybeSingle();
 
     if (questionError || !question) {
       throw new Error('Question not found');
@@ -56,11 +56,12 @@ Context_snippets: ${contextSnippets}
 Output format: JSON as specified.`;
 
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-goog-api-key': geminiApiKey,
         },
         body: JSON.stringify({
           contents: [{
@@ -77,7 +78,9 @@ Output format: JSON as specified.`;
     );
 
     if (!geminiResponse.ok) {
-      throw new Error(`Gemini API error: ${geminiResponse.status}`);
+      const errorText = await geminiResponse.text();
+      console.error('Gemini API error details:', errorText);
+      throw new Error(`Gemini API error: ${geminiResponse.status} - ${errorText}`);
     }
 
     const geminiData = await geminiResponse.json();
