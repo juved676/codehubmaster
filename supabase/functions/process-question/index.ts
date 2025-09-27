@@ -23,12 +23,12 @@ serve(async (req) => {
     
     console.log('Processing question:', questionId);
 
-    // Get question details
-    const { data: question, error: questionError } = await supabase
-      .from('questions')
-      .select('*')
-      .eq('id', questionId)
-      .maybeSingle();
+      // Get question details
+      const { data: question, error: questionError } = await supabase
+        .from('questions')
+        .select('*')
+        .eq('id', questionId)
+        .maybeSingle();
 
     if (questionError || !question) {
       throw new Error('Question not found');
@@ -184,19 +184,19 @@ Output format: JSON as specified.`;
       })
       .eq('id', questionId);
 
-    // Log the event
-    await supabase
-      .from('logs')
-      .insert({
-        event_type: 'ai_answer_generated',
-        details: {
-          question_id: questionId,
-          answer_id: answer.id,
-          requires_review: needsReview,
-          ai_provider: 'gemini'
-        },
-        user_id: question.user_id
-      });
+        // Log the event (handle anonymous users)
+        await supabase
+          .from('logs')
+          .insert({
+            event_type: 'ai_answer_generated',
+            details: {
+              question_id: questionId,
+              answer_id: answer.id,
+              requires_review: needsReview,
+              ai_provider: 'gemini'
+            },
+            user_id: question.user_id || null // Handle anonymous questions
+          });
 
     console.log('Question processed successfully:', {
       questionId,

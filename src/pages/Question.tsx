@@ -47,18 +47,22 @@ export default function Question() {
 
   const fetchQuestionAndAnswer = async () => {
     try {
-      // Fetch question
+      // Fetch question (handle anonymous questions)
       const { data: questionData, error: questionError } = await supabase
         .from('questions')
-        .select(`
-          *,
-          profiles:profiles!questions_user_id_fkey(name)
-        `)
+        .select('*')
         .eq('id', id)
         .single();
 
       if (questionError) throw questionError;
-      setQuestion(questionData);
+      
+      // Set question data with default profile for anonymous questions
+      const questionWithProfile = {
+        ...questionData,
+        profiles: questionData.user_id ? null : { name: 'Anonymous' }
+      };
+      
+      setQuestion(questionWithProfile);
 
       // Fetch published answer
       const { data: answerData, error: answerError } = await supabase

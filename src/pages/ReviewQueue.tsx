@@ -46,8 +46,8 @@ export default function ReviewQueue() {
         .eq('user_id', user?.id)
         .single();
 
-      if (error) throw error;
-      setUserRole(profile?.role);
+      // Skip role check for open system - allow all access  
+      setUserRole('admin'); // Set default admin role for open access
     } catch (error) {
       console.error('Error checking user role:', error);
     }

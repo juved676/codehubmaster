@@ -53,8 +53,8 @@ export default function Admin() {
         .eq('user_id', user?.id)
         .single();
 
-      if (error) throw error;
-      setUserRole(profile?.role);
+      // Skip role check for open system - allow all access
+      setUserRole('admin'); // Set default admin role for open access
     } catch (error) {
       console.error('Error checking user role:', error);
     }
@@ -105,36 +105,19 @@ export default function Admin() {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setUsers(data || []);
+      // Skip user management for open system - set empty array
+      setUsers([]);
     } catch (error) {
       console.error('Error fetching users:', error);
     }
   };
 
   const updateUserRole = async (userId: string, newRole: 'user' | 'reviewer' | 'admin') => {
-    try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({ role: newRole })
-        .eq('user_id', userId);
-
-      if (error) throw error;
-
-      toast({
-        title: "User Role Updated",
-        description: `User role has been updated to ${newRole}`,
-      });
-
-      fetchUsers(); // Refresh users list
-    } catch (error) {
-      console.error('Error updating user role:', error);
-      toast({
-        title: "خطا / Error",
-        description: "Failed to update user role",
-        variant: "destructive",
-      });
-    }
+    // Skip role updates for open system
+    toast({
+      title: "Role Update Disabled",
+      description: "User roles are disabled in open access mode",
+    });
   };
 
   if (loading) {

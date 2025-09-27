@@ -24,16 +24,6 @@ export default function Ask() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!user) {
-      toast({
-        title: "Authentication Required / لاگ ان ضروری",
-        description: "Please sign in to ask a question",
-        variant: "destructive",
-      });
-      navigate('/auth');
-      return;
-    }
 
     if (!formData.title.trim() || !formData.question.trim()) {
       toast({
@@ -47,11 +37,11 @@ export default function Ask() {
     setIsSubmitting(true);
 
     try {
-      // Insert question into database
+      // Insert question into database (anonymous or authenticated)
       const { data: question, error: questionError } = await supabase
         .from('questions')
         .insert({
-          user_id: user.id,
+          user_id: user?.id || null, // Allow null for anonymous users
           title: formData.title.trim(),
           body: formData.question.trim(),
           language: formData.language as any,
@@ -97,25 +87,7 @@ export default function Ask() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  if (!user) {
-    return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl text-center">
-        <Card>
-          <CardContent className="py-12">
-            <AlertCircle className="mx-auto h-16 w-16 text-amber-500 mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Sign In Required / لاگ ان ضروری</h2>
-            <p className="text-muted-foreground mb-6">
-              Please sign in to ask questions and get personalized answers. / 
-              سوال پوچھنے اور ذاتی جوابات حاصل کرنے کے لیے براہ کرم لاگ ان کریں۔
-            </p>
-            <Button onClick={() => navigate('/auth')}>
-              Sign In / لاگ ان کریں
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Remove authentication requirement - allow anonymous questions
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
