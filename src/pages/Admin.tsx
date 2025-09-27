@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -159,6 +160,11 @@ export default function Admin() {
         <p className="text-muted-foreground">
           Manage your Islamic Study Hub / اپنا اسلامک اسٹڈی ہب منظم کریں
         </p>
+      </div>
+
+      {/* Credits Overview */}
+      <div className="mb-8">
+        <CreditsDisplay />
       </div>
 
       {/* Stats Cards */}

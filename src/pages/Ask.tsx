@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { MessageSquare, Send, AlertCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -100,13 +101,15 @@ export default function Ask() {
         </p>
       </div>
 
-      <Card className="shadow-elegant">
-        <CardHeader>
-          <CardTitle>Submit Your Question / سوال جمع کریں</CardTitle>
-          <CardDescription>
-            Fill out the form below to get a comprehensive answer to your Islamic studies question.
-          </CardDescription>
-        </CardHeader>
+      <div className="grid gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <Card className="shadow-elegant">
+            <CardHeader>
+              <CardTitle>Submit Your Question / سوال جمع کریں</CardTitle>
+              <CardDescription>
+                Fill out the form below to get a comprehensive answer to your Islamic studies question.
+              </CardDescription>
+            </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Question Title */}
@@ -178,7 +181,26 @@ export default function Ask() {
             </Button>
           </form>
         </CardContent>
-      </Card>
+          </Card>
+        </div>
+
+        {/* Credits Sidebar */}
+        <div className="lg:col-span-1">
+          <CreditsDisplay />
+          
+          {/* Quick Tips */}
+          <Card className="mt-6 border-accent/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base">Quick Tips / تیز تجاویز</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <p>• Be specific for better answers</p>
+              <p>• Include context when relevant</p>
+              <p>• Complex questions may need review</p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       {/* Guidelines */}
       <Card className="mt-8 border-amber-200 dark:border-amber-800">

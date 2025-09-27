@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, BookOpen, User, LogOut, Shield, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function Navigation() {
@@ -71,6 +72,11 @@ export default function Navigation() {
               </>
             )}
           </nav>
+        </div>
+        
+        {/* Credits Display for Desktop */}
+        <div className="hidden lg:flex items-center mr-4">
+          <CreditsDisplay variant="compact" />
         </div>
         <Button
           variant="ghost"
