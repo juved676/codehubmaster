@@ -156,6 +156,56 @@ export type Database = {
         }
         Relationships: []
       }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          expires_at: string
+          id: string
+          payment_method: string
+          payment_status: string
+          plan_id: string | null
+          updated_at: string
+          upi_ref: string | null
+          upi_transaction_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          expires_at?: string
+          id?: string
+          payment_method?: string
+          payment_status?: string
+          plan_id?: string | null
+          updated_at?: string
+          upi_ref?: string | null
+          upi_transaction_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          expires_at?: string
+          id?: string
+          payment_method?: string
+          payment_status?: string
+          plan_id?: string | null
+          updated_at?: string
+          upi_ref?: string | null
+          upi_transaction_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -392,6 +442,63 @@ export type Database = {
         }
         Relationships: []
       }
+      user_subscriptions: {
+        Row: {
+          created_at: string
+          credits_remaining: number
+          current_period: number
+          expires_at: string
+          id: string
+          payment_id: string | null
+          period_start_date: string
+          plan_id: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          credits_remaining?: number
+          current_period?: number
+          expires_at: string
+          id?: string
+          payment_id?: string | null
+          period_start_date?: string
+          plan_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          credits_remaining?: number
+          current_period?: number
+          expires_at?: string
+          id?: string
+          payment_id?: string | null
+          period_start_date?: string
+          plan_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_subscriptions_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_usage: {
         Row: {
           created_at: string | null
@@ -460,6 +567,14 @@ export type Database = {
       get_current_period: {
         Args: Record<PropertyKey, never>
         Returns: number
+      }
+      get_user_credits_detailed: {
+        Args: { user_uuid: string }
+        Returns: Json
+      }
+      initiate_upi_payment: {
+        Args: { plan_uuid: string; user_uuid: string }
+        Returns: Json
       }
       manage_topic: {
         Args: {
