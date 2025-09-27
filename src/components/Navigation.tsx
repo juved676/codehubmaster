@@ -47,6 +47,14 @@ export default function Navigation() {
             >
               Ask Question / سوال پوچھیں
             </Link>
+            <Link
+              to="/pricing"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/pricing') ? 'text-foreground' : 'text-foreground/60'
+              } bg-gradient-accent text-white px-3 py-1 rounded-full text-xs font-semibold`}
+            >
+              Pricing ⚡ 80% OFF
+            </Link>
             
             {/* Auth Navigation */}
             {!loading && user && (
@@ -144,6 +152,15 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Ask Question / سوال پوچھیں
+            </Link>
+            <Link
+              to="/pricing"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/pricing') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              💰 Pricing - 80% OFF Sale!
             </Link>
             
             {/* Mobile Auth Navigation */}

@@ -12,6 +12,8 @@ import Topics from "./pages/Topics";
 import Auth from "./pages/Auth";
 import Question from "./pages/Question";
 import Admin from "./pages/Admin";
+import AdminPayments from "./pages/AdminPayments";
+import Pricing from "./pages/Pricing";
 import ReviewQueue from "./pages/ReviewQueue";
 import NotFound from "./pages/NotFound";
 
@@ -30,9 +32,11 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/ask" element={<Ask />} />
               <Route path="/topics" element={<Topics />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/question/:id" element={<Question />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/payments" element={<AdminPayments />} />
               <Route path="/review-queue" element={<ReviewQueue />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 
-interface CreditInfo {
+export interface CreditInfo {
   can_ask: boolean;
   credits_left: number;
-  period_number: number;
   plan_name: string;
   original_price: number;
   discounted_price: number;
-  message: string;
+  period_number: number;
+  is_premium?: boolean;
+  subscription_expires?: string;
+  message?: string;
 }
 
 export function useCredits() {
@@ -20,14 +22,14 @@ export function useCredits() {
 
   const fetchCredits = async () => {
     if (!user) {
-      // For anonymous users, show default free credits
       setCreditInfo({
         can_ask: true,
         credits_left: 6,
-        period_number: 1,
-        plan_name: 'Anonymous',
-        original_price: 0,
+        plan_name: 'ILM Free',
+        original_price: 25,
         discounted_price: 0,
+        period_number: 3,
+        is_premium: false,
         message: 'Anonymous users get 6 free questions'
       });
       setLoading(false);
@@ -36,17 +38,19 @@ export function useCredits() {
 
     try {
       setLoading(true);
-      const { data, error } = await supabase.rpc('check_user_credits', {
+      const { data, error } = await supabase.rpc('get_user_credits_detailed', {
         user_uuid: user.id
       });
 
-      if (error) throw error;
-      if (data && typeof data === 'object') {
+      if (error) {
+        console.error('Error fetching credits:', error);
+        setError(error.message);
+      } else {
         setCreditInfo(data as unknown as CreditInfo);
       }
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Error fetching credits:', err);
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      setError('Failed to fetch credit information');
     } finally {
       setLoading(false);
     }

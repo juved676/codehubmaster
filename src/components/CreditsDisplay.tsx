@@ -88,37 +88,45 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
           </div>
         )}
 
-        {/* Status Message */}
-        <div className="text-sm text-center p-3 bg-muted rounded-lg">
-          {creditInfo.message}
-        </div>
-
-        {/* Upgrade Options */}
-        {creditInfo.credits_left <= 2 && (
-          <div className="space-y-2 pt-2 border-t">
-            <p className="text-sm font-medium text-center mb-3">
-              Upgrade Options / اپ گریڈ آپشنز
+        <div className="space-y-4">
+          <div className="text-center">
+            <div className="text-lg font-semibold text-islamic-emerald">
+              {creditInfo.credits_left} Credits Left
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {creditInfo.plan_name} Plan {creditInfo.is_premium && '✨'} • Period {creditInfo.period_number}/3
             </p>
-            <div className="grid gap-2">
-              <Button 
-                variant="default" 
-                size="sm" 
-                className="w-full bg-gradient-primary"
-              >
-                <Crown className="h-4 w-4 mr-2" />
-                ILM Pro - $15/month
-              </Button>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full border-islamic-gold text-islamic-gold hover:bg-islamic-gold hover:text-foreground"
-              >
-                <Zap className="h-4 w-4 mr-2" />
-                ILM Advance - $25/month
+            
+            {daysUntilReset !== null && (
+              <div className="flex items-center gap-1 text-xs text-muted-foreground justify-center mt-2">
+                <Clock className="h-3 w-3" />
+                <span>Resets in {daysUntilReset} days</span>
+              </div>
+            )}
+          </div>
+
+          {!creditInfo.is_premium && creditInfo.credits_left <= 3 && (
+            <div className="mt-4 space-y-2">
+              <p className="text-sm text-amber-600 text-center">
+                🚀 Upgrade to premium for more credits and features!
+              </p>
+              <Button size="sm" className="w-full bg-gradient-primary" asChild>
+                <a href="/pricing">
+                  <Zap className="h-3 w-3 mr-1" />
+                  View Plans - 80% OFF
+                </a>
               </Button>
             </div>
-          </div>
-        )}
+          )}
+
+          {creditInfo.is_premium && creditInfo.credits_left <= 2 && (
+            <div className="mt-4 space-y-2">
+              <p className="text-sm text-amber-600 text-center">
+                ⚠️ Low on premium credits! They'll reset next period
+              </p>
+            </div>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
