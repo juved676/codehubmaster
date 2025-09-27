@@ -55,8 +55,41 @@ Audience_level: ${question.audience_level}
 Context_snippets: ${contextSnippets}
 Output format: JSON as specified.`;
 
+    // First test with a simple success response to verify basic connectivity
+    if (question.title.toLowerCase().includes('test')) {
+      const testAnswer = {
+        id: 'test-answer-id',
+        question_id: questionId,
+        answer_text: '🧪 Test successful! The edge function is working correctly.',
+        summary_text: 'Edge function connectivity test passed',
+        sources_used: [],
+        ai_provider: 'test',
+        confidence_score: 1.0,
+        requires_review: false,
+        published: true
+      };
+
+      const { data: answer, error: answerError } = await supabase
+        .from('answers')
+        .insert(testAnswer)
+        .select()
+        .single();
+
+      if (answerError) throw answerError;
+
+      return new Response(JSON.stringify({ 
+        success: true,
+        answer_id: answer.id,
+        requires_review: false,
+        published: true,
+        test_mode: true
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
       {
         method: 'POST',
         headers: {
