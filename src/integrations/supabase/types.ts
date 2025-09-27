@@ -14,6 +14,71 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_config: {
+        Row: {
+          api_key_name: string
+          created_at: string | null
+          id: string
+          model: string | null
+          provider: string | null
+          status: string | null
+        }
+        Insert: {
+          api_key_name?: string
+          created_at?: string | null
+          id?: string
+          model?: string | null
+          provider?: string | null
+          status?: string | null
+        }
+        Update: {
+          api_key_name?: string
+          created_at?: string | null
+          id?: string
+          model?: string | null
+          provider?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      ai_conversations: {
+        Row: {
+          answer: string | null
+          confidence_level: number | null
+          created_at: string | null
+          id: string
+          question: string
+          sources: string[] | null
+          topic_id: string | null
+        }
+        Insert: {
+          answer?: string | null
+          confidence_level?: number | null
+          created_at?: string | null
+          id?: string
+          question: string
+          sources?: string[] | null
+          topic_id?: string | null
+        }
+        Update: {
+          answer?: string | null
+          confidence_level?: number | null
+          created_at?: string | null
+          id?: string
+          question?: string
+          sources?: string[] | null
+          topic_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_conversations_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       answers: {
         Row: {
           ai_provider: string | null
@@ -89,46 +154,29 @@ export type Database = {
           id?: string
           user_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "logs_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
+        Relationships: []
       }
       profiles: {
         Row: {
-          created_at: string
-          email: string | null
-          id: string
-          name: string | null
-          role: Database["public"]["Enums"]["user_role"]
-          updated_at: string
+          created_at: string | null
+          preferred_language: string | null
+          study_level: string | null
+          updated_at: string | null
           user_id: string
-          verified: boolean
         }
         Insert: {
-          created_at?: string
-          email?: string | null
-          id?: string
-          name?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
-          updated_at?: string
+          created_at?: string | null
+          preferred_language?: string | null
+          study_level?: string | null
+          updated_at?: string | null
           user_id: string
-          verified?: boolean
         }
         Update: {
-          created_at?: string
-          email?: string | null
-          id?: string
-          name?: string | null
-          role?: Database["public"]["Enums"]["user_role"]
-          updated_at?: string
+          created_at?: string | null
+          preferred_language?: string | null
+          study_level?: string | null
+          updated_at?: string | null
           user_id?: string
-          verified?: boolean
         }
         Relationships: []
       }
@@ -142,7 +190,7 @@ export type Database = {
           status: Database["public"]["Enums"]["question_status"]
           title: string
           updated_at: string
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           audience_level?: Database["public"]["Enums"]["audience_level"]
@@ -153,7 +201,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["question_status"]
           title: string
           updated_at?: string
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           audience_level?: Database["public"]["Enums"]["audience_level"]
@@ -164,17 +212,9 @@ export type Database = {
           status?: Database["public"]["Enums"]["question_status"]
           title?: string
           updated_at?: string
-          user_id?: string
+          user_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "questions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
+        Relationships: []
       }
       reviews: {
         Row: {
@@ -209,93 +249,238 @@ export type Database = {
             referencedRelation: "answers"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "reviews_reviewer_id_fkey"
-            columns: ["reviewer_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
-          },
         ]
+      }
+      seo_metadata: {
+        Row: {
+          canonical_url: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          keywords: string[] | null
+          og_image: string | null
+          page_url: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          canonical_url?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          keywords?: string[] | null
+          og_image?: string | null
+          page_url: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          canonical_url?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          keywords?: string[] | null
+          og_image?: string | null
+          page_url?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       sources: {
         Row: {
           citation: string | null
           contributor: string | null
-          created_at: string
           id: string
-          text_snippet: string
+          text_snippet: string | null
           title: string
           trust_level: string | null
-          type: Database["public"]["Enums"]["source_type"]
-          updated_at: string
+          type: string | null
         }
         Insert: {
           citation?: string | null
           contributor?: string | null
-          created_at?: string
           id?: string
-          text_snippet: string
+          text_snippet?: string | null
           title: string
           trust_level?: string | null
-          type: Database["public"]["Enums"]["source_type"]
-          updated_at?: string
+          type?: string | null
         }
         Update: {
           citation?: string | null
           contributor?: string | null
-          created_at?: string
           id?: string
-          text_snippet?: string
+          text_snippet?: string | null
           title?: string
           trust_level?: string | null
-          type?: Database["public"]["Enums"]["source_type"]
-          updated_at?: string
+          type?: string | null
+        }
+        Relationships: []
+      }
+      subscription_plans: {
+        Row: {
+          created_at: string | null
+          credits_per_period: number | null
+          discounted_price: number | null
+          features: string[] | null
+          id: string
+          is_active: boolean | null
+          is_popular: boolean | null
+          name: string
+          original_price: number | null
+          periods_per_month: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          credits_per_period?: number | null
+          discounted_price?: number | null
+          features?: string[] | null
+          id?: string
+          is_active?: boolean | null
+          is_popular?: boolean | null
+          name: string
+          original_price?: number | null
+          periods_per_month?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          credits_per_period?: number | null
+          discounted_price?: number | null
+          features?: string[] | null
+          id?: string
+          is_active?: boolean | null
+          is_popular?: boolean | null
+          name?: string
+          original_price?: number | null
+          periods_per_month?: number | null
         }
         Relationships: []
       }
       topics: {
         Row: {
-          created_at: string
+          category: string | null
+          created_by: string | null
           description: string | null
+          display_order: number | null
           id: string
-          seo_meta: string | null
-          seo_title: string | null
-          slug: string
-          tags: Json | null
-          title: string
-          updated_at: string
+          is_active: boolean | null
+          name: string
+          tags: string[] | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
+          category?: string | null
+          created_by?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
-          seo_meta?: string | null
-          seo_title?: string | null
-          slug: string
-          tags?: Json | null
-          title: string
-          updated_at?: string
+          is_active?: boolean | null
+          name: string
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
+          category?: string | null
+          created_by?: string | null
           description?: string | null
+          display_order?: number | null
           id?: string
-          seo_meta?: string | null
-          seo_title?: string | null
-          slug?: string
-          tags?: Json | null
-          title?: string
-          updated_at?: string
+          is_active?: boolean | null
+          name?: string
+          tags?: string[] | null
+          updated_at?: string | null
         }
         Relationships: []
+      }
+      user_usage: {
+        Row: {
+          created_at: string | null
+          credits_used_current_period: number | null
+          current_period_number: number | null
+          id: string
+          last_period_reset: string | null
+          plan_id: string | null
+          status: string | null
+          subscription_start: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          credits_used_current_period?: number | null
+          current_period_number?: number | null
+          id?: string
+          last_period_reset?: string | null
+          plan_id?: string | null
+          status?: string | null
+          subscription_start?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          credits_used_current_period?: number | null
+          current_period_number?: number | null
+          id?: string
+          last_period_reset?: string | null
+          plan_id?: string | null
+          status?: string | null
+          subscription_start?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_usage_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      ask_question_with_credits: {
+        Args: { question_text: string; user_uuid: string }
+        Returns: Json
+      }
+      check_user_credits: {
+        Args: { user_uuid: string }
+        Returns: Json
+      }
+      get_ai_answer: {
+        Args: { user_question: string }
+        Returns: {
+          answer_text: string
+          confidence: number
+          sources: string[]
+        }[]
+      }
+      get_current_period: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      manage_topic: {
+        Args: {
+          action_type: string
+          topic_category?: string
+          topic_description?: string
+          topic_id?: string
+          topic_name?: string
+          topic_tags?: string[]
+        }
+        Returns: string
+      }
+      update_seo_metadata: {
+        Args: {
+          page_description: string
+          page_keywords: string[]
+          page_title: string
+          page_url: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       audience_level: "school" | "college" | "research"
