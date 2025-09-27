@@ -88,13 +88,14 @@ Output format: JSON as specified.`;
       });
     }
 
+    console.log('Making Gemini API request with prompt length:', prompt.length);
+    
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-goog-api-key': geminiApiKey,
         },
         body: JSON.stringify({
           contents: [{
@@ -110,6 +111,8 @@ Output format: JSON as specified.`;
       }
     );
 
+    console.log('Gemini API response status:', geminiResponse.status);
+
     if (!geminiResponse.ok) {
       const errorText = await geminiResponse.text();
       console.error('Gemini API error details:', errorText);
@@ -117,11 +120,16 @@ Output format: JSON as specified.`;
     }
 
     const geminiData = await geminiResponse.json();
+    console.log('Gemini API response structure:', JSON.stringify(geminiData, null, 2));
+    
     const generatedText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!generatedText) {
-      throw new Error('No response from Gemini API');
+      console.error('No generated text found in response:', geminiData);
+      throw new Error(`No response from Gemini API. Response structure: ${JSON.stringify(geminiData)}`);
     }
+
+    console.log('Generated text length:', generatedText.length);
 
     // Parse AI response
     let aiResponse;
