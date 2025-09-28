@@ -7,8 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from '@/hooks/use-toast';
-import { BarChart3, Users, MessageSquare, Settings, Shield, Database } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
+import { BarChart3, Users, MessageSquare, Settings, Shield, Database, IndianRupee, CreditCard, TrendingUp, Activity } from 'lucide-react';
+import { Navigate, Link } from 'react-router-dom';
 
 interface Stats {
   totalUsers: number;
@@ -214,9 +214,48 @@ export default function Admin() {
         </Card>
       </div>
 
+      {/* Quick Access to Payment Analytics */}
+      <div className="mb-8">
+        <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-800">
+              <IndianRupee className="h-5 w-5" />
+              Payment Analytics & Income Tracking
+            </CardTitle>
+            <CardDescription className="text-green-700">
+              Access comprehensive revenue analytics, Fampay UPI integration, and payment management
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="h-4 w-4 text-green-600" />
+                  <span className="text-sm font-medium">Fampay UPI: 9625852028@fam</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Activity className="h-4 w-4 text-blue-600" />
+                  <span className="text-sm">Real-time Tracking Active</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4 text-purple-600" />
+                  <span className="text-sm">Auto Verification Enabled</span>
+                </div>
+              </div>
+              <Link to="/admin/payments">
+                <Button className="bg-green-600 hover:bg-green-700 text-white">
+                  View Payment Dashboard
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       <Tabs defaultValue="users" className="space-y-4">
         <TabsList>
           <TabsTrigger value="users">Users / صارفین</TabsTrigger>
+          <TabsTrigger value="payments">Revenue Analytics</TabsTrigger>
           <TabsTrigger value="settings">Settings / ترتیبات</TabsTrigger>
           <TabsTrigger value="logs">Activity Logs / سرگرمی</TabsTrigger>
         </TabsList>
@@ -258,6 +297,124 @@ export default function Admin() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="payments" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <Card className="bg-gradient-to-br from-green-50 to-emerald-100 border-green-200">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg flex items-center gap-2 text-green-800">
+                  <IndianRupee className="h-5 w-5" />
+                  Revenue Tracking
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-green-700 mb-1">Real-time Income</div>
+                <p className="text-sm text-green-600">Complete financial analytics with daily/monthly breakdowns</p>
+                <div className="mt-3">
+                  <div className="text-xs text-green-800 font-medium">Features:</div>
+                  <ul className="text-xs text-green-700 mt-1 space-y-1">
+                    <li>• Daily revenue charts</li>
+                    <li>• Plan-wise sales analytics</li>
+                    <li>• Growth rate tracking</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg flex items-center gap-2 text-blue-800">
+                  <CreditCard className="h-5 w-5" />
+                  Fampay Integration
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-blue-700 mb-1">9625852028@fam</div>
+                <p className="text-sm text-blue-600">Automated UPI payment processing</p>
+                <div className="mt-3">
+                  <div className="text-xs text-blue-800 font-medium">Status:</div>
+                  <ul className="text-xs text-blue-700 mt-1 space-y-1">
+                    <li>✅ Auto verification active</li>
+                    <li>✅ Real-time tracking enabled</li>
+                    <li>✅ Subscription automation</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg flex items-center gap-2 text-purple-800">
+                  <BarChart3 className="h-5 w-5" />
+                  Payment Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-purple-700 mb-1">Complete Control</div>
+                <p className="text-sm text-purple-600">Manage all payment statuses and user subscriptions</p>
+                <div className="mt-3">
+                  <div className="text-xs text-purple-800 font-medium">Capabilities:</div>
+                  <ul className="text-xs text-purple-700 mt-1 space-y-1">
+                    <li>• Update payment status</li>
+                    <li>• Auto subscription creation</li>
+                    <li>• Export reports</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Access Full Payment Dashboard</CardTitle>
+              <CardDescription>
+                Click below to access the complete payment analytics system with charts, reports, and management tools
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/admin/payments" className="flex-1">
+                  <Button className="w-full bg-green-600 hover:bg-green-700 text-white h-12 text-base">
+                    <IndianRupee className="mr-2 h-5 w-5" />
+                    Open Payment Analytics Dashboard
+                  </Button>
+                </Link>
+                <div className="flex gap-2">
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4" />
+                    Quick Stats
+                  </Button>
+                  <Button variant="outline" className="flex items-center gap-2">
+                    <Activity className="h-4 w-4" />
+                    Live Tracking
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <div className="text-sm font-medium text-amber-800 mb-2">💡 Payment Analytics Features</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-amber-700">
+                  <div>
+                    <strong>Revenue Tracking:</strong>
+                    <ul className="mt-1 space-y-1 ml-4">
+                      <li>• Real-time income monitoring</li>
+                      <li>• Daily/monthly revenue charts</li>
+                      <li>• Growth rate calculations</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>Payment Management:</strong>
+                    <ul className="mt-1 space-y-1 ml-4">
+                      <li>• Fampay UPI verification</li>
+                      <li>• Automatic user upgrades</li>
+                      <li>• Detailed payment reports</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
