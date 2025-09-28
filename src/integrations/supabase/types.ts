@@ -581,9 +581,7 @@ export type Database = {
         Returns: Json
       }
       get_ai_answer: {
-        Args:
-          | { requesting_user_id?: string; user_question: string }
-          | { user_question: string }
+        Args: { requesting_user_id?: string; user_question: string }
         Returns: {
           answer_text: string
           confidence: number
