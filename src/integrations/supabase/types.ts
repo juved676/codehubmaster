@@ -130,6 +130,13 @@ export type Database = {
             foreignKeyName: "answers_question_id_fkey"
             columns: ["question_id"]
             isOneToOne: false
+            referencedRelation: "published_questions_secure"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
             referencedRelation: "questions"
             referencedColumns: ["id"]
           },
@@ -569,7 +576,42 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      published_questions_secure: {
+        Row: {
+          audience_level: Database["public"]["Enums"]["audience_level"] | null
+          body: string | null
+          created_at: string | null
+          id: string | null
+          language: Database["public"]["Enums"]["language_type"] | null
+          status: Database["public"]["Enums"]["question_status"] | null
+          title: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+          user_id?: never
+        }
+        Update: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+          user_id?: never
+        }
+        Relationships: []
+      }
     }
     Functions: {
       ask_question_with_credits: {
