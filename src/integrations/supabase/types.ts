@@ -50,6 +50,7 @@ export type Database = {
           question: string
           sources: string[] | null
           topic_id: string | null
+          user_id: string | null
         }
         Insert: {
           answer?: string | null
@@ -59,6 +60,7 @@ export type Database = {
           question: string
           sources?: string[] | null
           topic_id?: string | null
+          user_id?: string | null
         }
         Update: {
           answer?: string | null
@@ -68,6 +70,7 @@ export type Database = {
           question?: string
           sources?: string[] | null
           topic_id?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -578,7 +581,9 @@ export type Database = {
         Returns: Json
       }
       get_ai_answer: {
-        Args: { user_question: string }
+        Args:
+          | { requesting_user_id?: string; user_question: string }
+          | { user_question: string }
         Returns: {
           answer_text: string
           confidence: number
