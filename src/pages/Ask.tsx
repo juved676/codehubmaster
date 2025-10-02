@@ -28,7 +28,7 @@ export default function Ask() {
 
     if (!formData.title.trim() || !formData.question.trim()) {
       toast({
-        title: "Incomplete Form / نامکمل فارم",
+        title: "Incomplete Form",
         description: "Please fill in all required fields",
         variant: "destructive",
       });
@@ -63,10 +63,10 @@ export default function Ask() {
       if (processError) throw processError;
 
       toast({
-        title: "Question Submitted! / سوال جمع کر دیا گیا!",
+        title: "Question Submitted!",
         description: processResult.requires_review 
-          ? "Your question is being reviewed by scholars / آپ کا سوال علماء کے جائزے میں ہے"
-          : "Your answer is ready! / آپ کا جواب تیار ہے!",
+          ? "Your question is being reviewed by our team"
+          : "Your answer is ready!",
       });
 
       // Redirect to question page
@@ -75,7 +75,7 @@ export default function Ask() {
     } catch (error: any) {
       console.error('Error submitting question:', error);
       toast({
-        title: "خطا / Error",
+        title: "Error",
         description: error.message || "Failed to submit question",
         variant: "destructive",
       });
@@ -94,10 +94,10 @@ export default function Ask() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-4 text-center">
-          Ask Your Question / اپنا سوال پوچھیں
+          Ask Your Coding Question
         </h1>
         <p className="text-xl text-muted-foreground text-center max-w-2xl mx-auto">
-          Get knowledgeable answers about Islamic studies from our AI assistant, backed by authentic sources
+          Get expert answers about programming, debugging, and software development from our AI assistant
         </p>
       </div>
 
@@ -105,19 +105,19 @@ export default function Ask() {
         <div className="lg:col-span-2">
           <Card className="shadow-elegant">
             <CardHeader>
-              <CardTitle>Submit Your Question / سوال جمع کریں</CardTitle>
+              <CardTitle>Submit Your Question</CardTitle>
               <CardDescription>
-                Fill out the form below to get a comprehensive answer to your Islamic studies question.
+                Fill out the form below to get a comprehensive answer to your coding question with examples.
               </CardDescription>
             </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Question Title */}
             <div className="space-y-2">
-              <Label htmlFor="title">Question Title * / سوال کا عنوان</Label>
+              <Label htmlFor="title">Question Title *</Label>
               <Input
                 id="title"
-                placeholder="What is your main question? / آپ کا بنیادی سوال کیا ہے؟"
+                placeholder="What is your coding question? e.g., How do I use Python lists?"
                 value={formData.title}
                 onChange={(e) => handleInputChange("title", e.target.value)}
                 required
@@ -126,10 +126,10 @@ export default function Ask() {
 
             {/* Question Details */}
             <div className="space-y-2">
-              <Label htmlFor="question">Question Details * / تفصیلات</Label>
+              <Label htmlFor="question">Question Details *</Label>
               <Textarea
                 id="question"
-                placeholder="Please provide detailed context for your question. Include any specific aspects you'd like covered... / براہ کرم اپنے سوال کا تفصیلی پس منظر فراہم کریں۔"
+                placeholder="Describe your coding problem or what you want to learn. Include any error messages or code snippets if relevant..."
                 className="min-h-[120px]"
                 value={formData.question}
                 onChange={(e) => handleInputChange("question", e.target.value)}
@@ -140,30 +140,29 @@ export default function Ask() {
             {/* Language Selection */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Preferred Language / ترجیحی زبان</Label>
+                <Label>Preferred Language</Label>
                 <Select value={formData.language} onValueChange={(value) => handleInputChange("language", value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select language" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="urdu">اردو (Urdu)</SelectItem>
-                    <SelectItem value="arabic">العربية (Arabic)</SelectItem>
+                    <SelectItem value="hindi">हिंदी (Hindi)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Audience Level */}
               <div className="space-y-2">
-                <Label>Study Level / تعلیمی سطح</Label>
+                <Label>Experience Level</Label>
                 <Select value={formData.audience} onValueChange={(value) => handleInputChange("audience", value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select level" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="school">School Level / اسکول (بنیادی)</SelectItem>
-                    <SelectItem value="college">College Level / کالج (درمیانی)</SelectItem>
-                    <SelectItem value="research">Research Level / تحقیقی (اعلیٰ)</SelectItem>
+                    <SelectItem value="school">Beginner (Just Starting)</SelectItem>
+                    <SelectItem value="college">Intermediate (Some Experience)</SelectItem>
+                    <SelectItem value="research">Advanced (Experienced Developer)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -177,7 +176,7 @@ export default function Ask() {
               disabled={isSubmitting}
             >
               <Send className="mr-2 h-5 w-5" />
-              {isSubmitting ? 'Processing... / پروسیسنگ...' : 'Submit Question / سوال جمع کریں'}
+              {isSubmitting ? 'Processing...' : 'Submit Question'}
             </Button>
           </form>
         </CardContent>
@@ -191,12 +190,12 @@ export default function Ask() {
           {/* Quick Tips */}
           <Card className="mt-6 border-accent/20">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Quick Tips / تیز تجاویز</CardTitle>
+              <CardTitle className="text-base">Quick Tips</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>• Be specific for better answers</p>
-              <p>• Include context when relevant</p>
-              <p>• Complex questions may need review</p>
+              <p>• Be specific and include error messages</p>
+              <p>• Mention what you've already tried</p>
+              <p>• Include relevant code if needed</p>
             </CardContent>
           </Card>
         </div>
@@ -205,11 +204,11 @@ export default function Ask() {
       {/* Guidelines */}
       <Card className="mt-8 border-amber-200 dark:border-amber-800">
         <CardContent className="pt-6">
-          <h3 className="font-semibold mb-3">Guidelines / رہنمائی:</h3>
+          <h3 className="font-semibold mb-3">Guidelines:</h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>• Be specific and include context for better answers</li>
-            <li>• Complex theological questions may require human review</li>
-            <li>• Answers are educational summaries, not formal religious rulings</li>
+            <li>• Be specific and include error messages or code snippets</li>
+            <li>• Complex projects may require human review</li>
+            <li>• Answers are educational - always test code in your own environment</li>
           </ul>
         </CardContent>
       </Card>

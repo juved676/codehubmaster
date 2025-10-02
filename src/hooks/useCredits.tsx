@@ -25,7 +25,7 @@ export function useCredits() {
       setCreditInfo({
         can_ask: true,
         credits_left: 6,
-        plan_name: 'ILM Free',
+        plan_name: 'Code Free',
         original_price: 25,
         discounted_price: 0,
         period_number: 3,

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, BookOpen, MessageCircle, Users, Star } from "lucide-react";
+import { Search, BookOpen, MessageCircle, Users, Star, Code } from "lucide-react";
 
 const Topics = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,129 +12,96 @@ const Topics = () => {
   const allTopics = [
     {
       id: 1,
-      title: "Five Pillars of Islam",
-      titleUrdu: "اسلام کے پانچ ستون",
-      description: "Comprehensive guide to Shahada, Salah, Zakat, Sawm, and Hajj - the fundamental pillars of Islamic practice.",
-      slug: "five-pillars-of-islam",
-      questionCount: 45,
-      articleCount: 8,
+      title: "Python Basics",
+      description: "Learn Python fundamentals, syntax, data types, loops, and functions for beginners.",
+      slug: "python-basics",
+      questionCount: 128,
+      articleCount: 15,
       level: "Beginner",
-      tags: ["Fundamentals", "Practice", "Pillars"],
+      tags: ["Python", "Programming", "Basics"],
       featured: true
     },
     {
       id: 2,
-      title: "Salah (Prayer)",
-      titleUrdu: "نماز",
-      description: "Complete guide to Islamic prayer including rules, timings, types, and spiritual significance.",
-      slug: "salah-prayer",
-      questionCount: 67,
-      articleCount: 12,
+      title: "Web Development",
+      description: "Build modern websites with HTML, CSS, JavaScript, React, and responsive design.",
+      slug: "web-development",
+      questionCount: 95,
+      articleCount: 18,
       level: "All Levels",
-      tags: ["Prayer", "Worship", "Daily Practice"],
+      tags: ["HTML", "CSS", "JavaScript", "React"],
       featured: true
     },
     {
       id: 3,
-      title: "Hadith & Sunnah",
-      titleUrdu: "حدیث اور سنت",
-      description: "Understanding the teachings, practices, and sayings of Prophet Muhammad (PBUH).",
-      slug: "hadith-sunnah",
-      questionCount: 89,
-      articleCount: 15,
+      title: "Data Science",
+      description: "Master data analysis, visualization with pandas, numpy, and matplotlib.",
+      slug: "data-science",
+      questionCount: 76,
+      articleCount: 12,
       level: "Intermediate",
-      tags: ["Hadith", "Sunnah", "Prophet", "Authentic Sources"],
+      tags: ["Data", "Python", "Analytics"],
       featured: true
     },
     {
       id: 4,
-      title: "Tafsir (Quranic Commentary)",
-      titleUrdu: "تفسیر",
-      description: "Interpretation and explanation of Quranic verses by classical and contemporary scholars.",
-      slug: "tafsir",
-      questionCount: 52,
-      articleCount: 18,
+      title: "Machine Learning",
+      description: "Understand ML algorithms, scikit-learn, neural networks, and AI concepts.",
+      slug: "machine-learning",
+      questionCount: 62,
+      articleCount: 14,
       level: "Advanced",
-      tags: ["Quran", "Interpretation", "Commentary"],
+      tags: ["AI", "ML", "Algorithms"],
       featured: true
     },
     {
       id: 5,
-      title: "Zakat & Charity",
-      titleUrdu: "زکوٰت اور خیرات",
-      description: "Rules, calculations, and spiritual aspects of obligatory charity in Islam.",
-      slug: "zakat-charity",
-      questionCount: 34,
-      articleCount: 6,
+      title: "Algorithms & DSA",
+      description: "Master data structures, algorithms, problem-solving for coding interviews.",
+      slug: "algorithms-dsa",
+      questionCount: 89,
+      articleCount: 16,
       level: "Intermediate",
-      tags: ["Zakat", "Charity", "Finance", "Social Justice"],
+      tags: ["DSA", "LeetCode", "Interviews"],
       featured: false
     },
     {
       id: 6,
-      title: "Fasting (Sawm)",
-      titleUrdu: "روزہ",
-      description: "Complete guide to Ramadan fasting and voluntary fasting throughout the year.",
-      slug: "fasting-sawm",
-      questionCount: 41,
-      articleCount: 9,
-      level: "All Levels",
-      tags: ["Fasting", "Ramadan", "Spiritual Discipline"],
+      title: "Database & SQL",
+      description: "Learn database design, SQL queries, MySQL, PostgreSQL, and optimization.",
+      slug: "database-sql",
+      questionCount: 54,
+      articleCount: 10,
+      level: "Intermediate",
+      tags: ["SQL", "Database", "Backend"],
       featured: false
     },
     {
       id: 7,
-      title: "Islamic Ethics & Morality",
-      titleUrdu: "اسلامی اخلاق",
-      description: "Principles of Islamic moral conduct and ethical behavior in daily life.",
-      slug: "islamic-ethics",
-      questionCount: 28,
+      title: "APIs & Backend",
+      description: "Build REST APIs with Node.js, Express, FastAPI, and authentication.",
+      slug: "apis-backend",
+      questionCount: 48,
       articleCount: 11,
-      level: "All Levels",
-      tags: ["Ethics", "Morality", "Character", "Akhlaq"],
+      level: "Intermediate",
+      tags: ["API", "Backend", "Node.js"],
       featured: false
     },
     {
       id: 8,
-      title: "Marriage & Family",
-      titleUrdu: "نکاح اور خاندان",
-      description: "Islamic guidance on marriage, family relationships, and parenting.",
-      slug: "marriage-family",
+      title: "DevOps Basics",
+      description: "Git, GitHub, Docker, CI/CD, deployment, and cloud fundamentals.",
+      slug: "devops-basics",
       questionCount: 36,
-      articleCount: 7,
+      articleCount: 8,
       level: "All Levels",
-      tags: ["Marriage", "Family", "Relationships"],
-      featured: false
-    },
-    {
-      id: 9,
-      title: "Islamic History",
-      titleUrdu: "اسلامی تاریخ",
-      description: "Key events, figures, and periods in Islamic civilization and history.",
-      slug: "islamic-history",
-      questionCount: 23,
-      articleCount: 14,
-      level: "Intermediate",
-      tags: ["History", "Civilization", "Caliphate"],
-      featured: false
-    },
-    {
-      id: 10,
-      title: "Comparative Religion",
-      titleUrdu: "مقایسہ ادیان",
-      description: "Islamic perspective on other religions and interfaith dialogue.",
-      slug: "comparative-religion",
-      questionCount: 19,
-      articleCount: 5,
-      level: "Advanced",
-      tags: ["Comparative", "Interfaith", "Dialogue"],
+      tags: ["Git", "Docker", "DevOps"],
       featured: false
     }
   ];
 
   const filteredTopics = allTopics.filter(topic =>
     topic.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    topic.titleUrdu.includes(searchTerm) ||
     topic.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
     topic.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
   );
@@ -144,10 +111,10 @@ const Topics = () => {
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "Beginner": return "bg-green-100 text-green-800";
-      case "Intermediate": return "bg-yellow-100 text-yellow-800";
-      case "Advanced": return "bg-red-100 text-red-800";
-      default: return "bg-blue-100 text-blue-800";
+      case "Beginner": return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+      case "Intermediate": return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
+      case "Advanced": return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
+      default: return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
     }
   };
 
@@ -157,14 +124,14 @@ const Topics = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Islamic Study Topics
+            Coding Topics
           </h1>
           <p className="text-lg text-muted-foreground mb-2">
-            اسلامی مطالعاتی مواضیع
+            Master Programming & Development
           </p>
           <p className="text-muted-foreground max-w-3xl mx-auto mb-6">
-            Explore comprehensive topics in Islamic studies. From basic principles to advanced scholarly discussions, 
-            find answers to questions across all areas of Islamic knowledge.
+            Explore comprehensive coding topics from Python basics to advanced AI/ML. 
+            Get instant answers with practical examples and code snippets.
           </p>
 
           {/* Search Bar */}
@@ -172,7 +139,7 @@ const Topics = () => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="Search topics... / موضوعات تلاش کریں..."
+                placeholder="Search topics... e.g., Python, React, ML"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -199,12 +166,12 @@ const Topics = () => {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-xl mb-1">{topic.title}</CardTitle>
-                        <CardDescription className="text-islamic-emerald font-medium mb-2">
-                          {topic.titleUrdu}
+                        <CardDescription className="text-primary font-medium mb-2">
+                          {topic.questionCount} questions • {topic.articleCount} resources
                         </CardDescription>
                         <Badge className={getLevelColor(topic.level)}>{topic.level}</Badge>
                       </div>
-                      <Star className="h-5 w-5 text-islamic-gold fill-current" />
+                      <Code className="h-6 w-6 text-primary" />
                     </div>
                   </CardHeader>
                   
@@ -221,20 +188,9 @@ const Topics = () => {
                       ))}
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                      <span className="flex items-center">
-                        <MessageCircle className="h-4 w-4 mr-1" />
-                        {topic.questionCount} questions
-                      </span>
-                      <span className="flex items-center">
-                        <BookOpen className="h-4 w-4 mr-1" />
-                        {topic.articleCount} articles
-                      </span>
-                    </div>
-                    
                     <Button className="w-full" asChild>
                       <Link to={`/topic/${topic.slug}`}>
-                        Explore Topic / موضوع دیکھیں
+                        Explore Topic
                       </Link>
                     </Button>
                   </CardContent>
@@ -254,8 +210,8 @@ const Topics = () => {
                 <Card key={topic.id} className="hover:shadow-lg transition-all duration-300">
                   <CardHeader>
                     <CardTitle className="text-lg">{topic.title}</CardTitle>
-                    <CardDescription className="text-islamic-emerald font-medium">
-                      {topic.titleUrdu}
+                    <CardDescription className="text-primary font-medium">
+                      {topic.questionCount} questions
                     </CardDescription>
                     <Badge className={getLevelColor(topic.level)}>
                       {topic.level}
@@ -273,11 +229,6 @@ const Topics = () => {
                           {tag}
                         </Badge>
                       ))}
-                    </div>
-                    
-                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-4">
-                      <span>{topic.questionCount} questions</span>
-                      <span>{topic.articleCount} articles</span>
                     </div>
                     
                     <Button variant="outline" size="sm" className="w-full" asChild>
@@ -315,7 +266,7 @@ const Topics = () => {
               Can't find what you're looking for?
             </h3>
             <p className="text-white/90 mb-6">
-              Ask a specific question and get personalized answers from our AI-powered system.
+              Ask a specific coding question and get personalized answers with code examples.
             </p>
             <Button size="lg" variant="secondary" asChild>
               <Link to="/ask">

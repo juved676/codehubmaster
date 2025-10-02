@@ -87,7 +87,7 @@ const Pricing = () => {
       const responseData = data as any;
       if (responseData.success) {
         // Generate UPI deep link
-        const upiLink = `upi://pay?pa=${upiId}&pn=ILM Hub&am=${selectedPlan.discounted_price}&cu=INR&tn=ILM ${selectedPlan.name} Subscription Payment ID: ${responseData.payment_id}`;
+        const upiLink = `upi://pay?pa=${upiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Subscription Payment ID: ${responseData.payment_id}`;
         
         // Try to open UPI app
         if (navigator.userAgent.match(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/)) {
@@ -144,13 +144,13 @@ const Pricing = () => {
           Limited Time Offer - Massive Discounts!
         </div>
         
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-6">
-          Choose Your Islamic Learning Plan
-        </h1>
-        
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-          Get instant answers to your Islamic questions with AI-powered responses backed by authentic sources from Quran and Hadith
-        </p>
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-6">
+            Choose Your Coding Learning Plan
+          </h1>
+          
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Get instant help with Python, Web Development, Data Science & AI/ML from our AI coding assistant
+          </p>
 
         <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
           <Smartphone className="w-4 h-4" />
@@ -234,31 +234,31 @@ const Pricing = () => {
 
       {/* Features Section */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-8">Why Choose ILM Hub Premium?</h2>
+        <h2 className="text-2xl font-bold mb-8">Why Choose CodeHub Premium?</h2>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-islamic-emerald/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Check className="w-6 h-6 text-islamic-emerald" />
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Check className="w-6 h-6 text-primary" />
             </div>
-            <h3 className="font-semibold mb-2">Authentic Sources</h3>
+            <h3 className="font-semibold mb-2">Expert Answers</h3>
             <p className="text-sm text-muted-foreground">
-              All answers backed by Quran, Hadith, and trusted Islamic scholarship
+              Get detailed coding help with practical examples and best practices
             </p>
           </div>
           
           <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-islamic-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Clock className="w-6 h-6 text-islamic-gold" />
+            <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Clock className="w-6 h-6 text-accent" />
             </div>
-            <h3 className="font-semibold mb-2">Instant Responses</h3>
+            <h3 className="font-semibold mb-2">Instant Help</h3>
             <p className="text-sm text-muted-foreground">
-              Get detailed answers to your Islamic questions within seconds
+              Get immediate answers to programming questions 24/7
             </p>
           </div>
           
           <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-islamic-emerald/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Smartphone className="w-6 h-6 text-islamic-emerald" />
+            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Smartphone className="w-6 h-6 text-primary" />
             </div>
             <h3 className="font-semibold mb-2">Easy Payment</h3>
             <p className="text-sm text-muted-foreground">

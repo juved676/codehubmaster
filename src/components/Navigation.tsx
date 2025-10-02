@@ -19,7 +19,7 @@ export default function Navigation() {
           <Link to="/" className="mr-6 flex items-center space-x-2">
             <BookOpen className="h-6 w-6 text-primary" />
             <span className="hidden font-bold sm:inline-block">
-              Islamic Study Hub
+              CodeHub
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -29,7 +29,7 @@ export default function Navigation() {
                 isActive('/') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              Home / ہوم
+              Home
             </Link>
             <Link
               to="/topics"
@@ -37,7 +37,7 @@ export default function Navigation() {
                 isActive('/topics') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              Topics / موضوعات
+              Topics
             </Link>
             <Link
               to="/ask"
@@ -45,7 +45,7 @@ export default function Navigation() {
                 isActive('/ask') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              Ask Question / سوال پوچھیں
+              Ask Question
             </Link>
             <Link
               to="/pricing"
@@ -99,7 +99,7 @@ export default function Navigation() {
             {/* Mobile Logo */}
             <Link to="/" className="flex items-center space-x-2 md:hidden">
               <BookOpen className="h-6 w-6 text-primary" />
-              <span className="font-bold">Islamic Study Hub</span>
+              <span className="font-bold">CodeHub</span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-2">
@@ -114,7 +114,7 @@ export default function Navigation() {
                   <Link to="/auth">
                     <Button variant="default" size="sm">
                       <User className="h-4 w-4 mr-1" />
-                      Sign In / لاگ ان
+                      Sign In
                     </Button>
                   </Link>
                 )}
@@ -133,7 +133,7 @@ export default function Navigation() {
               }`}
               onClick={() => setIsOpen(false)}
             >
-              Home / ہوم
+              Home
             </Link>
             <Link
               to="/topics"
@@ -142,7 +142,7 @@ export default function Navigation() {
               }`}
               onClick={() => setIsOpen(false)}
             >
-              Topics / موضوعات
+              Topics
             </Link>
             <Link
               to="/ask"
@@ -151,7 +151,7 @@ export default function Navigation() {
               }`}
               onClick={() => setIsOpen(false)}
             >
-              Ask Question / سوال پوچھیں
+              Ask Question
             </Link>
             <Link
               to="/pricing"
@@ -196,7 +196,7 @@ export default function Navigation() {
                       className="w-full text-left block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
                       <LogOut className="h-4 w-4 inline mr-2" />
-                      Sign Out / لاگ آؤٹ
+                      Sign Out
                     </button>
                   </>
                 ) : (
@@ -206,7 +206,7 @@ export default function Navigation() {
                     onClick={() => setIsOpen(false)}
                   >
                     <User className="h-4 w-4 inline mr-2" />
-                    Sign In / لاگ ان
+                    Sign In
                   </Link>
                 )}
               </div>
