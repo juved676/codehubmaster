@@ -58,37 +58,41 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className="relative bg-gradient-hero py-20 lg:py-32 overflow-hidden"
+        className="relative py-20 lg:py-32 overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${heroImage})`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-hero opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
             Master Coding with AI
           </h1>
-          <p className="text-xl lg:text-2xl text-white/90 mb-2">
+          <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4 animate-fade-in">
             Learn Python, Web Dev, Data Science & ML
           </p>
-          <p className="text-lg lg:text-xl text-white/80 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto animate-fade-in">
             Get AI-powered coding tutorials, debugging help, and career guidance. 
             Perfect for Indian students and job seekers building tech careers.
           </p>
           
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+          <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
+            <div className="relative glass-card p-1 rounded-2xl">
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
               <Input 
                 placeholder="Ask your coding question... e.g., How do I learn Python?"
-                className="pl-12 pr-4 py-4 text-lg bg-white/95 backdrop-blur-sm border-0 shadow-elegant"
+                className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary"
               />
               <Button 
                 size="lg" 
-                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300"
                 asChild
               >
                 <Link to="/ask">Ask Now</Link>
@@ -96,17 +100,17 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" variant="secondary" asChild>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+            <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
               <Link to="/topics">
                 <BookOpen className="mr-2 h-5 w-5" />
-                Explore Coding Tutorials
+                Explore Tutorials
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
+            <Button size="lg" variant="outline" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all duration-300" asChild>
               <Link to="/ask">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Get Coding Help
+                Get Help Now
               </Link>
             </Button>
           </div>
@@ -114,67 +118,68 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-card">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center">
-              <div className="p-4 bg-gradient-primary rounded-full mb-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="glass-card p-8 rounded-2xl hover-lift group">
+              <div className="p-4 bg-gradient-primary rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">50,000+</h3>
-              <p className="text-muted-foreground">Students Learning</p>
+              <h3 className="text-4xl font-bold text-primary mb-2">50,000+</h3>
+              <p className="text-muted-foreground text-lg">Students Learning</p>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="p-4 bg-gradient-accent rounded-full mb-4">
+            <div className="glass-card p-8 rounded-2xl hover-lift group">
+              <div className="p-4 bg-gradient-accent rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
                 <MessageCircle className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">15,000+</h3>
-              <p className="text-muted-foreground">Coding Questions Solved</p>
+              <h3 className="text-4xl font-bold text-accent mb-2">15,000+</h3>
+              <p className="text-muted-foreground text-lg">Questions Solved</p>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="p-4 bg-gradient-primary rounded-full mb-4">
+            <div className="glass-card p-8 rounded-2xl hover-lift group">
+              <div className="p-4 bg-gradient-primary rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
                 <Globe className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">100+</h3>
-              <p className="text-muted-foreground">Tech Topics Covered</p>
+              <h3 className="text-4xl font-bold text-primary mb-2">100+</h3>
+              <p className="text-muted-foreground text-lg">Tech Topics</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Topics */}
-      <section className="py-16">
+      <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
               Popular Coding Topics
             </h2>
-            <p className="text-lg text-muted-foreground mb-2">
+            <p className="text-xl text-primary mb-2">
               Most Searched by Students
             </p>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               Explore our most popular programming topics with AI-powered answers and practical examples.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredTopics.map((topic) => (
-              <Card key={topic.slug} className="hover:shadow-elegant transition-all duration-300 border-border/50">
+            {featuredTopics.map((topic, index) => (
+              <Card key={topic.slug} className="glass-card hover-lift group border-primary/20 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardHeader>
-                  <CardTitle className="text-lg">{topic.title}</CardTitle>
-                  <CardDescription className="text-sm text-primary font-medium">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">{topic.title}</CardTitle>
+                  <CardDescription className="text-sm text-accent font-semibold">
                     {topic.questionCount} questions answered
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-muted-foreground mb-6">
                     {topic.description}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">
                       {topic.questionCount} questions
                     </span>
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
                       <Link to={`/topic/${topic.slug}`}>Explore</Link>
                     </Button>
                   </div>
@@ -186,38 +191,39 @@ const Home = () => {
       </section>
 
       {/* Recent Questions */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
               Recent Questions
             </h2>
-            <p className="text-lg text-muted-foreground mb-2">
+            <p className="text-xl text-primary mb-2">
               Latest from Our Community
             </p>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               See what other students are learning about programming and development.
             </p>
           </div>
 
           <div className="space-y-4">
-            {recentQuestions.map((question) => (
-              <Card key={question.id} className="hover:shadow-elegant transition-all duration-300">
+            {recentQuestions.map((question, index) => (
+              <Card key={question.id} className="glass-card hover-lift border-primary/20 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-4">
+                      <h3 className="text-lg font-semibold text-foreground mb-4 hover:text-primary transition-colors">
                         {question.title}
                       </h3>
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-6 text-sm text-muted-foreground">
                         <span className="flex items-center">
-                          <MessageCircle className="h-4 w-4 mr-1" />
+                          <MessageCircle className="h-4 w-4 mr-2 text-accent" />
                           {question.answers} answers
                         </span>
                         <span>{question.views.toLocaleString()} views</span>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
                       <Link to={`/question/${question.id}`}>View</Link>
                     </Button>
                   </div>
@@ -226,36 +232,41 @@ const Home = () => {
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <Button variant="outline" asChild>
-              <Link to="/questions">View All Questions</Link>
+          <div className="text-center mt-12">
+            <Button variant="outline" size="lg" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all" asChild>
+              <Link to="/topics">View All Questions</Link>
             </Button>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-hero">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-hero opacity-40"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+        </div>
+        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 glass-card p-12 rounded-3xl">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 gradient-text">
             Start Your Tech Career Today
           </h2>
-          <p className="text-lg text-white/90 mb-2">
+          <p className="text-2xl text-primary font-semibold mb-4">
             Join 50,000+ Students Mastering Programming
           </p>
-          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
             Get AI-powered coding lessons, real-world projects, and career guidance for tech jobs in India.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" asChild>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300 px-8 py-6 text-lg" asChild>
               <Link to="/ask">
-                <MessageCircle className="mr-2 h-5 w-5" />
+                <MessageCircle className="mr-2 h-6 w-6" />
                 Start Learning Now
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
+            <Button size="lg" variant="outline" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all duration-300 px-8 py-6 text-lg" asChild>
               <Link to="/pricing">
-                <Star className="mr-2 h-5 w-5" />
+                <Star className="mr-2 h-6 w-6" />
                 View Plans
               </Link>
             </Button>

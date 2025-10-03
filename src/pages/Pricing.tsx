@@ -136,94 +136,101 @@ const Pricing = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen py-20 px-4 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+      </div>
+      
       {/* Hero Section */}
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 bg-gradient-accent text-white px-6 py-2 rounded-full text-sm font-medium mb-6">
-          <Clock className="w-4 h-4" />
+      <div className="relative text-center mb-20">
+        <div className="inline-flex items-center gap-2 bg-gradient-accent text-white px-8 py-3 rounded-full text-sm font-bold mb-8 shadow-neon animate-fade-in">
+          <Clock className="w-5 h-5" />
           Limited Time Offer - Massive Discounts!
         </div>
         
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-6">
-            Choose Your Coding Learning Plan
-          </h1>
-          
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Get instant help with Python, Web Development, Data Science & AI/ML from our AI coding assistant
-          </p>
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
+          Choose Your Learning Plan
+        </h1>
+        
+        <p className="text-xl md:text-2xl text-primary font-semibold max-w-3xl mx-auto mb-4 animate-fade-in">
+          Get instant help with Python, Web Dev, Data Science & AI/ML
+        </p>
 
-        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-          <Smartphone className="w-4 h-4" />
+        <div className="flex items-center justify-center gap-3 text-base text-muted-foreground animate-fade-in">
+          <Smartphone className="w-5 h-5 text-accent" />
           <span>Pay securely with Fampay UPI - Instant activation</span>
         </div>
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-        {plans.map((plan) => {
+      <div className="relative grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+        {plans.map((plan, index) => {
           const discount = calculateDiscount(plan.original_price, plan.discounted_price);
           
           return (
             <Card 
               key={plan.id} 
-              className={`relative overflow-hidden transition-all duration-300 hover:shadow-elegant ${
+              className={`relative overflow-hidden glass-card hover-lift animate-fade-in ${
                 plan.is_popular 
-                  ? 'border-primary shadow-glow scale-105' 
-                  : 'hover:scale-105'
+                  ? 'border-primary/50 shadow-neon scale-105' 
+                  : 'border-primary/20'
               }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {plan.is_popular && (
-                <div className="absolute top-0 left-0 right-0 bg-gradient-accent text-white text-center py-2 text-sm font-medium">
-                  <Star className="inline w-4 h-4 mr-1" />
+                <div className="absolute top-0 left-0 right-0 bg-gradient-accent text-white text-center py-3 text-sm font-bold shadow-neon">
+                  <Star className="inline w-5 h-5 mr-2" />
                   MOST POPULAR - SAVE {discount}%
                 </div>
               )}
               
-              <CardHeader className={plan.is_popular ? 'pt-12' : 'pt-6'}>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-2xl text-islamic-emerald">{plan.name}</CardTitle>
+              <CardHeader className={plan.is_popular ? 'pt-16' : 'pt-8'}>
+                <div className="flex items-center justify-between mb-4">
+                  <CardTitle className="text-3xl font-bold gradient-text">{plan.name}</CardTitle>
                   {discount > 0 && (
-                    <Badge variant="destructive" className="bg-red-500">
+                    <Badge className="bg-destructive text-white px-3 py-1 font-bold shadow-neon">
                       {discount}% OFF
                     </Badge>
                   )}
                 </div>
                 
-                <div className="space-y-2">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-islamic-emerald">
+                <div className="space-y-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-5xl font-extrabold text-primary">
                       ₹{plan.discounted_price}
                     </span>
-                    <span className="text-lg text-muted-foreground line-through">
+                    <span className="text-xl text-muted-foreground line-through">
                       ₹{plan.original_price}
                     </span>
                   </div>
-                  <CardDescription>
+                  <CardDescription className="text-base">
                     {plan.credits_per_period} questions per 10-day period
                   </CardDescription>
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-6">
-                <ul className="space-y-3">
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-islamic-emerald mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
+              <CardContent className="space-y-8">
+                <ul className="space-y-4">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                      <span className="text-sm text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Button
                   onClick={() => handleSelectPlan(plan)}
-                  className={`w-full ${
+                  className={`w-full text-lg py-6 ${
                     plan.is_popular
-                      ? 'bg-gradient-primary hover:opacity-90'
-                      : 'bg-secondary hover:bg-secondary/80'
+                      ? 'bg-gradient-primary hover:shadow-neon'
+                      : 'glass-card border-primary/30 hover:border-primary hover:bg-primary/10'
                   }`}
+                  variant={plan.is_popular ? "default" : "outline"}
                   size="lg"
                 >
-                  <CreditCard className="w-4 h-4 mr-2" />
+                  <CreditCard className="w-5 h-5 mr-2" />
                   Choose {plan.name}
                 </Button>
               </CardContent>
@@ -233,35 +240,35 @@ const Pricing = () => {
       </div>
 
       {/* Features Section */}
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-8">Why Choose CodeHub Premium?</h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Check className="w-6 h-6 text-primary" />
+      <div className="relative text-center">
+        <h2 className="text-4xl font-bold mb-12 gradient-text">Why Choose CodeHub Premium?</h2>
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="glass-card p-8 rounded-2xl hover-lift group">
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:shadow-neon transition-all duration-300">
+              <Check className="w-8 h-8 text-white" />
             </div>
-            <h3 className="font-semibold mb-2">Expert Answers</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="text-xl font-bold mb-3 text-primary">Expert Answers</h3>
+            <p className="text-muted-foreground">
               Get detailed coding help with practical examples and best practices
             </p>
           </div>
           
-          <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Clock className="w-6 h-6 text-accent" />
+          <div className="glass-card p-8 rounded-2xl hover-lift group">
+            <div className="w-16 h-16 bg-gradient-accent rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:shadow-neon transition-all duration-300">
+              <Clock className="w-8 h-8 text-white" />
             </div>
-            <h3 className="font-semibold mb-2">Instant Help</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="text-xl font-bold mb-3 text-accent">Instant Help</h3>
+            <p className="text-muted-foreground">
               Get immediate answers to programming questions 24/7
             </p>
           </div>
           
-          <div className="p-6 rounded-lg bg-card">
-            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Smartphone className="w-6 h-6 text-primary" />
+          <div className="glass-card p-8 rounded-2xl hover-lift group">
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:shadow-neon transition-all duration-300">
+              <Smartphone className="w-8 h-8 text-white" />
             </div>
-            <h3 className="font-semibold mb-2">Easy Payment</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="text-xl font-bold mb-3 text-primary">Easy Payment</h3>
+            <p className="text-muted-foreground">
               Secure UPI payments with Fampay - activate instantly
             </p>
           </div>
@@ -279,8 +286,8 @@ const Pricing = () => {
           </DialogHeader>
           
           <div className="space-y-6">
-            <div className="text-center p-6 bg-muted rounded-lg">
-              <div className="text-2xl font-bold text-islamic-emerald mb-2">
+            <div className="text-center p-8 glass-card rounded-2xl">
+              <div className="text-4xl font-extrabold gradient-text mb-3">
                 ₹{selectedPlan?.discounted_price}
               </div>
               <div className="text-sm text-muted-foreground">
