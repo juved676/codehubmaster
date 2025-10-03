@@ -68,14 +68,14 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-hero opacity-80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
-            Learn Coding with AI
+            Master Coding with AI
           </h1>
           <p className="text-xl lg:text-2xl text-white/90 mb-2">
-            Master Programming Skills
+            Learn Python, Web Dev, Data Science & ML
           </p>
           <p className="text-lg lg:text-xl text-white/80 mb-8 max-w-3xl mx-auto">
-            Get instant help with Python, Web Development, Data Science & AI/ML. 
-            Learn coding with personalized AI assistance tailored for Indian students.
+            Get AI-powered coding tutorials, debugging help, and career guidance. 
+            Perfect for Indian students and job seekers building tech careers.
           </p>
           
           {/* Search Bar */}
@@ -100,13 +100,13 @@ const Home = () => {
             <Button size="lg" variant="secondary" asChild>
               <Link to="/topics">
                 <BookOpen className="mr-2 h-5 w-5" />
-                Browse Topics
+                Explore Coding Tutorials
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
               <Link to="/ask">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Ask Coding Question
+                Get Coding Help
               </Link>
             </Button>
           </div>
@@ -238,25 +238,25 @@ const Home = () => {
       <section className="py-16 bg-gradient-hero">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to Start Your Coding Journey?
+            Start Your Tech Career Today
           </h2>
           <p className="text-lg text-white/90 mb-2">
-            Join 50,000+ Students Learning to Code
+            Join 50,000+ Students Mastering Programming
           </p>
           <p className="text-white/80 mb-8 max-w-2xl mx-auto">
-            Master programming with AI-powered assistance. Perfect for beginners and job seekers in India.
+            Get AI-powered coding lessons, real-world projects, and career guidance for tech jobs in India.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
               <Link to="/ask">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Ask Your First Coding Question
+                Start Learning Now
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
-              <Link to="/topics">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Browse Coding Topics
+              <Link to="/pricing">
+                <Star className="mr-2 h-5 w-5" />
+                View Plans
               </Link>
             </Button>
           </div>

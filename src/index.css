@@ -17,10 +17,10 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Islamic-inspired emerald and gold palette */
-    --primary: 158 64% 52%; /* Islamic emerald green */
+    /* Modern tech blue/green palette */
+    --primary: 217 91% 60%; /* Vibrant tech blue */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 158 64% 65%;
+    --primary-glow: 217 91% 75%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -28,29 +28,30 @@ All colors MUST be HSL.
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 43 74% 66%; /* Warm gold accent */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 142 76% 36%; /* Modern green accent */
+    --accent-foreground: 0 0% 100%;
 
-    --islamic-gold: 43 74% 66%;
-    --islamic-gold-light: 43 74% 80%;
-    --islamic-emerald: 158 64% 52%;
-    --islamic-emerald-light: 158 64% 65%;
+    --tech-blue: 217 91% 60%;
+    --tech-blue-light: 217 91% 75%;
+    --tech-green: 142 76% 36%;
+    --tech-green-light: 142 76% 50%;
+    --tech-dark: 222 47% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 158 64% 52%;
+    --ring: 217 91% 60%;
 
-    /* Beautiful gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--islamic-emerald)), hsl(var(--islamic-emerald-light)));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--islamic-gold)), hsl(var(--islamic-gold-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--islamic-emerald)) 0%, hsl(var(--islamic-gold)) 100%);
+    /* Tech gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--tech-blue)), hsl(var(--tech-blue-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--tech-green)), hsl(var(--tech-green-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--tech-blue)) 0%, hsl(var(--tech-green)) 100%);
 
-    /* Elegant shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--islamic-emerald) / 0.3);
-    --shadow-glow: 0 0 40px hsl(var(--islamic-emerald-light) / 0.4);
+    /* Modern shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--tech-blue) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--tech-blue-light) / 0.4);
 
     --radius: 0.5rem;
 

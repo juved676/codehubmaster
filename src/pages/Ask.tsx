@@ -94,10 +94,10 @@ export default function Ask() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-4 text-center">
-          Ask Your Coding Question
+          Get AI Coding Help
         </h1>
         <p className="text-xl text-muted-foreground text-center max-w-2xl mx-auto">
-          Get expert answers about programming, debugging, and software development from our AI assistant
+          Describe your coding challenge and get detailed explanations, working examples, and debugging guidance from our AI instructor
         </p>
       </div>
 
@@ -105,9 +105,9 @@ export default function Ask() {
         <div className="lg:col-span-2">
           <Card className="shadow-elegant">
             <CardHeader>
-              <CardTitle>Submit Your Question</CardTitle>
+              <CardTitle>Describe Your Coding Challenge</CardTitle>
               <CardDescription>
-                Fill out the form below to get a comprehensive answer to your coding question with examples.
+                Our AI will provide detailed explanations, code examples, debugging tips, and learning resources.
               </CardDescription>
             </CardHeader>
         <CardContent>
