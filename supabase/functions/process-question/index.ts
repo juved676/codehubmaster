@@ -152,7 +152,7 @@ Output format: JSON as specified.`;
 
     // Check for moderation flags
     const needsReview = aiResponse.requires_review || 
-      /fatwa|ruling|permissible|haram|halal/i.test(question.body) ||
+      /complex project|full application|complete system|build entire/i.test(question.body) ||
       confidenceScore < 0.6;
 
     // Save answer to database
