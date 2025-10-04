@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MessageCircle, Search, Star, Users, Globe } from "lucide-react";
+import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
+import { sampleQuestions } from "@/data/sampleQuestions";
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  
   const featuredTopics = [
     {
       title: "Python Basics",
@@ -33,26 +37,7 @@ const Home = () => {
     }
   ];
 
-  const recentQuestions = [
-    {
-      id: 1,
-      title: "How do I start learning Python for data science?",
-      answers: 5,
-      views: 2340
-    },
-    {
-      id: 2,
-      title: "What's the difference between React and vanilla JavaScript?",
-      answers: 8,
-      views: 3156
-    },
-    {
-      id: 3,
-      title: "Best way to learn machine learning algorithms?",
-      answers: 4,
-      views: 1987
-    }
-  ];
+  const recentQuestions = sampleQuestions.slice(0, 3);
 
   return (
     <div className="min-h-screen">
@@ -87,6 +72,8 @@ const Home = () => {
             <div className="relative glass-card p-1 rounded-2xl">
               <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
               <Input 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Ask your coding question... e.g., How do I learn Python?"
                 className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary"
               />
@@ -180,7 +167,7 @@ const Home = () => {
                       {topic.questionCount} questions
                     </span>
                     <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
-                      <Link to={`/topic/${topic.slug}`}>Explore</Link>
+                      <Link to={`/${topic.slug}`}>Explore</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -218,13 +205,17 @@ const Home = () => {
                       <div className="flex items-center space-x-6 text-sm text-muted-foreground">
                         <span className="flex items-center">
                           <MessageCircle className="h-4 w-4 mr-2 text-accent" />
-                          {question.answers} answers
+                          {question.answers} answer{question.answers !== 1 ? 's' : ''}
                         </span>
-                        <span>{question.views.toLocaleString()} views</span>
+                        <span className="flex items-center">
+                          <Eye className="h-4 w-4 mr-2" />
+                          {question.views.toLocaleString()} views
+                        </span>
+                        <span className="text-primary font-medium">{question.difficulty}</span>
                       </div>
                     </div>
                     <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
-                      <Link to={`/question/${question.id}`}>View</Link>
+                      <Link to={`/question/${question.topic}/${question.id}`}>View</Link>
                     </Button>
                   </div>
                 </CardContent>

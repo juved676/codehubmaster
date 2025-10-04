@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import Home from "./pages/Home";
 import Ask from "./pages/Ask";
 import Topics from "./pages/Topics";
+import TopicDetail from "./pages/TopicDetail";
+import QuestionDetail from "./pages/QuestionDetail";
 import Auth from "./pages/Auth";
 import Question from "./pages/Question";
 import Admin from "./pages/Admin";
@@ -35,7 +37,18 @@ const App = () => (
               <Route path="/questions" element={<Topics />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/auth" element={<Auth />} />
+              
+              {/* Topic pages */}
+              <Route path="/python-basics" element={<TopicDetail />} />
+              <Route path="/data-science" element={<TopicDetail />} />
+              <Route path="/web-development" element={<TopicDetail />} />
+              <Route path="/machine-learning" element={<TopicDetail />} />
+              <Route path="/topic/:topic" element={<TopicDetail />} />
+              
+              {/* Question detail pages */}
+              <Route path="/question/:topic/:id" element={<QuestionDetail />} />
               <Route path="/question/:id" element={<Question />} />
+              
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/payments" element={<AdminPayments />} />
               <Route path="/review-queue" element={<ReviewQueue />} />
