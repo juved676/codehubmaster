@@ -30,14 +30,14 @@ export default function Auth() {
     
     if (error) {
       toast({
-        title: "خطا / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "خوش آمدید / Welcome!",
-        description: "Successfully signed in",
+        title: "Welcome!",
+        description: "Successfully signed in to IIM-HUB-AI",
       });
       navigate('/');
     }
@@ -53,13 +53,13 @@ export default function Auth() {
     
     if (error) {
       toast({
-        title: "خطا / Error", 
+        title: "Error", 
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "اکاؤنٹ بنایا گیا / Account Created!",
+        title: "Account Created!",
         description: "Please check your email to verify your account",
       });
     }
@@ -69,26 +69,26 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-gradient-primary flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md glass-card border-primary/30">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center font-bold">
-            Islamic Study Hub
+          <CardTitle className="text-2xl text-center font-bold gradient-text">
+            IIM-HUB-AI
           </CardTitle>
-          <CardDescription className="text-center">
-            اسلامی تعلیم کا مرکز / Center of Islamic Learning
+          <CardDescription className="text-center text-primary font-semibold">
+            AI-Powered Coding Education Platform
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="space-y-4">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In / لاگ ان</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up / رجسٹر</TabsTrigger>
+              <TabsTrigger value="signin">Sign In</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin" className="space-y-4">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email / ای میل</Label>
+                  <Label htmlFor="signin-email">Email</Label>
                   <Input
                     id="signin-email"
                     type="email"
@@ -99,7 +99,7 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password / پاس ورڈ</Label>
+                  <Label htmlFor="signin-password">Password</Label>
                   <Input
                     id="signin-password"
                     type="password"
@@ -109,8 +109,8 @@ export default function Auth() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Signing in...' : 'Sign In / لاگ ان کریں'}
+                <Button type="submit" className="w-full bg-gradient-primary hover:shadow-neon" disabled={isLoading}>
+                  {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </form>
             </TabsContent>
@@ -118,7 +118,7 @@ export default function Auth() {
             <TabsContent value="signup" className="space-y-4">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name">Full Name / نام</Label>
+                  <Label htmlFor="signup-name">Full Name</Label>
                   <Input
                     id="signup-name"
                     type="text"
@@ -129,7 +129,7 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email / ای میل</Label>
+                  <Label htmlFor="signup-email">Email</Label>
                   <Input
                     id="signup-email"
                     type="email"
@@ -140,18 +140,18 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password / پاس ورڈ</Label>
+                  <Label htmlFor="signup-password">Password</Label>
                   <Input
                     id="signup-password"
                     type="password"
-                    placeholder="Create a password"
+                    placeholder="Create a password (min 8 characters)"
                     value={signUpData.password}
                     onChange={(e) => setSignUpData({ ...signUpData, password: e.target.value })}
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Creating account...' : 'Create Account / اکاؤنٹ بنائیں'}
+                <Button type="submit" className="w-full bg-gradient-primary hover:shadow-neon" disabled={isLoading}>
+                  {isLoading ? 'Creating account...' : 'Create Account'}
                 </Button>
               </form>
             </TabsContent>

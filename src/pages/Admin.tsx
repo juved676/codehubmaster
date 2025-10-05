@@ -140,15 +140,14 @@ export default function Admin() {
     return <Navigate to="/auth" replace />;
   }
 
-  if (userRole !== 'admin') {
+      if (userRole !== 'admin') {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-2xl font-bold mb-4">Access Denied / رسائی مسترد</h1>
+        <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
         <p className="text-muted-foreground mb-4">
-          You need admin privileges to access this page. / 
-          اس صفحہ تک رسائی کے لیے آپ کو ایڈمن اختیارات کی ضرورت ہے۔
+          You need admin privileges to access this page.
         </p>
-        <Button onClick={() => window.history.back()}>Go Back / واپس جائیں</Button>
+        <Button onClick={() => window.history.back()}>Go Back</Button>
       </div>
     );
   }
@@ -156,9 +155,9 @@ export default function Admin() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Admin Dashboard / ایڈمن ڈیش بورڈ</h1>
+        <h1 className="text-3xl font-bold mb-2 gradient-text">Admin Dashboard</h1>
         <p className="text-muted-foreground">
-          Manage your Islamic Study Hub / اپنا اسلامک اسٹڈی ہب منظم کریں
+          Manage your IIM-HUB-AI platform
         </p>
       </div>
 
@@ -254,18 +253,18 @@ export default function Admin() {
 
       <Tabs defaultValue="users" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="users">Users / صارفین</TabsTrigger>
+          <TabsTrigger value="users">Users</TabsTrigger>
           <TabsTrigger value="payments">Revenue Analytics</TabsTrigger>
-          <TabsTrigger value="settings">Settings / ترتیبات</TabsTrigger>
-          <TabsTrigger value="logs">Activity Logs / سرگرمی</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="logs">Activity Logs</TabsTrigger>
         </TabsList>
 
         <TabsContent value="users" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>User Management / صارف کا انتظام</CardTitle>
+              <CardTitle>User Management</CardTitle>
               <CardDescription>
-                Manage user roles and permissions / صارف کے کردار اور اجازات کا انتظام
+                Manage user roles and permissions
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -423,7 +422,7 @@ export default function Admin() {
         <TabsContent value="settings" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>System Settings / سسٹم کی ترتیبات</CardTitle>
+              <CardTitle>System Settings</CardTitle>
               <CardDescription>
                 Configure AI providers and moderation settings
               </CardDescription>

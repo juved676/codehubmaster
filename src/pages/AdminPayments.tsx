@@ -153,9 +153,9 @@ const AdminPayments = () => {
 
           // Plan-wise sales
           const planName = payment.subscription_plans?.name || 'Unknown';
-          if (planName === 'ILM PRO') {
+          if (planName.includes('PRO') || planName.includes('Pro')) {
             acc.ilm_pro_sales += 1;
-          } else if (planName === 'ILM ADVANCE') {
+          } else if (planName.includes('ADVANCE') || planName.includes('Advance')) {
             acc.ilm_advance_sales += 1;
           }
         } else if (payment.payment_status === 'pending') {
@@ -367,7 +367,7 @@ const AdminPayments = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-islamic-emerald mb-2">Revenue & Payment Analytics</h1>
+        <h1 className="text-3xl font-bold text-primary mb-2">Revenue & Payment Analytics</h1>
         <p className="text-muted-foreground">Complete income tracking with Fampay UPI integration</p>
       </div>
 
@@ -388,7 +388,7 @@ const AdminPayments = () => {
                 <IndianRupee className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-islamic-emerald">₹{stats.total_revenue}</div>
+                <div className="text-2xl font-bold text-primary">₹{stats.total_revenue}</div>
                 <p className="text-xs text-muted-foreground">
                   +₹{stats.this_month_revenue} this month
                 </p>
@@ -451,7 +451,7 @@ const AdminPayments = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="text-sm font-medium">ILM PRO (₹5)</span>
+                      <span className="text-sm font-medium">Code Pro (₹5)</span>
                     </div>
                     <div className="text-right">
                       <div className="font-bold">{stats.ilm_pro_sales} sales</div>
@@ -461,7 +461,7 @@ const AdminPayments = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm font-medium">ILM ADVANCE (₹8)</span>
+                      <span className="text-sm font-medium">Code Advance (₹8)</span>
                     </div>
                     <div className="text-right">
                       <div className="font-bold">{stats.ilm_advance_sales} sales</div>
@@ -573,7 +573,7 @@ const AdminPayments = () => {
                     {dailyStats.slice(-14).map((day, index) => (
                       <div key={day.date} className="flex-1 flex flex-col items-center">
                         <div 
-                          className="bg-islamic-emerald rounded-t w-full transition-all hover:bg-islamic-emerald/80"
+                          className="bg-primary rounded-t w-full transition-all hover:bg-primary/80"
                           style={{ 
                             height: `${Math.max((day.revenue / Math.max(...dailyStats.map(d => d.revenue))) * 200, 4)}px` 
                           }}
@@ -723,11 +723,11 @@ const AdminPayments = () => {
                     <span className="font-bold">{stats.completed_payments}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">ILM PRO Users</span>
+                    <span className="text-sm">Code Pro Users</span>
                     <span className="font-bold text-green-600">{stats.ilm_pro_sales}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">ILM ADVANCE Users</span>
+                    <span className="text-sm">Code Advance Users</span>
                     <span className="font-bold text-blue-600">{stats.ilm_advance_sales}</span>
                   </div>
                   <div className="flex justify-between items-center">

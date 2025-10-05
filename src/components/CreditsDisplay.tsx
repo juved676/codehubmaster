@@ -26,7 +26,7 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
   if (variant === 'compact') {
     return (
       <div className={cn('flex items-center gap-2 text-sm', className)}>
-        <Coins className="h-4 w-4 text-islamic-gold" />
+        <Coins className="h-4 w-4 text-primary" />
         <span className="text-muted-foreground">Credits:</span>
         <Badge variant={creditInfo.credits_left > 0 ? 'default' : 'destructive'}>
           {creditInfo.credits_left}
@@ -41,11 +41,11 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
   }
 
   return (
-    <Card className={cn('border-islamic-emerald/20', className)}>
+    <Card className={cn('border-primary/20', className)}>
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Coins className="h-5 w-5 text-islamic-gold" />
-          Credits Overview / کریڈٹس کی تفصیلات
+          <Coins className="h-5 w-5 text-accent" />
+          Credits Overview
         </CardTitle>
         <CardDescription>
           Your current usage and plan information
@@ -55,7 +55,7 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
         {/* Credits Status */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Zap className="h-4 w-4 text-islamic-emerald" />
+            <Zap className="h-4 w-4 text-accent" />
             <span className="text-sm font-medium">Remaining Credits</span>
           </div>
           <Badge 
@@ -69,7 +69,7 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
         {/* Plan Information */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Crown className="h-4 w-4 text-islamic-gold" />
+            <Crown className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium">Current Plan</span>
           </div>
           <Badge variant="outline">{creditInfo.plan_name}</Badge>
@@ -90,7 +90,7 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
 
         <div className="space-y-4">
           <div className="text-center">
-            <div className="text-lg font-semibold text-islamic-emerald">
+            <div className="text-lg font-semibold text-primary">
               {creditInfo.credits_left} Credits Left
             </div>
             <p className="text-sm text-muted-foreground">
