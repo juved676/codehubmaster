@@ -43,7 +43,25 @@ const Pricing = () => {
         .order('discounted_price');
 
       if (error) throw error;
-      setPlans(data || []);
+      
+      // Map plan names to new branding
+      const mappedPlans = (data || []).map(plan => {
+        let displayName = plan.name;
+        if (plan.name.includes('ILM Free')) displayName = 'Code Free';
+        else if (plan.name.includes('ILM Advance')) displayName = 'Code Advance';
+        else if (plan.name.includes('ILM Pro') || plan.name.includes('Code Pro')) displayName = 'Code Pro';
+        
+        return { ...plan, name: displayName };
+      });
+
+      // Reorder: Code Advance first (most popular), then Code Pro, then Code Free
+      const reordered = [
+        ...mappedPlans.filter(p => p.name === 'Code Advance'),
+        ...mappedPlans.filter(p => p.name === 'Code Pro'),
+        ...mappedPlans.filter(p => p.name === 'Code Free')
+      ];
+
+      setPlans(reordered);
     } catch (error) {
       console.error('Error fetching plans:', error);
       toast({
@@ -164,28 +182,29 @@ const Pricing = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="relative grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+      <div className="relative grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
         {plans.map((plan, index) => {
           const discount = calculateDiscount(plan.original_price, plan.discounted_price);
+          const isAdvance = plan.name === 'Code Advance';
           
           return (
             <Card 
               key={plan.id} 
               className={`relative overflow-hidden glass-card hover-lift animate-fade-in ${
-                plan.is_popular 
-                  ? 'border-primary/50 shadow-neon scale-105' 
+                isAdvance
+                  ? 'border-accent/50 shadow-neon scale-105' 
                   : 'border-primary/20'
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {plan.is_popular && (
+              {isAdvance && (
                 <div className="absolute top-0 left-0 right-0 bg-gradient-accent text-white text-center py-3 text-sm font-bold shadow-neon">
                   <Star className="inline w-5 h-5 mr-2" />
-                  MOST POPULAR - SAVE {discount}%
+                  BEST VALUE - SAVE ₹4,500
                 </div>
               )}
               
-              <CardHeader className={plan.is_popular ? 'pt-16' : 'pt-8'}>
+              <CardHeader className={isAdvance ? 'pt-16' : 'pt-8'}>
                 <div className="flex items-center justify-between mb-4">
                   <CardTitle className="text-3xl font-bold gradient-text">{plan.name}</CardTitle>
                   {discount > 0 && (
@@ -223,11 +242,10 @@ const Pricing = () => {
                 <Button
                   onClick={() => handleSelectPlan(plan)}
                   className={`w-full text-lg py-6 ${
-                    plan.is_popular
-                      ? 'bg-gradient-primary hover:shadow-neon'
-                      : 'glass-card border-primary/30 hover:border-primary hover:bg-primary/10'
+                    isAdvance
+                      ? 'bg-gradient-accent hover:shadow-neon'
+                      : 'bg-gradient-primary hover:shadow-neon'
                   }`}
-                  variant={plan.is_popular ? "default" : "outline"}
                   size="lg"
                 >
                   <CreditCard className="w-5 h-5 mr-2" />

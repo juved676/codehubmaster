@@ -7,14 +7,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
+import { PricingModal } from '@/components/PricingModal';
 import { MessageSquare, Send, AlertCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
+import { useCredits } from '@/hooks/useCredits';
 import { toast } from '@/hooks/use-toast';
 
 export default function Ask() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { creditInfo } = useCredits();
   const [formData, setFormData] = useState({
     title: '',
     question: '',
@@ -22,6 +25,7 @@ export default function Ask() {
     audience: 'school'
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPricingModal, setShowPricingModal] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +34,17 @@ export default function Ask() {
       toast({
         title: "Incomplete Form",
         description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check if user has credits available
+    if (creditInfo && !creditInfo.can_ask) {
+      setShowPricingModal(true);
+      toast({
+        title: "No Credits Available",
+        description: "Please upgrade your plan to continue asking questions",
         variant: "destructive",
       });
       return;
@@ -212,6 +227,9 @@ export default function Ask() {
           </ul>
         </CardContent>
       </Card>
+
+      {/* Pricing Modal */}
+      <PricingModal open={showPricingModal} onClose={() => setShowPricingModal(false)} />
     </div>
   );
 }
