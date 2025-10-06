@@ -48,14 +48,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "islamic-gold": {
-          DEFAULT: "hsl(var(--islamic-gold))",
-          light: "hsl(var(--islamic-gold-light))",
-        },
-        "islamic-emerald": {
-          DEFAULT: "hsl(var(--islamic-emerald))",
-          light: "hsl(var(--islamic-emerald-light))",
-        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

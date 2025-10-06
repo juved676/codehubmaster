@@ -34,8 +34,8 @@ interface PaymentStats {
   yesterday_revenue: number;
   this_month_revenue: number;
   last_month_revenue: number;
-  ilm_pro_sales: number;
-  ilm_advance_sales: number;
+  code_pro_sales: number;
+  code_advance_sales: number;
 }
 
 interface DailyStats {
@@ -61,8 +61,8 @@ const AdminPayments = () => {
     yesterday_revenue: 0,
     this_month_revenue: 0,
     last_month_revenue: 0,
-    ilm_pro_sales: 0,
-    ilm_advance_sales: 0
+    code_pro_sales: 0,
+    code_advance_sales: 0
   });
   const [dailyStats, setDailyStats] = useState<DailyStats[]>([]);
   const [planStats, setPlanStats] = useState<PlanStats[]>([]);
@@ -154,9 +154,9 @@ const AdminPayments = () => {
           // Plan-wise sales
           const planName = payment.subscription_plans?.name || 'Unknown';
           if (planName.includes('PRO') || planName.includes('Pro')) {
-            acc.ilm_pro_sales += 1;
+            acc.code_pro_sales += 1;
           } else if (planName.includes('ADVANCE') || planName.includes('Advance')) {
-            acc.ilm_advance_sales += 1;
+            acc.code_advance_sales += 1;
           }
         } else if (payment.payment_status === 'pending') {
           acc.pending_payments += 1;
@@ -173,8 +173,8 @@ const AdminPayments = () => {
         yesterday_revenue: 0,
         this_month_revenue: 0,
         last_month_revenue: 0,
-        ilm_pro_sales: 0,
-        ilm_advance_sales: 0
+        code_pro_sales: 0,
+        code_advance_sales: 0
       });
 
       setStats(stats);
@@ -454,8 +454,8 @@ const AdminPayments = () => {
                       <span className="text-sm font-medium">Code Pro (₹5)</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-bold">{stats.ilm_pro_sales} sales</div>
-                      <div className="text-sm text-muted-foreground">₹{stats.ilm_pro_sales * 5}</div>
+                      <div className="font-bold">{stats.code_pro_sales} sales</div>
+                      <div className="text-sm text-muted-foreground">₹{stats.code_pro_sales * 5}</div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
@@ -464,8 +464,8 @@ const AdminPayments = () => {
                       <span className="text-sm font-medium">Code Advance (₹8)</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-bold">{stats.ilm_advance_sales} sales</div>
-                      <div className="text-sm text-muted-foreground">₹{stats.ilm_advance_sales * 8}</div>
+                      <div className="font-bold">{stats.code_advance_sales} sales</div>
+                      <div className="text-sm text-muted-foreground">₹{stats.code_advance_sales * 8}</div>
                     </div>
                   </div>
                 </div>
@@ -724,11 +724,11 @@ const AdminPayments = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Code Pro Users</span>
-                    <span className="font-bold text-green-600">{stats.ilm_pro_sales}</span>
+                    <span className="font-bold text-green-600">{stats.code_pro_sales}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Code Advance Users</span>
-                    <span className="font-bold text-blue-600">{stats.ilm_advance_sales}</span>
+                    <span className="font-bold text-blue-600">{stats.code_advance_sales}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Success Rate</span>

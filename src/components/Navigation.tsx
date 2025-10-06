@@ -19,7 +19,7 @@ export default function Navigation() {
           <Link to="/" className="mr-6 flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-primary" />
             <span className="hidden font-bold sm:inline-block gradient-text">
-              IIM-HUB-AI
+              Code Hub AI
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -107,7 +107,7 @@ export default function Navigation() {
             {/* Mobile Logo */}
             <Link to="/" className="flex items-center space-x-2 md:hidden">
               <Code2 className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">IIM-HUB-AI</span>
+              <span className="font-bold gradient-text">Code Hub AI</span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-2">

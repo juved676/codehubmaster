@@ -172,4 +172,9 @@ All colors MUST be HSL.
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  .shadow-neon {
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.8),
+                0 0 40px hsl(var(--neon-cyan) / 0.4);
+  }
 }

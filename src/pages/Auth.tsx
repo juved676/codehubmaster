@@ -37,7 +37,7 @@ export default function Auth() {
     } else {
       toast({
         title: "Welcome!",
-        description: "Successfully signed in to IIM-HUB-AI",
+        description: "Successfully signed in to Code Hub AI",
       });
       navigate('/');
     }
@@ -72,7 +72,7 @@ export default function Auth() {
       <Card className="w-full max-w-md glass-card border-primary/30">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center font-bold gradient-text">
-            IIM-HUB-AI
+            Code Hub AI
           </CardTitle>
           <CardDescription className="text-center text-primary font-semibold">
             AI-Powered Coding Education Platform

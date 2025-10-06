@@ -11,7 +11,7 @@ const Index = () => {
       </div>
       <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-3xl mx-4">
         <Code2 className="h-24 w-24 text-primary mx-auto mb-6" />
-        <h1 className="mb-4 text-5xl font-bold gradient-text">IIM-HUB-AI</h1>
+        <h1 className="mb-4 text-5xl font-bold gradient-text">Code Hub AI</h1>
         <p className="text-2xl text-primary font-semibold mb-4">AI-Powered Coding Education Platform</p>
         <p className="text-xl text-muted-foreground mb-8">Master programming with AI assistance. Learn Python, Web Development, Data Science, and Machine Learning.</p>
         <div className="flex gap-4 justify-center flex-wrap">
