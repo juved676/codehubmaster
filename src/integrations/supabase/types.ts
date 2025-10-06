@@ -133,6 +133,13 @@ export type Database = {
             referencedRelation: "questions"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       logs: {
@@ -205,6 +212,13 @@ export type Database = {
             columns: ["plan_id"]
             isOneToOne: false
             referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans_public"
             referencedColumns: ["id"]
           },
         ]
@@ -303,6 +317,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      secure_audit_logs: {
+        Row: {
+          action_type: string
+          created_at: string | null
+          id: string
+          input_data: string | null
+          ip_address: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action_type: string
+          created_at?: string | null
+          id?: string
+          input_data?: string | null
+          ip_address?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          created_at?: string | null
+          id?: string
+          input_data?: string | null
+          ip_address?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
       }
       seo_metadata: {
         Row: {
@@ -521,6 +562,13 @@ export type Database = {
             referencedRelation: "subscription_plans"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "user_subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       user_usage: {
@@ -565,11 +613,80 @@ export type Database = {
             referencedRelation: "subscription_plans"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "user_usage_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
     Views: {
-      [_ in never]: never
+      questions_public: {
+        Row: {
+          audience_level: Database["public"]["Enums"]["audience_level"] | null
+          body: string | null
+          created_at: string | null
+          id: string | null
+          language: Database["public"]["Enums"]["language_type"] | null
+          status: Database["public"]["Enums"]["question_status"] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      subscription_plans_public: {
+        Row: {
+          credits_per_period: number | null
+          discounted_price: number | null
+          features: string[] | null
+          id: string | null
+          is_popular: boolean | null
+          name: string | null
+          periods_per_month: number | null
+        }
+        Insert: {
+          credits_per_period?: number | null
+          discounted_price?: number | null
+          features?: string[] | null
+          id?: string | null
+          is_popular?: boolean | null
+          name?: string | null
+          periods_per_month?: number | null
+        }
+        Update: {
+          credits_per_period?: number | null
+          discounted_price?: number | null
+          features?: string[] | null
+          id?: string | null
+          is_popular?: boolean | null
+          name?: string | null
+          periods_per_month?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       ask_question_with_credits: {
@@ -630,6 +747,14 @@ export type Database = {
           page_url: string
         }
         Returns: string
+      }
+      update_user_credits: {
+        Args: { credits_to_use: number; user_id: string }
+        Returns: number
+      }
+      validate_user_input: {
+        Args: { input_text: string }
+        Returns: boolean
       }
     }
     Enums: {
