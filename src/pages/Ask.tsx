@@ -9,13 +9,13 @@ import { Send, Settings, Menu, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useCredits } from '@/hooks/useCredits';
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 export default function Ask() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { creditInfo } = useCredits();
+  const { creditInfo, refetch: refetchCredits } = useCredits();
   const [question, setQuestion] = useState('');
   const [language, setLanguage] = useState('english');
   const [experienceLevel, setExperienceLevel] = useState('school');
@@ -25,69 +25,99 @@ export default function Ask() {
 
   const handleSubmit = async () => {
     if (!question.trim()) {
-      toast({
-        title: "Empty Question",
-        description: "Please enter your coding question",
-        variant: "destructive",
-      });
+      toast.error("Please enter a question");
       return;
     }
 
-    // Check if user has credits available
     if (creditInfo && !creditInfo.can_ask) {
-      setShowPricingModal(true);
-      toast({
-        title: "No Credits Available",
-        description: "Please upgrade your plan to continue asking questions",
-        variant: "destructive",
-      });
+      toast.error(creditInfo.message || "No credits remaining");
       return;
     }
 
     setIsSubmitting(true);
 
-    try {
-      // Insert question into database (anonymous or authenticated)
-      const { data: questionData, error: questionError } = await supabase
-        .from('questions')
-        .insert({
+    const attemptSubmission = async (retryCount = 0): Promise<void> => {
+      try {
+        const questionData = {
+          title: question.substring(0, 100),
+          body: question,
+          language: language as 'english' | 'urdu' | 'arabic',
+          audience_level: experienceLevel as 'school' | 'college' | 'research',
           user_id: user?.id || null,
-          title: question.trim().substring(0, 100), // Use first 100 chars as title
-          body: question.trim(),
-          language: language as any,
-          audience_level: experienceLevel as any,
-          status: 'draft'
-        })
-        .select()
-        .single();
+          status: 'pending_review' as const,
+        };
 
-      if (questionError) throw questionError;
+        const { data: newQuestion, error: questionError } = await supabase
+          .from('questions')
+          .insert([questionData])
+          .select()
+          .single();
 
-      // Process the question with AI
-      const { data: processResult, error: processError } = await supabase.functions
-        .invoke('process-question', {
-          body: { questionId: questionData.id }
+        if (questionError) throw questionError;
+
+        toast.success("Processing your question...", {
+          description: "This may take a moment for complex topics",
+          duration: 3000
         });
 
-      if (processError) throw processError;
+        const { data: functionData, error: functionError } = await supabase.functions.invoke(
+          'process-question',
+          {
+            body: { questionId: newQuestion.id }
+          }
+        );
 
-      toast({
-        title: "Question Submitted!",
-        description: processResult.requires_review 
-          ? "Your question is being reviewed by our team"
-          : "Your answer is ready!",
-      });
+        if (functionError) {
+          console.error('Function error:', functionError);
+          
+          // Check if retry is possible
+          if (retryCount < 2 && (functionError.message?.includes('timeout') || functionError.message?.includes('temporarily'))) {
+            toast.info(`Retrying... (Attempt ${retryCount + 2}/3)`, {
+              description: "Complex questions may take longer",
+              duration: 3000
+            });
+            await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+            return attemptSubmission(retryCount + 1);
+          }
+          
+          throw functionError;
+        }
 
-      // Redirect to question page
-      navigate(`/question/${questionData.id}`);
+        if (functionData?.error) {
+          if (functionData.retry && retryCount < 2) {
+            toast.info(`Retrying... (Attempt ${retryCount + 2}/3)`, {
+              description: "Complex questions may take longer",
+              duration: 3000
+            });
+            await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+            return attemptSubmission(retryCount + 1);
+          }
+          throw new Error(functionData.error);
+        }
 
-    } catch (error: any) {
-      console.error('Error submitting question:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Failed to submit question",
-        variant: "destructive",
-      });
+        await refetchCredits();
+        
+        toast.success("Answer generated successfully!");
+        setQuestion("");
+        
+        if (functionData?.answer_id) {
+          navigate(`/question/${newQuestion.id}`);
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        const errorMessage = err instanceof Error ? err.message : 'Failed to process question';
+        toast.error(errorMessage, {
+          description: retryCount >= 2 ? "Please try again later" : "You can try again",
+          duration: 5000
+        });
+        throw err;
+      }
+    };
+
+    try {
+      await attemptSubmission();
+    } catch {
+      // Error already handled in attemptSubmission
     } finally {
       setIsSubmitting(false);
     }

@@ -45,7 +45,15 @@ serve(async (req) => {
       `[${s.type}] ${s.title}: ${s.text_snippet} (Citation: ${s.citation})`
     ).join('\n') || '';
 
-    // Prepare Gemini API request
+    // Detect question complexity
+    const isComplexQuestion = /multithreading|multi-threading|concurrent|parallel|distributed|system design|architecture|design pattern|algorithm complexity|big o|optimization|performance tuning|memory management|garbage collection|compiler|interpreter/i.test(question.body) ||
+      question.body.length > 500;
+
+    console.log('Question complexity detected:', isComplexQuestion ? 'COMPLEX' : 'SIMPLE');
+
+    // Prepare Gemini API request with dynamic token allocation
+    const maxTokens = isComplexQuestion ? 8192 : 2048;
+    
     const prompt = `You are an expert coding instructor and debugging mentor for Indian students learning programming. Your role is to ACTIVELY TEACH coding concepts, not just answer questions.
 
 TEACHING APPROACH:
@@ -61,6 +69,8 @@ When explaining code:
 - Show both correct and common mistake examples
 - Explain error messages if relevant
 - Provide debugging strategies
+
+${isComplexQuestion ? 'NOTE: This is a complex question requiring detailed explanation. Take your time to provide comprehensive coverage with multiple examples.' : ''}
 
 Question: ${question.title}
 Details: ${question.body}
@@ -111,35 +121,84 @@ Set requires_review=true only for: full project builds, production deployment qu
       });
     }
 
-    console.log('Making Gemini API request with prompt length:', prompt.length);
+    console.log('Making Gemini API request with prompt length:', prompt.length, 'maxTokens:', maxTokens);
     
-    const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: prompt
-            }]
-          }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1024
+    // Retry mechanism with exponential backoff
+    let geminiResponse;
+    let retryCount = 0;
+    const maxRetries = 3;
+    
+    while (retryCount <= maxRetries) {
+      try {
+        geminiResponse = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              contents: [{
+                parts: [{
+                  text: prompt
+                }]
+              }],
+              generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: maxTokens
+              }
+            })
           }
-        })
+        );
+
+        if (geminiResponse.ok) {
+          break; // Success, exit retry loop
+        }
+
+        // Handle rate limits and server errors with retry
+        if (geminiResponse.status === 429 || geminiResponse.status >= 500) {
+          retryCount++;
+          if (retryCount > maxRetries) {
+            throw new Error(`Gemini API failed after ${maxRetries} retries: ${geminiResponse.status}`);
+          }
+          
+          const backoffDelay = Math.min(1000 * Math.pow(2, retryCount), 10000); // Max 10 seconds
+          console.log(`Retry ${retryCount}/${maxRetries} after ${backoffDelay}ms due to status ${geminiResponse.status}`);
+          await new Promise(resolve => setTimeout(resolve, backoffDelay));
+          continue;
+        }
+
+        // For other errors, don't retry
+        break;
+      } catch (fetchError) {
+        retryCount++;
+        if (retryCount > maxRetries) {
+          throw new Error(`Network error after ${maxRetries} retries: ${fetchError.message}`);
+        }
+        
+        const backoffDelay = Math.min(1000 * Math.pow(2, retryCount), 10000);
+        console.log(`Retry ${retryCount}/${maxRetries} after ${backoffDelay}ms due to network error`);
+        await new Promise(resolve => setTimeout(resolve, backoffDelay));
       }
-    );
+    }
 
     console.log('Gemini API response status:', geminiResponse.status);
 
     if (!geminiResponse.ok) {
       const errorText = await geminiResponse.text();
       console.error('Gemini API error details:', errorText);
-      throw new Error(`Gemini API error: ${geminiResponse.status} - ${errorText}`);
+      
+      // Provide user-friendly error messages
+      let userMessage = 'Failed to generate answer. Please try again.';
+      if (geminiResponse.status === 429) {
+        userMessage = 'Too many requests. Please wait a moment and try again.';
+      } else if (geminiResponse.status >= 500) {
+        userMessage = 'AI service temporarily unavailable. Please try again in a few moments.';
+      } else if (geminiResponse.status === 400) {
+        userMessage = 'Question format issue. Try rephrasing your question.';
+      }
+      
+      throw new Error(userMessage);
     }
 
     const geminiData = await geminiResponse.json();
@@ -239,8 +298,30 @@ Set requires_review=true only for: full project builds, production deployment qu
   } catch (error) {
     console.error('Error processing question:', error);
     
+    // Log to database for monitoring
+    try {
+      await supabase
+        .from('logs')
+        .insert({
+          event_type: 'edge_function_error',
+          details: {
+            function: 'process-question',
+            error: (error as any)?.message || 'Unknown error',
+            stack: (error as any)?.stack,
+            timestamp: new Date().toISOString()
+          },
+          user_id: null
+        });
+    } catch (logError) {
+      console.error('Failed to log error:', logError);
+    }
+    
+    // Return user-friendly error message
+    const errorMessage = (error as any)?.message || 'Unable to process your question. Please try again or contact support.';
+    
     return new Response(JSON.stringify({ 
-      error: (error as any)?.message || 'Internal server error'
+      error: errorMessage,
+      retry: true // Indicate that retry is possible
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
