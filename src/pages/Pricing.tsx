@@ -25,7 +25,7 @@ const Pricing = () => {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
-  const [upiId, setUpiId] = useState('your-fampay-upi@paytm'); // Your Fampay UPI ID
+  const [upiId] = useState('codehubai@fampay');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
@@ -330,7 +330,7 @@ const Pricing = () => {
               <Button
                 onClick={handlePayment}
                 disabled={paymentLoading}
-                className="w-full bg-gradient-primary"
+                className="w-full bg-gradient-primary hover:shadow-neon"
                 size="lg"
               >
                 {paymentLoading ? (
@@ -341,7 +341,7 @@ const Pricing = () => {
                 Pay with UPI
               </Button>
               
-              <p className="text-xs text-center text-muted-foreground">
+              <p className="text-xs text-center text-muted-foreground mt-3">
                 After payment, contact support with your transaction ID for instant activation
               </p>
             </div>

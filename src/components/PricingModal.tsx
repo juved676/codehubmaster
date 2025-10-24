@@ -30,7 +30,7 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPayment, setShowPayment] = useState(false);
-  const [upiId] = useState('your-fampay-upi@paytm');
+  const [upiId] = useState('codehubai@fampay');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
@@ -178,7 +178,7 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
               <Button
                 onClick={handlePayment}
                 disabled={paymentLoading}
-                className="w-full bg-gradient-primary"
+                className="w-full bg-gradient-primary hover:shadow-neon"
                 size="lg"
               >
                 {paymentLoading ? (
@@ -189,9 +189,13 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
                 Pay with UPI
               </Button>
               
+              <p className="text-xs text-center text-muted-foreground mt-3">
+                After payment, contact support with your transaction ID for instant activation
+              </p>
+              
               <Button
                 onClick={() => setShowPayment(false)}
-                variant="ghost"
+                variant="outline"
                 className="w-full"
               >
                 Back to Plans
