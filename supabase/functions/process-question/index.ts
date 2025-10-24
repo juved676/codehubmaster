@@ -265,6 +265,67 @@ Set requires_review=true only for: full project builds, production deployment qu
       })
       .eq('id', questionId);
 
+    // Deduct credits for the user (if authenticated)
+    if (question.user_id) {
+      console.log('Deducting credits for user:', question.user_id);
+      
+      // Get current period
+      const currentPeriod = Math.floor((new Date().getDate() - 1) / 10) + 1;
+      
+      // Try to deduct from active subscription first
+      const { data: subscription } = await supabase
+        .from('user_subscriptions')
+        .select('*')
+        .eq('user_id', question.user_id)
+        .eq('status', 'active')
+        .gt('expires_at', new Date().toISOString())
+        .eq('current_period', currentPeriod)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      
+      if (subscription && subscription.credits_remaining > 0) {
+        // Deduct from subscription
+        await supabase
+          .from('user_subscriptions')
+          .update({ 
+            credits_remaining: subscription.credits_remaining - 1,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', subscription.id);
+        
+        console.log('Credits deducted from subscription. Remaining:', subscription.credits_remaining - 1);
+      } else {
+        // User has no active subscription, they're using free credits
+        // Update user_usage table to track free credit usage
+        const { data: usage } = await supabase
+          .from('user_usage')
+          .select('*')
+          .eq('user_id', question.user_id)
+          .maybeSingle();
+        
+        if (usage) {
+          await supabase
+            .from('user_usage')
+            .update({
+              credits_used_current_period: (usage.credits_used_current_period || 0) + 1
+            })
+            .eq('user_id', question.user_id);
+        } else {
+          // Create usage record if it doesn't exist
+          await supabase
+            .from('user_usage')
+            .insert({
+              user_id: question.user_id,
+              credits_used_current_period: 1,
+              current_period_number: currentPeriod
+            });
+        }
+        
+        console.log('Free credit used');
+      }
+    }
+
         // Log the event (handle anonymous users)
         await supabase
           .from('logs')

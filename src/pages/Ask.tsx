@@ -12,6 +12,13 @@ import { useCredits } from '@/hooks/useCredits';
 import { toast } from 'sonner';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
+interface ChatMessage {
+  type: 'question' | 'answer';
+  content: string;
+  timestamp: Date;
+  sources?: string[];
+}
+
 export default function Ask() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -22,6 +29,27 @@ export default function Ask() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+
+  const handleExperienceLevelChange = (value: string) => {
+    // Check if user is trying to select intermediate or advanced without premium
+    if ((value === 'college' || value === 'research') && !creditInfo?.is_premium) {
+      setShowPricingModal(true);
+      toast.error("Premium Plan Required", {
+        description: "Intermediate and Advanced options require a paid plan"
+      });
+      return;
+    }
+    setExperienceLevel(value);
+  };
+
+  const handleLanguageChange = (value: string) => {
+    // Show pricing modal when changing language to inform about plans
+    if (value !== 'english' && !creditInfo?.is_premium) {
+      setShowPricingModal(true);
+    }
+    setLanguage(value);
+  };
 
   const handleSubmit = async () => {
     if (!question.trim()) {
@@ -36,11 +64,21 @@ export default function Ask() {
 
     setIsSubmitting(true);
 
+    // Add question to chat immediately
+    setChatHistory(prev => [...prev, {
+      type: 'question',
+      content: question,
+      timestamp: new Date()
+    }]);
+
+    const currentQuestion = question;
+    setQuestion("");
+
     const attemptSubmission = async (retryCount = 0): Promise<void> => {
       try {
         const questionData = {
-          title: question.substring(0, 100),
-          body: question,
+          title: currentQuestion.substring(0, 100),
+          body: currentQuestion,
           language: language as 'english' | 'urdu' | 'arabic',
           audience_level: experienceLevel as 'school' | 'college' | 'research',
           user_id: user?.id || null,
@@ -58,11 +96,6 @@ export default function Ask() {
           throw new Error("I'm here to help with coding! Could you please try asking your question again?");
         }
 
-        toast.success("Processing your question...", {
-          description: "This may take a moment for complex topics",
-          duration: 3000
-        });
-
         const { data: functionData, error: functionError } = await supabase.functions.invoke(
           'process-question',
           {
@@ -73,7 +106,6 @@ export default function Ask() {
         if (functionError) {
           console.error('Function error:', functionError);
           
-          // Check if retry is possible
           if (retryCount < 2 && (functionError.message?.includes('timeout') || functionError.message?.includes('temporarily'))) {
             toast.info(`Working on your answer... (Attempt ${retryCount + 2}/3)`, {
               description: "Complex questions may take longer",
@@ -98,14 +130,30 @@ export default function Ask() {
           throw new Error("I'm ready to help! Could you please rephrase your coding question? Try to be specific about what you're trying to achieve.");
         }
 
-        await refetchCredits();
-        
-        toast.success("Answer generated successfully!");
-        setQuestion("");
-        
+        // Fetch the answer and add to chat
         if (functionData?.answer_id) {
-          navigate(`/question/${newQuestion.id}`);
+          const { data: answerData } = await supabase
+            .from('answers')
+            .select('answer_text, sources_used')
+            .eq('id', functionData.answer_id)
+            .single();
+
+          if (answerData) {
+            const sources = Array.isArray(answerData.sources_used) 
+              ? answerData.sources_used.map(s => String(s))
+              : [];
+              
+            setChatHistory(prev => [...prev, {
+              type: 'answer',
+              content: answerData.answer_text,
+              timestamp: new Date(),
+              sources
+            }]);
+          }
         }
+
+        await refetchCredits();
+        toast.success("Answer generated successfully!");
       } catch (err) {
         console.error('Submission error:', err);
         const errorMessage = err instanceof Error 
@@ -115,6 +163,10 @@ export default function Ask() {
           description: "I support Python, Web Dev, AI/ML, JavaScript & more",
           duration: 5000
         });
+        
+        // Remove the question from chat on error
+        setChatHistory(prev => prev.slice(0, -1));
+        setQuestion(currentQuestion);
         throw err;
       }
     };
@@ -179,7 +231,7 @@ export default function Ask() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Language</label>
-            <Select value={language} onValueChange={setLanguage}>
+            <Select value={language} onValueChange={handleLanguageChange}>
               <SelectTrigger className="bg-background/50">
                 <SelectValue />
               </SelectTrigger>
@@ -192,14 +244,18 @@ export default function Ask() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Experience Level</label>
-            <Select value={experienceLevel} onValueChange={setExperienceLevel}>
+            <Select value={experienceLevel} onValueChange={handleExperienceLevelChange}>
               <SelectTrigger className="bg-background/50">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-popover z-50">
                 <SelectItem value="school">🎓 Beginner</SelectItem>
-                <SelectItem value="college">💻 Intermediate</SelectItem>
-                <SelectItem value="research">🚀 Advanced</SelectItem>
+                <SelectItem value="college" disabled={!creditInfo?.is_premium}>
+                  💻 Intermediate {!creditInfo?.is_premium && "🔒"}
+                </SelectItem>
+                <SelectItem value="research" disabled={!creditInfo?.is_premium}>
+                  🚀 Advanced {!creditInfo?.is_premium && "🔒"}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -257,46 +313,87 @@ export default function Ask() {
         <div className="flex-1 grid lg:grid-cols-[1fr_320px] gap-6 min-h-0">
           {/* Chat Area */}
           <Card className="glass-card border-primary/30 flex flex-col shadow-elegant">
-            <CardContent className="flex-1 flex flex-col p-6 gap-4">
-              {/* Welcome Message */}
-              <div className="flex-1 flex items-center justify-center">
-                <div className="text-center max-w-2xl space-y-4">
-                  <div className="text-6xl mb-4">🤖</div>
-                  <h2 className="text-2xl font-bold">How can I help you today?</h2>
-                  <p className="text-muted-foreground">
-                    Ask any coding question and get detailed explanations with examples
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
-                    <button
-                      onClick={() => setQuestion("How do I create a function in Python?")}
-                      className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                    >
-                      <span className="block font-medium mb-1">Python Basics</span>
-                      <span className="text-muted-foreground text-xs">How do I create a function?</span>
-                    </button>
-                    <button
-                      onClick={() => setQuestion("Explain how JavaScript promises work")}
-                      className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                    >
-                      <span className="block font-medium mb-1">JavaScript</span>
-                      <span className="text-muted-foreground text-xs">Explain promises</span>
-                    </button>
-                    <button
-                      onClick={() => setQuestion("What's the difference between let, const, and var?")}
-                      className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                    >
-                      <span className="block font-medium mb-1">Variables</span>
-                      <span className="text-muted-foreground text-xs">let vs const vs var</span>
-                    </button>
-                    <button
-                      onClick={() => setQuestion("How do I fix 'undefined is not a function' error?")}
-                      className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                    >
-                      <span className="block font-medium mb-1">Debugging</span>
-                      <span className="text-muted-foreground text-xs">Fix common errors</span>
-                    </button>
+            <CardContent className="flex-1 flex flex-col p-6 gap-4 overflow-hidden">
+              {/* Messages Area */}
+              <div className="flex-1 overflow-y-auto space-y-4 min-h-0">
+                {chatHistory.length === 0 ? (
+                  /* Welcome Message */
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-center max-w-2xl space-y-4">
+                      <div className="text-6xl mb-4">🤖</div>
+                      <h2 className="text-2xl font-bold">How can I help you today?</h2>
+                      <p className="text-muted-foreground">
+                        Ask any coding question and get detailed explanations with examples
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
+                        <button
+                          onClick={() => setQuestion("How do I create a function in Python?")}
+                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                        >
+                          <span className="block font-medium mb-1">Python Basics</span>
+                          <span className="text-muted-foreground text-xs">How do I create a function?</span>
+                        </button>
+                        <button
+                          onClick={() => setQuestion("Explain how JavaScript promises work")}
+                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                        >
+                          <span className="block font-medium mb-1">JavaScript</span>
+                          <span className="text-muted-foreground text-xs">Explain promises</span>
+                        </button>
+                        <button
+                          onClick={() => setQuestion("What's the difference between let, const, and var?")}
+                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                        >
+                          <span className="block font-medium mb-1">Variables</span>
+                          <span className="text-muted-foreground text-xs">let vs const vs var</span>
+                        </button>
+                        <button
+                          onClick={() => setQuestion("How do I fix 'undefined is not a function' error?")}
+                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                        >
+                          <span className="block font-medium mb-1">Debugging</span>
+                          <span className="text-muted-foreground text-xs">Fix common errors</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  /* Chat Messages */
+                  chatHistory.map((message, index) => (
+                    <div key={index} className={`flex ${message.type === 'question' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[80%] rounded-lg p-4 ${
+                        message.type === 'question' 
+                          ? 'bg-primary text-primary-foreground' 
+                          : 'bg-muted'
+                      }`}>
+                        <div className="whitespace-pre-wrap break-words">{message.content}</div>
+                        {message.sources && message.sources.length > 0 && (
+                          <div className="mt-2 pt-2 border-t border-border/50 text-xs">
+                            <p className="font-semibold mb-1">Sources:</p>
+                            <ul className="list-disc list-inside space-y-0.5">
+                              {message.sources.map((source, idx) => (
+                                <li key={idx}>{source}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        <div className="text-xs opacity-70 mt-2">
+                          {message.timestamp.toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+                {isSubmitting && (
+                  <div className="flex justify-start">
+                    <div className="bg-muted rounded-lg p-4">
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div>
+                        <span>Thinking...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Input Area */}
@@ -306,7 +403,7 @@ export default function Ask() {
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="min-h-[120px] bg-background/50 border-border/50 focus:border-primary resize-none"
+                  className="min-h-[80px] bg-background/50 border-border/50 focus:border-primary resize-none"
                   disabled={isSubmitting}
                 />
                 <div className="flex items-center justify-between">
