@@ -693,10 +693,7 @@ export type Database = {
         Args: { question_text: string; user_uuid: string }
         Returns: Json
       }
-      check_user_credits: {
-        Args: { user_uuid: string }
-        Returns: Json
-      }
+      check_user_credits: { Args: { user_uuid: string }; Returns: Json }
       get_ai_answer: {
         Args: { requesting_user_id?: string; user_question: string }
         Returns: {
@@ -705,14 +702,8 @@ export type Database = {
           sources: string[]
         }[]
       }
-      get_current_period: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      get_user_credits_detailed: {
-        Args: { user_uuid: string }
-        Returns: Json
-      }
+      get_current_period: { Args: never; Returns: number }
+      get_user_credits_detailed: { Args: { user_uuid: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -724,10 +715,7 @@ export type Database = {
         Args: { plan_uuid: string; user_uuid: string }
         Returns: Json
       }
-      is_admin: {
-        Args: { _user_id: string }
-        Returns: boolean
-      }
+      is_admin: { Args: { _user_id: string }; Returns: boolean }
       manage_topic: {
         Args: {
           action_type: string
@@ -752,10 +740,7 @@ export type Database = {
         Args: { credits_to_use: number; user_id: string }
         Returns: number
       }
-      validate_user_input: {
-        Args: { input_text: string }
-        Returns: boolean
-      }
+      validate_user_input: { Args: { input_text: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"

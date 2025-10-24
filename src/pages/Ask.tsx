@@ -53,7 +53,10 @@ export default function Ask() {
           .select()
           .single();
 
-        if (questionError) throw questionError;
+        if (questionError) {
+          console.error('Question insert error:', questionError);
+          throw new Error("I'm here to help with coding! Could you please try asking your question again?");
+        }
 
         toast.success("Processing your question...", {
           description: "This may take a moment for complex topics",
@@ -72,7 +75,7 @@ export default function Ask() {
           
           // Check if retry is possible
           if (retryCount < 2 && (functionError.message?.includes('timeout') || functionError.message?.includes('temporarily'))) {
-            toast.info(`Retrying... (Attempt ${retryCount + 2}/3)`, {
+            toast.info(`Working on your answer... (Attempt ${retryCount + 2}/3)`, {
               description: "Complex questions may take longer",
               duration: 3000
             });
@@ -80,19 +83,19 @@ export default function Ask() {
             return attemptSubmission(retryCount + 1);
           }
           
-          throw functionError;
+          throw new Error("Let me help you with that. Could you try asking your question differently? Make sure it's clear and specific about what coding help you need.");
         }
 
         if (functionData?.error) {
           if (functionData.retry && retryCount < 2) {
-            toast.info(`Retrying... (Attempt ${retryCount + 2}/3)`, {
+            toast.info(`Working on your answer... (Attempt ${retryCount + 2}/3)`, {
               description: "Complex questions may take longer",
               duration: 3000
             });
             await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
             return attemptSubmission(retryCount + 1);
           }
-          throw new Error(functionData.error);
+          throw new Error("I'm ready to help! Could you please rephrase your coding question? Try to be specific about what you're trying to achieve.");
         }
 
         await refetchCredits();
@@ -105,9 +108,11 @@ export default function Ask() {
         }
       } catch (err) {
         console.error('Submission error:', err);
-        const errorMessage = err instanceof Error ? err.message : 'Failed to process question';
+        const errorMessage = err instanceof Error 
+          ? err.message 
+          : "I'm here to help with coding! Could you please rephrase your question?";
         toast.error(errorMessage, {
-          description: retryCount >= 2 ? "Please try again later" : "You can try again",
+          description: "I support Python, Web Dev, AI/ML, JavaScript & more",
           duration: 5000
         });
         throw err;
