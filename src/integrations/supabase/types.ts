@@ -716,6 +716,7 @@ export type Database = {
         Returns: Json
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_admin_email: { Args: { user_email: string }; Returns: boolean }
       manage_topic: {
         Args: {
           action_type: string

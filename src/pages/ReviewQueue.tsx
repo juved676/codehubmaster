@@ -40,16 +40,25 @@ export default function ReviewQueue() {
 
   const checkUserRole = async () => {
     try {
-      const { data: profile, error } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('user_id', user?.id)
-        .single();
+      if (!user?.email) {
+        setUserRole(null);
+        return;
+      }
 
-      // Skip role check for open system - allow all access  
-      setUserRole('admin'); // Set default admin role for open access
+      // Check if user's email is in admin whitelist
+      const { data, error } = await supabase
+        .rpc('is_admin_email', { user_email: user.email });
+
+      if (error) {
+        console.error('Error checking admin status:', error);
+        setUserRole(null);
+        return;
+      }
+
+      setUserRole(data ? 'admin' : null);
     } catch (error) {
       console.error('Error checking user role:', error);
+      setUserRole(null);
     }
   };
 

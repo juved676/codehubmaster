@@ -30,7 +30,7 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPayment, setShowPayment] = useState(false);
-  const [upiId] = useState('codehubai@fampay');
+  const [upiId] = useState('9625852028@fam');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
