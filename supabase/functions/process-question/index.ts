@@ -9,7 +9,7 @@ const corsHeaders = {
 
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const deepseekApiKey = Deno.env.get('DEEPSEEK_API_KEY')!;
+const lovableApiKey = Deno.env.get('LOVABLE_API_KEY')!;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
@@ -121,118 +121,82 @@ Set requires_review=true only for: full project builds, production deployment qu
       });
     }
 
-    console.log('Making DeepSeek API request with prompt length:', prompt.length, 'maxTokens:', maxTokens);
+    console.log('Making Lovable AI request with prompt length:', prompt.length, 'maxTokens:', maxTokens);
     
-    // Retry mechanism with exponential backoff
-    let deepseekResponse;
-    let retryCount = 0;
-    const maxRetries = 3;
-    
-    while (retryCount <= maxRetries) {
-      try {
-        deepseekResponse = await fetch(
-          'https://api.deepseek.com/v1/chat/completions',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${deepseekApiKey}`
-            },
-            body: JSON.stringify({
-              model: 'deepseek-chat',
-              messages: [
-                { role: 'system', content: 'You are an expert coding instructor and debugging mentor for Indian students learning programming.' },
-                { role: 'user', content: prompt }
-              ],
-              temperature: 0.7,
-              max_tokens: maxTokens,
-              response_format: { type: 'json_object' }
-            })
-          }
-        );
-
-        if (deepseekResponse.ok) {
-          break; // Success, exit retry loop
-        }
-
-        // Handle rate limits and server errors with retry
-        if (deepseekResponse.status === 429 || deepseekResponse.status >= 500) {
-          retryCount++;
-          if (retryCount > maxRetries) {
-            throw new Error(`DeepSeek API failed after ${maxRetries} retries: ${deepseekResponse.status}`);
-          }
-          
-          const backoffDelay = Math.min(1000 * Math.pow(2, retryCount), 10000); // Max 10 seconds
-          console.log(`Retry ${retryCount}/${maxRetries} after ${backoffDelay}ms due to status ${deepseekResponse.status}`);
-          await new Promise(resolve => setTimeout(resolve, backoffDelay));
-          continue;
-        }
-
-        // For other errors, don't retry
-        break;
-      } catch (fetchError) {
-        retryCount++;
-        if (retryCount > maxRetries) {
-          throw new Error(`Network error after ${maxRetries} retries: ${fetchError.message}`);
-        }
-        
-        const backoffDelay = Math.min(1000 * Math.pow(2, retryCount), 10000);
-        console.log(`Retry ${retryCount}/${maxRetries} after ${backoffDelay}ms due to network error`);
-        await new Promise(resolve => setTimeout(resolve, backoffDelay));
+    // Call Lovable AI Gateway
+    const aiResponse = await fetch(
+      'https://ai.gateway.lovable.dev/v1/chat/completions',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${lovableApiKey}`
+        },
+        body: JSON.stringify({
+          model: 'google/gemini-2.5-flash',
+          messages: [
+            { role: 'system', content: 'You are an expert coding instructor and debugging mentor for Indian students learning programming.' },
+            { role: 'user', content: prompt }
+          ],
+          temperature: 0.7,
+          max_tokens: maxTokens
+        })
       }
-    }
+    );
 
-    console.log('DeepSeek API response status:', deepseekResponse.status);
+    console.log('Lovable AI response status:', aiResponse.status);
 
-    if (!deepseekResponse.ok) {
-      const errorText = await deepseekResponse.text();
-      console.error('DeepSeek API error details:', errorText);
+    if (!aiResponse.ok) {
+      const errorText = await aiResponse.text();
+      console.error('Lovable AI error details:', errorText);
       
       // Provide user-friendly error messages
       let userMessage = 'Failed to generate answer. Please try again.';
-      if (deepseekResponse.status === 429) {
+      if (aiResponse.status === 429) {
         userMessage = 'Too many requests. Please wait a moment and try again.';
-      } else if (deepseekResponse.status >= 500) {
+      } else if (aiResponse.status === 402) {
+        userMessage = 'AI service quota exceeded. Please contact support.';
+      } else if (aiResponse.status >= 500) {
         userMessage = 'AI service temporarily unavailable. Please try again in a few moments.';
-      } else if (deepseekResponse.status === 400) {
+      } else if (aiResponse.status === 400) {
         userMessage = 'Question format issue. Try rephrasing your question.';
       }
       
       throw new Error(userMessage);
     }
 
-    const deepseekData = await deepseekResponse.json();
-    console.log('DeepSeek API response structure:', JSON.stringify(deepseekData, null, 2));
+    const aiData = await aiResponse.json();
+    console.log('Lovable AI response received');
     
-    const generatedText = deepseekData.choices?.[0]?.message?.content;
+    const generatedText = aiData.choices?.[0]?.message?.content;
 
     if (!generatedText) {
-      console.error('No generated text found in response:', deepseekData);
-      throw new Error(`No response from DeepSeek API. Response structure: ${JSON.stringify(deepseekData)}`);
+      console.error('No generated text found in response:', aiData);
+      throw new Error(`No response from AI. Response structure: ${JSON.stringify(aiData)}`);
     }
 
     console.log('Generated text length:', generatedText.length);
 
-    // Parse AI response (DeepSeek returns JSON directly due to response_format)
-    let aiResponse;
+    // Parse AI response (try to extract JSON if available)
+    let parsedResponse;
     try {
-      aiResponse = JSON.parse(generatedText);
+      parsedResponse = JSON.parse(generatedText);
     } catch (parseError) {
-      // Fallback if JSON parsing fails
-      console.error('JSON parse error:', parseError);
-      aiResponse = {
+      // Fallback if JSON parsing fails - AI might return plain text
+      console.log('Response is not JSON, using plain text format');
+      parsedResponse = {
         answer_text: generatedText,
         short_summary: generatedText.substring(0, 100) + '...',
-        sources: [],
+        sources: ['AI-powered answer'],
         requires_review: false
       };
     }
 
     // Calculate confidence score based on response quality
-    const confidenceScore = aiResponse.requires_review ? 0.3 : 0.8;
+    const confidenceScore = parsedResponse.requires_review ? 0.3 : 0.9;
 
     // Check for moderation flags
-    const needsReview = aiResponse.requires_review || 
+    const needsReview = parsedResponse.requires_review || 
       /complex project|full application|complete system|build entire/i.test(question.body) ||
       confidenceScore < 0.6;
 
@@ -241,11 +205,11 @@ Set requires_review=true only for: full project builds, production deployment qu
       .from('answers')
       .insert({
         question_id: questionId,
-        answer_text: aiResponse.answer_text,
-        summary_text: aiResponse.short_summary,
-        sources_used: aiResponse.sources || [],
-        ai_provider: 'deepseek',
-        ai_response_raw: deepseekData,
+        answer_text: parsedResponse.answer_text,
+        summary_text: parsedResponse.short_summary,
+        sources_used: parsedResponse.sources || ['AI-powered answer'],
+        ai_provider: 'lovable-ai-gemini',
+        ai_response_raw: aiData,
         confidence_score: confidenceScore,
         requires_review: needsReview,
         published: !needsReview
@@ -335,7 +299,7 @@ Set requires_review=true only for: full project builds, production deployment qu
               question_id: questionId,
               answer_id: answer.id,
               requires_review: needsReview,
-              ai_provider: 'deepseek'
+              ai_provider: 'lovable-ai-gemini'
             },
             user_id: question.user_id || null // Handle anonymous questions
           });
