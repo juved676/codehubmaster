@@ -9,7 +9,7 @@ const corsHeaders = {
 
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const lovableApiKey = Deno.env.get('LOVABLE_API_KEY')!;
+const deepseekApiKey = Deno.env.get('DEEPSEEK_API_KEY')!;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
@@ -121,19 +121,19 @@ Set requires_review=true only for: full project builds, production deployment qu
       });
     }
 
-    console.log('Making Lovable AI request with prompt length:', prompt.length, 'maxTokens:', maxTokens);
+    console.log('Making DeepSeek AI request with prompt length:', prompt.length, 'maxTokens:', maxTokens);
     
-    // Call Lovable AI Gateway (Free & Fast)
+    // Call DeepSeek API
     const aiResponse = await fetch(
-      'https://ai.gateway.lovable.dev/v1/chat/completions',
+      'https://api.deepseek.com/v1/chat/completions',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${lovableApiKey}`
+          'Authorization': `Bearer ${deepseekApiKey}`
         },
         body: JSON.stringify({
-          model: 'google/gemini-2.5-flash',
+          model: 'deepseek-chat',
           messages: [
             { role: 'system', content: 'You are an expert coding instructor and debugging mentor for Indian students learning programming.' },
             { role: 'user', content: prompt }
@@ -144,11 +144,11 @@ Set requires_review=true only for: full project builds, production deployment qu
       }
     );
 
-    console.log('Lovable AI response status:', aiResponse.status);
+    console.log('DeepSeek AI response status:', aiResponse.status);
 
     if (!aiResponse.ok) {
       const errorText = await aiResponse.text();
-      console.error('Lovable AI error details:', errorText);
+      console.error('DeepSeek AI error details:', errorText);
       
       // Provide user-friendly error messages
       let userMessage = 'Failed to generate answer. Please try again.';
@@ -166,7 +166,7 @@ Set requires_review=true only for: full project builds, production deployment qu
     }
 
     const aiData = await aiResponse.json();
-    console.log('Lovable AI response received');
+    console.log('DeepSeek AI response received');
     
     const generatedText = aiData.choices?.[0]?.message?.content;
 
@@ -208,7 +208,7 @@ Set requires_review=true only for: full project builds, production deployment qu
         answer_text: parsedResponse.answer_text,
         summary_text: parsedResponse.short_summary,
         sources_used: parsedResponse.sources || ['AI-powered answer'],
-        ai_provider: 'lovable-ai-gemini',
+        ai_provider: 'deepseek',
         ai_response_raw: aiData,
         confidence_score: confidenceScore,
         requires_review: needsReview,
@@ -299,7 +299,7 @@ Set requires_review=true only for: full project builds, production deployment qu
               question_id: questionId,
               answer_id: answer.id,
               requires_review: needsReview,
-              ai_provider: 'lovable-ai-gemini'
+              ai_provider: 'deepseek'
             },
             user_id: question.user_id || null // Handle anonymous questions
           });
