@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +25,12 @@ const topicInfo: Record<string, { title: string; description: string }> = {
 };
 
 export default function TopicDetail() {
-  const { topic } = useParams<{ topic: string }>();
+  const { topic: topicParam } = useParams<{ topic: string }>();
+  const location = useLocation();
+  
+  // Extract topic from either URL param or pathname
+  const topic = topicParam || location.pathname.replace('/', '');
+  
   const questions = topic ? getQuestionsByTopic(topic) : [];
   const info = topic ? topicInfo[topic] : null;
 
