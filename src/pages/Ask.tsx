@@ -58,7 +58,10 @@ export default function Ask() {
     }
 
     if (creditInfo && !creditInfo.can_ask) {
-      toast.error(creditInfo.message || "No credits remaining");
+      setShowPricingModal(true);
+      toast.error("Credits Required", {
+        description: creditInfo.message || "Please upgrade to continue asking questions"
+      });
       return;
     }
 
