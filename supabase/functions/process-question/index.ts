@@ -269,12 +269,26 @@ Set requires_review=true only for: full project builds, production deployment qu
           .maybeSingle();
         
         if (usage) {
-          await supabase
-            .from('user_usage')
-            .update({
-              credits_used_current_period: (usage.credits_used_current_period || 0) + 1
-            })
-            .eq('user_id', question.user_id);
+          // Check if the usage record is for the current period
+          if (usage.current_period_number === currentPeriod) {
+            // Same period, increment credits used
+            await supabase
+              .from('user_usage')
+              .update({
+                credits_used_current_period: (usage.credits_used_current_period || 0) + 1
+              })
+              .eq('user_id', question.user_id);
+          } else {
+            // New period started, reset credits
+            await supabase
+              .from('user_usage')
+              .update({
+                credits_used_current_period: 1,
+                current_period_number: currentPeriod,
+                last_period_reset: new Date().toISOString().split('T')[0]
+              })
+              .eq('user_id', question.user_id);
+          }
         } else {
           // Create usage record if it doesn't exist
           await supabase
@@ -286,7 +300,7 @@ Set requires_review=true only for: full project builds, production deployment qu
             });
         }
         
-        console.log('Free credit used');
+        console.log('Free credit used. Period:', currentPeriod);
       }
     }
 
