@@ -215,11 +215,6 @@ serve(async (req) => {
           current_month: stats.this_month_revenue,
           last_month: lastMonthRevenue,
           growth_rate: Math.round(growthRate * 100) / 100
-        },
-        fampay_integration: {
-          upi_id: "9625852028@fam",
-          status: "active",
-          auto_verification: true
         }
       },
       timestamp: new Date().toISOString()
