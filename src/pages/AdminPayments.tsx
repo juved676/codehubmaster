@@ -368,7 +368,7 @@ const AdminPayments = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-primary mb-2">Revenue & Payment Analytics</h1>
-        <p className="text-muted-foreground">Complete income tracking with Fampay UPI integration</p>
+        <p className="text-muted-foreground">Complete income tracking with PayTM UPI integration</p>
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
@@ -451,21 +451,21 @@ const AdminPayments = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="text-sm font-medium">Code Pro (₹5)</span>
+                      <span className="text-sm font-medium">Code Pro (₹49)</span>
                     </div>
                     <div className="text-right">
                       <div className="font-bold">{stats.code_pro_sales} sales</div>
-                      <div className="text-sm text-muted-foreground">₹{stats.code_pro_sales * 5}</div>
+                      <div className="text-sm text-muted-foreground">₹{stats.code_pro_sales * 49}</div>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm font-medium">Code Advance (₹8)</span>
+                      <span className="text-sm font-medium">Code Advance (₹99)</span>
                     </div>
                     <div className="text-right">
                       <div className="font-bold">{stats.code_advance_sales} sales</div>
-                      <div className="text-sm text-muted-foreground">₹{stats.code_advance_sales * 8}</div>
+                      <div className="text-sm text-muted-foreground">₹{stats.code_advance_sales * 99}</div>
                     </div>
                   </div>
                 </div>
@@ -503,12 +503,12 @@ const AdminPayments = () => {
             </Card>
           </div>
 
-          {/* Fampay Integration Info */}
+          {/* UPI Integration Info */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5" />
-                Fampay UPI Integration
+                PayTM UPI Integration
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -517,7 +517,7 @@ const AdminPayments = () => {
                   <CheckCircle className="h-8 w-8 text-green-600" />
                   <div>
                     <div className="font-semibold text-green-800">Active UPI ID</div>
-                    <div className="text-sm text-green-600">9625852028@fam</div>
+                    <div className="text-sm text-green-600">9871284199@ptyes</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
@@ -628,7 +628,7 @@ const AdminPayments = () => {
           <Card>
             <CardHeader>
               <CardTitle>Payment Management</CardTitle>
-              <CardDescription>Manage and verify user payments with Fampay UPI</CardDescription>
+              <CardDescription>Manage and verify user payments with PayTM UPI</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -773,14 +773,14 @@ const AdminPayments = () => {
           <DialogHeader>
             <DialogTitle>Update Payment Status</DialogTitle>
             <DialogDescription>
-              Verify Fampay UPI payment and update status
+              Verify PayTM UPI payment and update status
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             <div className="p-4 bg-blue-50 rounded-lg border">
-              <div className="text-sm font-medium text-blue-800 mb-1">Fampay UPI ID</div>
-              <div className="text-lg font-mono text-blue-900">9625852028@fam</div>
+              <div className="text-sm font-medium text-blue-800 mb-1">PayTM UPI ID</div>
+              <div className="text-lg font-mono text-blue-900">9871284199@ptyes</div>
             </div>
 
             <div>
@@ -804,7 +804,7 @@ const AdminPayments = () => {
                 id="upi-ref"
                 value={upiRef}
                 onChange={(e) => setUpiRef(e.target.value)}
-                placeholder="Enter UPI transaction ID from Fampay"
+                placeholder="Enter UPI transaction ID from PayTM"
               />
             </div>
 
