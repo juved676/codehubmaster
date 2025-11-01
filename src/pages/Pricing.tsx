@@ -25,10 +25,15 @@ const Pricing = () => {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
-  const [upiId] = useState('9625852028@fam');
+  const [selectedUpiId, setSelectedUpiId] = useState('9625852028@fam');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
+
+  const upiOptions = [
+    { id: 'fampay', upi: '9625852028@fam', name: 'Fampay UPI' },
+    { id: 'paytm', upi: '', name: 'PayTM UPI' } // User will provide this
+  ];
 
   useEffect(() => {
     fetchPlans();
@@ -105,7 +110,7 @@ const Pricing = () => {
       const responseData = data as any;
       if (responseData.success) {
         // Generate UPI deep link
-        const upiLink = `upi://pay?pa=${upiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Subscription Payment ID: ${responseData.payment_id}`;
+        const upiLink = `upi://pay?pa=${selectedUpiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Subscription Payment ID: ${responseData.payment_id}`;
         
         // Try to open UPI app
         if (navigator.userAgent.match(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/)) {
@@ -114,7 +119,7 @@ const Pricing = () => {
           // For desktop, show QR code or payment instructions
           toast({
             title: "Payment Initiated",
-            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${upiId} with reference: ${responseData.payment_id}`,
+            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${selectedUpiId} with reference: ${responseData.payment_id}`,
           });
         }
 
@@ -314,13 +319,35 @@ const Pricing = () => {
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="upi-id">UPI ID for Payment</Label>
-              <Input
-                id="upi-id"
-                value={upiId}
-                readOnly
-                className="font-mono"
-              />
+              <Label>Select Payment Method</Label>
+              <div className="space-y-2">
+                {upiOptions.map((option) => (
+                  <div
+                    key={option.id}
+                    onClick={() => option.upi && setSelectedUpiId(option.upi)}
+                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
+                      selectedUpiId === option.upi
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                    } ${!option.upi ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">{option.name}</p>
+                        {option.upi && (
+                          <p className="text-sm text-muted-foreground font-mono">{option.upi}</p>
+                        )}
+                        {!option.upi && (
+                          <p className="text-xs text-destructive">Coming Soon</p>
+                        )}
+                      </div>
+                      {selectedUpiId === option.upi && (
+                        <Check className="w-5 h-5 text-primary" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
               <p className="text-xs text-muted-foreground">
                 You will be redirected to your UPI app to complete the payment
               </p>
