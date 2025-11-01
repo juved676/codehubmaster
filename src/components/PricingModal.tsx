@@ -30,15 +30,10 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPayment, setShowPayment] = useState(false);
-  const [selectedUpiId, setSelectedUpiId] = useState('9625852028@fam');
+  const [upiId] = useState('9871284199@ptyes');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
-
-  const upiOptions = [
-    { id: 'fampay', upi: '9625852028@fam', name: 'Fampay UPI' },
-    { id: 'paytm', upi: '', name: 'PayTM UPI' } // User will provide this
-  ];
 
   useEffect(() => {
     if (open) {
@@ -110,14 +105,14 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
 
       const responseData = data as any;
       if (responseData.success) {
-        const upiLink = `upi://pay?pa=${selectedUpiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Payment ID: ${responseData.payment_id}`;
+        const upiLink = `upi://pay?pa=${upiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Payment ID: ${responseData.payment_id}`;
         
         if (navigator.userAgent.match(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/)) {
           window.location.href = upiLink;
         } else {
           toast({
             title: "Payment Initiated",
-            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${selectedUpiId}`,
+            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${upiId}`,
           });
         }
 
@@ -167,37 +162,15 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
             </div>
 
             <div className="space-y-3">
-              <Label>Select Payment Method</Label>
-              <div className="space-y-2">
-                {upiOptions.map((option) => (
-                  <div
-                    key={option.id}
-                    onClick={() => option.upi && setSelectedUpiId(option.upi)}
-                    className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                      selectedUpiId === option.upi
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
-                    } ${!option.upi ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">{option.name}</p>
-                        {option.upi && (
-                          <p className="text-sm text-muted-foreground font-mono">{option.upi}</p>
-                        )}
-                        {!option.upi && (
-                          <p className="text-xs text-destructive">Coming Soon</p>
-                        )}
-                      </div>
-                      {selectedUpiId === option.upi && (
-                        <Check className="w-5 h-5 text-primary" />
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <Label htmlFor="upi-id">UPI ID for Payment</Label>
+              <Input
+                id="upi-id"
+                value={upiId}
+                readOnly
+                className="font-mono"
+              />
               <p className="text-xs text-muted-foreground">
-                You will be redirected to your UPI app to complete payment
+                Pay using any UPI app - PhonePe, Google Pay, Paytm, etc.
               </p>
             </div>
 
