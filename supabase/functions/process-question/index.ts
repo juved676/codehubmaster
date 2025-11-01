@@ -1,11 +1,17 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.4';
+import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Input validation schema
+const questionInputSchema = z.object({
+  questionId: z.string().uuid('Invalid question ID format')
+});
 
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -19,8 +25,29 @@ serve(async (req) => {
   }
 
   try {
-    const { questionId } = await req.json();
+    const requestBody = await req.json();
     
+    // Validate input
+    const validationResult = questionInputSchema.safeParse(requestBody);
+    
+    if (!validationResult.success) {
+      console.error('Input validation failed:', validationResult.error.issues);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid input data',
+          details: validationResult.error.issues.map(issue => ({
+            path: issue.path.join('.'),
+            message: issue.message
+          }))
+        }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+    
+    const { questionId } = validationResult.data;
     console.log('Processing question:', questionId);
 
       // Get question details
@@ -31,7 +58,29 @@ serve(async (req) => {
         .maybeSingle();
 
     if (questionError || !question) {
-      throw new Error('Question not found');
+      console.error('Question not found:', questionError);
+      return new Response(
+        JSON.stringify({ error: 'Question not found' }),
+        { 
+          status: 404, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+    
+    // Validate question content lengths to prevent abuse
+    if (question.title && question.title.length > 200) {
+      return new Response(
+        JSON.stringify({ error: 'Question title too long (max 200 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }}
+      );
+    }
+    
+    if (question.body && question.body.length > 5000) {
+      return new Response(
+        JSON.stringify({ error: 'Question body too long (max 5000 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }}
+      );
     }
 
     // Get relevant sources (simple keyword matching for now)
