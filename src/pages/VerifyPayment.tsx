@@ -88,20 +88,7 @@ export default function VerifyPayment() {
         }
       });
 
-      if (error) {
-        // Check if it's a permission error
-        if (error.message?.includes('Forbidden') || error.message?.includes('admin')) {
-          toast({
-            title: "Admin Verification Required",
-            description: "Please contact admin to verify your payment. Share your payment ID and transaction details.",
-            variant: "destructive"
-          });
-        } else {
-          throw error;
-        }
-        setVerifying(false);
-        return;
-      }
+      if (error) throw error;
 
       const responseData = data as any;
       
@@ -234,7 +221,7 @@ export default function VerifyPayment() {
               <Card className="glass-card border-primary/20">
                 <CardContent className="py-4">
                   <p className="text-sm text-muted-foreground text-center">
-                    💡 <strong>Note:</strong> Payment verification requires admin approval. After entering your payment ID, please wait for admin confirmation or contact support at saifiumar51@gmail.com
+                    💡 <strong>Tip:</strong> After successful payment on Razorpay, you'll receive a payment ID. Enter it above to instantly activate your subscription!
                   </p>
                 </CardContent>
               </Card>
