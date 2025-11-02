@@ -30,7 +30,7 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPayment, setShowPayment] = useState(false);
-  const [upiId] = useState('9871284199@ptyes');
+  const [razorpayLink] = useState('https://razorpay.me/@afsana9249');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
@@ -105,23 +105,16 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
 
       const responseData = data as any;
       if (responseData.success) {
-        const upiLink = `upi://pay?pa=${upiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Payment ID: ${responseData.payment_id}`;
-        
-        if (navigator.userAgent.match(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/)) {
-          window.location.href = upiLink;
-        } else {
-          toast({
-            title: "Payment Initiated",
-            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${upiId}`,
-          });
-        }
+        // Redirect to Razorpay payment link with amount
+        const paymentUrl = `${razorpayLink}?amount=${selectedPlan.discounted_price}`;
+        window.open(paymentUrl, '_blank');
 
         setShowPayment(false);
         onClose();
         
         toast({
-          title: "Payment Initiated",
-          description: "After payment, contact support with your transaction ID for activation.",
+          title: "Payment Link Opened",
+          description: "Complete payment on Razorpay. After payment, contact support with payment ID for activation.",
         });
       }
     } catch (error) {
@@ -147,7 +140,7 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
           <DialogHeader>
             <DialogTitle>Complete Your Payment</DialogTitle>
             <DialogDescription>
-              Pay securely using UPI to activate your {selectedPlan.name} plan
+              Pay securely using Razorpay to activate your {selectedPlan.name} plan
             </DialogDescription>
           </DialogHeader>
           
@@ -162,15 +155,15 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="upi-id">UPI ID for Payment</Label>
+              <Label htmlFor="razorpay-link">Razorpay Payment Link</Label>
               <Input
-                id="upi-id"
-                value={upiId}
+                id="razorpay-link"
+                value={razorpayLink}
                 readOnly
                 className="font-mono"
               />
               <p className="text-xs text-muted-foreground">
-                Pay using any UPI app - PhonePe, Google Pay, Paytm, etc.
+                Pay securely using Razorpay - Supports UPI, Cards, Net Banking & Wallets
               </p>
             </div>
 
@@ -184,13 +177,13 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
                 {paymentLoading ? (
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
                 ) : (
-                  <Smartphone className="w-4 h-4 mr-2" />
+                  <CreditCard className="w-4 h-4 mr-2" />
                 )}
-                Pay with UPI
+                Pay with Razorpay
               </Button>
               
               <p className="text-xs text-center text-muted-foreground mt-3">
-                After payment, contact support with your transaction ID for instant activation
+                After payment, contact support with your Razorpay payment ID for instant activation
               </p>
               
               <Button

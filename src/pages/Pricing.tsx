@@ -25,7 +25,7 @@ const Pricing = () => {
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
-  const [upiId] = useState('9871284199@ptyes');
+  const [razorpayLink] = useState('https://razorpay.me/@afsana9249');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
@@ -104,26 +104,16 @@ const Pricing = () => {
 
       const responseData = data as any;
       if (responseData.success) {
-        // Generate UPI deep link
-        const upiLink = `upi://pay?pa=${upiId}&pn=CodeHub&am=${selectedPlan.discounted_price}&cu=INR&tn=CodeHub ${selectedPlan.name} Subscription Payment ID: ${responseData.payment_id}`;
-        
-        // Try to open UPI app
-        if (navigator.userAgent.match(/Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/)) {
-          window.location.href = upiLink;
-        } else {
-          // For desktop, show QR code or payment instructions
-          toast({
-            title: "Payment Initiated",
-            description: `Please pay ₹${selectedPlan.discounted_price} to UPI ID: ${upiId} with reference: ${responseData.payment_id}`,
-          });
-        }
+        // Redirect to Razorpay payment link with amount
+        const paymentUrl = `${razorpayLink}?amount=${selectedPlan.discounted_price}`;
+        window.open(paymentUrl, '_blank');
 
         setShowPaymentDialog(false);
         
         // Show success message with manual verification option
         toast({
-          title: "Payment Initiated",
-          description: "After completing payment, please contact support with your transaction ID for verification.",
+          title: "Payment Link Opened",
+          description: "Complete payment on Razorpay. After payment, contact support with payment ID for verification.",
         });
       }
     } catch (error) {
@@ -176,8 +166,8 @@ const Pricing = () => {
         </p>
 
         <div className="flex items-center justify-center gap-3 text-base text-muted-foreground animate-fade-in">
-          <Smartphone className="w-5 h-5 text-accent" />
-          <span>Pay securely with UPI - Works with all UPI apps</span>
+          <CreditCard className="w-5 h-5 text-accent" />
+          <span>Pay securely with Razorpay - UPI, Cards, Net Banking & Wallets</span>
         </div>
       </div>
 
@@ -287,7 +277,7 @@ const Pricing = () => {
             </div>
             <h3 className="text-xl font-bold mb-3 text-primary">Easy Payment</h3>
             <p className="text-muted-foreground">
-              Secure UPI payments - Works with PhonePe, GPay, Paytm & all UPI apps
+              Secure Razorpay payments - UPI, Cards, Net Banking & Wallets supported
             </p>
           </div>
         </div>
@@ -299,7 +289,7 @@ const Pricing = () => {
           <DialogHeader>
             <DialogTitle>Complete Your Payment</DialogTitle>
             <DialogDescription>
-              Pay securely using UPI to activate your {selectedPlan?.name} plan
+              Pay securely using Razorpay to activate your {selectedPlan?.name} plan
             </DialogDescription>
           </DialogHeader>
           
@@ -314,15 +304,15 @@ const Pricing = () => {
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="upi-id">UPI ID for Payment</Label>
+              <Label htmlFor="razorpay-link">Razorpay Payment Link</Label>
               <Input
-                id="upi-id"
-                value={upiId}
+                id="razorpay-link"
+                value={razorpayLink}
                 readOnly
                 className="font-mono"
               />
               <p className="text-xs text-muted-foreground">
-                Pay using any UPI app - PhonePe, Google Pay, Paytm, etc.
+                Pay securely using Razorpay - Supports UPI, Cards, Net Banking & Wallets
               </p>
             </div>
 
@@ -336,13 +326,13 @@ const Pricing = () => {
                 {paymentLoading ? (
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
                 ) : (
-                  <Smartphone className="w-4 h-4 mr-2" />
+                  <CreditCard className="w-4 h-4 mr-2" />
                 )}
-                Pay with UPI
+                Pay with Razorpay
               </Button>
               
               <p className="text-xs text-center text-muted-foreground mt-3">
-                After payment, contact support with your transaction ID for instant activation
+                After payment, contact support with your Razorpay payment ID for instant activation
               </p>
             </div>
           </div>

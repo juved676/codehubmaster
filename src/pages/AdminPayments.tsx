@@ -368,7 +368,7 @@ const AdminPayments = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-primary mb-2">Revenue & Payment Analytics</h1>
-        <p className="text-muted-foreground">Complete income tracking with PayTM UPI integration</p>
+        <p className="text-muted-foreground">Complete income tracking with Razorpay integration</p>
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
@@ -503,12 +503,12 @@ const AdminPayments = () => {
             </Card>
           </div>
 
-          {/* UPI Integration Info */}
+          {/* Razorpay Integration Info */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CreditCard className="h-5 w-5" />
-                PayTM UPI Integration
+                Razorpay Integration
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -516,22 +516,22 @@ const AdminPayments = () => {
                 <div className="flex items-center gap-3 p-4 bg-green-50 rounded-lg">
                   <CheckCircle className="h-8 w-8 text-green-600" />
                   <div>
-                    <div className="font-semibold text-green-800">Active UPI ID</div>
-                    <div className="text-sm text-green-600">9871284199@ptyes</div>
+                    <div className="font-semibold text-green-800">Payment Link Active</div>
+                    <div className="text-sm text-green-600">https://razorpay.me/@afsana9249</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
                   <Activity className="h-8 w-8 text-blue-600" />
                   <div>
-                    <div className="font-semibold text-blue-800">Auto Verification</div>
-                    <div className="text-sm text-blue-600">Enabled</div>
+                    <div className="font-semibold text-blue-800">Payment Methods</div>
+                    <div className="text-sm text-blue-600">UPI, Cards, Wallets</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-lg">
                   <TrendingUp className="h-8 w-8 text-purple-600" />
                   <div>
-                    <div className="font-semibold text-purple-800">Real-time Tracking</div>
-                    <div className="text-sm text-purple-600">Active</div>
+                    <div className="font-semibold text-purple-800">Gateway</div>
+                    <div className="text-sm text-purple-600">Razorpay</div>
                   </div>
                 </div>
               </div>
@@ -628,7 +628,7 @@ const AdminPayments = () => {
           <Card>
             <CardHeader>
               <CardTitle>Payment Management</CardTitle>
-              <CardDescription>Manage and verify user payments with PayTM UPI</CardDescription>
+              <CardDescription>Manage and verify user payments with Razorpay</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -773,14 +773,14 @@ const AdminPayments = () => {
           <DialogHeader>
             <DialogTitle>Update Payment Status</DialogTitle>
             <DialogDescription>
-              Verify PayTM UPI payment and update status
+              Verify Razorpay payment and update status
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4">
             <div className="p-4 bg-blue-50 rounded-lg border">
-              <div className="text-sm font-medium text-blue-800 mb-1">PayTM UPI ID</div>
-              <div className="text-lg font-mono text-blue-900">9871284199@ptyes</div>
+              <div className="text-sm font-medium text-blue-800 mb-1">Razorpay Payment Link</div>
+              <div className="text-lg font-mono text-blue-900">https://razorpay.me/@afsana9249</div>
             </div>
 
             <div>
@@ -799,12 +799,12 @@ const AdminPayments = () => {
             </div>
 
             <div>
-              <Label htmlFor="upi-ref">UPI Transaction Reference</Label>
+              <Label htmlFor="upi-ref">Razorpay Payment ID / Reference</Label>
               <Input
                 id="upi-ref"
                 value={upiRef}
                 onChange={(e) => setUpiRef(e.target.value)}
-                placeholder="Enter UPI transaction ID from PayTM"
+                placeholder="Enter Razorpay payment ID"
               />
             </div>
 
