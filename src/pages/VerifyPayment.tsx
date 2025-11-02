@@ -42,20 +42,34 @@ export default function VerifyPayment() {
     if (!user) return;
 
     try {
+      // Get current time for filtering expired payments
+      const now = new Date().toISOString();
+      
+      // Get payments from last 7 days only to avoid showing old test payments
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      
       const { data, error } = await supabase
         .from('payments')
-        .select('id, amount, created_at, payment_status, subscription_plans(name)')
+        .select('id, amount, created_at, payment_status, expires_at, subscription_plans(name)')
         .eq('user_id', user.id)
         .eq('payment_status', 'pending')
         .gt('amount', 0)
+        .gt('expires_at', now) // Only show non-expired payments
+        .gte('created_at', sevenDaysAgo.toISOString()) // Only show recent payments
         .order('created_at', { ascending: false });
 
       if (error) throw error;
       
-      // Remove duplicates based on payment ID
-      const uniquePayments = data ? Array.from(
-        new Map(data.map(item => [item.id, item])).values()
-      ) : [];
+      // Remove duplicates based on payment ID and keep only the most recent
+      const seen = new Set();
+      const uniquePayments = data?.filter(payment => {
+        if (seen.has(payment.id)) {
+          return false;
+        }
+        seen.add(payment.id);
+        return true;
+      }) || [];
       
       setPendingPayments(uniquePayments);
     } catch (error) {
@@ -70,6 +84,15 @@ export default function VerifyPayment() {
       toast({
         title: "Missing Information",
         description: "Please enter your Razorpay payment ID",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (razorpayRef.trim().length < 5) {
+      toast({
+        title: "Invalid Payment ID",
+        description: "Please enter a valid Razorpay payment ID or UPI transaction ID (minimum 5 characters)",
         variant: "destructive"
       });
       return;
@@ -105,13 +128,29 @@ export default function VerifyPayment() {
           window.location.reload();
         }, 2000);
       } else {
-        throw new Error('Payment verification failed');
+        throw new Error(responseData.error || 'Payment verification failed');
       }
     } catch (error: any) {
       console.error('Verification error:', error);
+      
+      // Handle specific error messages
+      let errorMessage = "Please contact admin with your payment details";
+      
+      if (error.message?.includes('expired')) {
+        errorMessage = "This payment has expired. Please create a new payment from the Pricing page.";
+      } else if (error.message?.includes('already been verified')) {
+        errorMessage = "This payment has already been processed. Please refresh the page.";
+      } else if (error.message?.includes('Invalid payment reference')) {
+        errorMessage = "Please enter a valid Razorpay payment ID or UPI transaction ID.";
+      } else if (error.message?.includes('Payment not found')) {
+        errorMessage = "Payment not found. Please check your payment ID and try again.";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
         title: "Verification Failed",
-        description: error.message || "Please contact admin with your payment details",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {

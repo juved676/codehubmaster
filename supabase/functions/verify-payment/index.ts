@@ -64,12 +64,23 @@ serve(async (req) => {
       );
     }
 
+    // Validate UPI reference format (minimum length check)
+    if (upi_ref.trim().length < 5) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid payment reference. Please enter a valid Razorpay payment ID or UPI transaction ID.' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
     console.log('Processing payment verification:', { payment_id, upi_ref, status });
 
-    // First, verify that this payment belongs to the authenticated user
+    // First, verify that this payment belongs to the authenticated user and is still valid
     const { data: paymentCheck, error: checkError } = await supabaseClient
       .from('payments')
-      .select('user_id')
+      .select('user_id, payment_status, expires_at, amount')
       .eq('id', payment_id)
       .single();
 
@@ -78,6 +89,41 @@ serve(async (req) => {
         JSON.stringify({ error: 'Payment not found' }),
         { 
           status: 404, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // Check if payment has expired
+    const now = new Date();
+    const expiresAt = new Date(paymentCheck.expires_at);
+    if (expiresAt < now) {
+      return new Response(
+        JSON.stringify({ error: 'Payment has expired. Please create a new payment.' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // Check if payment is already completed
+    if (paymentCheck.payment_status === 'completed') {
+      return new Response(
+        JSON.stringify({ error: 'This payment has already been verified and processed.' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // Validate amount
+    if (paymentCheck.amount <= 0) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid payment amount' }),
+        { 
+          status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
