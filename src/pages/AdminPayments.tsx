@@ -255,31 +255,38 @@ const AdminPayments = () => {
   };
 
   const handleUpdatePayment = async () => {
-    if (!selectedPayment || !newStatus) return;
+    if (!selectedPayment || !newStatus || !upiRef.trim()) {
+      toast({
+        title: "Error",
+        description: "Please provide UPI reference/Razorpay payment ID",
+        variant: "destructive"
+      });
+      return;
+    }
 
     try {
-      const updateData: any = { payment_status: newStatus };
-      if (upiRef.trim()) {
-        updateData.upi_ref = upiRef.trim();
-        updateData.upi_transaction_id = upiRef.trim();
-      }
-
-      const { error } = await supabase
-        .from('payments')
-        .update(updateData)
-        .eq('id', selectedPayment.id);
+      // Use the verify-payment edge function for consistent subscription creation
+      const { data, error } = await supabase.functions.invoke('verify-payment', {
+        body: {
+          payment_id: selectedPayment.id,
+          upi_ref: upiRef.trim(),
+          status: newStatus,
+          auto_upgrade: true // Always auto-upgrade on payment completion
+        }
+      });
 
       if (error) throw error;
 
-      // If payment is completed, create user subscription
-      if (newStatus === 'completed') {
-        await createUserSubscription(selectedPayment);
+      if (data?.success) {
+        toast({
+          title: "Success",
+          description: data.subscription_created 
+            ? "Payment verified and subscription activated!" 
+            : "Payment status updated successfully",
+        });
+      } else {
+        throw new Error(data?.error || 'Failed to verify payment');
       }
-
-      toast({
-        title: "Success",
-        description: "Payment status updated successfully"
-      });
 
       setShowUpdateDialog(false);
       fetchPayments();
@@ -288,49 +295,10 @@ const AdminPayments = () => {
       console.error('Error updating payment:', error);
       toast({
         title: "Error",
-        description: "Failed to update payment status",
+        description: error instanceof Error ? error.message : "Failed to update payment status",
         variant: "destructive"
       });
     }
-  };
-
-  const createUserSubscription = async (payment: Payment) => {
-    try {
-      // Get plan details
-      const { data: planData, error: planError } = await supabase
-        .from('subscription_plans')
-        .select('credits_per_period')
-        .eq('id', payment.plan_id)
-        .single();
-
-      if (planError) throw planError;
-
-      // Create subscription with 30-day expiry
-      const expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + 30);
-
-      const { error: subError } = await supabase
-        .from('user_subscriptions')
-        .insert({
-          user_id: payment.user_id,
-          plan_id: payment.plan_id,
-          payment_id: payment.id,
-          credits_remaining: planData.credits_per_period,
-          expires_at: expiresAt.toISOString(),
-          current_period: getCurrentPeriod()
-        });
-
-      if (subError) throw subError;
-    } catch (error) {
-      console.error('Error creating subscription:', error);
-    }
-  };
-
-  const getCurrentPeriod = () => {
-    const day = new Date().getDate();
-    if (day <= 10) return 1;
-    if (day <= 20) return 2;
-    return 3;
   };
 
   const getStatusBadge = (status: string) => {
@@ -799,13 +767,17 @@ const AdminPayments = () => {
             </div>
 
             <div>
-              <Label htmlFor="upi-ref">Razorpay Payment ID / Reference</Label>
+              <Label htmlFor="upi-ref">Razorpay Payment ID / Reference *</Label>
               <Input
                 id="upi-ref"
                 value={upiRef}
                 onChange={(e) => setUpiRef(e.target.value)}
-                placeholder="Enter Razorpay payment ID"
+                placeholder="Enter Razorpay payment ID (required)"
+                required
               />
+              <p className="text-xs text-muted-foreground mt-1">
+                Required to activate user's subscription
+              </p>
             </div>
 
             <div className="flex gap-2">
