@@ -214,7 +214,11 @@ const Pricing = () => {
                     </span>
                   </div>
                   <CardDescription className="text-base">
-                    {plan.credits_per_period} questions per 10-day period
+                    {plan.name === 'Code Pro' 
+                      ? '50 questions for 30 days' 
+                      : plan.name === 'Code Advance'
+                      ? '999 questions for 40 days'
+                      : '6 questions per 10-day period'}
                   </CardDescription>
                 </div>
               </CardHeader>

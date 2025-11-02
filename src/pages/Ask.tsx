@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PricingModal } from '@/components/PricingModal';
-import { Send, Settings, Menu, X } from 'lucide-react';
+import { Send, Settings, Menu, X, Sparkles } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useCredits } from '@/hooks/useCredits';
@@ -211,13 +211,22 @@ export default function Ask() {
           <div className="text-sm text-muted-foreground">
             Plan: <span className="text-primary font-semibold">{creditInfo?.plan_name || 'Code Free'}</span>
           </div>
+          {creditInfo?.subscription_expires && (() => {
+            const expiresAt = new Date(creditInfo.subscription_expires);
+            const now = new Date();
+            return expiresAt < now ? (
+              <div className="text-xs text-center text-destructive mt-2">
+                Plan expired - Renew to continue
+              </div>
+            ) : null;
+          })()}
           {!creditInfo?.can_ask && (
             <Button 
               onClick={() => setShowPricingModal(true)} 
               className="w-full mt-2"
               variant="default"
             >
-              Upgrade Plan
+              {creditInfo?.is_premium ? 'Renew Plan' : 'Upgrade Plan'}
             </Button>
           )}
         </CardContent>

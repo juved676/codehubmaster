@@ -693,6 +693,7 @@ export type Database = {
         Args: { question_text: string; user_uuid: string }
         Returns: Json
       }
+      can_user_purchase: { Args: { user_uuid: string }; Returns: boolean }
       check_user_credits: { Args: { user_uuid: string }; Returns: Json }
       get_ai_answer: {
         Args: { requesting_user_id?: string; user_question: string }
@@ -728,6 +729,7 @@ export type Database = {
         }
         Returns: string
       }
+      mark_expired_subscriptions: { Args: never; Returns: undefined }
       update_seo_metadata: {
         Args: {
           page_description: string
