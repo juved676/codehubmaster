@@ -204,7 +204,7 @@ export default function Ask() {
         <CardContent className="space-y-3">
           <div className="flex items-baseline gap-2">
             <span className="text-4xl font-bold gradient-text">
-              {creditInfo?.credits_left ?? 6}
+              {creditInfo?.credits_left ?? 5}
             </span>
             <span className="text-muted-foreground">remaining</span>
           </div>

@@ -118,13 +118,22 @@ serve(async (req) => {
           .single();
 
         if (!existingSub) {
-          // Get current period
+          // Get current period using consistent calculation
           const currentDay = new Date().getDate();
           const currentPeriod = currentDay <= 10 ? 1 : currentDay <= 20 ? 2 : 3;
 
-          // Create subscription with 30-day expiry
+          // Get plan details to determine expiration based on duration_days
+          const { data: planDetails } = await supabaseClient
+            .from('subscription_plans')
+            .select('duration_days')
+            .eq('id', payment.plan_id)
+            .single();
+
+          const durationDays = planDetails?.duration_days || 30;
+
+          // Create subscription with plan-specific expiry (30 days for Pro, 40 days for Advance)
           const expiresAt = new Date();
-          expiresAt.setDate(expiresAt.getDate() + 30);
+          expiresAt.setDate(expiresAt.getDate() + durationDays);
 
           const { error: subError } = await supabaseClient
             .from('user_subscriptions')

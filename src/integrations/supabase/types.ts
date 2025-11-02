@@ -416,6 +416,7 @@ export type Database = {
           created_at: string | null
           credits_per_period: number | null
           discounted_price: number | null
+          duration_days: number | null
           features: string[] | null
           id: string
           is_active: boolean | null
@@ -428,6 +429,7 @@ export type Database = {
           created_at?: string | null
           credits_per_period?: number | null
           discounted_price?: number | null
+          duration_days?: number | null
           features?: string[] | null
           id?: string
           is_active?: boolean | null
@@ -440,6 +442,7 @@ export type Database = {
           created_at?: string | null
           credits_per_period?: number | null
           discounted_price?: number | null
+          duration_days?: number | null
           features?: string[] | null
           id?: string
           is_active?: boolean | null

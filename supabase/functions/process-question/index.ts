@@ -282,8 +282,9 @@ Set requires_review=true only for: full project builds, production deployment qu
     if (question.user_id) {
       console.log('Deducting credits for user:', question.user_id);
       
-      // Get current period
-      const currentPeriod = Math.floor((new Date().getDate() - 1) / 10) + 1;
+      // Get current period using consistent calculation (matches SQL function)
+      const currentDay = new Date().getDate();
+      const currentPeriod = currentDay <= 10 ? 1 : currentDay <= 20 ? 2 : 3;
       
       // Try to deduct from active subscription first
       const { data: subscription } = await supabase
