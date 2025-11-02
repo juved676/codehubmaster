@@ -19,6 +19,7 @@ const Admin = lazy(() => import("./pages/Admin"));
 const AdminPayments = lazy(() => import("./pages/AdminPayments"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const ReviewQueue = lazy(() => import("./pages/ReviewQueue"));
+const VerifyPayment = lazy(() => import("./pages/VerifyPayment"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/admin/payments" element={<AdminPayments />} />
                 <Route path="/review-queue" element={<ReviewQueue />} />
+                <Route path="/verify-payment" element={<VerifyPayment />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

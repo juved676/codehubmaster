@@ -113,8 +113,13 @@ export function PricingModal({ open, onClose }: PricingModalProps) {
         
         toast({
           title: "Payment Link Opened",
-          description: `Please pay ₹${selectedPlan.discounted_price} on Razorpay. After payment, contact support with payment ID for activation.`,
+          description: `Please pay ₹${selectedPlan.discounted_price} on Razorpay. After payment, go to Verify Payment page to activate your subscription.`,
         });
+
+        // Redirect to verify payment page after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/verify-payment';
+        }, 2000);
       }
     } catch (error) {
       console.error('Payment error:', error);

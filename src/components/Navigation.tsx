@@ -63,10 +63,26 @@ export default function Navigation() {
             >
               ML
             </Link>
+            <Link
+              to="/pricing"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/pricing') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              Pricing
+            </Link>
             
             {/* Auth Navigation */}
             {!loading && user && (
               <>
+                <Link
+                  to="/verify-payment"
+                  className={`transition-colors hover:text-foreground/80 ${
+                    isActive('/verify-payment') ? 'text-foreground' : 'text-foreground/60'
+                  }`}
+                >
+                  Verify Payment
+                </Link>
                 <Link
                   to="/admin"
                   className={`transition-colors hover:text-foreground/80 ${
@@ -179,12 +195,30 @@ export default function Navigation() {
             >
               Machine Learning
             </Link>
+            <Link
+              to="/pricing"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/pricing') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Pricing
+            </Link>
             
             {/* Mobile Auth Navigation */}
             {!loading && (
               <div className="border-t pt-2 mt-2">
                 {user ? (
                   <>
+                    <Link
+                      to="/verify-payment"
+                      className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                        isActive('/verify-payment') ? 'bg-accent text-accent-foreground' : ''
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Verify Payment
+                    </Link>
                     <Link
                       to="/admin"
                       className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
