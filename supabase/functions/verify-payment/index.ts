@@ -54,15 +54,29 @@ serve(async (req) => {
     const { data: isAdmin, error: adminError } = await supabaseClient
       .rpc('is_admin_email', { user_email: user.email });
 
-    if (adminError || !isAdmin) {
+    if (adminError) {
+      console.error('Error checking admin status:', adminError);
       return new Response(
-        JSON.stringify({ error: 'Forbidden: Admin access required' }),
+        JSON.stringify({ error: 'Error verifying admin status' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    if (!isAdmin) {
+      console.log('Non-admin user attempted to verify payment:', user.email);
+      return new Response(
+        JSON.stringify({ error: 'Forbidden: Only admins can verify payments. Please contact support.' }),
         { 
           status: 403, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
     }
+
+    console.log('Admin user verifying payment:', user.email);
 
     const { payment_id, upi_ref, status, auto_upgrade = true }: PaymentVerificationRequest = await req.json();
 

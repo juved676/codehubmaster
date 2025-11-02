@@ -9,7 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { CheckCircle, Clock, XCircle, CreditCard } from 'lucide-react';
-import Navigation from '@/components/Navigation';
 
 interface PendingPayment {
   id: string;
@@ -48,10 +47,17 @@ export default function VerifyPayment() {
         .select('id, amount, created_at, payment_status, subscription_plans(name)')
         .eq('user_id', user.id)
         .eq('payment_status', 'pending')
+        .gt('amount', 0)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setPendingPayments(data || []);
+      
+      // Remove duplicates based on payment ID
+      const uniquePayments = data ? Array.from(
+        new Map(data.map(item => [item.id, item])).values()
+      ) : [];
+      
+      setPendingPayments(uniquePayments);
     } catch (error) {
       console.error('Error fetching payments:', error);
     } finally {
@@ -82,7 +88,20 @@ export default function VerifyPayment() {
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        // Check if it's a permission error
+        if (error.message?.includes('Forbidden') || error.message?.includes('admin')) {
+          toast({
+            title: "Admin Verification Required",
+            description: "Please contact admin to verify your payment. Share your payment ID and transaction details.",
+            variant: "destructive"
+          });
+        } else {
+          throw error;
+        }
+        setVerifying(false);
+        return;
+      }
 
       const responseData = data as any;
       
@@ -105,7 +124,7 @@ export default function VerifyPayment() {
       console.error('Verification error:', error);
       toast({
         title: "Verification Failed",
-        description: error.message || "Please contact support with your payment details",
+        description: error.message || "Please contact admin with your payment details",
         variant: "destructive"
       });
     } finally {
@@ -128,18 +147,14 @@ export default function VerifyPayment() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <div className="container mx-auto px-4 py-12 flex items-center justify-center">
-          <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
-        </div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8">
@@ -219,7 +234,7 @@ export default function VerifyPayment() {
               <Card className="glass-card border-primary/20">
                 <CardContent className="py-4">
                   <p className="text-sm text-muted-foreground text-center">
-                    💡 <strong>Tip:</strong> After successful payment on Razorpay, you'll receive a payment ID. Enter it above to instantly activate your subscription.
+                    💡 <strong>Note:</strong> Payment verification requires admin approval. After entering your payment ID, please wait for admin confirmation or contact support at saifiumar51@gmail.com
                   </p>
                 </CardContent>
               </Card>
