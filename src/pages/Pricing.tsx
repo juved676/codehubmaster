@@ -111,14 +111,14 @@ const Pricing = () => {
         
         // Show success message with manual verification option
         toast({
-          title: "Payment Link Opened",
-          description: `Please pay ₹${selectedPlan.discounted_price} on Razorpay. After payment, go to Verify Payment page to activate your subscription.`,
+          title: "Payment Link Opened 🎉",
+          description: `Please pay ₹${selectedPlan.discounted_price} on Razorpay. After payment, you'll receive a Payment ID via SMS/Email. Enter it on the Verify Payment page to activate instantly!`,
         });
 
-        // Redirect to verify payment page after 2 seconds
+        // Redirect to verify payment page after 3 seconds
         setTimeout(() => {
           window.location.href = '/verify-payment';
-        }, 2000);
+        }, 3000);
       }
     } catch (error) {
       console.error('Payment error:', error);
@@ -340,7 +340,7 @@ const Pricing = () => {
               </Button>
               
               <p className="text-xs text-center text-muted-foreground mt-3">
-                After payment, contact support with your Razorpay payment ID for instant activation
+                💡 After payment, you'll receive a Payment ID via SMS/Email. Enter it on the Verify Payment page for instant activation (valid for 24 hours).
               </p>
             </div>
           </div>

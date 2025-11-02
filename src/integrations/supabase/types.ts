@@ -698,6 +698,7 @@ export type Database = {
       }
       can_user_purchase: { Args: { user_uuid: string }; Returns: boolean }
       check_user_credits: { Args: { user_uuid: string }; Returns: Json }
+      cleanup_expired_payments: { Args: never; Returns: undefined }
       get_ai_answer: {
         Args: { requesting_user_id?: string; user_question: string }
         Returns: {

@@ -45,9 +45,9 @@ export default function VerifyPayment() {
       // Get current time for filtering expired payments
       const now = new Date().toISOString();
       
-      // Get payments from last 7 days only to avoid showing old test payments
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      // Get payments from last 3 days only (24h expiry + 2 days buffer)
+      const threeDaysAgo = new Date();
+      threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
       
       const { data, error } = await supabase
         .from('payments')
@@ -56,8 +56,9 @@ export default function VerifyPayment() {
         .eq('payment_status', 'pending')
         .gt('amount', 0)
         .gt('expires_at', now) // Only show non-expired payments
-        .gte('created_at', sevenDaysAgo.toISOString()) // Only show recent payments
-        .order('created_at', { ascending: false });
+        .gte('created_at', threeDaysAgo.toISOString()) // Only show recent payments (3 days)
+        .order('created_at', { ascending: false })
+        .limit(5); // Limit to 5 most recent
 
       if (error) throw error;
       
@@ -259,9 +260,14 @@ export default function VerifyPayment() {
 
               <Card className="glass-card border-primary/20">
                 <CardContent className="py-4">
-                  <p className="text-sm text-muted-foreground text-center">
-                    💡 <strong>Tip:</strong> After successful payment on Razorpay, you'll receive a payment ID. Enter it above to instantly activate your subscription!
-                  </p>
+                  <div className="space-y-3 text-sm text-muted-foreground">
+                    <p className="text-center">
+                      💡 <strong>Tip:</strong> After successful payment on Razorpay, you'll receive a payment ID via SMS/Email. Enter it above to instantly activate your subscription!
+                    </p>
+                    <p className="text-center text-xs">
+                      ⏰ Payment links are valid for <strong>24 hours</strong>. Complete your payment within this time.
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
