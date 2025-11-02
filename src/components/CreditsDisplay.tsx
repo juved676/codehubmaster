@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Coins, Clock, Zap, Crown, Calendar } from 'lucide-react';
 import { useCredits } from '@/hooks/useCredits';
 import { cn } from '@/lib/utils';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, format } from 'date-fns';
 
 interface CreditsDisplayProps {
   variant?: 'compact' | 'full';
@@ -13,6 +13,31 @@ interface CreditsDisplayProps {
 
 export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayProps) {
   const { creditInfo, loading, daysUntilReset } = useCredits();
+
+  // Calculate reset date (10-day periods)
+  const getResetDate = () => {
+    if (!creditInfo) return null;
+    
+    const currentDay = new Date().getDate();
+    const periodEnd = creditInfo.period_number * 10;
+    const today = new Date();
+    
+    if (currentDay <= periodEnd) {
+      // Current period end date
+      const resetDate = new Date(today.getFullYear(), today.getMonth(), periodEnd);
+      return resetDate;
+    } else {
+      // Next period start
+      const nextPeriodStart = ((creditInfo.period_number % 3) + 1) * 10 - 9;
+      if (nextPeriodStart > currentDay) {
+        return new Date(today.getFullYear(), today.getMonth(), nextPeriodStart);
+      } else {
+        return new Date(today.getFullYear(), today.getMonth() + 1, 1);
+      }
+    }
+  };
+
+  const resetDate = getResetDate();
 
   if (loading) {
     return (
@@ -96,14 +121,17 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
         )}
 
         {/* Reset Timer for Free Users */}
-        {!creditInfo.is_premium && daysUntilReset > 0 && (
+        {!creditInfo.is_premium && resetDate && (
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm font-medium">Credits Reset</span>
             </div>
             <span className="text-sm text-muted-foreground">
-              {daysUntilReset} day{daysUntilReset !== 1 ? 's' : ''}
+              {creditInfo.credits_left === 0 
+                ? format(resetDate, 'MMM dd, yyyy')
+                : format(resetDate, 'MMM dd')
+              }
             </span>
           </div>
         )}
@@ -117,10 +145,15 @@ export function CreditsDisplay({ variant = 'full', className }: CreditsDisplayPr
               {creditInfo.plan_name} Plan {creditInfo.is_premium && '✨'} • Period {creditInfo.period_number}/3
             </p>
             
-            {daysUntilReset !== null && (
+            {!creditInfo.is_premium && resetDate && (
               <div className="flex items-center gap-1 text-xs text-muted-foreground justify-center mt-2">
                 <Clock className="h-3 w-3" />
-                <span>Resets in {daysUntilReset} days</span>
+                <span>
+                  {creditInfo.credits_left === 0 
+                    ? `Resets on ${format(resetDate, 'MMM dd, yyyy')}`
+                    : `Resets ${format(resetDate, 'MMM dd')}`
+                  }
+                </span>
               </div>
             )}
           </div>

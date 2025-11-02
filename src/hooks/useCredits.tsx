@@ -24,13 +24,13 @@ export function useCredits() {
     if (!user) {
       setCreditInfo({
         can_ask: true,
-        credits_left: 6,
+        credits_left: 5,
         plan_name: 'Code Free',
         original_price: 25,
         discounted_price: 0,
         period_number: 3,
         is_premium: false,
-        message: 'Anonymous users get 6 free questions'
+        message: 'Anonymous users get 5 free questions'
       });
       setLoading(false);
       return;
