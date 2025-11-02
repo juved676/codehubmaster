@@ -104,16 +104,15 @@ const Pricing = () => {
 
       const responseData = data as any;
       if (responseData.success) {
-        // Redirect to Razorpay payment link with amount
-        const paymentUrl = `${razorpayLink}?amount=${selectedPlan.discounted_price}`;
-        window.open(paymentUrl, '_blank');
+        // Open Razorpay payment link - user will enter amount manually
+        window.open(razorpayLink, '_blank');
 
         setShowPaymentDialog(false);
         
         // Show success message with manual verification option
         toast({
           title: "Payment Link Opened",
-          description: "Complete payment on Razorpay. After payment, contact support with payment ID for verification.",
+          description: `Please pay ₹${selectedPlan.discounted_price} on Razorpay. After payment, contact support with payment ID for verification.`,
         });
       }
     } catch (error) {
