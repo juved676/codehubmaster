@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { Helmet } from 'react-helmet';
 
 interface Plan {
   id: string;
@@ -32,6 +33,11 @@ const Pricing = () => {
 
   useEffect(() => {
     fetchPlans();
+    document.title = "Affordable Coding Courses Pricing - Learn Programming at Low Cost | CodeHub";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Affordable Python programming courses starting at just ₹99. Learn coding with AI-powered tutorials. Flexible pricing plans for students and developers.');
+    }
   }, []);
 
   const fetchPlans = async () => {
@@ -158,15 +164,15 @@ const Pricing = () => {
       <div className="relative text-center mb-20">
         <div className="inline-flex items-center gap-2 bg-gradient-accent text-white px-8 py-3 rounded-full text-sm font-bold mb-8 shadow-neon animate-fade-in">
           <Clock className="w-5 h-5" />
-          Limited Time Offer - Massive Discounts!
+          Limited Time Offer - Save Up to 90% on Coding Courses
         </div>
         
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
-          Choose Your Learning Plan
+          Affordable Coding Course Pricing Plans
         </h1>
         
         <p className="text-xl md:text-2xl text-primary font-semibold max-w-3xl mx-auto mb-4 animate-fade-in">
-          Get instant help with Python, Web Dev, Data Science & AI/ML
+          Learn Python Programming, Web Development & AI at Low Cost
         </p>
 
         <div className="flex items-center justify-center gap-3 text-base text-muted-foreground animate-fade-in">
@@ -257,7 +263,7 @@ const Pricing = () => {
 
       {/* Features Section */}
       <div className="relative text-center">
-        <h2 className="text-4xl font-bold mb-12 gradient-text">Why Choose CodeHub Premium?</h2>
+        <h2 className="text-4xl font-bold mb-12 gradient-text">Why Choose CodeHub Premium Coding Courses?</h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div className="glass-card p-8 rounded-2xl hover-lift group">
             <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:shadow-neon transition-all duration-300">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +8,14 @@ import { Search, BookOpen, MessageCircle, Users, Star, Code } from "lucide-react
 
 const Topics = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    document.title = "Python Tutorial for Beginners - Learn Python Step by Step with Examples | CodeHub";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner\'s guide to Python programming.');
+    }
+  }, []);
 
   const allTopics = [
     {
@@ -124,14 +132,14 @@ const Topics = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Coding Topics
+            Free Python Programming Tutorials & Coding Topics
           </h1>
           <p className="text-lg text-muted-foreground mb-2">
-            Master Programming & Development
+            Master Python, Web Development & Data Science Step by Step
           </p>
           <p className="text-muted-foreground max-w-3xl mx-auto mb-6">
-            Explore comprehensive coding topics from Python basics to advanced AI/ML. 
-            Get instant answers with practical examples and code snippets.
+            Learn coding from Python basics to advanced AI/ML with comprehensive tutorials. 
+            Get step-by-step Python programming guides with practical examples, code snippets, and real-world projects for beginners and advanced developers.
           </p>
 
           {/* Search Bar */}
@@ -152,10 +160,10 @@ const Topics = () => {
         {featuredTopics.length > 0 && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Featured Topics</h2>
+              <h2 className="text-2xl font-bold text-foreground">Featured Python & Programming Topics</h2>
               <Badge variant="secondary" className="flex items-center">
                 <Star className="h-3 w-3 mr-1" />
-                Most Popular
+                Most Popular Tutorials
               </Badge>
             </div>
             

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,14 @@ import { sampleQuestions } from "@/data/sampleQuestions";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    document.title = "Python Tutorial for Beginners - Learn Python Programming Free | CodeHub";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner\'s guide to Python programming.');
+    }
+  }, []);
   
   const featuredTopics = [
     {
@@ -57,14 +65,14 @@ const Home = () => {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
-            Master Coding with AI
+            Learn Python Programming for Free
           </h1>
           <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4 animate-fade-in">
-            Learn Python, Web Dev, Data Science & ML
+            Master Python, Web Development, Data Science & Machine Learning
           </p>
           <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto animate-fade-in">
-            Get AI-powered coding tutorials, debugging help, and career guidance. 
-            Perfect for Indian students and job seekers building tech careers.
+            Free Python tutorials for beginners with step-by-step guides, practical coding examples, and AI-powered learning. 
+            Perfect for students and developers building careers in programming.
           </p>
           
           {/* Search Bar */}
@@ -139,13 +147,13 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-              Popular Coding Topics
+              Most Popular Python & Coding Topics
             </h2>
             <p className="text-xl text-primary mb-2">
-              Most Searched by Students
+              Top Programming Tutorials for Beginners
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Explore our most popular programming topics with AI-powered answers and practical examples.
+              Explore comprehensive Python programming tutorials, web development guides, and AI/ML courses with practical coding examples and step-by-step instructions.
             </p>
           </div>
 
@@ -182,14 +190,14 @@ const Home = () => {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-              Recent Questions
-            </h2>
+            <h3 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
+              Recent Coding Questions & Answers
+            </h3>
             <p className="text-xl text-primary mb-2">
-              Latest from Our Community
+              Latest Python Programming Discussions
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              See what other students are learning about programming and development.
+              Discover what other students are learning. Get answers to your Python, web development, and AI programming questions.
             </p>
           </div>
 

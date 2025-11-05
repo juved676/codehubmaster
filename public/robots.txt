@@ -12,3 +12,8 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /verify-payment
+Disallow: /auth
+
+Sitemap: https://code-hub-master.lovable.app/sitemap.xml
