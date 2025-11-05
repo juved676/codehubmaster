@@ -58,6 +58,7 @@ const Home = () => {
           backgroundPosition: 'center'
         }}
       >
+        <link rel="preload" as="image" href={heroImage} />
         <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl"></div>

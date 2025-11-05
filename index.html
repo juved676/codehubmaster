@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="nqXImYXmkCp1I8Zthb8pdUMvPRN3IEEdMCWUZQSc-f8" />
     
-    <!-- Google Fonts -->
+    <!-- Preload critical resources -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    
+    <!-- Google Fonts - Optimized with preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <title>Learn Python Programming - Free Coding Tutorials & AI Courses | CodeHub Master</title>
     <meta name="description" content="Master Python programming, AI coding, and web development with free tutorials. Step-by-step guides with practical examples for beginners to advanced developers." />
@@ -23,6 +27,16 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@codehubai" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- Register Service Worker for caching -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .catch(() => {});
+        });
+      }
+    </script>
   </head>
 
   <body>
