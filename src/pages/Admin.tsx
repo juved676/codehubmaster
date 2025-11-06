@@ -8,7 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from '@/hooks/use-toast';
 import { BarChart3, Users, MessageSquare, Settings, Shield, Database, IndianRupee, CreditCard, TrendingUp, Activity } from 'lucide-react';
-import { Navigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Stats {
   totalUsers: number;
@@ -130,7 +130,7 @@ export default function Admin() {
     });
   };
 
-  if (loading) {
+  if (loading || loadingStats) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="animate-pulse space-y-4">
@@ -145,11 +145,7 @@ export default function Admin() {
     );
   }
 
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
-
-      if (userRole !== 'admin') {
+  if (userRole !== 'admin') {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
