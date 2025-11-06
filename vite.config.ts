@@ -14,6 +14,11 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    dedupe: ["react", "react-dom"],
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom", "react/jsx-runtime"],
+    exclude: [],
   },
   build: {
     minify: 'terser',
@@ -26,5 +31,9 @@ export default defineConfig(({ mode }) => ({
     },
     cssMinify: true,
     chunkSizeWarningLimit: 1000,
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
   },
 }));
