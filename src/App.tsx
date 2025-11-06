@@ -1,3 +1,4 @@
+import React, { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,7 +8,6 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
-import { lazy, Suspense } from "react";
 
 // Lazy load pages for better performance
 const Ask = lazy(() => import("./pages/Ask"));
