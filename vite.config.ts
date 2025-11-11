@@ -8,21 +8,28 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    force: true,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ["react", "react-dom"],
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react/jsx-runtime"],
-    force: true,
+    esbuildOptions: {
+      jsx: 'automatic',
+    },
   },
   build: {
     cssMinify: true,
     chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+        },
+      },
+    },
   },
 }));
