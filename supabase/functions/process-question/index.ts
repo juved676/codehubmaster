@@ -100,42 +100,59 @@ serve(async (req) => {
 
     console.log('Question complexity detected:', isComplexQuestion ? 'COMPLEX' : 'SIMPLE');
 
-    // Prepare DeepSeek API request with dynamic token allocation
-    const maxTokens = isComplexQuestion ? 8192 : 2048;
+    // Optimized for medium-length, fast responses
+    const maxTokens = isComplexQuestion ? 3072 : 1024;
     
-    const prompt = `You are an expert coding instructor and debugging mentor for Indian students learning programming. Your role is to ACTIVELY TEACH coding concepts, not just answer questions.
+    const prompt = `You are a coding instructor for Indian students. Provide FAST, MEDIUM-LENGTH answers (100-300 words).
 
-TEACHING APPROACH:
-1. Start with a clear explanation of the concept
-2. Provide working code examples with detailed comments
-3. Explain WHY things work, not just HOW
-4. Include practical tips and best practices
-5. Suggest next steps for deeper learning
-6. Use simple language for beginners, technical depth for advanced learners
+CRITICAL RESPONSE RULES:
+✅ Length: 100-300 words ONLY (3-5 paragraphs max)
+✅ Language: Simple Hindi + English technical terms
+✅ Speed: Direct answers, no lengthy background
+✅ Structure (STRICT):
+   - Para 1: Short intro (1-2 lines)
+   - Para 2-3: Main content with bullet points/code
+   - Para 4: Quick summary (1-2 lines)
 
-When explaining code:
-- Break down complex concepts into simple steps
-- Show both correct and common mistake examples
-- Explain error messages if relevant
-- Provide debugging strategies
+WRITING STYLE:
+- Use simple Hindi for explanations: "Yeh function kaam karta hai..."
+- Keep English for technical terms: "function", "array", "loop", "variable"
+- Be direct and practical
+- Include small code examples (5-10 lines max)
+- Avoid lengthy theory
 
-${isComplexQuestion ? 'NOTE: This is a complex question requiring detailed explanation. Take your time to provide comprehensive coverage with multiple examples.' : ''}
+Example format:
+"JavaScript mein arrays ko manipulate karne ke liye map() function bahut useful hai.
+
+• map() original array ko modify nahi karta
+• Har element par function apply karta hai
+• Naya array return karta hai
+
+\`\`\`javascript
+const numbers = [1,2,3];
+const doubled = numbers.map(x => x * 2);
+// Output: [2,4,6]
+\`\`\`
+
+Summary: map() fast aur clean way hai array transformation ke liye."
+
+${isComplexQuestion ? 'NOTE: Complex topic hai, but answer concise rakhna. Focus on key points only.' : ''}
 
 Question: ${question.title}
 Details: ${question.body}
 Language: ${question.language}
-Experience Level: ${question.audience_level}
+Level: ${question.audience_level}
 Context: ${contextSnippets}
 
-Response format (JSON):
+Response (JSON):
 {
-  "answer_text": "Comprehensive explanation with code examples and teaching points",
-  "short_summary": "40-word summary of key learning",
-  "sources": ["Python Docs", "MDN", "GeeksforGeeks", "W3Schools"],
+  "answer_text": "Hindi+English medium answer (100-300 words, 3-5 paragraphs)",
+  "short_summary": "Quick 30-word Hindi+English summary",
+  "sources": ["Docs/References"],
   "requires_review": false
 }
 
-Set requires_review=true only for: full project builds, production deployment questions, or security-sensitive topics.`;
+Set requires_review=true ONLY for: full projects, production deployments, security issues.`;
 
     // Test mode for connectivity verification
     if (question.title.toLowerCase().includes('test')) {
