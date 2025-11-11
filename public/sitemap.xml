@@ -31,26 +31,32 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code-hub-master.lovable.app/python-basics</loc>
-    <lastmod>2025-11-04</lastmod>
+    <loc>https://code-hub-master.lovable.app/topic/python-basics</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code-hub-master.lovable.app/data-science</loc>
-    <lastmod>2025-11-04</lastmod>
+    <loc>https://code-hub-master.lovable.app/topic/data-science</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code-hub-master.lovable.app/web-development</loc>
-    <lastmod>2025-11-04</lastmod>
+    <loc>https://code-hub-master.lovable.app/topic/web-development</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://code-hub-master.lovable.app/machine-learning</loc>
-    <lastmod>2025-11-04</lastmod>
+    <loc>https://code-hub-master.lovable.app/topic/machine-learning</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://code-hub-master.lovable.app/topic/devops-basics</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

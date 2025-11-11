@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from '@/hooks/use-toast';
 import { ArrowLeft, ExternalLink, Flag, ThumbsUp } from 'lucide-react';
+import { SEO } from '@/components/SEO';
 
 interface Question {
   id: string;
@@ -140,8 +141,19 @@ export default function Question() {
     );
   }
 
+  const canonicalUrl = `https://code-hub-master.lovable.app/question/${id}`;
+  const pageTitle = `${question.title} - AI Answer | CodeHub`;
+  const pageDescription = question.body.substring(0, 155);
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        canonical={canonicalUrl}
+        keywords={`${question.title}, AI coding help, programming question`}
+      />
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Navigation */}
       <div className="mb-6">
         <Link to="/topics">
@@ -269,5 +281,6 @@ export default function Question() {
         </Link>
       </div>
     </div>
+    </>
   );
 }

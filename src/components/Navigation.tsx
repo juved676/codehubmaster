@@ -32,33 +32,33 @@ export default function Navigation() {
               Home
             </Link>
             <Link
-              to="/python-basics"
+              to="/topic/python-basics"
               className={`transition-colors hover:text-foreground/80 ${
-                isActive('/python-basics') ? 'text-foreground' : 'text-foreground/60'
+                isActive('/topic/python-basics') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
               Python
             </Link>
             <Link
-              to="/data-science"
+              to="/topic/data-science"
               className={`transition-colors hover:text-foreground/80 ${
-                isActive('/data-science') ? 'text-foreground' : 'text-foreground/60'
+                isActive('/topic/data-science') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
               Data Science
             </Link>
             <Link
-              to="/web-development"
+              to="/topic/web-development"
               className={`transition-colors hover:text-foreground/80 ${
-                isActive('/web-development') ? 'text-foreground' : 'text-foreground/60'
+                isActive('/topic/web-development') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
               Web Dev
             </Link>
             <Link
-              to="/machine-learning"
+              to="/topic/machine-learning"
               className={`transition-colors hover:text-foreground/80 ${
-                isActive('/machine-learning') ? 'text-foreground' : 'text-foreground/60'
+                isActive('/topic/machine-learning') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
               ML
@@ -160,36 +160,36 @@ export default function Navigation() {
               Home
             </Link>
             <Link
-              to="/python-basics"
+              to="/topic/python-basics"
               className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
-                isActive('/python-basics') ? 'bg-accent text-accent-foreground' : ''
+                isActive('/topic/python-basics') ? 'bg-accent text-accent-foreground' : ''
               }`}
               onClick={() => setIsOpen(false)}
             >
               Python
             </Link>
             <Link
-              to="/data-science"
+              to="/topic/data-science"
               className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
-                isActive('/data-science') ? 'bg-accent text-accent-foreground' : ''
+                isActive('/topic/data-science') ? 'bg-accent text-accent-foreground' : ''
               }`}
               onClick={() => setIsOpen(false)}
             >
               Data Science
             </Link>
             <Link
-              to="/web-development"
+              to="/topic/web-development"
               className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
-                isActive('/web-development') ? 'bg-accent text-accent-foreground' : ''
+                isActive('/topic/web-development') ? 'bg-accent text-accent-foreground' : ''
               }`}
               onClick={() => setIsOpen(false)}
             >
               Web Development
             </Link>
             <Link
-              to="/machine-learning"
+              to="/topic/machine-learning"
               className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
-                isActive('/machine-learning') ? 'bg-accent text-accent-foreground' : ''
+                isActive('/topic/machine-learning') ? 'bg-accent text-accent-foreground' : ''
               }`}
               onClick={() => setIsOpen(false)}
             >

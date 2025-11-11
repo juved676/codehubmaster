@@ -176,7 +176,7 @@ const Home = () => {
                       {topic.questionCount} questions
                     </span>
                     <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
-                      <Link to={`/${topic.slug}`}>Explore</Link>
+                      <Link to={`/topic/${topic.slug}`}>Explore</Link>
                     </Button>
                   </div>
                 </CardContent>

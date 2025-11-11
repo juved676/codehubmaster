@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Eye, MessageCircle } from "lucide-react";
 import { getQuestionsByTopic } from "@/data/sampleQuestions";
+import { SEO } from "@/components/SEO";
 
 const topicInfo: Record<string, { title: string; description: string }> = {
   "python-basics": {
@@ -50,9 +51,20 @@ export default function TopicDetail() {
     );
   }
 
+  const canonicalUrl = `https://code-hub-master.lovable.app/topic/${topic}`;
+  const pageTitle = `${info.title} - Learn Python Programming | CodeHub`;
+  const pageDescription = `${info.description} Explore ${questions.length} questions and detailed code examples.`;
+
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        canonical={canonicalUrl}
+        keywords={`${info.title}, python programming, coding tutorial, ${topic}`}
+      />
+      <div className="min-h-screen bg-background py-8">
+        <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="mb-6">
           <Link to="/topics">
@@ -137,5 +149,6 @@ export default function TopicDetail() {
         </div>
       </div>
     </div>
+    </>
   );
 }

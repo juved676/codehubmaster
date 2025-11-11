@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Code2, Eye, MessageCircle, Copy, Check } from "lucide-react";
 import { getQuestionById } from "@/data/sampleQuestions";
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 
 export default function QuestionDetail() {
   const { topic, id } = useParams<{ topic: string; id: string }>();
@@ -35,9 +36,20 @@ export default function QuestionDetail() {
     );
   }
 
+  const canonicalUrl = `https://code-hub-master.lovable.app/question/${topic}/${id}`;
+  const pageTitle = `${question.title} - Python Code Example | CodeHub`;
+  const pageDescription = question.body.substring(0, 155);
+
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        canonical={canonicalUrl}
+        keywords={`${question.title}, python code, ${topic}, programming example`}
+      />
+      <div className="min-h-screen bg-background py-8">
+        <div className="max-w-4xl mx-auto px-4">
         {/* Navigation */}
         <div className="mb-6">
           <Link to={`/${topic}`}>
@@ -143,5 +155,6 @@ export default function QuestionDetail() {
         </div>
       </div>
     </div>
+    </>
   );
 }
