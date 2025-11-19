@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2, User, LogOut, Shield, Users } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
+import logo from '@/assets/codehubmaster-logo.png';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +18,9 @@ export default function Navigation() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold sm:inline-block gradient-text">
-              Code Hub AI
+            <img src={logo} alt="CodeHubMaster Logo" className="h-10 w-auto" />
+            <span className="hidden font-bold text-lg sm:inline-block gradient-text">
+              CodeHubMaster
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -122,8 +123,8 @@ export default function Navigation() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* Mobile Logo */}
             <Link to="/" className="flex items-center space-x-2 md:hidden">
-              <Code2 className="h-6 w-6 text-primary" />
-              <span className="font-bold gradient-text">Code Hub AI</span>
+              <img src={logo} alt="CodeHubMaster Logo" className="h-8 w-auto" />
+              <span className="font-bold gradient-text">CodeHubMaster</span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-2">
