@@ -22,6 +22,10 @@ const topicInfo: Record<string, { title: string; description: string }> = {
   "machine-learning": {
     title: "Machine Learning",
     description: "Understand ML algorithms, scikit-learn, neural networks, and AI."
+  },
+  "devops-basics": {
+    title: "DevOps Basics",
+    description: "Master Git, GitHub, Docker, CI/CD pipelines, and cloud deployment fundamentals."
   }
 };
 
