@@ -365,6 +365,109 @@ early_stop = EarlyStopping(
 model.fit(X_train, y_train, 
           validation_split=0.2,
           callbacks=[early_stop])`
+  },
+
+  // DevOps Basics
+  {
+    id: "devops-1",
+    title: "What is Git and how do I start using it?",
+    body: "I'm new to version control. Can you explain Git basics and essential commands?",
+    topic: "devops-basics",
+    views: 987,
+    answers: 1,
+    difficulty: "Beginner",
+    answer: "Git ek distributed version control system hai jo code changes track karta hai.\n\nBasic Git concepts:\n1. Repository (repo) - Project folder jisme .git folder hota hai\n2. Commit - Code changes ka snapshot\n3. Branch - Separate development line\n4. Remote - GitHub/GitLab par online repo\n\nEssential commands:\n- git init - Naya repo banaye\n- git add - Files staging area mein add kare\n- git commit - Changes save kare\n- git push - Remote repo par upload kare\n- git pull - Remote se latest changes download kare",
+    codeExample: `# Git setup
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+# Initialize repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Connect to GitHub
+git remote add origin https://github.com/username/repo.git
+git push -u origin main
+
+# Daily workflow
+git pull origin main
+git add file.txt
+git commit -m "Update file"
+git push origin main`
+  },
+  {
+    id: "devops-2",
+    title: "How to create and use Docker containers?",
+    body: "What is Docker and how can I containerize my application?",
+    topic: "devops-basics",
+    views: 1156,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "Docker lightweight containers banata hai jo applications ko isolated environment mein run karte hain.\n\nKey components:\n1. Dockerfile - Container build karne ki recipe\n2. Image - Application ka template\n3. Container - Running instance of image\n4. Docker Hub - Public image registry\n\nBenefits:\n- Consistent environment across systems\n- Easy deployment\n- Resource efficient\n- Scalable architecture",
+    codeExample: `# Dockerfile example
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+
+# Build and run
+docker build -t myapp .
+docker run -p 3000:3000 myapp
+
+# Docker Compose (docker-compose.yml)
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_PASSWORD: secret`
+  },
+  {
+    id: "devops-3",
+    title: "What is CI/CD and how to set it up?",
+    body: "Can you explain Continuous Integration and Continuous Deployment with an example?",
+    topic: "devops-basics",
+    views: 834,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "CI/CD automated pipeline hai jo code testing aur deployment automatically karta hai.\n\nCI (Continuous Integration):\n- Code changes automatically test hote hain\n- Bugs jaldi detect ho jate hain\n- Team collaboration improve hoti hai\n\nCD (Continuous Deployment):\n- Tested code automatically production par deploy hota hai\n- Faster releases\n- Reduced manual errors\n\nPopular tools: GitHub Actions, GitLab CI, Jenkins, CircleCI",
+    codeExample: `# .github/workflows/deploy.yml
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Deploy
+        run: |
+          echo "Deploying to production..."
+          # Your deployment script here`
   }
 ];
 

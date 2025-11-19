@@ -52,7 +52,7 @@ export default function QuestionDetail() {
         <div className="max-w-4xl mx-auto px-4">
         {/* Navigation */}
         <div className="mb-6">
-          <Link to={`/${topic}`}>
+          <Link to={`/topic/${topic}`}>
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to {topic?.replace('-', ' ')}
