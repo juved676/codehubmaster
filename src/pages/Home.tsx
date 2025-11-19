@@ -6,10 +6,8 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
-
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
   useEffect(() => {
     document.title = "Python Tutorial for Beginners - Learn Python Programming Free | CodeHub";
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -17,47 +15,35 @@ const Home = () => {
       metaDescription.setAttribute('content', 'Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner\'s guide to Python programming.');
     }
   }, []);
-  
-  const featuredTopics = [
-    {
-      title: "Python Basics",
-      description: "Master Python fundamentals, syntax, and core programming concepts",
-      questionCount: 128,
-      slug: "python-basics"
-    },
-    {
-      title: "Web Development",
-      description: "Build modern websites with HTML, CSS, JavaScript, and React",
-      questionCount: 95,
-      slug: "web-development"
-    },
-    {
-      title: "Data Science",
-      description: "Learn data analysis, visualization with pandas and numpy",
-      questionCount: 76,
-      slug: "data-science"
-    },
-    {
-      title: "Machine Learning",
-      description: "Understand ML algorithms, AI concepts, and model training",
-      questionCount: 62,
-      slug: "machine-learning"
-    }
-  ];
-
+  const featuredTopics = [{
+    title: "Python Basics",
+    description: "Master Python fundamentals, syntax, and core programming concepts",
+    questionCount: 128,
+    slug: "python-basics"
+  }, {
+    title: "Web Development",
+    description: "Build modern websites with HTML, CSS, JavaScript, and React",
+    questionCount: 95,
+    slug: "web-development"
+  }, {
+    title: "Data Science",
+    description: "Learn data analysis, visualization with pandas and numpy",
+    questionCount: 76,
+    slug: "data-science"
+  }, {
+    title: "Machine Learning",
+    description: "Understand ML algorithms, AI concepts, and model training",
+    questionCount: 62,
+    slug: "machine-learning"
+  }];
   const recentQuestions = sampleQuestions.slice(0, 3);
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Section */}
-      <section 
-        className="relative py-20 lg:py-32 overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+      <section className="relative py-20 lg:py-32 overflow-hidden" style={{
+      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
         <link rel="preload" as="image" href={heroImage} />
         <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
         <div className="absolute inset-0">
@@ -66,7 +52,7 @@ const Home = () => {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
-            Learn Python Programming for Free
+            Learn coding Programming for Free
           </h1>
           <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4 animate-fade-in">
             Master Python, Web Development, Data Science & Machine Learning
@@ -80,17 +66,8 @@ const Home = () => {
           <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
             <div className="relative glass-card p-1 rounded-2xl">
               <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
-              <Input 
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Ask your coding question... e.g., How do I learn Python?"
-                className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary"
-              />
-              <Button 
-                size="lg" 
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300"
-                asChild
-              >
+              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask your coding question... e.g., How do I learn Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary" />
+              <Button size="lg" className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300" asChild>
                 <Link to="/ask">Ask Now</Link>
               </Button>
             </div>
@@ -159,8 +136,9 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredTopics.map((topic, index) => (
-              <Card key={topic.slug} className="glass-card hover-lift group border-primary/20 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            {featuredTopics.map((topic, index) => <Card key={topic.slug} className="glass-card hover-lift group border-primary/20 animate-fade-in" style={{
+            animationDelay: `${index * 0.1}s`
+          }}>
                 <CardHeader>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">{topic.title}</CardTitle>
                   <CardDescription className="text-sm text-accent font-semibold">
@@ -180,8 +158,7 @@ const Home = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -203,8 +180,9 @@ const Home = () => {
           </div>
 
           <div className="space-y-4">
-            {recentQuestions.map((question, index) => (
-              <Card key={question.id} className="glass-card hover-lift border-primary/20 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            {recentQuestions.map((question, index) => <Card key={question.id} className="glass-card hover-lift border-primary/20 animate-fade-in" style={{
+            animationDelay: `${index * 0.1}s`
+          }}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -228,8 +206,7 @@ const Home = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-12">
@@ -273,8 +250,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
