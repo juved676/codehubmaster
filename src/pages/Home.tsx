@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
+import { AdUnit } from "@/components/AdUnit";
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   useEffect(() => {
@@ -90,6 +91,9 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Ad Unit 1 - After Hero */}
+      <AdUnit />
+
       {/* Stats Section */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background"></div>
@@ -162,6 +166,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Ad Unit 2 - After Featured Topics */}
+      <AdUnit />
 
       {/* Recent Questions */}
       <section className="py-20 relative overflow-hidden">
