@@ -19,6 +19,7 @@ const Question = lazy(() => import("./pages/Question"));
 const Admin = lazy(() => import("./pages/Admin"));
 const AdminPayments = lazy(() => import("./pages/AdminPayments"));
 const Pricing = lazy(() => import("./pages/Pricing"));
+const AboutPolicy = lazy(() => import("./pages/AboutPolicy"));
 const ReviewQueue = lazy(() => import("./pages/ReviewQueue"));
 const VerifyPayment = lazy(() => import("./pages/VerifyPayment"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -48,6 +49,7 @@ const App = () => (
                 <Route path="/topics" element={<Topics />} />
                 <Route path="/questions" element={<Topics />} />
                 <Route path="/pricing" element={<Pricing />} />
+                <Route path="/about-policy" element={<AboutPolicy />} />
                 <Route path="/auth" element={<Auth />} />
                 
                 {/* Topic pages - consolidated to single dynamic route */}
