@@ -6,6 +6,7 @@ import { ArrowLeft, Code2, Eye, MessageCircle, Copy, Check } from "lucide-react"
 import { getQuestionById } from "@/data/sampleQuestions";
 import { useState } from "react";
 import { SEO } from "@/components/SEO";
+import { AdUnit } from "@/components/AdUnit";
 
 export default function QuestionDetail() {
   const { topic, id } = useParams<{ topic: string; id: string }>();
@@ -84,6 +85,9 @@ export default function QuestionDetail() {
             <p className="text-muted-foreground whitespace-pre-wrap">{question.body}</p>
           </CardContent>
         </Card>
+
+        {/* Ad Unit - Between Question and Answer */}
+        <AdUnit />
 
         {/* AI Answer */}
         <Card className="mb-6">
