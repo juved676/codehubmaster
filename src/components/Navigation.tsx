@@ -72,6 +72,14 @@ export default function Navigation() {
             >
               Pricing
             </Link>
+            <Link
+              to="/about-policy"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/about-policy') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              About & Policy
+            </Link>
             
             {/* Auth Navigation */}
             {!loading && user && (
@@ -204,6 +212,15 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Pricing
+            </Link>
+            <Link
+              to="/about-policy"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/about-policy') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              About & Policy
             </Link>
             
             {/* Mobile Auth Navigation */}
