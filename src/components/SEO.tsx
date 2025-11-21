@@ -14,7 +14,7 @@ export const SEO = ({
   description, 
   keywords = "learn python, python programming, coding tutorials, web development, AI coding, machine learning",
   canonical,
-  ogImage = "https://code-hub-master.lovable.app/favicon.png",
+  ogImage = "https://codehubmaster.lovable.app/favicon.png",
   schemaData
 }: SEOProps) => {
   // Default organization schema
@@ -23,8 +23,8 @@ export const SEO = ({
     "@type": "EducationalOrganization",
     "name": "CodeHubMaster",
     "description": "Free online platform for learning Python programming, web development, AI, and machine learning",
-    "url": "https://code-hub-master.lovable.app",
-    "logo": "https://code-hub-master.lovable.app/favicon.png",
+    "url": "https://codehubmaster.lovable.app",
+    "logo": "https://codehubmaster.lovable.app/favicon.png",
     "sameAs": [
       "https://twitter.com/codehubmaster"
     ]

@@ -1,0 +1,2 @@
+# 301 Permanent Redirects from old domain to new domain
+https://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
