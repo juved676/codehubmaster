@@ -37,7 +37,7 @@ export default function QuestionDetail() {
     );
   }
 
-  const canonicalUrl = `https://code-hub-master.lovable.app/question/${topic}/${id}`;
+  const canonicalUrl = `https://codehubmaster.lovable.app/question/${topic}/${id}`;
   const pageTitle = `${question.title} - Python Code Example | CodeHub`;
   const pageDescription = question.body.substring(0, 155);
 

@@ -16,4 +16,4 @@ Disallow: /admin
 Disallow: /verify-payment
 Disallow: /auth
 
-Sitemap: https://code-hub-master.lovable.app/sitemap.xml
+Sitemap: https://codehubmaster.lovable.app/sitemap.xml
