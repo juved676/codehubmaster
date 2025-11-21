@@ -1,2 +1,21 @@
 # 301 Permanent Redirects from old domain to new domain
+
+# Homepage
+https://code-hub-master.lovable.app/ https://codehubmaster.lovable.app/ 301!
+
+# Main pages
+https://code-hub-master.lovable.app/ask https://codehubmaster.lovable.app/ask 301!
+https://code-hub-master.lovable.app/topics https://codehubmaster.lovable.app/topics 301!
+https://code-hub-master.lovable.app/pricing https://codehubmaster.lovable.app/pricing 301!
+https://code-hub-master.lovable.app/auth https://codehubmaster.lovable.app/auth 301!
+https://code-hub-master.lovable.app/about-policy https://codehubmaster.lovable.app/about-policy 301!
+
+# Topic pages
+https://code-hub-master.lovable.app/topic/python-basics https://codehubmaster.lovable.app/topic/python-basics 301!
+https://code-hub-master.lovable.app/topic/data-science https://codehubmaster.lovable.app/topic/data-science 301!
+https://code-hub-master.lovable.app/topic/web-development https://codehubmaster.lovable.app/topic/web-development 301!
+https://code-hub-master.lovable.app/topic/machine-learning https://codehubmaster.lovable.app/topic/machine-learning 301!
+https://code-hub-master.lovable.app/topic/devops-basics https://codehubmaster.lovable.app/topic/devops-basics 301!
+
+# Dynamic routes - catch all remaining pages
 https://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
