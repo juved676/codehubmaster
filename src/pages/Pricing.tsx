@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Helmet } from 'react-helmet';
+import { SEO } from '@/components/SEO';
 
 interface Plan {
   id: string;
@@ -33,11 +33,6 @@ const Pricing = () => {
 
   useEffect(() => {
     fetchPlans();
-    document.title = "Affordable Coding Courses Pricing - Learn Programming at Low Cost | CodeHub";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Affordable Python programming courses starting at just ₹99. Learn coding with AI-powered tutorials. Flexible pricing plans for students and developers.');
-    }
   }, []);
 
   const fetchPlans = async () => {
@@ -154,8 +149,16 @@ const Pricing = () => {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4 relative overflow-hidden">
-      <div className="absolute inset-0">
+    <>
+      <SEO 
+        title="Affordable Coding Courses Pricing - Learn Programming at Low Cost | CodeHub"
+        description="Affordable Python programming courses starting at just ₹99. Learn coding with AI-powered tutorials. Flexible pricing plans for students and developers."
+        keywords="coding course pricing, python course price, affordable programming courses, learn python cheap"
+        canonical="https://codehubmaster.lovable.app/pricing"
+      />
+      
+      <div className="min-h-screen py-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
       </div>
@@ -352,7 +355,8 @@ const Pricing = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </>
   );
 };
 
