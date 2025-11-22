@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { SEO } from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,7 +10,14 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center relative overflow-hidden">
+    <>
+      <SEO 
+        title="Page Not Found - 404 Error | CodeHub"
+        description="The page you're looking for doesn't exist. Return to CodeHub homepage to explore Python tutorials and coding resources."
+        canonical="https://codehubmaster.lovable.app/404"
+      />
+      
+      <div className="flex min-h-screen items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
@@ -21,7 +29,8 @@ const NotFound = () => {
           Return to Home
         </a>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

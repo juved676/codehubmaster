@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, BookOpen, MessageCircle, Users, Star, Code } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const Topics = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    document.title = "Python Tutorial for Beginners - Learn Python Step by Step with Examples | CodeHub";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner\'s guide to Python programming.');
-    }
-  }, []);
 
   const allTopics = [
     {
@@ -127,8 +120,16 @@ const Topics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="Python Tutorial for Beginners - Learn Python Step by Step | CodeHub"
+        description="Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner's guide to Python programming."
+        keywords="python tutorial, python programming, python for beginners, web development, data science, machine learning"
+        canonical="https://codehubmaster.lovable.app/topics"
+      />
+      
+      <div className="min-h-screen bg-background py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -284,8 +285,9 @@ const Topics = () => {
             </Button>
           </section>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

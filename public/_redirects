@@ -1,5 +1,9 @@
 # 301 Permanent Redirects from old domain to new domain
 
+# Force HTTPS and remove trailing slashes
+http://codehubmaster.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
+https://codehubmaster.lovable.app/*/ https://codehubmaster.lovable.app/:splat 301!
+
 # Homepage
 https://code-hub-master.lovable.app/ https://codehubmaster.lovable.app/ 301!
 

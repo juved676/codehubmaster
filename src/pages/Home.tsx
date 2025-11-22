@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,15 +7,10 @@ import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } 
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
 import { AdUnit } from "@/components/AdUnit";
+import { SEO } from "@/components/SEO";
+
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  useEffect(() => {
-    document.title = "Python Tutorial for Beginners - Learn Python Programming Free | CodeHub";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner\'s guide to Python programming.');
-    }
-  }, []);
   const featuredTopics = [{
     title: "Python Basics",
     description: "Master Python fundamentals, syntax, and core programming concepts",
@@ -38,9 +33,19 @@ const Home = () => {
     slug: "machine-learning"
   }];
   const recentQuestions = sampleQuestions.slice(0, 3);
-  return <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden" style={{
+  
+  return (
+    <>
+      <SEO 
+        title="Python Tutorial for Beginners - Learn Python Programming Free | CodeHub"
+        description="Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner's guide to Python programming."
+        keywords="python tutorial, learn python, python programming, python for beginners, coding tutorials, free python course"
+        canonical="https://codehubmaster.lovable.app"
+      />
+      
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="relative py-20 lg:py-32 overflow-hidden" style={{
       backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
@@ -257,6 +262,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>;
+      </div>
+    </>
+  );
 };
 export default Home;

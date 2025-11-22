@@ -17,6 +17,13 @@ export const SEO = ({
   ogImage = "https://codehubmaster.lovable.app/favicon.png",
   schemaData
 }: SEOProps) => {
+  // Auto-generate canonical URL if not provided
+  const currentUrl = typeof window !== 'undefined' 
+    ? window.location.href.replace(/\/$/, '') // Remove trailing slash
+    : 'https://codehubmaster.lovable.app';
+  
+  const canonicalUrl = canonical || currentUrl;
+  
   // Default organization schema
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -35,7 +42,7 @@ export const SEO = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
-      {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="canonical" href={canonicalUrl} />
       
       {/* Open Graph */}
       <meta property="og:title" content={title} />

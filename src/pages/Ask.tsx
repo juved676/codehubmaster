@@ -11,6 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useCredits } from '@/hooks/useCredits';
 import { toast } from 'sonner';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { SEO } from '@/components/SEO';
 
 interface ChatMessage {
   type: 'question' | 'answer';
@@ -290,164 +291,185 @@ export default function Ask() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      <div className="container mx-auto px-4 py-6 max-w-7xl h-screen flex flex-col">
-        {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold gradient-text mb-1">
-              AI Coding Assistant
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Ask anything about coding and get instant help
-            </p>
+    <>
+      <SEO 
+        title="Ask Coding Questions - Get Instant Programming Help | CodeHub"
+        description="Ask any coding question and get instant AI-powered answers. Python, JavaScript, web development, data science help available 24/7."
+        keywords="ask coding question, programming help, python help, javascript help, coding assistance"
+        canonical="https://codehubmaster.lovable.app/ask"
+      />
+      
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+        <div className="container mx-auto px-4 py-6 max-w-7xl h-screen flex flex-col">
+          {/* Header */}
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold gradient-text mb-1">
+                AI Coding Assistant
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Ask anything about coding and get instant help
+              </p>
+            </div>
+            
+            {/* Mobile sidebar trigger */}
+            <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="lg:hidden">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-80 overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>Settings</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
+                  <PreferencesSidebar />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
-          
-          {/* Mobile sidebar trigger */}
-          <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="lg:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80 overflow-y-auto">
-              <SheetHeader>
-                <SheetTitle>Settings</SheetTitle>
-              </SheetHeader>
-              <div className="mt-6">
-                <PreferencesSidebar />
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
 
-        {/* Main Content */}
-        <div className="flex-1 grid lg:grid-cols-[1fr_320px] gap-6 min-h-0">
-          {/* Chat Area */}
-          <Card className="glass-card border-primary/30 flex flex-col shadow-elegant">
-            <CardContent className="flex-1 flex flex-col p-6 gap-4 overflow-hidden">
-              {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto space-y-4 min-h-0">
-                {chatHistory.length === 0 ? (
-                  /* Welcome Message */
-                  <div className="flex items-center justify-center h-full">
-                    <div className="text-center max-w-2xl space-y-4">
-                      <div className="text-6xl mb-4">🤖</div>
-                      <h2 className="text-2xl font-bold">How can I help you today?</h2>
-                      <p className="text-muted-foreground">
-                        Ask any coding question and get detailed explanations with examples
-                      </p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
-                        <button
-                          onClick={() => setQuestion("How do I create a function in Python?")}
-                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                        >
-                          <span className="block font-medium mb-1">Python Basics</span>
-                          <span className="text-muted-foreground text-xs">How do I create a function?</span>
-                        </button>
-                        <button
-                          onClick={() => setQuestion("Explain how JavaScript promises work")}
-                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                        >
-                          <span className="block font-medium mb-1">JavaScript</span>
-                          <span className="text-muted-foreground text-xs">Explain promises</span>
-                        </button>
-                        <button
-                          onClick={() => setQuestion("What's the difference between let, const, and var?")}
-                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                        >
-                          <span className="block font-medium mb-1">Variables</span>
-                          <span className="text-muted-foreground text-xs">let vs const vs var</span>
-                        </button>
-                        <button
-                          onClick={() => setQuestion("How do I fix 'undefined is not a function' error?")}
-                          className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
-                        >
-                          <span className="block font-medium mb-1">Debugging</span>
-                          <span className="text-muted-foreground text-xs">Fix common errors</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  /* Chat Messages */
-                  chatHistory.map((message, index) => (
-                    <div key={index} className={`flex ${message.type === 'question' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[80%] rounded-lg p-4 ${
-                        message.type === 'question' 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted'
-                      }`}>
-                        <div className="whitespace-pre-wrap break-words">{message.content}</div>
-                        {message.sources && message.sources.length > 0 && (
-                          <div className="mt-2 pt-2 border-t border-border/50 text-xs">
-                            <p className="font-semibold mb-1">Sources:</p>
-                            <ul className="list-disc list-inside space-y-0.5">
-                              {message.sources.map((source, idx) => (
-                                <li key={idx}>{source}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                        <div className="text-xs opacity-70 mt-2">
-                          {message.timestamp.toLocaleTimeString()}
+          {/* Main Content */}
+          <div className="flex-1 grid lg:grid-cols-[1fr_320px] gap-6 min-h-0">
+            {/* Chat Area */}
+            <Card className="glass-card border-primary/30 flex flex-col shadow-elegant">
+              <CardContent className="flex-1 flex flex-col p-6 gap-4 overflow-hidden">
+                {/* Messages Area */}
+                <div className="flex-1 overflow-y-auto space-y-4 min-h-0">
+                  {chatHistory.length === 0 ? (
+                    /* Welcome Message */
+                    <div className="flex items-center justify-center h-full">
+                      <div className="text-center max-w-2xl space-y-4">
+                        <div className="text-6xl mb-4">🤖</div>
+                        <h2 className="text-2xl font-bold">How can I help you today?</h2>
+                        <p className="text-muted-foreground">
+                          Ask any coding question and get detailed explanations with examples
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
+                          <button
+                            onClick={() => setQuestion("How do I create a function in Python?")}
+                            className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                          >
+                            <span className="block font-medium mb-1">Python Basics</span>
+                            <span className="text-muted-foreground text-xs">How do I create a function?</span>
+                          </button>
+                          <button
+                            onClick={() => setQuestion("Explain how JavaScript promises work")}
+                            className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                          >
+                            <span className="block font-medium mb-1">JavaScript</span>
+                            <span className="text-muted-foreground text-xs">Explain promises</span>
+                          </button>
+                          <button
+                            onClick={() => setQuestion("What's the difference between let, const, and var?")}
+                            className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                          >
+                            <span className="block font-medium mb-1">Variables</span>
+                            <span className="text-muted-foreground text-xs">let vs const vs var</span>
+                          </button>
+                          <button
+                            onClick={() => setQuestion("How do I fix 'undefined is not a function' error?")}
+                            className="p-4 rounded-lg border border-border hover:border-primary/50 bg-card/50 hover:bg-card transition-colors text-sm"
+                          >
+                            <span className="block font-medium mb-1">Debugging</span>
+                            <span className="text-muted-foreground text-xs">Fix common errors</span>
+                          </button>
                         </div>
                       </div>
                     </div>
-                  ))
-                )}
-                {isSubmitting && (
-                  <div className="flex justify-start">
-                    <div className="bg-muted rounded-lg p-4">
-                      <div className="flex items-center gap-2">
-                        <div className="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div>
-                        <span>Thinking...</span>
+                  ) : (
+                    /* Chat Messages */
+                    chatHistory.map((message, index) => (
+                      <div key={index} className={`flex ${message.type === 'question' ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`max-w-[80%] rounded-lg p-4 ${
+                          message.type === 'question' 
+                            ? 'bg-primary text-primary-foreground' 
+                            : 'bg-muted'
+                        }`}>
+                          <div className="whitespace-pre-wrap break-words">{message.content}</div>
+                          {message.sources && message.sources.length > 0 && (
+                            <div className="mt-2 pt-2 border-t border-border/50 text-xs">
+                              <p className="font-semibold mb-1">Sources:</p>
+                              <ul className="list-disc list-inside space-y-0.5">
+                                {message.sources.map((source, idx) => (
+                                  <li key={idx}>{source}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          <div className="text-xs opacity-70 mt-2">
+                            {message.timestamp.toLocaleTimeString()}
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                  {isSubmitting && (
+                    <div className="flex justify-start">
+                      <div className="bg-muted rounded-lg p-4">
+                        <div className="flex items-center gap-2">
+                          <div className="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full"></div>
+                          <span>Thinking...</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Input Area */}
-              <div className="space-y-3">
-                <Textarea
-                  placeholder="Type your coding question here... (Ctrl/Cmd + Enter to send)"
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="min-h-[80px] bg-background/50 border-border/50 focus:border-primary resize-none"
-                  disabled={isSubmitting}
-                />
-                <div className="flex items-center justify-between">
-                  <div className="text-xs text-muted-foreground">
-                    {creditInfo?.can_ask ? (
-                      <span className="text-accent">✓ Ready to ask</span>
-                    ) : (
-                      <span className="text-destructive">⚠️ No credits</span>
-                    )}
-                  </div>
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={isSubmitting || !question.trim()}
-                    size="lg"
-                    className="gap-2 shadow-neon"
-                  >
-                    <Send className="h-4 w-4" />
-                    {isSubmitting ? 'Sending...' : 'Send Question'}
-                  </Button>
+                  )}
                 </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Desktop Sidebar */}
-          <div className="hidden lg:block overflow-y-auto">
-            <PreferencesSidebar />
+                {/* Input Area */}
+                <div className="space-y-3">
+                  <Textarea
+                    placeholder="Type your coding question here... (Ctrl/Cmd + Enter to send)"
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="min-h-[80px] bg-background/50 border-border/50 focus:border-primary resize-none"
+                    disabled={isSubmitting}
+                  />
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs text-muted-foreground">
+                      {creditInfo?.credits_left !== undefined && (
+                        <span className="font-medium">
+                          {creditInfo.credits_left} credits remaining
+                        </span>
+                      )}
+                    </div>
+                    <Button 
+                      onClick={handleSubmit}
+                      disabled={isSubmitting || !question.trim()}
+                      className="bg-gradient-primary hover:shadow-neon"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Ask Question
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Desktop Sidebar */}
+            <div className="hidden lg:block">
+              <PreferencesSidebar />
+            </div>
           </div>
         </div>
-      </div>
 
-      <PricingModal open={showPricingModal} onClose={() => setShowPricingModal(false)} />
-    </div>
+        <PricingModal 
+          open={showPricingModal} 
+          onClose={() => setShowPricingModal(false)}
+        />
+      </div>
+    </>
   );
 }
