@@ -32,4 +32,35 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+    <!-- Topic Pages -->
+    <url>
+        <loc>https://codehubmaster.lovable.app/topic/python-basics</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://codehubmaster.lovable.app/topic/data-science</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://codehubmaster.lovable.app/topic/machine-learning</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://codehubmaster.lovable.app/topic/web-development</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://codehubmaster.lovable.app/topic/devops-basics</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
 </urlset>
