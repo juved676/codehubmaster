@@ -231,7 +231,7 @@ const Pricing = () => {
                       ? '50 questions for 30 days' 
                       : plan.name === 'Code Advance'
                       ? '999 questions for 40 days'
-                      : '6 questions per 10-day period'}
+                      : '5 questions per 10-day period (15/month)'}
                   </CardDescription>
                 </div>
               </CardHeader>
