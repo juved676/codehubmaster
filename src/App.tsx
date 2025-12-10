@@ -54,6 +54,11 @@ const App = () => (
                 
                 {/* Topic pages - consolidated to single dynamic route */}
                 <Route path="/topic/:topic" element={<TopicDetail />} />
+                <Route path="/python-basics" element={<TopicDetail />} />
+                <Route path="/data-science" element={<TopicDetail />} />
+                <Route path="/web-development" element={<TopicDetail />} />
+                <Route path="/machine-learning" element={<TopicDetail />} />
+                <Route path="/devops-basics" element={<TopicDetail />} />
                 
                 {/* Question detail pages */}
                 <Route path="/question/:topic/:id" element={<QuestionDetail />} />
