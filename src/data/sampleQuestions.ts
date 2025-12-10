@@ -88,6 +88,133 @@ try:
 except FileNotFoundError:
     print("File not found!")`
   },
+  {
+    id: "py-4",
+    title: "Python mein Dictionary kaise use kare?",
+    body: "Dictionary kya hoti hai aur ise kaise efficiently use kar sakte hain?",
+    topic: "python-basics",
+    views: 678,
+    answers: 1,
+    difficulty: "Beginner",
+    answer: "Dictionary Python ka key-value pair data structure hai. Ye hash table pe based hai isliye bahut fast hai.\n\nMain features:\n- Keys unique honi chahiye\n- Values kuch bhi ho sakti hain\n- O(1) time mein access\n- Mutable hai (change ho sakti hai)\n\nUse cases:\n- Configuration settings\n- Counting occurrences\n- Caching data\n- JSON data handling",
+    codeExample: `# Dictionary creation
+student = {
+    "name": "Rahul",
+    "age": 20,
+    "courses": ["Python", "ML", "Data Science"]
+}
+
+# Access values
+print(student["name"])  # Rahul
+print(student.get("email", "Not found"))  # Safe access
+
+# Add/Update
+student["email"] = "rahul@example.com"
+student["age"] = 21
+
+# Dictionary methods
+print(student.keys())    # All keys
+print(student.values())  # All values
+print(student.items())   # Key-value pairs
+
+# Loop through dictionary
+for key, value in student.items():
+    print(f"{key}: {value}")
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(5)}`
+  },
+  {
+    id: "py-5",
+    title: "Python Functions aur Lambda expressions",
+    body: "Functions kaise define karte hain aur lambda expressions kab use karni chahiye?",
+    topic: "python-basics",
+    views: 823,
+    answers: 1,
+    difficulty: "Beginner",
+    answer: "Functions reusable code blocks hain. Lambda anonymous (bina naam ki) functions hain.\n\nRegular functions:\n- def keyword se define\n- Multiple lines ho sakti hain\n- Documentation add kar sakte hain\n- Complex logic ke liye\n\nLambda functions:\n- Single expression only\n- Anonymous (no name needed)\n- map(), filter(), sort() mein useful\n- Short, one-time operations ke liye",
+    codeExample: `# Regular function
+def add(a, b):
+    """Add two numbers"""
+    return a + b
+
+# Function with default args
+def greet(name, msg="Hello"):
+    return f"{msg}, {name}!"
+
+# *args and **kwargs
+def flexible(*args, **kwargs):
+    print(f"Args: {args}")
+    print(f"Kwargs: {kwargs}")
+
+flexible(1, 2, 3, name="Python", level="Easy")
+
+# Lambda function
+square = lambda x: x ** 2
+print(square(5))  # 25
+
+# Lambda with map
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x**2, numbers))
+
+# Lambda with filter
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+
+# Lambda with sorted
+students = [("Alice", 85), ("Bob", 90), ("Charlie", 75)]
+sorted_students = sorted(students, key=lambda x: x[1], reverse=True)`
+  },
+  {
+    id: "py-6",
+    title: "Python File Handling complete guide",
+    body: "Python mein files kaise read/write karte hain? CSV aur JSON files kaise handle karein?",
+    topic: "python-basics",
+    views: 945,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "Python mein file handling ke liye open() function use hota hai with context manager.\n\nModes:\n- 'r': Read (default)\n- 'w': Write (overwrite)\n- 'a': Append\n- 'rb'/'wb': Binary mode\n\nBest practices:\n- Always use 'with' statement\n- Handle exceptions properly\n- Close files automatically with context manager\n- Use appropriate encoding (utf-8)",
+    codeExample: `# Basic file operations
+# Read file
+with open('data.txt', 'r', encoding='utf-8') as f:
+    content = f.read()        # Read all
+    # or
+    lines = f.readlines()     # List of lines
+
+# Write file
+with open('output.txt', 'w') as f:
+    f.write("Hello World\\n")
+    f.writelines(["Line 1\\n", "Line 2\\n"])
+
+# Append to file
+with open('log.txt', 'a') as f:
+    f.write("New log entry\\n")
+
+# CSV file handling
+import csv
+
+# Read CSV
+with open('data.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row['name'], row['age'])
+
+# Write CSV
+with open('output.csv', 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=['name', 'age'])
+    writer.writeheader()
+    writer.writerow({'name': 'Rahul', 'age': 25})
+
+# JSON file handling
+import json
+
+# Read JSON
+with open('config.json', 'r') as f:
+    data = json.load(f)
+
+# Write JSON
+with open('output.json', 'w') as f:
+    json.dump(data, f, indent=2)`
+  },
 
   // Data Science
   {
@@ -152,6 +279,163 @@ df = pd.DataFrame({
 df['Bonus'] = df['Salary'] * 0.1
 avg_age = df['Age'].mean()
 filtered = df[df['Age'] > 28]`
+  },
+  {
+    id: "ds-3",
+    title: "Data Visualization with Matplotlib aur Seaborn",
+    body: "Python mein professional charts aur graphs kaise banaye?",
+    topic: "data-science",
+    views: 1087,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "Matplotlib basic plotting library hai, Seaborn uske upar statistical visualizations ke liye.\n\nMatplotlib:\n- Low-level control\n- Customizable\n- All chart types\n- Figure aur Axes concept\n\nSeaborn:\n- Beautiful default styles\n- Statistical plots built-in\n- Pandas integration\n- Complex visualizations easy\n\nChoose Seaborn for quick, beautiful plots. Matplotlib for complete customization.",
+    codeExample: `import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+# Matplotlib basics
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+# Line plot
+axes[0, 0].plot([1, 2, 3, 4], [1, 4, 2, 3], marker='o')
+axes[0, 0].set_title('Line Plot')
+
+# Bar chart
+axes[0, 1].bar(['A', 'B', 'C'], [10, 20, 15], color='skyblue')
+axes[0, 1].set_title('Bar Chart')
+
+# Scatter plot
+axes[1, 0].scatter(np.random.rand(50), np.random.rand(50), c='red', alpha=0.5)
+axes[1, 0].set_title('Scatter Plot')
+
+# Histogram
+axes[1, 1].hist(np.random.randn(1000), bins=30, edgecolor='black')
+axes[1, 1].set_title('Histogram')
+
+plt.tight_layout()
+plt.savefig('charts.png', dpi=300)
+
+# Seaborn examples
+df = sns.load_dataset('tips')
+
+# Distribution plot
+sns.histplot(data=df, x='total_bill', kde=True)
+
+# Box plot
+sns.boxplot(data=df, x='day', y='total_bill', hue='sex')
+
+# Heatmap
+correlation = df.corr()
+sns.heatmap(correlation, annot=True, cmap='coolwarm')
+
+# Pair plot
+sns.pairplot(df, hue='sex')`
+  },
+  {
+    id: "ds-4",
+    title: "Pandas Data Manipulation advanced techniques",
+    body: "Pandas mein groupby, merge, pivot tables kaise use karte hain?",
+    topic: "data-science",
+    views: 1234,
+    answers: 1,
+    difficulty: "Advanced",
+    answer: "Pandas powerful data manipulation capabilities provide karta hai:\n\nGroupBy:\n- Data ko groups mein divide karo\n- Aggregate functions apply karo\n- Multiple columns pe group kar sakte ho\n\nMerge/Join:\n- SQL-like joins\n- inner, left, right, outer joins\n- Multiple DataFrames combine karo\n\nPivot Tables:\n- Data reshape karo\n- Summary tables banao\n- Excel pivot table jaisa",
+    codeExample: `import pandas as pd
+
+# Sample data
+df = pd.DataFrame({
+    'Date': pd.date_range('2024-01-01', periods=100),
+    'Category': np.random.choice(['A', 'B', 'C'], 100),
+    'Region': np.random.choice(['North', 'South', 'East'], 100),
+    'Sales': np.random.randint(100, 1000, 100),
+    'Quantity': np.random.randint(1, 50, 100)
+})
+
+# GroupBy operations
+grouped = df.groupby('Category')['Sales'].agg(['sum', 'mean', 'count'])
+
+# Multiple column groupby
+multi_group = df.groupby(['Category', 'Region']).agg({
+    'Sales': ['sum', 'mean'],
+    'Quantity': 'sum'
+})
+
+# Merge DataFrames
+customers = pd.DataFrame({
+    'id': [1, 2, 3],
+    'name': ['Alice', 'Bob', 'Charlie']
+})
+orders = pd.DataFrame({
+    'customer_id': [1, 2, 1, 3],
+    'amount': [100, 200, 150, 300]
+})
+merged = pd.merge(customers, orders, left_on='id', right_on='customer_id')
+
+# Pivot table
+pivot = df.pivot_table(
+    values='Sales',
+    index='Category',
+    columns='Region',
+    aggfunc='sum',
+    fill_value=0
+)
+
+# Crosstab
+cross = pd.crosstab(df['Category'], df['Region'], margins=True)`
+  },
+  {
+    id: "ds-5",
+    title: "Exploratory Data Analysis (EDA) complete guide",
+    body: "Naye dataset ko analyze karne ka systematic approach kya hai?",
+    topic: "data-science",
+    views: 1456,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "EDA data ko samajhne ka first step hai before modeling.\n\nEDA Steps:\n1. Data Loading & Overview\n2. Missing Values Check\n3. Data Types & Statistics\n4. Univariate Analysis\n5. Bivariate Analysis\n6. Correlation Analysis\n7. Outlier Detection\n8. Feature Engineering Ideas\n\nTools: Pandas Profiling, Sweetviz auto-generate EDA reports.",
+    codeExample: `import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load data
+df = pd.read_csv('dataset.csv')
+
+# 1. Basic Overview
+print(df.shape)           # Rows, Columns
+print(df.head())          # First 5 rows
+print(df.info())          # Data types, non-null counts
+print(df.describe())      # Statistics
+
+# 2. Missing Values
+missing = df.isnull().sum()
+missing_pct = (missing / len(df)) * 100
+print(missing_pct[missing_pct > 0])
+
+# 3. Visualize missing data
+sns.heatmap(df.isnull(), cbar=True, yticklabels=False)
+
+# 4. Distribution of numerical columns
+for col in df.select_dtypes(include=[np.number]).columns:
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+    df[col].hist(ax=axes[0], bins=30)
+    df.boxplot(column=col, ax=axes[1])
+    plt.suptitle(f'Distribution of {col}')
+    plt.show()
+
+# 5. Correlation matrix
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', center=0)
+
+# 6. Categorical columns
+for col in df.select_dtypes(include=['object']).columns:
+    print(f"\\n{col}:")
+    print(df[col].value_counts())
+
+# 7. Auto EDA with pandas-profiling
+from ydata_profiling import ProfileReport
+profile = ProfileReport(df, title="EDA Report")
+profile.to_file("eda_report.html")`
   },
 
   // Web Development
@@ -267,6 +551,220 @@ app.delete('/api/v1/users/:id', async (req, res) => {
   res.status(204).send();
 });`
   },
+  {
+    id: "web-4",
+    title: "React Hooks complete tutorial",
+    body: "useState, useEffect, useContext aur custom hooks kaise use karte hain?",
+    topic: "web-development",
+    views: 1876,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "React Hooks functional components mein state aur lifecycle features dete hain.\n\nEssential Hooks:\n- useState: State management\n- useEffect: Side effects (API calls, subscriptions)\n- useContext: Global state access\n- useRef: DOM references, mutable values\n- useMemo: Expensive calculations cache\n- useCallback: Function memoization\n\nCustom hooks logic reuse ke liye perfect hain.",
+    codeExample: `import React, { useState, useEffect, useContext, useRef, useMemo, useCallback } from 'react';
+
+// useState
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+
+// useEffect - API call
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUser() {
+      setLoading(true);
+      const response = await fetch(\`/api/users/\${userId}\`);
+      const data = await response.json();
+      setUser(data);
+      setLoading(false);
+    }
+    fetchUser();
+  }, [userId]); // Runs when userId changes
+
+  if (loading) return <div>Loading...</div>;
+  return <div>{user?.name}</div>;
+}
+
+// Custom Hook
+function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    setStoredValue(value);
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  return [storedValue, setValue];
+}
+
+// useMemo & useCallback
+function ExpensiveComponent({ items, onSelect }) {
+  const sortedItems = useMemo(() => {
+    return [...items].sort((a, b) => a.name.localeCompare(b.name));
+  }, [items]);
+
+  const handleClick = useCallback((id) => {
+    onSelect(id);
+  }, [onSelect]);
+
+  return sortedItems.map(item => (
+    <div key={item.id} onClick={() => handleClick(item.id)}>
+      {item.name}
+    </div>
+  ));
+}`
+  },
+  {
+    id: "web-5",
+    title: "Tailwind CSS se responsive design",
+    body: "Tailwind CSS use karke mobile-first responsive websites kaise banaye?",
+    topic: "web-development",
+    views: 1543,
+    answers: 1,
+    difficulty: "Beginner",
+    answer: "Tailwind CSS utility-first framework hai jo rapid UI development enable karta hai.\n\nBreakpoints:\n- sm: 640px+\n- md: 768px+\n- lg: 1024px+\n- xl: 1280px+\n- 2xl: 1536px+\n\nMobile-first approach: Base styles mobile ke liye, breakpoints pe larger screens ke liye.\n\nBenefits:\n- No CSS files needed\n- Consistent design system\n- Smaller bundle size (purge unused)\n- Fast prototyping",
+    codeExample: `<!-- Responsive Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <h3 class="text-lg md:text-xl font-bold">Card 1</h3>
+    <p class="text-gray-600 text-sm md:text-base">Content</p>
+  </div>
+</div>
+
+<!-- Responsive Navigation -->
+<nav class="flex flex-col md:flex-row justify-between items-center p-4">
+  <div class="text-2xl font-bold mb-4 md:mb-0">Logo</div>
+  <ul class="flex flex-col md:flex-row gap-2 md:gap-6">
+    <li><a href="#" class="hover:text-blue-500">Home</a></li>
+    <li><a href="#" class="hover:text-blue-500">About</a></li>
+    <li><a href="#" class="hover:text-blue-500">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center 
+                bg-gradient-to-r from-purple-500 to-pink-500 
+                px-4 md:px-8 lg:px-16">
+  <div class="text-center text-white">
+    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+      Welcome
+    </h1>
+    <p class="text-lg md:text-xl mb-8 max-w-2xl">
+      Build beautiful websites faster
+    </p>
+    <button class="px-6 py-3 md:px-8 md:py-4 
+                   bg-white text-purple-600 
+                   rounded-full font-semibold
+                   hover:bg-opacity-90 transition">
+      Get Started
+    </button>
+  </div>
+</section>
+
+<!-- Responsive Table -->
+<div class="overflow-x-auto">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="px-4 py-3 text-left text-xs md:text-sm">Name</th>
+        <th class="px-4 py-3 text-left text-xs md:text-sm hidden md:table-cell">Email</th>
+        <th class="px-4 py-3 text-left text-xs md:text-sm">Status</th>
+      </tr>
+    </thead>
+  </table>
+</div>`
+  },
+  {
+    id: "web-6",
+    title: "TypeScript basics for React developers",
+    body: "TypeScript React projects mein kaise use kare? Types aur Interfaces ka fayda kya hai?",
+    topic: "web-development",
+    views: 1678,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "TypeScript JavaScript mein static type checking add karta hai.\n\nBenefits:\n- Compile-time error detection\n- Better IDE support (autocomplete)\n- Self-documenting code\n- Easier refactoring\n- Catch bugs before runtime\n\nReact mein:\n- Props ko type karo\n- State types define karo\n- Event handlers type karo\n- API responses type karo",
+    codeExample: `// Basic Types
+let name: string = "Rahul";
+let age: number = 25;
+let isActive: boolean = true;
+let items: string[] = ["a", "b", "c"];
+
+// Interface for object shape
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  avatar?: string;  // Optional property
+}
+
+// Type for union types
+type Status = "pending" | "active" | "completed";
+
+// React Component with Props
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({ 
+  label, 
+  onClick, 
+  variant = "primary",
+  disabled = false 
+}) => {
+  return (
+    <button 
+      onClick={onClick} 
+      disabled={disabled}
+      className={\`btn btn-\${variant}\`}
+    >
+      {label}
+    </button>
+  );
+};
+
+// useState with Types
+const [user, setUser] = useState<User | null>(null);
+const [items, setItems] = useState<string[]>([]);
+
+// Event Types
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setValue(e.target.value);
+};
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  // submit logic
+};
+
+// API Response typing
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+async function fetchUsers(): Promise<ApiResponse<User[]>> {
+  const response = await fetch('/api/users');
+  return response.json();
+}`
+  },
 
   // Machine Learning
   {
@@ -365,6 +863,175 @@ early_stop = EarlyStopping(
 model.fit(X_train, y_train, 
           validation_split=0.2,
           callbacks=[early_stop])`
+  },
+  {
+    id: "ml-3",
+    title: "Neural Networks aur Deep Learning basics",
+    body: "Neural networks kaise kaam karte hain? Deep learning kab use karni chahiye?",
+    topic: "machine-learning",
+    views: 1567,
+    answers: 1,
+    difficulty: "Advanced",
+    answer: "Neural networks brain neurons se inspired computing systems hain.\n\nBasic components:\n- Input layer: Data receive karta hai\n- Hidden layers: Features learn karte hain\n- Output layer: Predictions deta hai\n- Weights & Biases: Learnable parameters\n- Activation functions: Non-linearity add karte hain\n\nDeep Learning:\n- Multiple hidden layers\n- Complex patterns learn\n- Large data pe best results\n- Image, text, speech ke liye ideal\n\nUse when: Large data, complex patterns, unstructured data (images, text)",
+    codeExample: `import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+# Simple Neural Network
+model = keras.Sequential([
+    layers.Dense(128, activation='relu', input_shape=(784,)),
+    layers.Dropout(0.2),
+    layers.Dense(64, activation='relu'),
+    layers.Dropout(0.2),
+    layers.Dense(10, activation='softmax')
+])
+
+model.compile(
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+# Train model
+history = model.fit(
+    X_train, y_train,
+    epochs=10,
+    batch_size=32,
+    validation_split=0.2
+)
+
+# CNN for Image Classification
+cnn_model = keras.Sequential([
+    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+# Plot training history
+import matplotlib.pyplot as plt
+
+plt.plot(history.history['accuracy'], label='Training')
+plt.plot(history.history['val_accuracy'], label='Validation')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()`
+  },
+  {
+    id: "ml-4",
+    title: "Model Evaluation Metrics kaise samjhe?",
+    body: "Accuracy, Precision, Recall, F1-Score mein kya difference hai? Kab kaunsa use kare?",
+    topic: "machine-learning",
+    views: 1234,
+    answers: 1,
+    difficulty: "Intermediate",
+    answer: "Different metrics different scenarios ke liye important hain.\n\nAccuracy: Overall correct predictions / Total predictions\n- Use when: Balanced classes\n- Problem: Misleading for imbalanced data\n\nPrecision: True Positives / (True + False Positives)\n- Use when: False positives costly hain (spam detection)\n\nRecall: True Positives / (True + False Negatives)\n- Use when: False negatives costly hain (disease detection)\n\nF1-Score: Harmonic mean of Precision & Recall\n- Use when: Need balance between Precision & Recall\n\nAUC-ROC: Area under ROC curve\n- Use for: Binary classification threshold selection",
+    codeExample: `from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, 
+    f1_score, confusion_matrix, classification_report,
+    roc_auc_score, roc_curve
+)
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# All metrics at once
+print(classification_report(y_test, y_pred))
+
+# Individual metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='weighted')
+recall = recall_score(y_test, y_pred, average='weighted')
+f1 = f1_score(y_test, y_pred, average='weighted')
+
+print(f"Accuracy: {accuracy:.4f}")
+print(f"Precision: {precision:.4f}")
+print(f"Recall: {recall:.4f}")
+print(f"F1-Score: {f1:.4f}")
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+
+# ROC Curve (binary classification)
+y_prob = model.predict_proba(X_test)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+auc = roc_auc_score(y_test, y_prob)
+
+plt.plot(fpr, tpr, label=f'ROC Curve (AUC = {auc:.2f})')
+plt.plot([0, 1], [0, 1], 'k--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.legend()
+plt.show()`
+  },
+  {
+    id: "ml-5",
+    title: "Feature Engineering techniques for better models",
+    body: "Features kaise create aur transform kare better ML models ke liye?",
+    topic: "machine-learning",
+    views: 1123,
+    answers: 1,
+    difficulty: "Advanced",
+    answer: "Feature Engineering ML ka most important step hai.\n\nTechniques:\n1. Missing value handling\n2. Encoding categorical variables\n3. Scaling numerical features\n4. Feature creation (domain knowledge)\n5. Polynomial features\n6. Binning/Discretization\n7. Feature selection\n\nGood features > Complex models\nDomain knowledge is key!",
+    codeExample: `import pandas as pd
+import numpy as np
+from sklearn.preprocessing import (
+    StandardScaler, MinMaxScaler, LabelEncoder,
+    OneHotEncoder, PolynomialFeatures
+)
+from sklearn.feature_selection import SelectKBest, f_classif
+
+# 1. Encoding Categorical Variables
+# Label Encoding (ordinal)
+le = LabelEncoder()
+df['category_encoded'] = le.fit_transform(df['category'])
+
+# One-Hot Encoding (nominal)
+df_encoded = pd.get_dummies(df, columns=['category'], prefix='cat')
+
+# 2. Scaling
+scaler = StandardScaler()  # Mean=0, Std=1
+df['scaled_feature'] = scaler.fit_transform(df[['feature']])
+
+minmax = MinMaxScaler()  # Range [0, 1]
+df['normalized'] = minmax.fit_transform(df[['feature']])
+
+# 3. Feature Creation
+# Date features
+df['date'] = pd.to_datetime(df['date'])
+df['year'] = df['date'].dt.year
+df['month'] = df['date'].dt.month
+df['day_of_week'] = df['date'].dt.dayofweek
+df['is_weekend'] = df['day_of_week'].isin([5, 6]).astype(int)
+
+# Interaction features
+df['feature_interaction'] = df['feature1'] * df['feature2']
+
+# Binning
+df['age_group'] = pd.cut(df['age'], bins=[0, 18, 35, 50, 100],
+                         labels=['Child', 'Young', 'Middle', 'Senior'])
+
+# 4. Polynomial Features
+poly = PolynomialFeatures(degree=2, include_bias=False)
+poly_features = poly.fit_transform(X)
+
+# 5. Feature Selection
+selector = SelectKBest(f_classif, k=10)
+X_selected = selector.fit_transform(X, y)
+selected_features = X.columns[selector.get_support()]`
   },
 
   // DevOps Basics
