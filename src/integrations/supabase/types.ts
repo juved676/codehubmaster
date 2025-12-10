@@ -140,13 +140,6 @@ export type Database = {
             referencedRelation: "questions_public"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "answers_question_id_fkey"
-            columns: ["question_id"]
-            isOneToOne: false
-            referencedRelation: "questions_safe"
-            referencedColumns: ["id"]
-          },
         ]
       }
       logs: {
@@ -321,6 +314,13 @@ export type Database = {
             columns: ["answer_id"]
             isOneToOne: false
             referencedRelation: "answers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_answer_id_fkey"
+            columns: ["answer_id"]
+            isOneToOne: false
+            referencedRelation: "answers_public"
             referencedColumns: ["id"]
           },
         ]
@@ -634,40 +634,52 @@ export type Database = {
       }
     }
     Views: {
-      questions_public: {
+      answers_public: {
         Row: {
-          audience_level: Database["public"]["Enums"]["audience_level"] | null
-          body: string | null
+          answer_text: string | null
           created_at: string | null
           id: string | null
-          language: Database["public"]["Enums"]["language_type"] | null
-          status: Database["public"]["Enums"]["question_status"] | null
-          title: string | null
+          published: boolean | null
+          question_id: string | null
+          summary_text: string | null
           updated_at: string | null
         }
         Insert: {
-          audience_level?: Database["public"]["Enums"]["audience_level"] | null
-          body?: string | null
+          answer_text?: string | null
           created_at?: string | null
           id?: string | null
-          language?: Database["public"]["Enums"]["language_type"] | null
-          status?: Database["public"]["Enums"]["question_status"] | null
-          title?: string | null
+          published?: boolean | null
+          question_id?: string | null
+          summary_text?: string | null
           updated_at?: string | null
         }
         Update: {
-          audience_level?: Database["public"]["Enums"]["audience_level"] | null
-          body?: string | null
+          answer_text?: string | null
           created_at?: string | null
           id?: string | null
-          language?: Database["public"]["Enums"]["language_type"] | null
-          status?: Database["public"]["Enums"]["question_status"] | null
-          title?: string | null
+          published?: boolean | null
+          question_id?: string | null
+          summary_text?: string | null
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions_public"
+            referencedColumns: ["id"]
+          },
+        ]
       }
-      questions_safe: {
+      questions_public: {
         Row: {
           audience_level: Database["public"]["Enums"]["audience_level"] | null
           body: string | null
