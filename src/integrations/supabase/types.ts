@@ -760,6 +760,19 @@ export type Database = {
         }[]
       }
       get_current_period: { Args: never; Returns: number }
+      get_published_questions: {
+        Args: never
+        Returns: {
+          audience_level: Database["public"]["Enums"]["audience_level"]
+          body: string
+          created_at: string
+          id: string
+          language: Database["public"]["Enums"]["language_type"]
+          status: Database["public"]["Enums"]["question_status"]
+          title: string
+          updated_at: string
+        }[]
+      }
       get_user_credits_detailed: { Args: { user_uuid: string }; Returns: Json }
       has_role: {
         Args: {
