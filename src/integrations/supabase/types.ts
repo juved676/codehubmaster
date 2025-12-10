@@ -140,6 +140,13 @@ export type Database = {
             referencedRelation: "questions_public"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions_safe"
+            referencedColumns: ["id"]
+          },
         ]
       }
       logs: {
@@ -628,6 +635,39 @@ export type Database = {
     }
     Views: {
       questions_public: {
+        Row: {
+          audience_level: Database["public"]["Enums"]["audience_level"] | null
+          body: string | null
+          created_at: string | null
+          id: string | null
+          language: Database["public"]["Enums"]["language_type"] | null
+          status: Database["public"]["Enums"]["question_status"] | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          audience_level?: Database["public"]["Enums"]["audience_level"] | null
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          language?: Database["public"]["Enums"]["language_type"] | null
+          status?: Database["public"]["Enums"]["question_status"] | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      questions_safe: {
         Row: {
           audience_level: Database["public"]["Enums"]["audience_level"] | null
           body: string | null
