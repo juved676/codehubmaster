@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
@@ -37,6 +37,15 @@ export default function Navigation() {
               }`}
             >
               Home
+            </Link>
+            <Link
+              to="/ai-technology"
+              className={`transition-colors hover:text-foreground/80 flex items-center gap-1 ${
+                isActive('/ai-technology') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              <Cpu className="h-3 w-3" />
+              AI Tech
             </Link>
             <Link
               to="/topic/python-basics"
@@ -179,6 +188,16 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Home
+            </Link>
+            <Link
+              to="/ai-technology"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                isActive('/ai-technology') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              <Cpu className="h-4 w-4" />
+              AI Technology
             </Link>
             <Link
               to="/topic/python-basics"
