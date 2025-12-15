@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
-import { AdUnit } from "@/components/AdUnit";
+import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
 import { SEO } from "@/components/SEO";
 
 const Home = () => {
@@ -44,6 +44,12 @@ const Home = () => {
       />
       
       <div className="min-h-screen">
+        {/* ABOVE THE FOLD AD - Priority placement for high-value traffic */}
+        <AboveFoldAd />
+        
+        {/* Mobile-only ad for 60%+ mobile traffic */}
+        <MobileAd />
+
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 overflow-hidden" style={{
       backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
@@ -96,8 +102,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Ad Unit 1 - After Hero */}
-      <AdUnit />
+      {/* In-Article Ad - After Hero */}
+      <InArticleAd />
 
       {/* Stats Section */}
       <section className="py-20 relative overflow-hidden">
@@ -172,8 +178,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Ad Unit 2 - After Featured Topics */}
-      <AdUnit />
+      {/* In-Article Ad - After Featured Topics */}
+      <InArticleAd />
+      
+      {/* Mobile Ad - Extra placement for mobile users */}
+      <MobileAd />
 
       {/* Recent Questions */}
       <section className="py-20 relative overflow-hidden">
