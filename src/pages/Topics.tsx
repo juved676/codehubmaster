@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, BookOpen, MessageCircle, Users, Star, Code } from "lucide-react";
+import { Search, BookOpen, MessageCircle, Users, Star, Code, Brain, ArrowRight, Bot } from "lucide-react";
 import { SEO } from "@/components/SEO";
 
 const Topics = () => {
@@ -162,6 +162,35 @@ const Topics = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
+            </div>
+          </div>
+        </div>
+
+        {/* AI Technology Banner */}
+        <div className="mb-8 p-6 rounded-xl bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 border border-primary/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-primary rounded-lg">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Powered by Enterprise AI Technology</h3>
+                <p className="text-sm text-muted-foreground">GPT-4 • Claude 3.5 • Gemini Pro • 94.7% Accuracy • 2.3s Response</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button variant="outline" size="sm" className="border-primary/40" asChild>
+                <Link to="/ai-technology">
+                  <Brain className="mr-2 h-4 w-4" />
+                  View AI Stack
+                </Link>
+              </Button>
+              <Button size="sm" className="bg-gradient-primary" asChild>
+                <Link to="/ask">
+                  <Bot className="mr-2 h-4 w-4" />
+                  Try AI Assistant
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
