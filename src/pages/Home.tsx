@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye } from "lucide-react";
+import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
 import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
@@ -37,10 +37,11 @@ const Home = () => {
   return (
     <>
       <SEO 
-        title="Python Tutorial for Beginners - Learn Python Programming Free | CodeHub"
-        description="Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner's guide to Python programming."
-        keywords="python tutorial, learn python, python programming, python for beginners, coding tutorials, free python course"
+        title="AI Coding Assistant - Intelligent Programming Help | CodeHubMaster"
+        description="Advanced AI-powered coding assistant for Python, JavaScript, and web development. Get instant AI-generated code solutions, debugging help, and machine learning tutorials. Free AI coding platform."
+        keywords="AI coding assistant, AI programming help, artificial intelligence coding, machine learning code generator, GPT coding assistant, AI developer tools, automated code generation, intelligent programming"
         canonical="https://codehubmaster.lovable.app"
+        isAIContent={true}
       />
       
       <div className="min-h-screen">
@@ -63,24 +64,34 @@ const Home = () => {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* AI Badge */}
+          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6 animate-fade-in">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Powered by Advanced AI</span>
+            <Cpu className="h-4 w-4 text-primary" />
+          </div>
+          
           <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
-            Learn coding Programming for Free
+            AI-Powered Coding Assistant
           </h1>
           <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4 animate-fade-in">
-            Master Python, Web Development, Data Science & Machine Learning
+            Intelligent Solutions for Python, Web Dev & Machine Learning
           </p>
           <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto animate-fade-in">
-            Free Python tutorials for beginners with step-by-step guides, practical coding examples, and AI-powered learning. 
-            Perfect for students and developers building careers in programming.
+            Get instant AI-generated code solutions, intelligent debugging assistance, and machine learning-powered 
+            programming help. Our advanced AI understands your questions and delivers expert-level coding guidance.
           </p>
           
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
             <div className="relative glass-card p-1 rounded-2xl">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
-              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask your coding question... e.g., How do I learn Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary" />
+              <Bot className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
+              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask AI: How do I implement machine learning in Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary" />
               <Button size="lg" className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300" asChild>
-                <Link to="/ask">Ask Now</Link>
+                <Link to="/ask">
+                  <Zap className="mr-1 h-4 w-4" />
+                  Ask AI
+                </Link>
               </Button>
             </div>
           </div>
@@ -88,14 +99,14 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
               <Link to="/topics">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Explore Tutorials
+                <Cpu className="mr-2 h-5 w-5" />
+                AI Solutions
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all duration-300" asChild>
               <Link to="/ask">
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Get Help Now
+                <Bot className="mr-2 h-5 w-5" />
+                Ask AI Assistant
               </Link>
             </Button>
           </div>
@@ -109,44 +120,55 @@ const Home = () => {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="glass-card p-8 rounded-2xl hover-lift group">
               <div className="p-4 bg-gradient-primary rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
-                <Users className="h-8 w-8 text-white" />
+                <Bot className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-4xl font-bold text-primary mb-2">50,000+</h3>
-              <p className="text-muted-foreground text-lg">Students Learning</p>
+              <h3 className="text-4xl font-bold text-primary mb-2">AI</h3>
+              <p className="text-muted-foreground text-lg">Powered Responses</p>
             </div>
             <div className="glass-card p-8 rounded-2xl hover-lift group">
               <div className="p-4 bg-gradient-accent rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
-                <MessageCircle className="h-8 w-8 text-white" />
+                <Zap className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-4xl font-bold text-accent mb-2">15,000+</h3>
-              <p className="text-muted-foreground text-lg">Questions Solved</p>
+              <h3 className="text-4xl font-bold text-accent mb-2">Instant</h3>
+              <p className="text-muted-foreground text-lg">Code Generation</p>
             </div>
             <div className="glass-card p-8 rounded-2xl hover-lift group">
               <div className="p-4 bg-gradient-primary rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
-                <Globe className="h-8 w-8 text-white" />
+                <Cpu className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-4xl font-bold text-primary mb-2">100+</h3>
-              <p className="text-muted-foreground text-lg">Tech Topics</p>
+              <h3 className="text-4xl font-bold text-primary mb-2">ML</h3>
+              <p className="text-muted-foreground text-lg">Enhanced Learning</p>
+            </div>
+            <div className="glass-card p-8 rounded-2xl hover-lift group">
+              <div className="p-4 bg-gradient-accent rounded-2xl mb-6 w-fit group-hover:shadow-neon transition-all duration-300">
+                <Sparkles className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-4xl font-bold text-accent mb-2">Smart</h3>
+              <p className="text-muted-foreground text-lg">Debug Assistance</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Topics */}
+      {/* Featured AI Solutions */}
       <section className="py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-2 mb-4">
+              <Sparkles className="h-4 w-4 text-accent" />
+              <span className="text-sm font-medium text-accent">AI-Powered Solutions</span>
+            </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 gradient-text">
-              Most Popular Python & Coding Topics
+              AI Coding Solutions & Tutorials
             </h2>
             <p className="text-xl text-primary mb-2">
-              Top Programming Tutorials for Beginners
+              Machine Learning-Enhanced Programming Help
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Explore comprehensive Python programming tutorials, web development guides, and AI/ML courses with practical coding examples and step-by-step instructions.
+              Get AI-generated code solutions, intelligent debugging assistance, and automated programming help powered by advanced machine learning models.
             </p>
           </div>
 
@@ -155,9 +177,13 @@ const Home = () => {
             animationDelay: `${index * 0.1}s`
           }}>
                 <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Cpu className="h-4 w-4 text-primary" />
+                    <span className="text-xs text-primary font-medium">AI-Enhanced</span>
+                  </div>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">{topic.title}</CardTitle>
                   <CardDescription className="text-sm text-accent font-semibold">
-                    {topic.questionCount} questions answered
+                    {topic.questionCount} AI solutions
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -165,11 +191,15 @@ const Home = () => {
                     {topic.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">
-                      {topic.questionCount} questions
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Bot className="h-3 w-3" />
+                      {topic.questionCount} solutions
                     </span>
                     <Button variant="outline" size="sm" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all" asChild>
-                      <Link to={`/topic/${topic.slug}`}>Explore</Link>
+                      <Link to={`/topic/${topic.slug}`}>
+                        <Zap className="mr-1 h-3 w-3" />
+                        Get AI Help
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -246,26 +276,31 @@ const Home = () => {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
         </div>
         <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 glass-card p-12 rounded-3xl">
+          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
+            <Bot className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Start Your AI Coding Journey</span>
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 gradient-text">
-            Start Your Tech Career Today
+            Experience AI-Powered Programming
           </h2>
           <p className="text-2xl text-primary font-semibold mb-4">
-            Join 50,000+ Students Mastering Programming
+            Join Developers Using AI to Code Smarter
           </p>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Get AI-powered coding lessons, real-world projects, and career guidance for tech jobs in India.
+            Get instant AI-generated solutions, intelligent code explanations, and machine learning-powered debugging assistance. 
+            The future of programming is here.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300 px-8 py-6 text-lg" asChild>
               <Link to="/ask">
-                <MessageCircle className="mr-2 h-6 w-6" />
-                Start Learning Now
+                <Zap className="mr-2 h-6 w-6" />
+                Try AI Assistant Free
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all duration-300 px-8 py-6 text-lg" asChild>
               <Link to="/pricing">
-                <Star className="mr-2 h-6 w-6" />
-                View Plans
+                <Sparkles className="mr-2 h-6 w-6" />
+                Upgrade to Pro AI
               </Link>
             </Button>
           </div>

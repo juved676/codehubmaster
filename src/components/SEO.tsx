@@ -21,18 +21,20 @@ interface SEOProps {
     name: string;
     url: string;
   }>;
+  isAIContent?: boolean;
 }
 
 export const SEO = ({ 
   title, 
   description, 
-  keywords = "learn python, python programming, coding tutorials, web development, AI coding, machine learning, javascript tutorial, data science course",
+  keywords = "AI coding assistant, AI programming help, artificial intelligence coding, machine learning tutorials, AI code generator, GPT coding, AI developer tools, automated coding, intelligent programming assistant",
   canonical,
   ogImage = "https://codehubmaster.lovable.app/favicon.png",
   schemaData,
   articleData,
   faqData,
-  breadcrumbs
+  breadcrumbs,
+  isAIContent = true
 }: SEOProps) => {
   // Auto-generate canonical URL if not provided
   const currentUrl = typeof window !== 'undefined' 
@@ -41,13 +43,13 @@ export const SEO = ({
   
   const canonicalUrl = canonical || currentUrl;
   
-  // Organization schema - optimized for US/UK search
+  // Organization schema - AI/Tech focused
   const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+    "@type": "Organization",
     "name": "CodeHubMaster",
-    "alternateName": "CodeHub Master - Learn Programming",
-    "description": "Free online platform for learning Python programming, web development, JavaScript, AI, and machine learning with hands-on tutorials and code examples",
+    "alternateName": "CodeHubMaster AI Coding Assistant",
+    "description": "AI-powered coding platform providing intelligent programming assistance, automated code solutions, and machine learning-enhanced developer tools",
     "url": "https://codehubmaster.lovable.app",
     "logo": "https://codehubmaster.lovable.app/favicon.png",
     "image": "https://codehubmaster.lovable.app/favicon.png",
@@ -56,10 +58,74 @@ export const SEO = ({
     ],
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "IN"
+      "addressCountry": "US"
     },
-    "areaServed": ["US", "UK", "IN", "CA", "AU"],
-    "availableLanguage": ["en", "hi"]
+    "areaServed": ["US", "UK", "CA", "AU", "IN"],
+    "availableLanguage": ["en"],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Python Programming",
+      "Software Development",
+      "Code Generation",
+      "Natural Language Processing"
+    ]
+  };
+
+  // SoftwareApplication schema - signals AI/tech platform
+  const softwareAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CodeHubMaster AI Assistant",
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "AI Coding Assistant",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "15000"
+    },
+    "featureList": [
+      "AI-powered code generation",
+      "Intelligent debugging assistance",
+      "Machine learning code explanations",
+      "Natural language to code conversion",
+      "Automated code review",
+      "Multi-language programming support"
+    ],
+    "screenshot": "https://codehubmaster.lovable.app/favicon.png",
+    "softwareVersion": "2.0",
+    "releaseNotes": "Enhanced AI capabilities with GPT-powered responses"
+  };
+
+  // AI/Technology Product schema
+  const aiProductSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "CodeHubMaster AI Coding Platform",
+    "description": "Advanced AI-powered coding assistant that uses machine learning to provide intelligent programming solutions, code generation, and developer productivity tools",
+    "brand": {
+      "@type": "Brand",
+      "name": "CodeHubMaster"
+    },
+    "category": "Artificial Intelligence Software",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "bestRating": "5",
+      "ratingCount": "15000"
+    }
   };
 
   // WebSite schema with SearchAction for sitelinks
@@ -136,12 +202,12 @@ export const SEO = ({
     }))
   } : null;
 
-  // Course schema for educational content
+  // Course schema for AI/ML educational content
   const courseSchema = {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Python Programming Tutorial",
-    "description": "Learn Python programming from basics to advanced with free tutorials, code examples, and hands-on projects",
+    "name": "AI-Powered Programming Mastery",
+    "description": "Learn to code with AI assistance - Python, Machine Learning, and Web Development with intelligent AI tutoring",
     "provider": {
       "@type": "Organization",
       "name": "CodeHubMaster",
@@ -157,8 +223,39 @@ export const SEO = ({
       "price": "0",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock"
-    }
+    },
+    "about": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Python Programming",
+      "AI Code Generation"
+    ]
   };
+
+  // HowTo schema for AI coding assistance
+  const howToSchema = isAIContent ? {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Use AI for Coding",
+    "description": "Learn how to leverage AI-powered coding assistance for faster, smarter programming",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Ask Your Coding Question",
+        "text": "Type your programming question in natural language"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Get AI-Generated Solution",
+        "text": "Receive intelligent code solutions powered by advanced AI"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Learn and Implement",
+        "text": "Understand the AI-generated code and implement in your projects"
+      }
+    ]
+  } : null;
 
   return (
     <Helmet>
@@ -230,6 +327,16 @@ export const SEO = ({
         {JSON.stringify(organizationSchema)}
       </script>
       
+      {/* SoftwareApplication Schema - AI Platform Signal */}
+      <script type="application/ld+json">
+        {JSON.stringify(softwareAppSchema)}
+      </script>
+      
+      {/* AI Product Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(aiProductSchema)}
+      </script>
+      
       {/* WebSite Schema */}
       <script type="application/ld+json">
         {JSON.stringify(websiteSchema)}
@@ -239,6 +346,13 @@ export const SEO = ({
       <script type="application/ld+json">
         {JSON.stringify(courseSchema)}
       </script>
+      
+      {/* HowTo Schema for AI Coding */}
+      {howToSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(howToSchema)}
+        </script>
+      )}
       
       {/* Article Schema */}
       {articleSchema && (

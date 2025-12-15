@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, LogOut, Shield, Users } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
@@ -18,10 +18,16 @@ export default function Navigation() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
-            <img src={logo} alt="CodeHubMaster Logo" className="h-10 w-auto" />
-            <span className="hidden font-bold text-lg sm:inline-block gradient-text">
-              CodeHubMaster
-            </span>
+            <img src={logo} alt="CodeHubMaster AI Logo" className="h-10 w-auto" />
+            <div className="hidden sm:flex flex-col">
+              <span className="font-bold text-lg gradient-text leading-tight">
+                CodeHubMaster
+              </span>
+              <span className="text-[10px] text-primary flex items-center gap-1">
+                <Bot className="h-2.5 w-2.5" />
+                AI Coding Assistant
+              </span>
+            </div>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
@@ -131,8 +137,14 @@ export default function Navigation() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* Mobile Logo */}
             <Link to="/" className="flex items-center space-x-2 md:hidden">
-              <img src={logo} alt="CodeHubMaster Logo" className="h-8 w-auto" />
-              <span className="font-bold gradient-text">CodeHubMaster</span>
+              <img src={logo} alt="CodeHubMaster AI Logo" className="h-8 w-auto" />
+              <div className="flex flex-col">
+                <span className="font-bold gradient-text text-sm">CodeHubMaster</span>
+                <span className="text-[9px] text-primary flex items-center gap-0.5">
+                  <Bot className="h-2 w-2" />
+                  AI Assistant
+                </span>
+              </div>
             </Link>
           </div>
           <nav className="hidden md:flex items-center space-x-2">
