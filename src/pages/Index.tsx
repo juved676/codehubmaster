@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Learn Python Programming - Free Coding Tutorials & AI Courses | CodeHub Master";
+    document.title = "Learn Python Programming - Free Coding Tutorials & AI Courses | CodeHubMaster";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Master Python programming, AI coding, and web development with free tutorials. Step-by-step guides with practical examples for beginners to advanced developers.');
@@ -44,7 +44,7 @@ const Index = () => {
       {/* Features Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 gradient-text">Why Learn Python Programming with CodeHub Master?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 gradient-text">Why Learn Python Programming with CodeHubMaster?</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="glass-card p-6 rounded-xl">
               <BookOpen className="h-12 w-12 text-primary mb-4" />
