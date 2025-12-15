@@ -1,0 +1,137 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CodeHubMaster AI Coding Assistant",
+  "url": "https://codehubmaster.lovable.app",
+  "description": "Advanced AI-powered coding platform providing intelligent programming assistance, automated code generation, and machine learning-enhanced developer tools",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "AI Coding Assistant",
+  "operatingSystem": "Web Browser",
+  "browserRequirements": "HTML5, JavaScript",
+  "permissions": "none",
+  "softwareVersion": "2.5",
+  "releaseNotes": "Enhanced AI capabilities with multi-model support (GPT-4, Claude 3.5, Gemini Pro)",
+  
+  "aiCapabilities": {
+    "codeGeneration": {
+      "name": "AI Code Generator",
+      "description": "Generate production-ready code from natural language descriptions",
+      "supportedLanguages": ["Python", "JavaScript", "TypeScript", "HTML", "CSS", "SQL", "React", "Node.js"],
+      "accuracy": "94.7%",
+      "responseTime": "2.3 seconds average"
+    },
+    "intelligentDebugging": {
+      "name": "Smart Debugger",
+      "description": "AI-powered debugging assistance with error detection and fix suggestions",
+      "features": ["Error Detection", "Fix Suggestions", "Code Optimization", "Security Analysis"]
+    },
+    "mlProjectGenerator": {
+      "name": "ML Project Generator",
+      "description": "Generate complete machine learning projects with data preprocessing, model training, and evaluation",
+      "frameworks": ["TensorFlow", "PyTorch", "scikit-learn", "Keras"]
+    },
+    "personalizedLearning": {
+      "name": "Personalized Learning Paths",
+      "description": "AI-curated learning paths based on skill level and goals",
+      "levels": ["Beginner", "Intermediate", "Advanced", "Expert"]
+    },
+    "codeReview": {
+      "name": "Automated Code Review",
+      "description": "AI-powered code review with best practices suggestions",
+      "checks": ["Code Quality", "Security", "Performance", "Maintainability"]
+    },
+    "nlpCoding": {
+      "name": "Natural Language to Code",
+      "description": "Convert plain English descriptions to working code",
+      "accuracy": "92.3%"
+    }
+  },
+  
+  "aiModels": [
+    {
+      "name": "GPT-4",
+      "provider": "OpenAI",
+      "capabilities": ["Code Generation", "Debugging", "Explanation", "Optimization"],
+      "contextWindow": "32K tokens"
+    },
+    {
+      "name": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "capabilities": ["Code Analysis", "Documentation", "Testing", "Refactoring"],
+      "contextWindow": "200K tokens"
+    },
+    {
+      "name": "Gemini Pro",
+      "provider": "Google",
+      "capabilities": ["Multi-modal Understanding", "Code Translation", "Architecture Design"],
+      "contextWindow": "32K tokens"
+    }
+  ],
+  
+  "features": [
+    {
+      "name": "AI Code Assistant",
+      "description": "Real-time AI assistance for coding tasks",
+      "icon": "🤖",
+      "availability": "24/7"
+    },
+    {
+      "name": "ML Project Generator",
+      "description": "Generate complete machine learning projects",
+      "icon": "🧠",
+      "availability": "24/7"
+    },
+    {
+      "name": "Smart Debugger",
+      "description": "AI-powered debugging and error resolution",
+      "icon": "⚡",
+      "availability": "24/7"
+    },
+    {
+      "name": "Personalized Learning Paths",
+      "description": "Custom learning journeys based on your goals",
+      "icon": "🎯",
+      "availability": "24/7"
+    }
+  ],
+  
+  "metrics": {
+    "aiGeneratedExamples": "50,000+",
+    "mlProjects": "1,200+",
+    "codeSnippets": "100,000+",
+    "activeUsers": "15,000+",
+    "accuracy": "94.7%",
+    "responseTime": "2.3s",
+    "uptime": "99.9%"
+  },
+  
+  "compliance": {
+    "security": ["SOC 2 Type II", "GDPR", "CCPA"],
+    "encryption": "AES-256",
+    "dataPrivacy": "No data retention beyond session"
+  },
+  
+  "pricing": {
+    "free": {
+      "name": "Free Tier",
+      "credits": "5 per 10-day period",
+      "features": ["Basic AI Assistance", "Code Generation", "Debugging Help"]
+    },
+    "pro": {
+      "name": "Code Pro",
+      "price": "₹99/month",
+      "features": ["Unlimited AI Queries", "Priority Response", "Advanced Models"]
+    }
+  },
+  
+  "sameAs": [
+    "https://twitter.com/codehubmaster"
+  ],
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "CodeHubMaster",
+    "url": "https://codehubmaster.lovable.app",
+    "logo": "https://codehubmaster.lovable.app/favicon.png"
+  }
+}
