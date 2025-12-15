@@ -2,7 +2,7 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Eye, MessageCircle } from "lucide-react";
+import { ArrowLeft, Eye, MessageCircle, Bot, Brain, ArrowRight } from "lucide-react";
 import { getQuestionsByTopic } from "@/data/sampleQuestions";
 import { SEO } from "@/components/SEO";
 
@@ -137,19 +137,49 @@ export default function TopicDetail() {
           )}
         </div>
 
+        {/* AI Technology Banner */}
+        <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 border border-primary/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-gradient-primary rounded-lg">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-foreground">Powered by Enterprise AI</h4>
+                <p className="text-sm text-muted-foreground">GPT-4 • Claude 3.5 • Gemini Pro • 94.7% Accuracy</p>
+              </div>
+            </div>
+            <Button variant="outline" size="sm" className="border-primary/40" asChild>
+              <Link to="/ai-technology">
+                View AI Technology
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+
         {/* CTA Section */}
-        <div className="mt-12 text-center bg-gradient-hero rounded-lg p-8">
+        <div className="mt-8 text-center bg-gradient-hero rounded-lg p-8">
           <h3 className="text-2xl font-bold text-white mb-4">
             Have a specific question about {info.title}?
           </h3>
           <p className="text-white/90 mb-6">
-            Get personalized answers with detailed code examples from our AI coding instructor.
+            Get personalized AI-generated answers with detailed code examples from our intelligent coding assistant.
           </p>
-          <Button size="lg" variant="secondary" asChild>
-            <Link to="/ask">
-              Ask Your Question
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" asChild>
+              <Link to="/ask">
+                <Bot className="mr-2 h-5 w-5" />
+                Ask AI Assistant
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20" asChild>
+              <Link to="/ai-technology">
+                <Brain className="mr-2 h-5 w-5" />
+                Explore AI Stack
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot } from "lucide-react";
+import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
 import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
@@ -98,17 +99,57 @@ const Home = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
-              <Link to="/topics">
-                <Cpu className="mr-2 h-5 w-5" />
-                AI Solutions
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="glass-card border-primary/30 hover:border-primary hover:shadow-neon transition-all duration-300" asChild>
               <Link to="/ask">
                 <Bot className="mr-2 h-5 w-5" />
                 Ask AI Assistant
               </Link>
             </Button>
+            <Button size="lg" variant="outline" className="glass-card border-accent/50 hover:border-accent hover:shadow-neon transition-all duration-300 bg-accent/10" asChild>
+              <Link to="/ai-technology">
+                <Brain className="mr-2 h-5 w-5" />
+                View Our AI Stack
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Enterprise AI Technology Banner */}
+      <section className="py-8 relative overflow-hidden bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 border-y border-primary/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-gradient-primary rounded-xl shadow-neon">
+                <Brain className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-xl font-bold text-foreground">Enterprise AI Technology</h3>
+                  <Badge className="bg-green-500/20 text-green-500 border-green-500/40">GPT-4 • Claude • Gemini</Badge>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  94.7% accuracy • 2.3s response time • 32K token context • SOC 2 Compliant
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <Server className="h-4 w-4 text-primary" />
+                  <span className="text-muted-foreground">99.9% Uptime</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Shield className="h-4 w-4 text-green-500" />
+                  <span className="text-muted-foreground">Enterprise Security</span>
+                </div>
+              </div>
+              <Button className="bg-gradient-primary hover:shadow-neon" asChild>
+                <Link to="/ai-technology">
+                  Explore AI Technology
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
