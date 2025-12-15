@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PricingModal } from '@/components/PricingModal';
-import { Send, Settings, Menu, X, Sparkles } from 'lucide-react';
+import { Send, Settings, Menu, X, Sparkles, Bot, Cpu, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useCredits } from '@/hooks/useCredits';
@@ -293,18 +293,19 @@ export default function Ask() {
   return (
     <>
       <SEO 
-        title="Ask Coding Questions - Get Instant Python & JavaScript Help Free | CodeHubMaster"
-        description="Ask any programming question and get instant AI-powered answers with code examples. Free Python, JavaScript, React, and web development help available 24/7 for US, UK developers."
-        keywords="ask coding question, programming help, python help, javascript help, coding assistance, free coding help, learn programming, web development tutorial, react help"
+        title="AI Coding Assistant - Instant Python & JavaScript Help | CodeHubMaster"
+        description="Ask any programming question to our advanced AI and get instant, intelligent code solutions. AI-powered Python, JavaScript, React, and web development help with automated code generation."
+        keywords="AI coding assistant, AI programming help, artificial intelligence coding, GPT code generator, automated coding, intelligent programming, AI developer tools, machine learning code"
         canonical="https://codehubmaster.lovable.app/ask"
+        isAIContent={true}
         faqData={[
-          { question: "How do I ask a coding question?", answer: "Simply type your programming question in the chat box and click Ask. Our AI will provide detailed answers with code examples." },
-          { question: "What programming languages are supported?", answer: "We support Python, JavaScript, React, HTML, CSS, SQL, and many more programming languages and frameworks." },
-          { question: "Is it free to ask coding questions?", answer: "Yes! You get 5 free questions per period. Premium plans offer more questions and advanced features." }
+          { question: "What is an AI coding assistant?", answer: "An AI coding assistant uses artificial intelligence and machine learning to understand your programming questions and generate intelligent code solutions instantly." },
+          { question: "How does AI-powered coding help work?", answer: "Our advanced AI analyzes your question, understands the context, and generates accurate code solutions with explanations using machine learning models." },
+          { question: "What programming languages does the AI support?", answer: "Our AI assistant supports Python, JavaScript, React, HTML, CSS, SQL, and many more programming languages and frameworks with intelligent code generation." }
         ]}
         breadcrumbs={[
           { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "Ask Question", url: "https://codehubmaster.lovable.app/ask" }
+          { name: "AI Assistant", url: "https://codehubmaster.lovable.app/ask" }
         ]}
       />
       
@@ -313,11 +314,16 @@ export default function Ask() {
           {/* Header */}
           <div className="mb-6 flex items-center justify-between">
             <div>
+              <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-3 py-1 mb-2">
+                <Bot className="h-3 w-3 text-primary" />
+                <span className="text-xs font-medium text-primary">AI-Powered</span>
+                <Sparkles className="h-3 w-3 text-primary" />
+              </div>
               <h1 className="text-3xl font-bold gradient-text mb-1">
                 AI Coding Assistant
               </h1>
               <p className="text-sm text-muted-foreground">
-                Ask anything about coding and get instant help
+                Get instant AI-generated code solutions and intelligent debugging help
               </p>
             </div>
             
@@ -350,11 +356,18 @@ export default function Ask() {
                     /* Welcome Message */
                     <div className="flex items-center justify-center h-full">
                       <div className="text-center max-w-2xl space-y-4">
-                        <div className="text-6xl mb-4">🤖</div>
-                        <h2 className="text-2xl font-bold">How can I help you today?</h2>
+                        <div className="flex justify-center gap-2">
+                          <Bot className="h-12 w-12 text-primary" />
+                          <Cpu className="h-12 w-12 text-accent" />
+                        </div>
+                        <h2 className="text-2xl font-bold">AI Coding Assistant Ready</h2>
                         <p className="text-muted-foreground">
-                          Ask any coding question and get detailed explanations with examples
+                          Ask any coding question and get intelligent AI-generated solutions with detailed explanations
                         </p>
+                        <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-3 py-1">
+                          <Zap className="h-3 w-3 text-accent" />
+                          <span className="text-xs font-medium text-accent">Powered by Advanced AI</span>
+                        </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 text-left">
                           <button
                             onClick={() => setQuestion("How do I create a function in Python?")}
