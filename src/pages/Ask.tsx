@@ -293,10 +293,19 @@ export default function Ask() {
   return (
     <>
       <SEO 
-        title="Ask Coding Questions - Get Instant Programming Help | CodeHub"
-        description="Ask any coding question and get instant AI-powered answers. Python, JavaScript, web development, data science help available 24/7."
-        keywords="ask coding question, programming help, python help, javascript help, coding assistance"
+        title="Ask Coding Questions - Get Instant Python & JavaScript Help Free | CodeHubMaster"
+        description="Ask any programming question and get instant AI-powered answers with code examples. Free Python, JavaScript, React, and web development help available 24/7 for US, UK developers."
+        keywords="ask coding question, programming help, python help, javascript help, coding assistance, free coding help, learn programming, web development tutorial, react help"
         canonical="https://codehubmaster.lovable.app/ask"
+        faqData={[
+          { question: "How do I ask a coding question?", answer: "Simply type your programming question in the chat box and click Ask. Our AI will provide detailed answers with code examples." },
+          { question: "What programming languages are supported?", answer: "We support Python, JavaScript, React, HTML, CSS, SQL, and many more programming languages and frameworks." },
+          { question: "Is it free to ask coding questions?", answer: "Yes! You get 5 free questions per period. Premium plans offer more questions and advanced features." }
+        ]}
+        breadcrumbs={[
+          { name: "Home", url: "https://codehubmaster.lovable.app" },
+          { name: "Ask Question", url: "https://codehubmaster.lovable.app/ask" }
+        ]}
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
