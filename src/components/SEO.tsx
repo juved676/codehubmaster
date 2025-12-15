@@ -163,17 +163,33 @@ export const SEO = ({
   return (
     <Helmet>
       {/* Primary Meta Tags */}
+      <html lang="en" />
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Geographic targeting for US/UK */}
+      {/* Hreflang tags for international targeting - signals to Google/AdSense your target audience */}
+      <link rel="alternate" hrefLang="en-US" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="en-GB" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      
+      {/* Geographic targeting for US/UK - helps AdSense understand target audience */}
       <meta name="geo.region" content="US" />
+      <meta name="geo.placename" content="United States" />
       <meta name="geo.region" content="GB" />
+      <meta name="geo.placename" content="United Kingdom" />
       <meta name="language" content="en-US" />
-      <meta httpEquiv="content-language" content="en" />
+      <meta httpEquiv="content-language" content="en-US" />
+      <meta name="audience" content="all" />
+      <meta name="target" content="all" />
+      <meta name="coverage" content="Worldwide" />
+      <meta name="distribution" content="Global" />
+      
+      {/* AdSense optimization hints */}
+      <meta name="adsense-audience" content="en-US,en-GB" />
       
       {/* Robots */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
