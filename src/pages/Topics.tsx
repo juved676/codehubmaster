@@ -122,10 +122,19 @@ const Topics = () => {
   return (
     <>
       <SEO 
-        title="Python Tutorial for Beginners - Learn Python Step by Step | CodeHub"
-        description="Learn Python from basics to advanced with our free coding tutorials. Practical examples, projects, and complete beginner's guide to Python programming."
-        keywords="python tutorial, python programming, python for beginners, web development, data science, machine learning"
+        title="Python Tutorial for Beginners 2025 - Free Programming Courses | CodeHubMaster"
+        description="Learn Python programming from scratch with free step-by-step tutorials. Master web development, data science, machine learning with practical code examples. Best for US/UK beginners."
+        keywords="python tutorial 2025, python programming course, learn python free, web development tutorial, data science course, machine learning tutorial, javascript tutorial, react course, coding for beginners"
         canonical="https://codehubmaster.lovable.app/topics"
+        faqData={[
+          { question: "What programming topics can I learn?", answer: "We offer tutorials on Python, JavaScript, React, Web Development, Data Science, Machine Learning, SQL, and more." },
+          { question: "Are the programming tutorials free?", answer: "Yes! All our basic tutorials and code examples are completely free. Premium plans offer AI-powered personalized help." },
+          { question: "Which topic should I start with as a beginner?", answer: "We recommend starting with Python Basics. It's beginner-friendly and provides a solid foundation for programming." }
+        ]}
+        breadcrumbs={[
+          { name: "Home", url: "https://codehubmaster.lovable.app" },
+          { name: "Topics", url: "https://codehubmaster.lovable.app/topics" }
+        ]}
       />
       
       <div className="min-h-screen bg-background py-8">

@@ -151,10 +151,19 @@ const Pricing = () => {
   return (
     <>
       <SEO 
-        title="Affordable Coding Courses Pricing - Learn Programming at Low Cost | CodeHub"
-        description="Affordable Python programming courses starting at just ₹99. Learn coding with AI-powered tutorials. Flexible pricing plans for students and developers."
-        keywords="coding course pricing, python course price, affordable programming courses, learn python cheap"
+        title="Affordable Python Courses Pricing - Learn Programming from ₹99 | CodeHubMaster"
+        description="Best affordable Python programming courses starting at just ₹99. Learn coding with AI-powered tutorials. Flexible pricing plans for students and developers in India, US, UK."
+        keywords="coding course pricing, python course price, affordable programming courses, learn python cheap, online coding classes, best python course, programming tutorial pricing"
         canonical="https://codehubmaster.lovable.app/pricing"
+        faqData={[
+          { question: "How much does a coding course cost?", answer: "Our courses start at just ₹99 for Code Pro plan with 50 questions. Code Advance offers 999 questions for ₹499." },
+          { question: "Is there a free plan available?", answer: "Yes! Code Free plan offers 5 free questions per 10-day period (15 questions per month) at no cost." },
+          { question: "What payment methods are accepted?", answer: "We accept all major payment methods through Razorpay including UPI, Credit/Debit Cards, Net Banking, and Wallets." }
+        ]}
+        breadcrumbs={[
+          { name: "Home", url: "https://codehubmaster.lovable.app" },
+          { name: "Pricing", url: "https://codehubmaster.lovable.app/pricing" }
+        ]}
       />
       
       <div className="min-h-screen py-20 px-4 relative overflow-hidden">
