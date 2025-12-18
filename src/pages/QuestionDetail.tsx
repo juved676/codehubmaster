@@ -59,6 +59,7 @@ export default function QuestionDetail() {
 
   return (
     <>
+      {/* SEO - noindex for question pages to improve site quality signals */}
       <SEO
         title={pageTitle}
         description={pageDescription}
@@ -72,6 +73,7 @@ export default function QuestionDetail() {
           author: "CodeHubMaster",
           section: topic?.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())
         }}
+        noIndex={true}
       />
       <div className="min-h-screen bg-background py-8">
         <div className="max-w-4xl mx-auto px-4">
