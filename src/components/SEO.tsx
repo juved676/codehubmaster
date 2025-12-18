@@ -22,6 +22,7 @@ interface SEOProps {
     url: string;
   }>;
   isAIContent?: boolean;
+  noIndex?: boolean;
 }
 
 export const SEO = ({ 
@@ -34,7 +35,8 @@ export const SEO = ({
   articleData,
   faqData,
   breadcrumbs,
-  isAIContent = true
+  isAIContent = true,
+  noIndex = false
 }: SEOProps) => {
   // Auto-generate canonical URL if not provided
   const currentUrl = typeof window !== 'undefined' 
@@ -288,9 +290,9 @@ export const SEO = ({
       {/* AdSense optimization hints */}
       <meta name="adsense-audience" content="en-US,en-GB" />
       
-      {/* Robots */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow" />
+      {/* Robots - conditional noindex for low-quality pages */}
+      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+      <meta name="googlebot" content={noIndex ? "noindex, nofollow" : "index, follow"} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={articleData ? "article" : "website"} />
