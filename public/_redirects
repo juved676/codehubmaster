@@ -13,6 +13,10 @@ http://codehubmaster.io/* https://codehubmaster.lovable.app/:splat 301!
 https://www.codehubmaster.io/* https://codehubmaster.lovable.app/:splat 301!
 http://www.codehubmaster.io/* https://codehubmaster.lovable.app/:splat 301!
 
+# Fix malformed/truncated URLs discovered in Google Search Console
+/st-capabilities.json /ai-capabilities.json 301
+/st-technology /ai-technology 301
+
 # CATCH-ALL: Redirect old hyphenated domain URLs
 https://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
 http://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
