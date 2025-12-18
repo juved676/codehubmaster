@@ -12,9 +12,10 @@ const NotFound = () => {
   return (
     <>
       <SEO 
-        title="Page Not Found - 404 Error | CodeHub"
-        description="The page you're looking for doesn't exist. Return to CodeHub homepage to explore Python tutorials and coding resources."
+        title="Page Not Found - 404 Error | CodeHubMaster"
+        description="The page you're looking for doesn't exist. Return to CodeHubMaster homepage to explore coding tutorials and AI-powered learning resources."
         canonical="https://codehubmaster.lovable.app/404"
+        noIndex={true}
       />
       
       <div className="flex min-h-screen items-center justify-center relative overflow-hidden">
