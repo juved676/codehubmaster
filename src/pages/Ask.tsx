@@ -80,14 +80,28 @@ export default function Ask() {
 
     const attemptSubmission = async (retryCount = 0): Promise<void> => {
       try {
-        const questionData = {
+        // Build question data - user_id must be exactly null for anonymous users (RLS requirement)
+        const questionData: {
+          title: string;
+          body: string;
+          language: 'english' | 'urdu' | 'arabic';
+          audience_level: 'school' | 'college' | 'research';
+          user_id: string | null;
+          status: 'pending_review';
+        } = {
           title: currentQuestion.substring(0, 100),
           body: currentQuestion,
           language: language as 'english' | 'urdu' | 'arabic',
           audience_level: experienceLevel as 'school' | 'college' | 'research',
-          user_id: user?.id || null,
-          status: 'pending_review' as const,
+          user_id: user?.id ?? null, // Explicit null for anonymous
+          status: 'pending_review',
         };
+
+        console.log('Submitting question:', { 
+          hasUser: !!user, 
+          userId: questionData.user_id,
+          titleLength: questionData.title.length 
+        });
 
         const { data: newQuestion, error: questionError } = await supabase
           .from('questions')
@@ -96,9 +110,21 @@ export default function Ask() {
           .single();
 
         if (questionError) {
-          console.error('Question insert error:', questionError);
-          throw new Error("I'm here to help with coding! Could you please try asking your question again?");
+          console.error('Question insert error details:', {
+            code: questionError.code,
+            message: questionError.message,
+            details: questionError.details,
+            hint: questionError.hint
+          });
+          
+          // More specific error messages based on error type
+          if (questionError.code === '42501' || questionError.message?.includes('permission')) {
+            throw new Error("Please login to ask questions, or try again as a guest.");
+          }
+          throw new Error("Unable to save your question. Please try again in a moment.");
         }
+
+        console.log('Question created:', newQuestion.id);
 
         const { data: functionData, error: functionError } = await supabase.functions.invoke(
           'process-question',
@@ -107,40 +133,54 @@ export default function Ask() {
           }
         );
 
+        console.log('Edge function response:', { functionData, functionError });
+
         if (functionError) {
-          console.error('Function error:', functionError);
+          console.error('Function error details:', {
+            name: functionError.name,
+            message: functionError.message,
+            context: functionError.context
+          });
           
-          if (retryCount < 2 && (functionError.message?.includes('timeout') || functionError.message?.includes('temporarily'))) {
-            toast.info(`Working on your answer... (Attempt ${retryCount + 2}/3)`, {
-              description: "Complex questions may take longer",
+          if (retryCount < 2 && (functionError.message?.includes('timeout') || functionError.message?.includes('temporarily') || functionError.message?.includes('FunctionsHttpError'))) {
+            toast.info(`Generating your answer... (Attempt ${retryCount + 2}/3)`, {
+              description: "AI is thinking...",
               duration: 3000
             });
-            await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+            await new Promise(resolve => setTimeout(resolve, 3000 * (retryCount + 1)));
             return attemptSubmission(retryCount + 1);
           }
           
-          throw new Error("Let me help you with that. Could you try asking your question differently? Make sure it's clear and specific about what coding help you need.");
+          throw new Error("AI is processing. Please wait a moment and try again.");
         }
 
         if (functionData?.error) {
+          console.error('Function returned error:', functionData.error);
+          
           if (functionData.retry && retryCount < 2) {
-            toast.info(`Working on your answer... (Attempt ${retryCount + 2}/3)`, {
-              description: "Complex questions may take longer",
+            toast.info(`Generating your answer... (Attempt ${retryCount + 2}/3)`, {
+              description: "AI is working on your question...",
               duration: 3000
             });
-            await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+            await new Promise(resolve => setTimeout(resolve, 3000 * (retryCount + 1)));
             return attemptSubmission(retryCount + 1);
           }
-          throw new Error("I'm ready to help! Could you please rephrase your coding question? Try to be specific about what you're trying to achieve.");
+          throw new Error(functionData.error || "AI couldn't process your question. Please try a different question.");
         }
 
         // Fetch the answer and add to chat
         if (functionData?.answer_id) {
-          const { data: answerData } = await supabase
+          console.log('Fetching answer:', functionData.answer_id);
+          
+          const { data: answerData, error: answerFetchError } = await supabase
             .from('answers')
             .select('answer_text, sources_used')
             .eq('id', functionData.answer_id)
             .single();
+
+          if (answerFetchError) {
+            console.error('Answer fetch error:', answerFetchError);
+          }
 
           if (answerData) {
             const sources = Array.isArray(answerData.sources_used) 
@@ -162,15 +202,16 @@ export default function Ask() {
         console.error('Submission error:', err);
         const errorMessage = err instanceof Error 
           ? err.message 
-          : "I'm here to help with coding! Could you please rephrase your question?";
-        toast.error(errorMessage, {
-          description: "I support Python, Web Dev, AI/ML, JavaScript & more",
-          duration: 5000
-        });
+          : "Something went wrong. Please try again.";
         
-        // Remove the question from chat on error
-        setChatHistory(prev => prev.slice(0, -1));
-        setQuestion(currentQuestion);
+        // Add error message to chat instead of removing the question
+        setChatHistory(prev => [...prev, {
+          type: 'answer',
+          content: `⚠️ ${errorMessage}\n\nPlease try asking your question again. I support Python, JavaScript, Web Dev, AI/ML, and more!`,
+          timestamp: new Date(),
+          sources: []
+        }]);
+        
         throw err;
       }
     };
