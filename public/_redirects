@@ -1,5 +1,8 @@
 # 301 Permanent Redirects - All domains to canonical domain
 
+# IMPORTANT: Allow ads.txt to be served directly (no redirect)
+/ads.txt /ads.txt 200
+
 # Force HTTPS
 http://codehubmaster.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
 
