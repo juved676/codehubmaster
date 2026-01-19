@@ -13,7 +13,8 @@ Allow: /topic/web-development
 Allow: /topic/devops-basics
 Allow: /pricing
 Allow: /about-policy
-Allow: /ai-capabilities.json
+# Block technical JSON files from crawling
+Disallow: /ai-capabilities.json
 
 # Block low-quality question pages (thin content hurting site quality)
 Disallow: /question/
