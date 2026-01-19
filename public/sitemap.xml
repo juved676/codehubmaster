@@ -3,7 +3,7 @@
     <!-- Homepage - Highest Priority -->
     <url>
         <loc>https://codehubmaster.lovable.app</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -11,7 +11,7 @@
     <!-- AI Technology Hub - PRIORITY PAGE -->
     <url>
         <loc>https://codehubmaster.lovable.app/ai-technology</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -19,7 +19,7 @@
     <!-- AI Coding Assistant - PRIORITY PAGE -->
     <url>
         <loc>https://codehubmaster.lovable.app/ask</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -27,7 +27,7 @@
     <!-- Topics Directory -->
     <url>
         <loc>https://codehubmaster.lovable.app/topics</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.95</priority>
     </url>
@@ -35,7 +35,7 @@
     <!-- Pricing -->
     <url>
         <loc>https://codehubmaster.lovable.app/pricing</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.85</priority>
     </url>
@@ -43,7 +43,7 @@
     <!-- About Policy -->
     <url>
         <loc>https://codehubmaster.lovable.app/about-policy</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
@@ -51,31 +51,31 @@
     <!-- Topic Pages - High Priority -->
     <url>
         <loc>https://codehubmaster.lovable.app/topic/python-basics</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://codehubmaster.lovable.app/topic/web-development</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://codehubmaster.lovable.app/topic/data-science</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://codehubmaster.lovable.app/topic/machine-learning</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://codehubmaster.lovable.app/topic/devops-basics</loc>
-        <lastmod>2025-12-20</lastmod>
+        <lastmod>2026-01-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.85</priority>
     </url>
