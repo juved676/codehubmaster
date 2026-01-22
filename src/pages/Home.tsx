@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server } from "lucide-react";
+import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server, Rocket } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
 import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
 import { SEO } from "@/components/SEO";
+import { LearningPaths } from "@/components/LearningPaths";
+import { LaunchProjectCTA } from "@/components/LaunchProjectCTA";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -386,6 +388,16 @@ const Home = () => {
 
       {/* In-Article Ad - After Featured Topics */}
       <InArticleAd />
+
+      {/* Learning Paths Section */}
+      <LearningPaths />
+
+      {/* Launch Your Project CTA */}
+      <section className="py-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LaunchProjectCTA variant="full" />
+        </div>
+      </section>
       
       {/* Mobile Ad - Extra placement for mobile users */}
       <MobileAd />

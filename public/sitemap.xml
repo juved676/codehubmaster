@@ -48,6 +48,14 @@
         <priority>0.6</priority>
     </url>
     
+    <!-- Hosting Guide - Launch Your Project -->
+    <url>
+        <loc>https://codehubmaster.lovable.app/hosting-guide</loc>
+        <lastmod>2026-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
     <!-- Topic Pages - High Priority -->
     <url>
         <loc>https://codehubmaster.lovable.app/topic/python-basics</loc>
