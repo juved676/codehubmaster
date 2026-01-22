@@ -13,6 +13,7 @@ Allow: /topic/web-development
 Allow: /topic/devops-basics
 Allow: /pricing
 Allow: /about-policy
+Allow: /hosting-guide
 # Block technical JSON files from crawling
 Disallow: /ai-capabilities.json
 

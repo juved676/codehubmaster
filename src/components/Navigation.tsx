@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles, Cpu } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles, Cpu, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
@@ -88,12 +88,21 @@ export default function Navigation() {
               Pricing
             </Link>
             <Link
+              to="/hosting-guide"
+              className={`transition-colors hover:text-foreground/80 flex items-center gap-1 ${
+                isActive('/hosting-guide') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              <Rocket className="h-3 w-3" />
+              Launch
+            </Link>
+            <Link
               to="/about-policy"
               className={`transition-colors hover:text-foreground/80 ${
                 isActive('/about-policy') ? 'text-foreground' : 'text-foreground/60'
               }`}
             >
-              About & Policy
+              About
             </Link>
             
             {/* Auth Navigation */}
@@ -243,6 +252,16 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Pricing
+            </Link>
+            <Link
+              to="/hosting-guide"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                isActive('/hosting-guide') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              <Rocket className="h-4 w-4" />
+              Launch Your Project
             </Link>
             <Link
               to="/about-policy"

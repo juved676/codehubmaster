@@ -2,9 +2,10 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Eye, MessageCircle, Bot, Brain, ArrowRight } from "lucide-react";
+import { ArrowLeft, Eye, MessageCircle, Bot, Brain, ArrowRight, Rocket } from "lucide-react";
 import { getQuestionsByTopic } from "@/data/sampleQuestions";
 import { SEO } from "@/components/SEO";
+import { LaunchProjectCTA } from "@/components/LaunchProjectCTA";
 
 const topicInfo: Record<string, { title: string; description: string }> = {
   "python-basics": {
@@ -158,6 +159,11 @@ export default function TopicDetail() {
           </div>
         </div>
 
+        {/* Launch Your Project CTA */}
+        <div className="mt-8">
+          <LaunchProjectCTA variant="compact" />
+        </div>
+
         {/* CTA Section */}
         <div className="mt-8 text-center bg-gradient-hero rounded-lg p-8">
           <h3 className="text-2xl font-bold text-white mb-4">
@@ -174,9 +180,9 @@ export default function TopicDetail() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/30 hover:bg-white/20" asChild>
-              <Link to="/ai-technology">
-                <Brain className="mr-2 h-5 w-5" />
-                Explore AI Stack
+              <Link to="/hosting-guide">
+                <Rocket className="mr-2 h-5 w-5" />
+                Launch Your Project
               </Link>
             </Button>
           </div>
