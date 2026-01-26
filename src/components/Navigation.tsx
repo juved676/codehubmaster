@@ -48,6 +48,31 @@ export default function Navigation() {
               AI Tech
             </Link>
             <Link
+              to="/ai-coding-for-beginners"
+              className={`transition-colors hover:text-foreground/80 flex items-center gap-1 ${
+                isActive('/ai-coding-for-beginners') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              <Sparkles className="h-3 w-3" />
+              AI Coding
+            </Link>
+            <Link
+              to="/python-with-ai"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/python-with-ai') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              Python+AI
+            </Link>
+            <Link
+              to="/web-development-with-ai"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/web-development-with-ai') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              Web+AI
+            </Link>
+            <Link
               to="/topic/python-basics"
               className={`transition-colors hover:text-foreground/80 ${
                 isActive('/topic/python-basics') ? 'text-foreground' : 'text-foreground/60'
@@ -207,6 +232,34 @@ export default function Navigation() {
             >
               <Cpu className="h-4 w-4" />
               AI Technology
+            </Link>
+            <Link
+              to="/ai-coding-for-beginners"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                isActive('/ai-coding-for-beginners') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              <Sparkles className="h-4 w-4" />
+              AI Coding for Beginners
+            </Link>
+            <Link
+              to="/python-with-ai"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/python-with-ai') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Python with AI
+            </Link>
+            <Link
+              to="/web-development-with-ai"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/web-development-with-ai') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Web Development with AI
             </Link>
             <Link
               to="/topic/python-basics"
