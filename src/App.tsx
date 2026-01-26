@@ -24,6 +24,9 @@ const ReviewQueue = lazy(() => import("./pages/ReviewQueue"));
 const VerifyPayment = lazy(() => import("./pages/VerifyPayment"));
 const AITechnology = lazy(() => import("./pages/AITechnology"));
 const HostingGuide = lazy(() => import("./pages/HostingGuide"));
+const AICodingForBeginners = lazy(() => import("./pages/AICodingForBeginners"));
+const PythonWithAI = lazy(() => import("./pages/PythonWithAI"));
+const WebDevelopmentWithAI = lazy(() => import("./pages/WebDevelopmentWithAI"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -54,6 +57,9 @@ const App = () => (
                 <Route path="/about-policy" element={<AboutPolicy />} />
                 <Route path="/ai-technology" element={<AITechnology />} />
                 <Route path="/hosting-guide" element={<HostingGuide />} />
+                <Route path="/ai-coding-for-beginners" element={<AICodingForBeginners />} />
+                <Route path="/python-with-ai" element={<PythonWithAI />} />
+                <Route path="/web-development-with-ai" element={<WebDevelopmentWithAI />} />
                 <Route path="/auth" element={<Auth />} />
                 
                 {/* Topic pages - consolidated to single dynamic route */}
