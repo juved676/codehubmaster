@@ -73,6 +73,22 @@ export default function Navigation() {
               Web+AI
             </Link>
             <Link
+              to="/ai-projects-for-students"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/ai-projects-for-students') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              AI Projects
+            </Link>
+            <Link
+              to="/how-ai-helps-in-coding"
+              className={`transition-colors hover:text-foreground/80 ${
+                isActive('/how-ai-helps-in-coding') ? 'text-foreground' : 'text-foreground/60'
+              }`}
+            >
+              AI Help
+            </Link>
+            <Link
               to="/topic/python-basics"
               className={`transition-colors hover:text-foreground/80 ${
                 isActive('/topic/python-basics') ? 'text-foreground' : 'text-foreground/60'
@@ -260,6 +276,24 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Web Development with AI
+            </Link>
+            <Link
+              to="/ai-projects-for-students"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/ai-projects-for-students') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              AI Projects for Students
+            </Link>
+            <Link
+              to="/how-ai-helps-in-coding"
+              className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
+                isActive('/how-ai-helps-in-coding') ? 'bg-accent text-accent-foreground' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              How AI Helps in Coding
             </Link>
             <Link
               to="/topic/python-basics"
