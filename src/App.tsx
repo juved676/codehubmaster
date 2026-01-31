@@ -29,6 +29,9 @@ const PythonWithAI = lazy(() => import("./pages/PythonWithAI"));
 const WebDevelopmentWithAI = lazy(() => import("./pages/WebDevelopmentWithAI"));
 const AIProjectsForStudents = lazy(() => import("./pages/AIProjectsForStudents"));
 const HowAIHelpsInCoding = lazy(() => import("./pages/HowAIHelpsInCoding"));
+const FreeAICodingTools = lazy(() => import("./pages/FreeAICodingTools"));
+const AIToolsDataScience = lazy(() => import("./pages/AIToolsDataScience"));
+const AICodingSkillsJobs = lazy(() => import("./pages/AICodingSkillsJobs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -64,6 +67,9 @@ const App = () => (
                 <Route path="/web-development-with-ai" element={<WebDevelopmentWithAI />} />
                 <Route path="/ai-projects-for-students" element={<AIProjectsForStudents />} />
                 <Route path="/how-ai-helps-in-coding" element={<HowAIHelpsInCoding />} />
+                <Route path="/free-ai-coding-tools-for-beginners" element={<FreeAICodingTools />} />
+                <Route path="/ai-tools-for-data-science" element={<AIToolsDataScience />} />
+                <Route path="/ai-coding-skills-for-jobs-2025" element={<AICodingSkillsJobs />} />
                 <Route path="/auth" element={<Auth />} />
                 
                 {/* Topic pages - consolidated to single dynamic route */}
