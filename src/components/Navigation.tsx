@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles, Cpu, Rocket } from 'lucide-react';
+import { Menu, X, User, LogOut, Shield, Users, Bot, Sparkles, Cpu, Rocket, ChevronDown, GraduationCap, Brain, Briefcase, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CreditsDisplay } from '@/components/CreditsDisplay';
 import { useAuth } from '@/hooks/useAuth';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import logo from '@/assets/codehubmaster-logo.png';
 
 export default function Navigation() {
@@ -88,6 +94,46 @@ export default function Navigation() {
             >
               AI Help
             </Link>
+            {/* AI Skills Dropdown Menu */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className={`flex items-center gap-1 transition-colors hover:text-foreground/80 text-sm font-medium ${
+                isActive('/free-ai-coding-tools-for-beginners') || isActive('/ai-tools-for-data-science') || isActive('/ai-coding-skills-for-jobs-2025') 
+                  ? 'text-foreground' : 'text-foreground/60'
+              }`}>
+                <GraduationCap className="h-3 w-3" />
+                AI Skills
+                <ChevronDown className="h-3 w-3" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link to="/free-ai-coding-tools-for-beginners" className="flex items-center gap-2 cursor-pointer">
+                    <BookOpen className="h-4 w-4 text-primary" />
+                    <div>
+                      <div className="font-medium">Free AI Coding Tools</div>
+                      <div className="text-xs text-muted-foreground">Learn Python & Web Dev</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/ai-tools-for-data-science" className="flex items-center gap-2 cursor-pointer">
+                    <Brain className="h-4 w-4 text-accent" />
+                    <div>
+                      <div className="font-medium">AI for Data Science</div>
+                      <div className="text-xs text-muted-foreground">Python Automation & Analysis</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/ai-coding-skills-for-jobs-2025" className="flex items-center gap-2 cursor-pointer">
+                    <Briefcase className="h-4 w-4 text-green-500" />
+                    <div>
+                      <div className="font-medium">AI Skills for Jobs 2025</div>
+                      <div className="text-xs text-muted-foreground">Career-Ready Developer Skills</div>
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Link
               to="/topic/python-basics"
               className={`transition-colors hover:text-foreground/80 ${
@@ -295,6 +341,46 @@ export default function Navigation() {
             >
               How AI Helps in Coding
             </Link>
+            
+            {/* AI Skills Section - Mobile */}
+            <div className="border-t pt-2 mt-2">
+              <div className="px-3 py-2 text-sm font-semibold text-primary flex items-center gap-2">
+                <GraduationCap className="h-4 w-4" />
+                AI Skills
+              </div>
+              <Link
+                to="/free-ai-coding-tools-for-beginners"
+                className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                  isActive('/free-ai-coding-tools-for-beginners') ? 'bg-accent text-accent-foreground' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                <BookOpen className="h-4 w-4" />
+                Free AI Coding Tools
+              </Link>
+              <Link
+                to="/ai-tools-for-data-science"
+                className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                  isActive('/ai-tools-for-data-science') ? 'bg-accent text-accent-foreground' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                <Brain className="h-4 w-4" />
+                AI for Data Science
+              </Link>
+              <Link
+                to="/ai-coding-skills-for-jobs-2025"
+                className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex items-center gap-2 ${
+                  isActive('/ai-coding-skills-for-jobs-2025') ? 'bg-accent text-accent-foreground' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                <Briefcase className="h-4 w-4" />
+                AI Skills for Jobs 2025
+              </Link>
+            </div>
+            
+            <div className="border-t pt-2 mt-2">
             <Link
               to="/topic/python-basics"
               className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground ${
@@ -359,6 +445,7 @@ export default function Navigation() {
             >
               About & Policy
             </Link>
+            </div>
             
             {/* Mobile Auth Navigation */}
             {!loading && (
