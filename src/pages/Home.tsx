@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server, Rocket } from "lucide-react";
+import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server, Rocket, GraduationCap, Briefcase } from "lucide-react";
 import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
 import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
@@ -382,6 +382,43 @@ const Home = () => {
                   </div>
                 </CardContent>
               </Card>)}
+          </div>
+
+          {/* AI Skills Quick Links */}
+          <div className="mt-12 glass-card p-6 rounded-xl border border-primary/20">
+            <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+              <GraduationCap className="h-5 w-5 text-primary" />
+              Explore AI Learning Resources
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/free-ai-coding-tools-for-beginners" className="flex items-center gap-3 p-4 rounded-lg bg-card/50 hover:bg-primary/10 border border-primary/20 hover:border-primary/40 transition-all group">
+                <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <div className="font-medium text-foreground group-hover:text-primary transition-colors">Free AI Coding Tools</div>
+                  <div className="text-xs text-muted-foreground">Learn Python & Web Dev for Free</div>
+                </div>
+              </Link>
+              <Link to="/ai-tools-for-data-science" className="flex items-center gap-3 p-4 rounded-lg bg-card/50 hover:bg-accent/10 border border-accent/20 hover:border-accent/40 transition-all group">
+                <div className="p-2 bg-accent/20 rounded-lg group-hover:bg-accent/30 transition-colors">
+                  <Brain className="h-5 w-5 text-accent" />
+                </div>
+                <div>
+                  <div className="font-medium text-foreground group-hover:text-accent transition-colors">AI for Data Science</div>
+                  <div className="text-xs text-muted-foreground">Python Automation & Analysis</div>
+                </div>
+              </Link>
+              <Link to="/ai-coding-skills-for-jobs-2025" className="flex items-center gap-3 p-4 rounded-lg bg-card/50 hover:bg-green-500/10 border border-green-500/20 hover:border-green-500/40 transition-all group">
+                <div className="p-2 bg-green-500/20 rounded-lg group-hover:bg-green-500/30 transition-colors">
+                  <Briefcase className="h-5 w-5 text-green-500" />
+                </div>
+                <div>
+                  <div className="font-medium text-foreground group-hover:text-green-500 transition-colors">AI Skills for Jobs 2025</div>
+                  <div className="text-xs text-muted-foreground">Career-Ready Developer Skills</div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

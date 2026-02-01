@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 
 // Lazy load pages for better performance
@@ -50,48 +51,51 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <div className="min-h-screen bg-background">
+          <div className="min-h-screen bg-background flex flex-col">
             <Navigation />
-            <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/ask" element={<Ask />} />
-                <Route path="/topics" element={<Topics />} />
-                <Route path="/questions" element={<Topics />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/about-policy" element={<AboutPolicy />} />
-                <Route path="/ai-technology" element={<AITechnology />} />
-                <Route path="/hosting-guide" element={<HostingGuide />} />
-                <Route path="/ai-coding-for-beginners" element={<AICodingForBeginners />} />
-                <Route path="/python-with-ai" element={<PythonWithAI />} />
-                <Route path="/web-development-with-ai" element={<WebDevelopmentWithAI />} />
-                <Route path="/ai-projects-for-students" element={<AIProjectsForStudents />} />
-                <Route path="/how-ai-helps-in-coding" element={<HowAIHelpsInCoding />} />
-                <Route path="/free-ai-coding-tools-for-beginners" element={<FreeAICodingTools />} />
-                <Route path="/ai-tools-for-data-science" element={<AIToolsDataScience />} />
-                <Route path="/ai-coding-skills-for-jobs-2025" element={<AICodingSkillsJobs />} />
-                <Route path="/auth" element={<Auth />} />
-                
-                {/* Topic pages - consolidated to single dynamic route */}
-                <Route path="/topic/:topic" element={<TopicDetail />} />
-                <Route path="/python-basics" element={<TopicDetail />} />
-                <Route path="/data-science" element={<TopicDetail />} />
-                <Route path="/web-development" element={<TopicDetail />} />
-                <Route path="/machine-learning" element={<TopicDetail />} />
-                <Route path="/devops-basics" element={<TopicDetail />} />
-                
-                {/* Question detail pages */}
-                <Route path="/question/:topic/:id" element={<QuestionDetail />} />
-                <Route path="/question/:id" element={<Question />} />
-                
-                <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
-                <Route path="/admin/payments" element={<ProtectedRoute><AdminPayments /></ProtectedRoute>} />
-                <Route path="/review-queue" element={<ProtectedRoute><ReviewQueue /></ProtectedRoute>} />
-                <Route path="/verify-payment" element={<VerifyPayment />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <main className="flex-1">
+              <Suspense fallback={<LoadingFallback />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/ask" element={<Ask />} />
+                  <Route path="/topics" element={<Topics />} />
+                  <Route path="/questions" element={<Topics />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/about-policy" element={<AboutPolicy />} />
+                  <Route path="/ai-technology" element={<AITechnology />} />
+                  <Route path="/hosting-guide" element={<HostingGuide />} />
+                  <Route path="/ai-coding-for-beginners" element={<AICodingForBeginners />} />
+                  <Route path="/python-with-ai" element={<PythonWithAI />} />
+                  <Route path="/web-development-with-ai" element={<WebDevelopmentWithAI />} />
+                  <Route path="/ai-projects-for-students" element={<AIProjectsForStudents />} />
+                  <Route path="/how-ai-helps-in-coding" element={<HowAIHelpsInCoding />} />
+                  <Route path="/free-ai-coding-tools-for-beginners" element={<FreeAICodingTools />} />
+                  <Route path="/ai-tools-for-data-science" element={<AIToolsDataScience />} />
+                  <Route path="/ai-coding-skills-for-jobs-2025" element={<AICodingSkillsJobs />} />
+                  <Route path="/auth" element={<Auth />} />
+                  
+                  {/* Topic pages - consolidated to single dynamic route */}
+                  <Route path="/topic/:topic" element={<TopicDetail />} />
+                  <Route path="/python-basics" element={<TopicDetail />} />
+                  <Route path="/data-science" element={<TopicDetail />} />
+                  <Route path="/web-development" element={<TopicDetail />} />
+                  <Route path="/machine-learning" element={<TopicDetail />} />
+                  <Route path="/devops-basics" element={<TopicDetail />} />
+                  
+                  {/* Question detail pages */}
+                  <Route path="/question/:topic/:id" element={<QuestionDetail />} />
+                  <Route path="/question/:id" element={<Question />} />
+                  
+                  <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+                  <Route path="/admin/payments" element={<ProtectedRoute><AdminPayments /></ProtectedRoute>} />
+                  <Route path="/review-queue" element={<ProtectedRoute><ReviewQueue /></ProtectedRoute>} />
+                  <Route path="/verify-payment" element={<VerifyPayment />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </main>
+            <Footer />
           </div>
         </BrowserRouter>
       </TooltipProvider>
