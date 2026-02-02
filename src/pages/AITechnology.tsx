@@ -121,11 +121,16 @@ def smart_sort(
   return (
     <>
       <SEO 
-        title="AI Technology - Advanced Coding Assistant Platform | CodeHubMaster"
-        description="Explore our AI technology stack: GPT-4, Claude 3.5, and Gemini Pro models. See how our AI coding assistant compares to GitHub Copilot and Amazon CodeWhisperer. Enterprise-grade security with 99.9% uptime."
-        keywords="AI coding technology, GPT-4 coding assistant, Claude AI programming, AI code generator comparison, GitHub Copilot alternative, enterprise AI coding, AI model specifications"
+        title="Free AI Coding Assistant - GPT-4, Claude & Gemini Powered | CodeHubMaster"
+        description="Get free AI-powered coding help using GPT-4, Claude 3.5, and Gemini Pro. See how our AI generates production-ready code in seconds. Compare with GitHub Copilot. Try free today!"
+        keywords="free AI coding assistant, GPT-4 code generator, Claude AI programming, free GitHub Copilot alternative, AI code helper, AI programming assistant free"
         canonical="https://codehubmaster.lovable.app/ai-technology"
         isAIContent={true}
+        faqData={[
+          { question: "Is the AI coding assistant free?", answer: "Yes! Get 15 free AI-powered coding questions per month. No credit card required." },
+          { question: "What AI models power CodeHubMaster?", answer: "We use GPT-4 Turbo, Claude 3.5 Sonnet, and Gemini Pro for accurate, production-ready code." },
+          { question: "How fast are AI responses?", answer: "Most coding questions are answered in 2-5 seconds with complete code examples." }
+        ]}
         breadcrumbs={[
           { name: "Home", url: "https://codehubmaster.lovable.app" },
           { name: "AI Technology", url: "https://codehubmaster.lovable.app/ai-technology" }
@@ -141,33 +146,55 @@ def smart_sort(
           </div>
           
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
-              <Brain className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Enterprise AI Technology</span>
-              <Cpu className="h-4 w-4 text-primary" />
-            </div>
+            <Badge className="mb-6 bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30">
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Free to Use - No Credit Card Required
+            </Badge>
             
             <h1 className="text-4xl lg:text-6xl font-extrabold mb-6 gradient-text">
-              AI Technology Stack
+              Free AI Coding Assistant
             </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Powered by the world's most advanced language models. See exactly how our AI 
-              delivers intelligent coding solutions with enterprise-grade reliability.
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
+              Powered by GPT-4, Claude 3.5 & Gemini Pro
+            </p>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Get instant, production-ready code for Python, JavaScript, React, and 15+ languages. 
+              94.7% accuracy rate with 2-second response times.
             </p>
             
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-primary hover:shadow-neon" asChild>
+            <div className="flex flex-wrap gap-4 justify-center mb-12">
+              <Button size="lg" className="bg-gradient-primary hover:shadow-neon text-lg px-8 py-6" asChild>
                 <Link to="/ask">
                   <Play className="mr-2 h-5 w-5" />
-                  Try AI Demo
+                  Try AI Now - It's Free
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="glass-card border-primary/30">
+              <Button size="lg" variant="outline" className="glass-card border-primary/30 text-lg px-8 py-6" asChild>
                 <a href="#comparison">
                   <BarChart3 className="mr-2 h-5 w-5" />
-                  View Comparisons
+                  See Comparisons
                 </a>
               </Button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+              <div className="glass-card p-4 rounded-xl">
+                <div className="text-2xl font-bold text-primary">2-5 sec</div>
+                <div className="text-sm text-muted-foreground">Response Time</div>
+              </div>
+              <div className="glass-card p-4 rounded-xl">
+                <div className="text-2xl font-bold text-primary">94.7%</div>
+                <div className="text-sm text-muted-foreground">Accuracy Rate</div>
+              </div>
+              <div className="glass-card p-4 rounded-xl">
+                <div className="text-2xl font-bold text-primary">15+</div>
+                <div className="text-sm text-muted-foreground">Languages</div>
+              </div>
+              <div className="glass-card p-4 rounded-xl">
+                <div className="text-2xl font-bold text-green-500">FREE</div>
+                <div className="text-sm text-muted-foreground">15 Questions/Month</div>
+              </div>
             </div>
           </div>
         </section>
@@ -1095,27 +1122,44 @@ curl -X POST https://api.codehubmaster.com/v1/generate \\
         <section className="py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-hero opacity-40"></div>
           <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 glass-card p-12 rounded-3xl">
-            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
-              <Zap className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Start Building with AI</span>
-            </div>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 gradient-text">
-              Experience the Power of AI Coding
+            <Badge className="mb-6 bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30">
+              <CheckCircle className="w-4 h-4 mr-2" />
+              Free to Start - No Credit Card Required
+            </Badge>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 gradient-text">
+              Try Our AI Coding Assistant Now
             </h2>
-            <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-              Join thousands of developers using AI to code faster, smarter, and with fewer bugs. 
-              Start free today.
+            <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
+              Ask any coding question and get production-ready code in seconds. 
+              Python, JavaScript, React, SQL — 15 free questions per month.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="bg-gradient-primary hover:shadow-neon px-8 py-6 text-lg" asChild>
+            
+            {/* Benefits list */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm">
+              <span className="flex items-center gap-2 text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                2-second responses
+              </span>
+              <span className="flex items-center gap-2 text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                Working code examples
+              </span>
+              <span className="flex items-center gap-2 text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                15+ languages
+              </span>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-green-600 hover:bg-green-700 px-8 py-6 text-lg" asChild>
                 <Link to="/ask">
-                  <Bot className="mr-2 h-6 w-6" />
-                  Try AI Free
+                  <Play className="mr-2 h-5 w-5" />
+                  Try AI Now - It's Free
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="glass-card border-primary/30 px-8 py-6 text-lg" asChild>
-                <Link to="/pricing">
-                  View Pricing
+                <Link to="/topics">
+                  Browse Tutorials
                 </Link>
               </Button>
             </div>
