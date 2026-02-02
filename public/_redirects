@@ -23,3 +23,7 @@ http://www.codehubmaster.io/* https://codehubmaster.lovable.app/:splat 301!
 # CATCH-ALL: Redirect old hyphenated domain URLs
 https://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
 http://code-hub-master.lovable.app/* https://codehubmaster.lovable.app/:splat 301!
+
+# SPA FALLBACK: Serve index.html for all client-side routes (MUST BE LAST)
+# This ensures React Router handles all routes, preventing 404 errors for valid pages
+/*    /index.html   200
