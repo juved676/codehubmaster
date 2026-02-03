@@ -1,25 +1,8 @@
 # CodeHubMaster - AI-Powered Coding Education Platform
-# PRIORITY: Index high-value pages, block low-quality thin content
+# Allow all crawlers to index content
 
 User-agent: Googlebot
 Allow: /
-Allow: /ai-technology
-Allow: /ask
-Allow: /topics
-Allow: /topic/machine-learning
-Allow: /topic/data-science
-Allow: /topic/python-basics
-Allow: /topic/web-development
-Allow: /topic/devops-basics
-Allow: /pricing
-Allow: /about-policy
-Allow: /hosting-guide
-# Block technical JSON files from crawling
-Disallow: /ai-capabilities.json
-
-# Block low-quality question pages (thin content hurting site quality)
-Disallow: /question/
-
 Crawl-delay: 1
 
 User-agent: Googlebot-Image
@@ -27,9 +10,6 @@ Allow: /
 
 User-agent: Bingbot
 Allow: /
-Allow: /ai-technology
-Allow: /ask
-Disallow: /question/
 Crawl-delay: 2
 
 User-agent: Twitterbot
@@ -45,10 +25,8 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /verify-payment
-Disallow: /auth
 Disallow: /review-queue
-Disallow: /question/
 
-# Sitemaps - Core content only
+# Sitemaps
 Sitemap: https://codehubmaster.lovable.app/sitemap.xml
 Sitemap: https://codehubmaster.lovable.app/sitemap-ai.xml
