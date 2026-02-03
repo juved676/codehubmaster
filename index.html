@@ -21,25 +21,17 @@
     <meta name="category" content="Artificial Intelligence,Programming Education,Software Development" />
     <meta name="topic" content="AI Code Assistant,ML Projects,Data Science,Python Programming" />
     
-    <!-- Google AdSense with Auto Ads (Anchor, Vignette, In-article) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155843649635845"
-     crossorigin="anonymous"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-1155843649635845",
-        enable_page_level_ads: true,
-        overlays: { bottom: true }
-      });
-    </script>
+    <!-- CRITICAL: Preload LCP hero image for faster rendering -->
+    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" fetchpriority="high" />
     
-    <!-- Preload critical resources -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <!-- Preconnect to critical third-party domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
     
-    <!-- Google Fonts - Optimized with preload -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <!-- DNS Prefetch for faster resolution -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
     
     <!-- Primary SEO Meta Tags -->
     <title>AI Coding Assistant - Machine Learning Powered Programming Help | CodeHubMaster</title>
@@ -66,12 +58,27 @@
     <!-- AI Capabilities JSON-LD Reference -->
     <link rel="alternate" type="application/json" href="/ai-capabilities.json" title="AI Capabilities" />
     
-    <!-- Register Service Worker for caching -->
+    <!-- Critical CSS: Inline minimal styles for above-the-fold content -->
+    <style>
+      /* Critical CSS for LCP optimization */
+      :root{--background:222 47% 11%;--foreground:210 40% 98%;--primary:199 89% 48%}
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{background:hsl(222 47% 11%);color:hsl(210 40% 98%);font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif}
+      #root{min-height:100vh}
+      .loading-skeleton{background:linear-gradient(90deg,hsl(224 71% 4%) 25%,hsl(224 71% 8%) 50%,hsl(224 71% 4%) 75%);animation:shimmer 1.5s infinite}
+      @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    </style>
+    
+    <!-- Google Fonts - Load async to prevent render blocking -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Register Service Worker for caching - deferred -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .catch(() => {});
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
         });
       }
     </script>
@@ -80,5 +87,27 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Google AdSense - Load after main content (non-blocking) -->
+    <script>
+      // Defer AdSense loading until after LCP
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var adScript = document.createElement('script');
+          adScript.async = true;
+          adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1155843649635845';
+          adScript.crossOrigin = 'anonymous';
+          document.head.appendChild(adScript);
+          
+          adScript.onload = function() {
+            (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-1155843649635845",
+              enable_page_level_ads: true,
+              overlays: { bottom: true }
+            });
+          };
+        }, 2000); // Delay 2 seconds after load
+      });
+    </script>
   </body>
 </html>

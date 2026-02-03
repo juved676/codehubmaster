@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface AdUnitProps {
   slot?: string;
@@ -9,6 +9,29 @@ interface AdUnitProps {
   className?: string;
 }
 
+// Defer ad initialization to avoid blocking LCP
+const initAd = (element: HTMLElement | null) => {
+  if (!element) return;
+  
+  // Wait for AdSense to be available
+  requestIdleCallback(() => {
+    try {
+      // @ts-ignore
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      // Silent fail for ad errors
+    }
+  }, { timeout: 3000 });
+};
+
+// Polyfill for requestIdleCallback
+if (typeof window !== 'undefined' && !window.requestIdleCallback) {
+  // @ts-ignore
+  window.requestIdleCallback = (callback: IdleRequestCallback) => {
+    return setTimeout(() => callback({ didTimeout: false, timeRemaining: () => 50 }), 1);
+  };
+}
+
 export const AdUnit = ({ 
   slot = "auto", 
   format = "auto",
@@ -17,14 +40,38 @@ export const AdUnit = ({
   type = 'display',
   className = ''
 }: AdUnitProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const adRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    try {
-      // @ts-ignore
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error('AdSense error:', err);
+    // Use Intersection Observer to lazy load ads
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { 
+        rootMargin: '200px', // Load ads 200px before they enter viewport
+        threshold: 0 
+      }
+    );
+
+    if (adRef.current) {
+      observer.observe(adRef.current);
     }
+
+    return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (isVisible && adRef.current) {
+      initAd(adRef.current);
+    }
+  }, [isVisible]);
 
   const getLayoutStyle = () => {
     if (type === 'in-article') {
@@ -36,24 +83,38 @@ export const AdUnit = ({
     return style;
   };
 
+  // Reserve space for ads to prevent layout shifts
+  const getContainerStyle = (): React.CSSProperties => {
+    if (type === 'in-article') {
+      return { minHeight: '250px', width: '100%' };
+    }
+    return { minHeight: '90px', width: '100%' };
+  };
+
   return (
-    <div className={`w-full flex justify-center ${className}`}>
-      <ins
-        className="adsbygoogle"
-        style={getLayoutStyle()}
-        data-ad-client="ca-pub-1155843649635845"
-        data-ad-slot={slot}
-        data-ad-format={type === 'in-article' ? 'fluid' : format}
-        data-ad-layout={type === 'in-article' ? 'in-article' : undefined}
-        data-full-width-responsive={responsive.toString()}
-      />
+    <div 
+      ref={adRef} 
+      className={`w-full flex justify-center ${className}`}
+      style={getContainerStyle()}
+    >
+      {isVisible && (
+        <ins
+          className="adsbygoogle"
+          style={getLayoutStyle()}
+          data-ad-client="ca-pub-1155843649635845"
+          data-ad-slot={slot}
+          data-ad-format={type === 'in-article' ? 'fluid' : format}
+          data-ad-layout={type === 'in-article' ? 'in-article' : undefined}
+          data-full-width-responsive={responsive.toString()}
+        />
+      )}
     </div>
   );
 };
 
-// Above the fold ad - priority placement
+// Above the fold ad - priority placement (still deferred but with reserved space)
 export const AboveFoldAd = () => (
-  <div className="w-full py-2 bg-card/30">
+  <div className="w-full py-2 bg-card/30" style={{ minHeight: '100px' }}>
     <AdUnit 
       format="horizontal" 
       responsive={true}
@@ -64,7 +125,7 @@ export const AboveFoldAd = () => (
 
 // In-article ad for content sections
 export const InArticleAd = () => (
-  <div className="my-6 w-full">
+  <div className="my-6 w-full" style={{ minHeight: '280px' }}>
     <AdUnit 
       type="in-article"
       format="fluid"
@@ -75,7 +136,7 @@ export const InArticleAd = () => (
 
 // Mobile-optimized responsive ad
 export const MobileAd = () => (
-  <div className="w-full py-4 md:hidden">
+  <div className="w-full py-4 md:hidden" style={{ minHeight: '250px' }}>
     <AdUnit 
       format="rectangle"
       responsive={true}
@@ -85,40 +146,41 @@ export const MobileAd = () => (
 );
 
 // Anchor ad (sticky bottom) - auto-enabled by AdSense
-// This component adds the necessary script for anchor ads
 export const AnchorAd = () => {
   useEffect(() => {
-    try {
-      // Enable anchor and vignette ads through AdSense auto ads
-      // @ts-ignore
-      (window.adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-1155843649635845",
-        enable_page_level_ads: true,
-        overlays: { bottom: true }
-      });
-    } catch (err) {
-      console.error('Anchor ad error:', err);
-    }
+    // Defer anchor ad initialization
+    requestIdleCallback(() => {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-1155843649635845",
+          enable_page_level_ads: true,
+          overlays: { bottom: true }
+        });
+      } catch (err) {
+        // Silent fail
+      }
+    }, { timeout: 5000 });
   }, []);
 
-  return null; // Auto ads are handled by AdSense
+  return null;
 };
 
 // Vignette ad trigger - auto-enabled by AdSense
 export const VignetteAd = () => {
   useEffect(() => {
-    try {
-      // Vignette ads are enabled through page-level ads
-      // They show between page navigations automatically
-      // @ts-ignore
-      (window.adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-1155843649635845",
-        enable_page_level_ads: true
-      });
-    } catch (err) {
-      console.error('Vignette ad error:', err);
-    }
+    requestIdleCallback(() => {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-1155843649635845",
+          enable_page_level_ads: true
+        });
+      } catch (err) {
+        // Silent fail
+      }
+    }, { timeout: 5000 });
   }, []);
 
-  return null; // Auto ads are handled by AdSense
+  return null;
 };
