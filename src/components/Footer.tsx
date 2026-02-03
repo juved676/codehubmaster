@@ -10,7 +10,15 @@ export default function Footer() {
           {/* Logo & Description */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="CodeHubMaster AI Logo" className="h-10 w-auto" />
+              <img 
+                src={logo} 
+                alt="CodeHubMaster AI Logo" 
+                className="h-10 w-auto" 
+                width={40} 
+                height={40}
+                loading="lazy"
+                decoding="async"
+              />
               <div className="flex flex-col">
                 <span className="font-bold text-lg gradient-text">CodeHubMaster</span>
                 <span className="text-xs text-primary flex items-center gap-1">

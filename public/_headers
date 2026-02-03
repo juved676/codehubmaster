@@ -1,6 +1,9 @@
 /*
-  # Cache static assets for 1 year
-  Cache-Control: public, max-age=31536000, immutable
+  # Default security headers
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
 
 /*.html
   # Don't cache HTML files - ensures fresh content for search engines
@@ -13,38 +16,60 @@
   Pragma: no-cache
   Expires: 0
 
-/*.css
-  # Cache CSS for 1 year
+# Static assets with content hashing - cache for 1 year
+/assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
 
 /*.js
-  # Cache JavaScript for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+# Images - long cache with immutable
+/*.jpg
   Cache-Control: public, max-age=31536000, immutable
 
-/*.jpg
-  # Cache images for 1 year
+/*.jpeg
   Cache-Control: public, max-age=31536000, immutable
 
 /*.png
-  # Cache images for 1 year
   Cache-Control: public, max-age=31536000, immutable
 
 /*.webp
-  # Cache images for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.avif
   Cache-Control: public, max-age=31536000, immutable
 
 /*.svg
-  # Cache SVG for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/svg+xml
+
+/*.gif
   Cache-Control: public, max-age=31536000, immutable
 
-/*.woff2
-  # Cache fonts for 1 year
+# Hero image - prioritized caching
+/hero-bg.webp
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
+
+# Fonts - long cache
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/woff2
 
 /*.woff
-  # Cache fonts for 1 year
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/woff
 
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/ttf
+
+# SEO files - moderate cache
 /sitemap.xml
   Content-Type: application/xml; charset=utf-8
   Cache-Control: public, max-age=3600
@@ -65,3 +90,12 @@
 /ai-capabilities.json
   Content-Type: application/json; charset=utf-8
   Cache-Control: public, max-age=3600
+
+# Favicon - long cache
+/favicon.png
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/png
+
+/favicon.ico
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/x-icon

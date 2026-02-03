@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { BookOpen, MessageCircle, Search, Star, Users, Globe, ArrowRight, Eye, Cpu, Sparkles, Zap, Bot, Brain, Shield, Server, Rocket, GraduationCap, Briefcase } from "lucide-react";
-import heroImage from "@/assets/coding-hero-bg.jpg";
 import { sampleQuestions } from "@/data/sampleQuestions";
-import { AdUnit, AboveFoldAd, InArticleAd, MobileAd } from "@/components/AdUnit";
 import { SEO } from "@/components/SEO";
-import { LearningPaths } from "@/components/LearningPaths";
-import { LaunchProjectCTA } from "@/components/LaunchProjectCTA";
+
+// Lazy load non-critical components to reduce initial bundle
+const LearningPaths = lazy(() => import("@/components/LearningPaths").then(m => ({ default: m.LearningPaths })));
+const LaunchProjectCTA = lazy(() => import("@/components/LaunchProjectCTA").then(m => ({ default: m.LaunchProjectCTA })));
+const AdUnit = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.AdUnit })));
+const AboveFoldAd = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.AboveFoldAd })));
+const InArticleAd = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.InArticleAd })));
+const MobileAd = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.MobileAd })));
+
+// Use WebP hero image from public folder for LCP optimization
+const heroImageWebP = "/hero-bg.webp";
+
+// Loading fallback for lazy components
+const LazyFallback = () => <div className="min-h-[100px]" />;
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,23 +58,28 @@ const Home = () => {
       />
       
       <div className="min-h-screen">
-        {/* ABOVE THE FOLD AD - Priority placement for high-value traffic */}
-        <AboveFoldAd />
-        
-        {/* Mobile-only ad for 60%+ mobile traffic */}
-        <MobileAd />
+        {/* Lazy load ads to not block LCP */}
+        <Suspense fallback={<LazyFallback />}>
+          <AboveFoldAd />
+          <MobileAd />
+        </Suspense>
 
-        {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 overflow-hidden" style={{
-      backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}>
-        <link rel="preload" as="image" href={heroImage} />
-        <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
+        {/* Hero Section - Optimized for LCP */}
+        <section 
+          className="relative py-20 lg:py-32 overflow-hidden"
+          style={{
+            backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImageWebP})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            contentVisibility: 'auto',
+            containIntrinsicSize: '0 600px',
+          }}
+        >
+        {/* Decorative elements with reduced blur for performance */}
+        <div className="absolute inset-0 bg-gradient-hero opacity-60" style={{ willChange: 'auto' }}></div>
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-2xl" style={{ willChange: 'auto' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-2xl" style={{ willChange: 'auto' }}></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* AI Badge */}
@@ -291,8 +306,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* In-Article Ad - After Hero */}
-      <InArticleAd />
+      {/* In-Article Ad - After Hero - Lazy loaded */}
+      <Suspense fallback={<LazyFallback />}>
+        <InArticleAd />
+      </Suspense>
 
       {/* Stats Section */}
       <section className="py-20 relative overflow-hidden">
@@ -426,13 +443,17 @@ const Home = () => {
       {/* In-Article Ad - After Featured Topics */}
       <InArticleAd />
 
-      {/* Learning Paths Section */}
-      <LearningPaths />
+      {/* Learning Paths Section - Lazy loaded */}
+      <Suspense fallback={<LazyFallback />}>
+        <LearningPaths />
+      </Suspense>
 
-      {/* Launch Your Project CTA */}
-      <section className="py-12">
+      {/* Launch Your Project CTA - Lazy loaded */}
+      <section className="py-12" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 300px' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <LaunchProjectCTA variant="full" />
+          <Suspense fallback={<LazyFallback />}>
+            <LaunchProjectCTA variant="full" />
+          </Suspense>
         </div>
       </section>
       
@@ -493,12 +514,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
+      {/* CTA Section - Optimized blur effects */}
+      <section className="py-20 relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}>
         <div className="absolute inset-0 bg-gradient-hero opacity-40"></div>
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-2xl"></div>
         </div>
         <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 glass-card p-12 rounded-3xl">
           <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">

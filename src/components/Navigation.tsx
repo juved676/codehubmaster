@@ -24,7 +24,15 @@ export default function Navigation() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
-            <img src={logo} alt="CodeHubMaster AI Logo" className="h-10 w-auto" />
+            <img 
+              src={logo} 
+              alt="CodeHubMaster AI Logo" 
+              className="h-10 w-auto" 
+              width={40} 
+              height={40}
+              loading="eager"
+              decoding="async"
+            />
             <div className="hidden sm:flex flex-col">
               <span className="font-bold text-lg gradient-text leading-tight">
                 CodeHubMaster
@@ -242,7 +250,15 @@ export default function Navigation() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* Mobile Logo */}
             <Link to="/" className="flex items-center space-x-2 md:hidden">
-              <img src={logo} alt="CodeHubMaster AI Logo" className="h-8 w-auto" />
+              <img 
+                src={logo} 
+                alt="CodeHubMaster AI Logo" 
+                className="h-8 w-auto" 
+                width={32} 
+                height={32}
+                loading="eager"
+                decoding="async"
+              />
               <div className="flex flex-col">
                 <span className="font-bold gradient-text text-sm">CodeHubMaster</span>
                 <span className="text-[9px] text-primary flex items-center gap-0.5">
