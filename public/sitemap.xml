@@ -112,6 +112,12 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
+    <url>
+        <loc>https://codehubmaster.lovable.app/ai-capabilities-guide</loc>
+        <lastmod>2026-02-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
     
     <!-- Topic Pages - High Priority -->
     <url>
