@@ -16,33 +16,50 @@
   Pragma: no-cache
   Expires: 0
 
-# Static assets with content hashing - cache for 1 year
+# Static assets with content hashing - cache for 1 year (immutable)
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# All CSS files - aggressive caching
 /*.css
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: text/css; charset=utf-8
 
+# All JavaScript files - aggressive caching
 /*.js
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: application/javascript; charset=utf-8
 
-# Images - long cache with immutable
+# JS files in subdirectories
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+
+# CSS files in subdirectories  
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+
+# All image formats - long cache with immutable
 /*.jpg
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/jpeg
 
 /*.jpeg
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/jpeg
 
 /*.png
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/png
 
 /*.webp
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
 
 /*.avif
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/avif
 
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
@@ -50,24 +67,33 @@
 
 /*.gif
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/gif
 
 # Hero image - prioritized caching
 /hero-bg.webp
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: image/webp
 
-# Fonts - long cache
+# All fonts - long cache
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: font/woff2
+  Access-Control-Allow-Origin: *
 
 /*.woff
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: font/woff
+  Access-Control-Allow-Origin: *
 
 /*.ttf
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: font/ttf
+  Access-Control-Allow-Origin: *
+
+/*.otf
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/otf
+  Access-Control-Allow-Origin: *
 
 # SEO files - moderate cache
 /sitemap.xml
@@ -99,3 +125,8 @@
 /favicon.ico
   Cache-Control: public, max-age=31536000, immutable
   Content-Type: image/x-icon
+
+# Service worker - never cache
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript; charset=utf-8
