@@ -145,42 +145,8 @@ export const MobileAd = () => (
   </div>
 );
 
-// Anchor ad (sticky bottom) - auto-enabled by AdSense
-export const AnchorAd = () => {
-  useEffect(() => {
-    // Defer anchor ad initialization
-    requestIdleCallback(() => {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-1155843649635845",
-          enable_page_level_ads: true,
-          overlays: { bottom: true }
-        });
-      } catch (err) {
-        // Silent fail
-      }
-    }, { timeout: 5000 });
-  }, []);
+// REMOVED: AnchorAd and VignetteAd components
+// These were causing "Only one enable_page_level_ads allowed" errors
+// Page-level ads are now ONLY initialized once in index.html
 
-  return null;
-};
-
-// Vignette ad trigger - auto-enabled by AdSense
-export const VignetteAd = () => {
-  useEffect(() => {
-    requestIdleCallback(() => {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-1155843649635845",
-          enable_page_level_ads: true
-        });
-      } catch (err) {
-        // Silent fail
-      }
-    }, { timeout: 5000 });
-  }, []);
-
-  return null;
-};
+export default AdUnit;

@@ -27,11 +27,13 @@ export default function Navigation() {
             <img 
               src={logo} 
               alt="CodeHubMaster AI Logo" 
-              className="h-10 w-auto" 
-              width={40} 
-              height={40}
+              className="h-10 w-10"
+              width="40"
+              height="40"
+              style={{ aspectRatio: '1/1', width: '40px', height: '40px' }}
               loading="eager"
               decoding="async"
+              fetchPriority="high"
             />
             <div className="hidden sm:flex flex-col">
               <span className="font-bold text-lg gradient-text leading-tight">
@@ -253,9 +255,10 @@ export default function Navigation() {
               <img 
                 src={logo} 
                 alt="CodeHubMaster AI Logo" 
-                className="h-8 w-auto" 
-                width={32} 
-                height={32}
+                className="h-8 w-8"
+                width="32"
+                height="32"
+                style={{ aspectRatio: '1/1', width: '32px', height: '32px' }}
                 loading="eager"
                 decoding="async"
               />
