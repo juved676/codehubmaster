@@ -27,10 +27,10 @@ export default function Navigation() {
             <img 
               src={logo} 
               alt="CodeHubMaster AI Logo" 
-              className="h-10 w-10"
+              className="h-10 w-auto object-contain"
               width="40"
-              height="40"
-              style={{ aspectRatio: '1/1', width: '40px', height: '40px' }}
+              height="34"
+              style={{ height: '40px', width: 'auto', maxWidth: '48px' }}
               loading="eager"
               decoding="async"
               fetchPriority="high"
@@ -255,10 +255,10 @@ export default function Navigation() {
               <img 
                 src={logo} 
                 alt="CodeHubMaster AI Logo" 
-                className="h-8 w-8"
+                className="h-8 w-auto object-contain"
                 width="32"
-                height="32"
-                style={{ aspectRatio: '1/1', width: '32px', height: '32px' }}
+                height="27"
+                style={{ height: '32px', width: 'auto', maxWidth: '40px' }}
                 loading="eager"
                 decoding="async"
               />

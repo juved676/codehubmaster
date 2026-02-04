@@ -73,22 +73,28 @@ export const AdUnit = ({
     }
   }, [isVisible]);
 
-  const getLayoutStyle = () => {
+  const getLayoutStyle = (): React.CSSProperties => {
+    const baseStyle: React.CSSProperties = {
+      display: 'block',
+      minWidth: '300px',
+      width: '100%',
+    };
     if (type === 'in-article') {
       return {
-        display: 'block',
+        ...baseStyle,
         textAlign: 'center' as const,
+        minHeight: '250px',
       };
     }
-    return style;
+    return { ...baseStyle, ...style };
   };
 
-  // Reserve space for ads to prevent layout shifts
+  // Reserve space for ads to prevent layout shifts and "No slot size" errors
   const getContainerStyle = (): React.CSSProperties => {
     if (type === 'in-article') {
-      return { minHeight: '250px', width: '100%' };
+      return { minHeight: '280px', minWidth: '300px', width: '100%' };
     }
-    return { minHeight: '90px', width: '100%' };
+    return { minHeight: '100px', minWidth: '300px', width: '100%' };
   };
 
   return (
@@ -114,7 +120,7 @@ export const AdUnit = ({
 
 // Above the fold ad - priority placement (still deferred but with reserved space)
 export const AboveFoldAd = () => (
-  <div className="w-full py-2 bg-card/30" style={{ minHeight: '100px' }}>
+  <div className="w-full py-2 bg-card/30" style={{ minHeight: '100px', minWidth: '300px' }}>
     <AdUnit 
       format="horizontal" 
       responsive={true}
@@ -125,7 +131,7 @@ export const AboveFoldAd = () => (
 
 // In-article ad for content sections
 export const InArticleAd = () => (
-  <div className="my-6 w-full" style={{ minHeight: '280px' }}>
+  <div className="my-6 w-full" style={{ minHeight: '280px', minWidth: '300px' }}>
     <AdUnit 
       type="in-article"
       format="fluid"
@@ -136,11 +142,11 @@ export const InArticleAd = () => (
 
 // Mobile-optimized responsive ad
 export const MobileAd = () => (
-  <div className="w-full py-4 md:hidden" style={{ minHeight: '250px' }}>
+  <div className="w-full py-4 md:hidden" style={{ minHeight: '250px', minWidth: '300px' }}>
     <AdUnit 
       format="rectangle"
       responsive={true}
-      style={{ display: 'block', minHeight: '250px' }}
+      style={{ display: 'block', minHeight: '250px', minWidth: '300px' }}
     />
   </div>
 );
