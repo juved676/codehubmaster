@@ -21,8 +21,8 @@
     <meta name="category" content="Artificial Intelligence,Programming Education,Software Development" />
     <meta name="topic" content="AI Code Assistant,ML Projects,Data Science,Python Programming" />
     
-    <!-- CRITICAL: Preload LCP hero image for faster rendering -->
-    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" fetchpriority="high" />
+    <!-- Preload hero image only for desktop (mobile uses CSS gradient only) -->
+    <link rel="preload" as="image" href="/hero-bg.webp" type="image/webp" fetchpriority="high" media="(min-width: 768px)" />
     
     <!-- Preconnect to critical third-party domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
