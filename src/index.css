@@ -151,6 +151,30 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /*
+    Performance: Prevent mobile from downloading the heavy hero background image.
+    Desktop keeps the image; mobile uses only gradient.
+  */
+  .hero-bg {
+    background-image:
+      linear-gradient(
+        hsl(var(--background) / 0.95),
+        hsl(var(--background) / 0.85)
+      ),
+      url("/hero-bg.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  @media (max-width: 767px) {
+    .hero-bg {
+      background-image: linear-gradient(
+        hsl(var(--background) / 0.95),
+        hsl(var(--background) / 0.85)
+      );
+    }
+  }
+
   .glass {
     background: rgba(15, 23, 42, 0.7);
     backdrop-filter: blur(12px);

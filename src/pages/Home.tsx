@@ -16,9 +16,6 @@ const AboveFoldAd = lazy(() => import("@/components/AdUnit").then(m => ({ defaul
 const InArticleAd = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.InArticleAd })));
 const MobileAd = lazy(() => import("@/components/AdUnit").then(m => ({ default: m.MobileAd })));
 
-// Use WebP hero image from public folder for LCP optimization
-const heroImageWebP = "/hero-bg.webp";
-
 // Loading fallback for lazy components
 const LazyFallback = () => <div className="min-h-[100px]" />;
 
@@ -72,14 +69,7 @@ const Home = () => {
 
         {/* Hero Section - Optimized for LCP */}
         <section 
-          className="relative py-20 lg:py-32 overflow-hidden"
-          style={{
-            backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url(${heroImageWebP})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            contentVisibility: 'auto',
-            containIntrinsicSize: '0 600px',
-          }}
+          className="relative py-20 lg:py-32 overflow-hidden hero-bg"
         >
         {/* Decorative elements with reduced blur for performance */}
         <div className="absolute inset-0 bg-gradient-hero opacity-60" style={{ willChange: 'auto' }}></div>
