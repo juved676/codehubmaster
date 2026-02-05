@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Bot, Code, Brain, Zap, Rocket, BookOpen, GraduationCap, Briefcase } from 'lucide-react';
-import logo from '@/assets/codehubmaster-logo.png';
+import logo from '@/assets/codehubmaster-logo-96x80.png';
 
 export default function Footer() {
   return (
