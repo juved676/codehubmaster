@@ -120,7 +120,14 @@ export const AdUnit = ({
 
 // Above the fold ad - priority placement (still deferred but with reserved space)
 export const AboveFoldAd = () => (
-  <div className="w-full py-2 bg-card/30" style={{ minHeight: '100px', minWidth: '300px' }}>
+  <div 
+    className="w-full py-2 bg-card/30" 
+    style={{ 
+      minHeight: '100px', 
+      minWidth: '300px',
+      contain: 'layout style',
+    }}
+  >
     <AdUnit 
       format="horizontal" 
       responsive={true}
@@ -131,7 +138,14 @@ export const AboveFoldAd = () => (
 
 // In-article ad for content sections
 export const InArticleAd = () => (
-  <div className="my-6 w-full" style={{ minHeight: '280px', minWidth: '300px' }}>
+  <div 
+    className="my-6 w-full" 
+    style={{ 
+      minHeight: '280px', 
+      minWidth: '300px',
+      contain: 'layout style',
+    }}
+  >
     <AdUnit 
       type="in-article"
       format="fluid"
@@ -140,13 +154,21 @@ export const InArticleAd = () => (
   </div>
 );
 
-// Mobile-optimized responsive ad
+// Mobile-optimized responsive ad - Fixed height to prevent CLS
 export const MobileAd = () => (
-  <div className="w-full py-4 md:hidden" style={{ minHeight: '250px', minWidth: '300px' }}>
+  <div 
+    className="w-full py-4 md:hidden" 
+    style={{ 
+      minHeight: '280px', 
+      height: '280px',
+      minWidth: '300px',
+      contain: 'layout style',
+    }}
+  >
     <AdUnit 
       format="rectangle"
       responsive={true}
-      style={{ display: 'block', minHeight: '250px', minWidth: '300px' }}
+      style={{ display: 'block', minHeight: '250px', minWidth: '300px', height: '250px' }}
     />
   </div>
 );

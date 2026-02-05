@@ -58,11 +58,17 @@ const Home = () => {
       />
       
       <div className="min-h-screen">
-        {/* Lazy load ads to not block LCP */}
-        <Suspense fallback={<LazyFallback />}>
-          <AboveFoldAd />
-          <MobileAd />
-        </Suspense>
+        {/* Lazy load ads to not block LCP - Reserve space for CLS prevention */}
+        <div style={{ minHeight: '100px', contain: 'layout' }}>
+          <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
+            <AboveFoldAd />
+          </Suspense>
+        </div>
+        <div className="md:hidden" style={{ minHeight: '280px', height: '280px', contain: 'layout' }}>
+          <Suspense fallback={<div style={{ minHeight: '280px', height: '280px' }} />}>
+            <MobileAd />
+          </Suspense>
+        </div>
 
         {/* Hero Section - Optimized for LCP */}
         <section 
