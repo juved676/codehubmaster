@@ -30,7 +30,6 @@ export default function Navigation() {
               className="object-contain"
               width="48"
               height="40"
-              style={{ width: '48px', height: '40px', aspectRatio: '923/778' }}
               loading="eager"
               decoding="async"
               fetchPriority="high"
@@ -258,7 +257,6 @@ export default function Navigation() {
                 className="object-contain"
                 width="38"
                 height="32"
-                style={{ width: '38px', height: '32px', aspectRatio: '923/778' }}
                 loading="eager"
                 decoding="async"
               />

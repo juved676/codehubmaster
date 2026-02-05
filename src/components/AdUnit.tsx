@@ -154,22 +154,36 @@ export const InArticleAd = () => (
   </div>
 );
 
-// Mobile-optimized responsive ad - Fixed height to prevent CLS
+// Mobile-optimized responsive ad - OUTER wrapper forces height to prevent AdSense CLS override
 export const MobileAd = () => (
   <div 
-    className="w-full py-4 md:hidden" 
-    style={{ 
-      minHeight: '280px', 
-      height: '280px',
-      minWidth: '300px',
-      contain: 'layout style',
+    className="w-full md:hidden"
+    style={{
+      // Outer wrapper with fixed dimensions - AdSense cannot override this
+      height: '290px',
+      maxHeight: '290px',
+      overflow: 'hidden',
+      contain: 'strict',
+      contentVisibility: 'auto',
+      containIntrinsicSize: '300px 290px',
     }}
   >
-    <AdUnit 
-      format="rectangle"
-      responsive={true}
-      style={{ display: 'block', minHeight: '250px', minWidth: '300px', height: '250px' }}
-    />
+    <div 
+      className="py-4"
+      style={{ 
+        height: '100%',
+        minWidth: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <AdUnit 
+        format="rectangle"
+        responsive={true}
+        style={{ display: 'block', minHeight: '250px', minWidth: '300px', height: '250px' }}
+      />
+    </div>
   </div>
 );
 

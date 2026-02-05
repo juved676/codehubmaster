@@ -16,7 +16,6 @@ export default function Footer() {
                 className="object-contain" 
                 width="48" 
                 height="40"
-                style={{ width: '48px', height: '40px', aspectRatio: '923/778' }}
                 loading="lazy"
                 decoding="async"
               />
