@@ -35,6 +35,7 @@ const AIToolsDataScience = lazy(() => import("./pages/AIToolsDataScience"));
 const AICodingSkillsJobs = lazy(() => import("./pages/AICodingSkillsJobs"));
 const EDATutorial = lazy(() => import("./pages/EDATutorial"));
 const AICapabilitiesGuide = lazy(() => import("./pages/AICapabilitiesGuide"));
+const AIToolsMegaGuide = lazy(() => import("./pages/AIToolsMegaGuide"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -77,6 +78,7 @@ const App = () => (
                   <Route path="/eda-tutorial-python" element={<EDATutorial />} />
                   <Route path="/question/data-science/ds-5" element={<EDATutorial />} />
                   <Route path="/ai-capabilities-guide" element={<AICapabilitiesGuide />} />
+                  <Route path="/ai-tools-mega-guide-2025" element={<AIToolsMegaGuide />} />
                   <Route path="/auth" element={<Auth />} />
                   
                   {/* Topic pages - consolidated to single dynamic route */}
