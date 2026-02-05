@@ -13,10 +13,10 @@ export default function Footer() {
               <img 
                 src={logo} 
                 alt="CodeHubMaster AI Logo" 
-                className="h-10 w-auto object-contain" 
-                width="40" 
-                height="34"
-                style={{ height: '40px', width: 'auto', maxWidth: '48px' }}
+                className="object-contain" 
+                width="48" 
+                height="40"
+                style={{ width: '48px', height: '40px', aspectRatio: '923/778' }}
                 loading="lazy"
                 decoding="async"
               />

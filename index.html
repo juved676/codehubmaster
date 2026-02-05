@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
     <link rel="preconnect" href="https://cdn.getimg.co" />
+    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
     
     <!-- DNS Prefetch for faster resolution -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -77,6 +78,9 @@
       .gradient-text{background:linear-gradient(135deg,hsl(199 89% 48%),hsl(142 71% 45%));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
       /* Button critical styles */
       .btn-primary{background:linear-gradient(135deg,hsl(199 89% 48%),hsl(199 89% 38%));color:#fff;padding:0.75rem 1.5rem;border-radius:0.5rem;font-weight:600;display:inline-flex;align-items:center;gap:0.5rem;border:none;text-decoration:none}
+      /* Ad container reserve space to prevent CLS */
+      .ad-container-mobile{min-height:280px;height:280px;contain:layout style}
+      .ad-container-fold{min-height:100px;contain:layout}
     </style>
     
     <!-- Google Fonts - Load async to prevent render blocking -->
