@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { InArticleAd } from '@/components/AdUnit';
-import { ChevronDown, ChevronUp, Lightbulb, TrendingUp, Building2, Scale, GraduationCap, Home, Palette, Settings, Briefcase, Sparkles, ExternalLink } from 'lucide-react';
+import { ChevronDown, ChevronUp, Lightbulb, TrendingUp, Building2, Scale, GraduationCap, Home, Palette, Settings, Briefcase, Sparkles, ExternalLink, ArrowUp, BadgeCheck } from 'lucide-react';
 
 // Collapsible Section Component
 const CollapsibleSection = ({ 
@@ -55,7 +56,27 @@ const CaseStudyBox = ({ title, children }: { title: string; children: React.Reac
   </div>
 );
 
-// Table of Contents Component
+// Back to Top Button
+const BackToTop = () => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  if (!visible) return null;
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-colors"
+      aria-label="Back to top"
+    >
+      <ArrowUp className="w-5 h-5" />
+    </button>
+  );
+};
+
+// Table of Contents Component (Sticky)
 const TableOfContents = () => {
   const sections = [
     { id: 'finance-accounting', title: '1. Finance, Accounting & Operations', icon: Building2 },
@@ -69,8 +90,8 @@ const TableOfContents = () => {
   ];
 
   return (
-    <nav className="my-8 p-6 bg-card/30 border border-border/50 rounded-xl">
-      <h2 className="text-xl font-bold text-foreground mb-4">📑 Table of Contents</h2>
+    <nav id="toc" className="my-8 p-6 bg-card/30 border border-border/50 rounded-xl sticky top-20 z-10">
+      <h2 className="text-xl font-bold text-foreground mb-4">📑 Table of Contents — 50+ AI Tools by Category</h2>
       <ul className="grid md:grid-cols-2 gap-3">
         {sections.map((section) => (
           <li key={section.id}>
@@ -113,6 +134,26 @@ const AIToolsMegaGuide = () => {
     {
       question: "Are there AI tools specifically designed for people with ADHD?",
       answer: "Yes, AI tools for ADHD include Goblin Tools for task breakdown, Brain.fm for focus-enhancing audio, Motion for AI-powered scheduling, and Sunsama for daily planning. These tools help with executive function challenges by automating organization and providing structured workflows."
+    },
+    {
+      question: "What are the best AI tools for business analysts?",
+      answer: "The best AI tools for business analysts include ThoughtSpot for natural language analytics, Microsoft Copilot for Power BI, Narrative Science Lexio for automated insight generation, and Yellowfin for self-service BI with AI-driven recommendations."
+    },
+    {
+      question: "Which AI tools help with SEO and content marketing?",
+      answer: "AI tools for SEO and content marketing include MarketMuse for content optimization, Clearscope for keyword analysis, Frase for question-focused content, and BrightEdge for enterprise-level SEO data integration. These tools help improve search visibility and content authority."
+    },
+    {
+      question: "What AI tools are recommended for sales teams in 2025?",
+      answer: "Recommended AI tools for sales teams in 2025 include Gong for conversation intelligence, Chorus.ai for call analysis, SalesLoft with AI for email optimization, and Second Nature for AI-powered sales role-play training."
+    },
+    {
+      question: "How can AI tools help with patent drafting?",
+      answer: "AI patent drafting tools like TurboPatent, PatentPal, and ClaimMaster automate claim generation, prior art integration, formality checks, and specification drafting. They can reduce drafting time by 50-70% while improving accuracy and consistency."
+    },
+    {
+      question: "Are there free AI tools for small businesses?",
+      answer: "Yes, many AI tools offer free tiers suitable for small businesses, including ChatGPT for text generation, Canva AI for design, Otter.ai for meeting transcription, and Google Cloud Vision for image analysis. These tools provide essential AI capabilities without upfront investment."
     }
   ];
 
@@ -125,9 +166,9 @@ const AIToolsMegaGuide = () => {
   return (
     <>
       <SEO 
-        title="50+ Niche AI Tools for Every Professional 2025 | Complete Guide"
-        description="Discover 50+ specialized AI tools for accountants, lawyers, educators, marketers, engineers & more. The ultimate 2025 guide to niche-specific AI solutions for every profession."
-        keywords="ai tools for accountants, ai tools for compliance audit preparation, ai tools for student retention, ai tools for ui ux designers, ai tools for consultants, ai tools for insurance agents, ai patent drafting tools 2025, ai tools for data engineering, ai tools for business analysts, ai tools for private equity"
+        title="50+ Best AI Tools (2025) – Complete Mega Guide for Business, SEO & More"
+        description="Discover 50+ powerful AI tools for business, SEO, security, design & productivity. Updated 2025 mega guide with real use cases. Free & paid tools included."
+        keywords="best ai tools 2025, ai tools for business, ai tools for seo, ai tools mega guide, ai tools for accountants, ai tools for compliance, ai tools for student retention, ai tools for ui ux designers, ai tools for sales, ai patent drafting tools 2025, ai tools for data engineering, ai tools for productivity"
         canonical="https://codehubmaster.lovable.app/ai-tools-mega-guide-2025"
         faqData={faqData}
         breadcrumbs={breadcrumbs}
@@ -144,22 +185,49 @@ const AIToolsMegaGuide = () => {
           
           {/* Hero Section */}
           <header className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              <span>2025 Comprehensive Guide</span>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium">
+                <Sparkles className="w-4 h-4" />
+                <span>2025 Comprehensive Guide</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-2 bg-green-500/15 text-green-400 rounded-full text-sm font-semibold border border-green-500/30">
+                <BadgeCheck className="w-4 h-4" />
+                <span>Updated Feb 2025</span>
+              </div>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-              The 2025 Ultimate Guide: <span className="gradient-text">50+ Niche-Specific AI Tools</span> for Every Professional
+              50+ Best AI Tools (2025) – <span className="gradient-text">Complete Mega Guide</span> for Business, SEO & More
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
               From accountants to UI/UX designers, from legal professionals to educators — discover the specialized AI tools transforming every industry in 2025.
             </p>
+            {/* Value bullets */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-card/50 border border-border/50 rounded-lg text-sm text-foreground">🛠️ 50+ Tools Reviewed</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-card/50 border border-border/50 rounded-lg text-sm text-foreground">📂 8 Categories</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-card/50 border border-border/50 rounded-lg text-sm text-foreground">💼 Business, SEO, Security & More</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-card/50 border border-border/50 rounded-lg text-sm text-foreground">🆓 Free & Paid Options</span>
+            </div>
             <div className="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
               <span>📅 Updated: February 2025</span>
               <span>•</span>
               <span>⏱️ 25 min read</span>
               <span>•</span>
               <span>🎯 50 AI Tool Categories</span>
+            </div>
+
+            {/* Internal links - above the fold, natural anchors */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm">
+              <span className="text-muted-foreground">Explore:</span>
+              <Link to="/ai-capabilities-guide" className="text-primary hover:underline">Best AI Tools</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/ai-niche-tools-complete-guide" className="text-primary hover:underline">AI Tools for Business</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/ai-tools-for-data-science" className="text-primary hover:underline">AI Tools for SEO</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/free-ai-coding-tools-for-beginners" className="text-primary hover:underline">Free AI Coding Tools</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/ai-coding-skills-for-jobs-2025" className="text-primary hover:underline">AI Skills for Jobs 2025</Link>
             </div>
           </header>
 
@@ -1570,6 +1638,9 @@ const AIToolsMegaGuide = () => {
 
         </div>
       </article>
+
+      {/* Back to Top FAB */}
+      <BackToTop />
     </>
   );
 };
