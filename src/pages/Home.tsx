@@ -55,52 +55,35 @@ const Home = () => {
       />
       
       <div className="min-h-screen">
-        {/* Lazy load ads to not block LCP - Reserve space for CLS prevention */}
-        <div style={{ minHeight: '100px', contain: 'layout' }}>
-          <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
-            <AboveFoldAd />
-          </Suspense>
-        </div>
-        <div className="md:hidden" style={{ minHeight: '280px', height: '280px', contain: 'layout' }}>
-          <Suspense fallback={<div style={{ minHeight: '280px', height: '280px' }} />}>
-            <MobileAd />
-          </Suspense>
-        </div>
-
-        {/* Hero Section - Optimized for LCP */}
+        {/* Hero Section - FIRST for fastest LCP */}
         <section 
           className="relative py-20 lg:py-32 overflow-hidden hero-bg"
         >
-        {/* Decorative elements with reduced blur for performance */}
-        <div className="absolute inset-0 bg-gradient-hero opacity-60" style={{ willChange: 'auto' }}></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-2xl" style={{ willChange: 'auto' }}></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-2xl" style={{ willChange: 'auto' }}></div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* AI Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
             <Sparkles className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">Powered by Advanced AI</span>
             <Cpu className="h-4 w-4 text-primary" />
           </div>
           
-          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text animate-fade-in">
+          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text">
             AI-Powered Coding Assistant
           </h1>
-          <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4 animate-fade-in">
+          <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4">
             Intelligent Solutions for Python, Web Dev & Machine Learning
           </p>
-          <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto animate-fade-in">
+          <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
             Get instant AI-generated code solutions, intelligent debugging assistance, and machine learning-powered 
             programming help. Our advanced AI understands your questions and delivers expert-level coding guidance.
           </p>
           
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8 animate-fade-in">
+          <div className="max-w-2xl mx-auto mb-8">
             <div className="relative glass-card p-1 rounded-2xl">
               <Bot className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
-              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask AI: How do I implement machine learning in Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-blur-sm border-0 rounded-xl focus:ring-2 focus:ring-primary" />
+              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask AI: How do I implement machine learning in Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-filter-none border-0 rounded-xl focus:ring-2 focus:ring-primary" />
               <Button size="lg" className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300" asChild>
                 <Link to="/ask">
                   <Zap className="mr-1 h-4 w-4" />
@@ -110,7 +93,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
               <Link to="/ask">
                 <Bot className="mr-2 h-5 w-5" />
@@ -126,6 +109,18 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+        {/* Ads AFTER hero - don't block LCP */}
+        <div style={{ minHeight: '100px', contain: 'layout' }}>
+          <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
+            <AboveFoldAd />
+          </Suspense>
+        </div>
+        <div className="md:hidden mobile-ad-lock" style={{ contain: 'strict' }}>
+          <Suspense fallback={<div style={{ minHeight: '290px', height: '290px' }} />}>
+            <MobileAd />
+          </Suspense>
+        </div>
 
       {/* AI FEATURES SECTION - Above The Fold Visibility for Google */}
       <section className="py-12 relative overflow-hidden bg-gradient-to-b from-card/80 to-background border-b border-primary/10">
