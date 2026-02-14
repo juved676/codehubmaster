@@ -157,12 +157,8 @@ export const InArticleAd = () => (
 // Mobile-optimized responsive ad - OUTER wrapper forces height to prevent AdSense CLS override
 export const MobileAd = () => (
   <div 
-    className="w-full md:hidden"
+    className="w-full md:hidden mobile-ad-lock"
     style={{
-      // Outer wrapper with fixed dimensions - AdSense cannot override this
-      height: '290px',
-      maxHeight: '290px',
-      overflow: 'hidden',
       contain: 'strict',
       contentVisibility: 'auto',
       containIntrinsicSize: '300px 290px',

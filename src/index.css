@@ -219,4 +219,11 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.8),
                 0 0 40px hsl(var(--neon-cyan) / 0.4);
   }
+
+  /* Lock mobile ad height - !important beats AdSense overrides */
+  .mobile-ad-lock {
+    height: 290px !important;
+    max-height: 290px !important;
+    overflow: hidden !important;
+  }
 }
