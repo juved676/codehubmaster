@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import logo from '@/assets/codehubmaster-logo-96x80.png';
+import logo from '@/assets/codehubmaster-logo.jpeg';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
