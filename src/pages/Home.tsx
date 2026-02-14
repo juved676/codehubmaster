@@ -55,60 +55,58 @@ const Home = () => {
       />
       
       <div className="min-h-screen">
-        {/* Hero Section - FIRST for fastest LCP */}
-        <section 
-          className="relative py-20 lg:py-32 overflow-hidden hero-bg"
-        >
-        <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* AI Badge */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Powered by Advanced AI</span>
-            <Cpu className="h-4 w-4 text-primary" />
-          </div>
-          
-          <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text">
-            AI-Powered Coding Assistant
-          </h1>
-          <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4">
-            Intelligent Solutions for Python, Web Dev & Machine Learning
-          </p>
-          <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
-            Get instant AI-generated code solutions, intelligent debugging assistance, and machine learning-powered 
-            programming help. Our advanced AI understands your questions and delivers expert-level coding guidance.
-          </p>
-          
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="relative glass-card p-1 rounded-2xl">
-              <Bot className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
-              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask AI: How do I implement machine learning in Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 backdrop-filter-none border-0 rounded-xl focus:ring-2 focus:ring-primary" />
-              <Button size="lg" className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300" asChild>
+        {/* Hero Section - FIRST for fastest LCP, NO animations for Speed Index */}
+        <section className="relative py-20 lg:py-32 overflow-hidden hero-bg">
+          <div className="absolute inset-0 bg-gradient-hero opacity-60"></div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* AI Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Powered by Advanced AI</span>
+              <Cpu className="h-4 w-4 text-primary" />
+            </div>
+            
+            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 gradient-text">
+              AI-Powered Coding Assistant
+            </h1>
+            <p className="text-2xl lg:text-3xl font-semibold text-primary mb-4">
+              Intelligent Solutions for Python, Web Dev & Machine Learning
+            </p>
+            <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
+              Get instant AI-generated code solutions, intelligent debugging assistance, and machine learning-powered 
+              programming help. Our advanced AI understands your questions and delivers expert-level coding guidance.
+            </p>
+            
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative glass-card p-1 rounded-2xl">
+                <Bot className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary h-5 w-5 z-10" />
+                <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Ask AI: How do I implement machine learning in Python?" className="pl-14 pr-32 py-6 text-lg bg-card/50 border-0 rounded-xl focus:ring-2 focus:ring-primary" />
+                <Button size="lg" className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:shadow-neon transition-all duration-300" asChild>
+                  <Link to="/ask">
+                    <Zap className="mr-1 h-4 w-4" />
+                    Ask AI
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
                 <Link to="/ask">
-                  <Zap className="mr-1 h-4 w-4" />
-                  Ask AI
+                  <Bot className="mr-2 h-5 w-5" />
+                  Ask AI Assistant
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="glass-card border-accent/50 hover:border-accent hover:shadow-neon transition-all duration-300 bg-accent/10" asChild>
+                <Link to="/ai-technology">
+                  <Brain className="mr-2 h-5 w-5" />
+                  View Our AI Stack
                 </Link>
               </Button>
             </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-gradient-primary hover:shadow-neon hover-lift transition-all duration-300" asChild>
-              <Link to="/ask">
-                <Bot className="mr-2 h-5 w-5" />
-                Ask AI Assistant
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="glass-card border-accent/50 hover:border-accent hover:shadow-neon transition-all duration-300 bg-accent/10" asChild>
-              <Link to="/ai-technology">
-                <Brain className="mr-2 h-5 w-5" />
-                View Our AI Stack
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+        </section>
 
         {/* Ads AFTER hero - don't block LCP */}
         <div style={{ minHeight: '100px', contain: 'layout' }}>
@@ -122,8 +120,8 @@ const Home = () => {
           </Suspense>
         </div>
 
-      {/* AI FEATURES SECTION - Above The Fold Visibility for Google */}
-      <section className="py-12 relative overflow-hidden bg-gradient-to-b from-card/80 to-background border-b border-primary/10">
+      {/* AI FEATURES SECTION */}
+      <section className="py-12 relative overflow-hidden bg-gradient-to-b from-card/80 to-background border-b border-primary/10" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }}>
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
         </div>
@@ -131,7 +129,7 @@ const Home = () => {
           {/* Section Header */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/40 rounded-full px-4 py-2 mb-4">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
               <span className="text-sm font-medium text-green-500">AI Systems Online • 99.9% Uptime</span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-3 gradient-text">
@@ -144,10 +142,9 @@ const Home = () => {
 
           {/* AI Features Grid - 4 Columns */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {/* AI Code Assistant */}
             <div className="glass-card p-5 rounded-xl hover-lift group border border-primary/20 hover:border-primary/50 transition-all">
               <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-gradient-primary rounded-lg shadow-neon">
+                <div className="p-2 bg-gradient-primary rounded-lg">
                   <Bot className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full font-medium">Live</span>
@@ -157,7 +154,6 @@ const Home = () => {
               <div className="text-xs text-primary font-medium">94.7% accuracy</div>
             </div>
 
-            {/* ML Project Generator */}
             <div className="glass-card p-5 rounded-xl hover-lift group border border-accent/20 hover:border-accent/50 transition-all">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-gradient-accent rounded-lg">
@@ -170,7 +166,6 @@ const Home = () => {
               <div className="text-xs text-accent font-medium">1,200+ projects</div>
             </div>
 
-            {/* Smart Debugger */}
             <div className="glass-card p-5 rounded-xl hover-lift group border border-yellow-500/20 hover:border-yellow-500/50 transition-all">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
@@ -183,7 +178,6 @@ const Home = () => {
               <div className="text-xs text-yellow-500 font-medium">2.3s response</div>
             </div>
 
-            {/* Personalized Paths */}
             <div className="glass-card p-5 rounded-xl hover-lift group border border-green-500/20 hover:border-green-500/50 transition-all">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
@@ -199,11 +193,10 @@ const Home = () => {
 
           {/* Live AI Demo Element & Metrics */}
           <div className="grid lg:grid-cols-2 gap-6">
-            {/* Try AI Demo Card */}
             <div className="glass-card p-6 rounded-xl border border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-primary rounded-lg shadow-neon animate-pulse">
+                  <div className="p-2 bg-gradient-primary rounded-lg">
                     <Bot className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -212,7 +205,7 @@ const Home = () => {
                   </div>
                 </div>
                 <Badge className="bg-green-500/20 text-green-500 border-green-500/40">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1 animate-pulse"></div>
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1"></div>
                   Online
                 </Badge>
               </div>
@@ -228,7 +221,6 @@ const Home = () => {
               </Button>
             </div>
 
-            {/* AI Metrics Dashboard */}
             <div className="glass-card p-6 rounded-xl border border-accent/30">
               <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
                 <Cpu className="h-5 w-5 text-accent" />
@@ -258,11 +250,11 @@ const Home = () => {
       </section>
 
       {/* Enterprise AI Technology Banner */}
-      <section className="py-8 relative overflow-hidden bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 border-y border-primary/20">
+      <section className="py-8 relative overflow-hidden bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 border-y border-primary/20" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 100px' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-gradient-primary rounded-xl shadow-neon">
+              <div className="p-3 bg-gradient-primary rounded-xl">
                 <Brain className="h-8 w-8 text-white" />
               </div>
               <div>
@@ -297,13 +289,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* In-Article Ad - After Hero - Lazy loaded */}
+      {/* In-Article Ad - Lazy loaded */}
       <Suspense fallback={<LazyFallback />}>
         <InArticleAd />
       </Suspense>
 
       {/* Stats Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 300px' }}>
         <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -340,7 +332,7 @@ const Home = () => {
       </section>
 
       {/* Featured AI Solutions */}
-      <section className="py-20 relative">
+      <section className="py-20 relative" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 rounded-full px-4 py-2 mb-4">
@@ -359,9 +351,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredTopics.map((topic, index) => <Card key={topic.slug} className="glass-card hover-lift group border-primary/20 animate-fade-in" style={{
-            animationDelay: `${index * 0.1}s`
-          }}>
+            {featuredTopics.map((topic) => <Card key={topic.slug} className="glass-card hover-lift group border-primary/20">
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
                     <Cpu className="h-4 w-4 text-primary" />
@@ -431,8 +421,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* In-Article Ad - After Featured Topics */}
-      <InArticleAd />
+      {/* In-Article Ad - After Featured Topics - Lazy loaded */}
+      <Suspense fallback={<LazyFallback />}>
+        <InArticleAd />
+      </Suspense>
 
       {/* Learning Paths Section - Lazy loaded */}
       <Suspense fallback={<LazyFallback />}>
@@ -448,11 +440,13 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Mobile Ad - Extra placement for mobile users */}
-      <MobileAd />
+      {/* Mobile Ad - Extra placement for mobile users - Lazy loaded */}
+      <Suspense fallback={<div className="md:hidden mobile-ad-lock" />}>
+        <MobileAd />
+      </Suspense>
 
       {/* Recent Questions */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}>
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -468,9 +462,7 @@ const Home = () => {
           </div>
 
           <div className="space-y-4">
-            {recentQuestions.map((question, index) => <Card key={question.id} className="glass-card hover-lift border-primary/20 animate-fade-in" style={{
-            animationDelay: `${index * 0.1}s`
-          }}>
+            {recentQuestions.map((question) => <Card key={question.id} className="glass-card hover-lift border-primary/20">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -505,13 +497,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section - Optimized blur effects */}
+      {/* CTA Section - No blur decoratives for performance */}
       <section className="py-20 relative overflow-hidden" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 400px' }}>
         <div className="absolute inset-0 bg-gradient-hero opacity-40"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-2xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-2xl"></div>
-        </div>
         <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 glass-card p-12 rounded-3xl">
           <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/40 rounded-full px-4 py-2 mb-6">
             <Bot className="h-4 w-4 text-primary" />
