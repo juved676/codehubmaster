@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { InArticleAd } from '@/components/AdUnit';
 import { ChevronUp, List, ArrowUp, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -94,15 +95,15 @@ const AINicheToolsGuide = () => {
 
   const breadcrumbs = [
     { name: 'Home', url: 'https://codehubmaster.lovable.app/' },
-    { name: 'AI Resources', url: 'https://codehubmaster.lovable.app/ai-capabilities-guide' },
-    { name: 'AI Niche Tools Guide', url: 'https://codehubmaster.lovable.app/ai-niche-tools-complete-guide' },
+    { name: 'AI Guides', url: 'https://codehubmaster.lovable.app/ai-capabilities-guide' },
+    { name: 'Niche AI Tools 2026', url: 'https://codehubmaster.lovable.app/ai-niche-tools-complete-guide' },
   ];
 
   return (
     <>
       <SEO
-        title="47 Niche AI Tools Guides for Every Professional | 2024-2025"
-        description="Discover 47 in-depth guides to niche AI tools: avatars, voiceovers, wireframes, dental AI, phishing detection, patent tools, interior design, agile, sales training, enterprise search & more."
+        title="Niche AI Tools for Every Profession: 2026 Industry Guide"
+        description="Explore niche AI tools for creative agencies, healthcare, insurance, sustainability & business. 50+ picks across 8 industries. 2026 edition inside."
         keywords="ai avatar tools with integrated scriptwriting assistance, compare ai voiceover options in ugc video tools, gen ai tools to create a low fidelity wireframes, top ai cloud business management platform tools, ai patient education dental tools 2024, best ai interior design tools, ai tools for content gap analysis, ai tools for nonprofits, best ai phishing detection tools, ai tools for instructional design, ai tools for security questionnaires, best ai patent tools, best ai tools for agile teams 2025, best ai-powered fare optimization tools for airlines, diffit ai teacher tools educational technology, governance tools for enterprise ai model lifecycle management, affordable ai meeting assistant tools for startups, ai generative tools with best customer satisfaction 2025, ai image description tool, ai landscaping tool, ai patent tools with best reviews, ai tools for executive search firms, ai tools for multi-channel phishing protection, ai visibility optimization tools, best ai feedback tools for training programs 2025, best ai knowledge management tools for enterprise search, best ai sales training tools for role-playing customer interactions 2025, best ai tools for accountants in b2b saas, best ai tools for sales reps handling objections 2025, best ai tools for sales role-play, best enterprise ai search tool reviews, best tools for managing ai governance in workflows, best-rated ai patent application tools, leading ai patent drafting tool, most recommended ai ad creative analysis tools"
         canonical="https://codehubmaster.lovable.app/ai-niche-tools-complete-guide"
         faqData={faqData}
@@ -125,13 +126,18 @@ const AINicheToolsGuide = () => {
               <span>47 In-Depth AI Tool Guides</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-              The Complete Guide to <span className="gradient-text">Niche AI Tools</span> for Every Professional
+              Niche AI Tools for Every Industry: <span className="gradient-text">2026 Complete Collection</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               47 expert guides covering AI avatars, voiceovers, wireframing, dental imaging, phishing detection, patent management, interior design, agile teams, sales training, enterprise search, and more — everything you need to find the right AI tool for your specific profession.
             </p>
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-4 mb-4 text-sm">
+              <Link to="/ai-tools-mega-guide-2025" className="text-primary hover:underline">Explore our mega guide to industry-specific AI tools</Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/ai-capabilities-guide" className="text-primary hover:underline">AI Capabilities Guide</Link>
+            </div>
             <div className="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground flex-wrap">
-              <span>📅 Updated: 2025</span>
+              <span>📅 Updated: 2026</span>
               <span>•</span>
               <span>⏱️ 90 min read</span>
               <span>•</span>
