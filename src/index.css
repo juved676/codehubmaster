@@ -225,10 +225,9 @@ All colors MUST be HSL.
     overflow: hidden !important;
   }
 
-  /* Lazy render off-screen article sections for performance */
-  .lazy-article {
+  /* Lazy render off-screen article sections for long-form pages */
+  article > div > section {
     content-visibility: auto;
     contain-intrinsic-size: 0 600px;
-    contain: layout style paint;
   }
 }
