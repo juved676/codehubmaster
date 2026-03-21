@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="nqXImYXmkCp1I8Zthb8pdUMvPRN3IEEdMCWUZQSc-f8" />
-    
+
+    <!-- Domain Migration: Instant redirect from old domain to new domain -->
+    <script>
+      (function(){
+        var h=window.location.hostname;
+        if(h==='codehubmaster.lovable.app'||h==='code-hub-master.lovable.app'){
+          window.location.replace('https://codehubmaster.site'+window.location.pathname+window.location.search+window.location.hash);
+        }
+      })();
+    </script>
+
     <!-- CRITICAL: Preconnect FIRST for faster resource loading -->
     <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
