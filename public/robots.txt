@@ -1,5 +1,5 @@
 # CodeHubMaster - AI-Powered Coding Education Platform
-# Allow all crawlers to index content
+# Domain: codehubmaster.site
 
 User-agent: Googlebot
 Allow: /
@@ -28,5 +28,5 @@ Disallow: /verify-payment
 Disallow: /review-queue
 
 # Sitemaps
-Sitemap: https://codehubmaster.lovable.app/sitemap.xml
-Sitemap: https://codehubmaster.lovable.app/sitemap-ai.xml
+Sitemap: https://codehubmaster.site/sitemap.xml
+Sitemap: https://codehubmaster.site/sitemap-ai.xml
