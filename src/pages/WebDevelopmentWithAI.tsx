@@ -67,7 +67,7 @@ const WebDevelopmentWithAI = () => {
         title="Web Development with AI | Build Websites with AI Assistant"
         description="Learn web development with AI assistance. Generate HTML, CSS, and JavaScript code instantly. Build responsive websites faster with our AI-powered platform."
         keywords="web development with ai, ai website builder, html css ai, javascript ai, build websites with ai"
-        canonical="https://codehubmaster.lovable.app/web-development-with-ai"
+        canonical="https://codehubmaster.site/web-development-with-ai"
       />
       
       {/* Hero Section */}

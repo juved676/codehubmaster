@@ -47,7 +47,7 @@ const FreeAICodingTools = () => {
         title="Free AI Coding Tools for Beginners | Learn Python & Web Dev"
         description="Discover free AI coding tools for beginners. Learn Python with AI assistant and web development with AI tutor. Start coding without fear on CodeHubMaster."
         keywords="free AI coding tools for beginners, learn Python with AI assistant, learn web development with AI tutor, AI coding help, beginner programming"
-        canonical="https://codehubmaster.lovable.app/free-ai-coding-tools-for-beginners"
+        canonical="https://codehubmaster.site/free-ai-coding-tools-for-beginners"
         articleData={{
           publishedTime: "2026-01-31",
           modifiedTime: "2026-01-31",
@@ -56,8 +56,8 @@ const FreeAICodingTools = () => {
         }}
         faqData={faqData}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "Free AI Coding Tools", url: "https://codehubmaster.lovable.app/free-ai-coding-tools-for-beginners" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "Free AI Coding Tools", url: "https://codehubmaster.site/free-ai-coding-tools-for-beginners" }
         ]}
       />
 

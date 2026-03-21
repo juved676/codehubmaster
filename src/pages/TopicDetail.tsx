@@ -56,7 +56,7 @@ export default function TopicDetail() {
     );
   }
 
-  const canonicalUrl = `https://codehubmaster.lovable.app/topic/${topic}`;
+  const canonicalUrl = `https://codehubmaster.site/topic/${topic}`;
   const pageTitle = `${info.title} - Learn Python Programming | CodeHub`;
   const pageDescription = `${info.description} Explore ${questions.length} questions and detailed code examples.`;
 

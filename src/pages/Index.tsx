@@ -31,7 +31,7 @@ const Index = () => {
         title="Learn to Code with Free AI Assistance - Python, JavaScript & More | CodeHubMaster"
         description="Get free AI-powered coding help instantly. Ask questions about Python, JavaScript, React, SQL, and 15+ programming languages. No credit card required. Start learning today!"
         keywords="learn to code free, AI coding assistant, Python tutorial free, JavaScript help, coding questions answered, free programming help, learn programming with AI"
-        canonical="https://codehubmaster.lovable.app"
+        canonical="https://codehubmaster.site"
         faqData={[
           { question: "Is CodeHubMaster free to use?", answer: "Yes! Get 15 free AI-powered coding questions per month. No credit card required." },
           { question: "What programming languages are supported?", answer: "Python, JavaScript, React, SQL, Java, C++, Go, and 15+ languages." },

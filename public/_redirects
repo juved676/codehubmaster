@@ -1,3 +1,13 @@
+# ==============================================
+# DOMAIN MIGRATION: codehubmaster.lovable.app → codehubmaster.site
+# All old domain URLs 301 redirect to new domain
+# ==============================================
+
+# Catch-all 301 redirect from old domain to new domain
 https://codehubmaster.lovable.app/* https://codehubmaster.site/:splat 301!
 
+# Legacy domain redirects
+https://code-hub-master.lovable.app/* https://codehubmaster.site/:splat 301!
+
+# SPA fallback for new domain
 /* /index.html 200

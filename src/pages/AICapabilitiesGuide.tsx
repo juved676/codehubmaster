@@ -390,12 +390,12 @@ const AICapabilitiesGuide = () => {
       "name": "CodeHubMaster",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://codehubmaster.lovable.app/favicon.png"
+        "url": "https://codehubmaster.site/favicon.png"
       }
     },
     "datePublished": "2025-02-03",
     "dateModified": "2025-02-03",
-    "mainEntityOfPage": "https://codehubmaster.lovable.app/ai-capabilities-guide"
+    "mainEntityOfPage": "https://codehubmaster.site/ai-capabilities-guide"
   };
 
   const faqSchema = {
@@ -412,9 +412,9 @@ const AICapabilitiesGuide = () => {
   };
 
   const breadcrumbs = [
-    { name: "Home", url: "https://codehubmaster.lovable.app" },
-    { name: "AI Technology", url: "https://codehubmaster.lovable.app/ai-technology" },
-    { name: "AI Capabilities Guide", url: "https://codehubmaster.lovable.app/ai-capabilities-guide" }
+    { name: "Home", url: "https://codehubmaster.site" },
+    { name: "AI Technology", url: "https://codehubmaster.site/ai-technology" },
+    { name: "AI Capabilities Guide", url: "https://codehubmaster.site/ai-capabilities-guide" }
   ];
 
   return (
@@ -423,7 +423,7 @@ const AICapabilitiesGuide = () => {
         title="AI Capabilities Guide 2025: Best Tools for Data Analysis & Automation | Python AI Tools"
         description="Explore top AI tools for data science in 2025. Compare 20+ free and paid tools for data analysis, automation, machine learning. Step-by-step guides with Python code examples."
         keywords="AI tools for data analysis, best AI tools for Python, automate data analysis with AI, AI data science tools, Python automation tools, free AI tools for data analysis, AI coding tools Python, Python AI tools 2025, AI tools for data scientists, automate tasks with Python AI"
-        canonical="https://codehubmaster.lovable.app/ai-capabilities-guide"
+        canonical="https://codehubmaster.site/ai-capabilities-guide"
         schemaData={schemaData}
         faqData={faqs}
         breadcrumbs={breadcrumbs}

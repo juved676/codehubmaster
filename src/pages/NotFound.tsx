@@ -14,7 +14,7 @@ const NotFound = () => {
       <SEO 
         title="Page Not Found - 404 Error | CodeHubMaster"
         description="The page you're looking for doesn't exist. Return to CodeHubMaster homepage to explore coding tutorials and AI-powered learning resources."
-        canonical="https://codehubmaster.lovable.app/404"
+        canonical="https://codehubmaster.site/404"
         noIndex={true}
       />
       

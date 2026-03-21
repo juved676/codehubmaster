@@ -183,9 +183,9 @@ const AIToolsMegaGuide = () => {
   ];
 
   const breadcrumbs = [
-    { name: 'Home', url: 'https://codehubmaster.lovable.app/' },
-    { name: 'AI Guides', url: 'https://codehubmaster.lovable.app/ai-capabilities-guide' },
-    { name: 'AI Tools for Finance, Legal & Business 2026', url: 'https://codehubmaster.lovable.app/ai-tools-mega-guide-2025' }
+    { name: 'Home', url: 'https://codehubmaster.site/' },
+    { name: 'AI Guides', url: 'https://codehubmaster.site/ai-capabilities-guide' },
+    { name: 'AI Tools for Finance, Legal & Business 2026', url: 'https://codehubmaster.site/ai-tools-mega-guide-2025' }
   ];
 
   return (
@@ -194,7 +194,7 @@ const AIToolsMegaGuide = () => {
         title="50+ AI Tools for Finance, Legal & Business: 2026 Complete Guide"
         description="Discover 50+ specialized AI tools for accountants, lawyers, teachers, realtors, engineers & more. Find industry-specific AI solutions in our 2026 guide."
         keywords="ai tools for finance 2026, ai tools for legal professionals, ai tools for business, ai tools for accountants, ai tools for compliance, ai tools for education, ai tools for real estate, ai tools for marketing, ai tools for engineering, ai tools mega guide 2026"
-        canonical="https://codehubmaster.lovable.app/ai-tools-mega-guide-2025"
+        canonical="https://codehubmaster.site/ai-tools-mega-guide-2025"
         faqData={faqData}
         breadcrumbs={breadcrumbs}
         articleData={{

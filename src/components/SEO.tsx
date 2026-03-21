@@ -30,7 +30,7 @@ export const SEO = ({
   description, 
   keywords = "AI coding assistant, AI programming help, artificial intelligence coding, machine learning tutorials, AI code generator, GPT coding, AI developer tools, automated coding, intelligent programming assistant",
   canonical,
-  ogImage = "https://codehubmaster.lovable.app/favicon.png",
+  ogImage = "https://codehubmaster.site/favicon.png",
   schemaData,
   articleData,
   faqData,
@@ -41,7 +41,7 @@ export const SEO = ({
   // Auto-generate canonical URL if not provided
   const currentUrl = typeof window !== 'undefined' 
     ? window.location.href.replace(/\/$/, '') // Remove trailing slash
-    : 'https://codehubmaster.lovable.app';
+    : 'https://codehubmaster.site';
   
   const canonicalUrl = canonical || currentUrl;
   
@@ -50,7 +50,7 @@ export const SEO = ({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "CodeHubMaster",
-    "url": "https://codehubmaster.lovable.app/",
+    "url": "https://codehubmaster.site/",
     "description": "Learn coding with AI-powered tutorials"
   };
 
@@ -60,8 +60,8 @@ export const SEO = ({
     "@type": "EducationalOrganization",
     "name": "CodeHubMaster",
     "description": "Free coding education platform with AI-powered tutorials and programming guides",
-    "url": "https://codehubmaster.lovable.app",
-    "logo": "https://codehubmaster.lovable.app/favicon.png"
+    "url": "https://codehubmaster.site",
+    "logo": "https://codehubmaster.site/favicon.png"
   };
 
   // Article schema for content pages
@@ -74,14 +74,14 @@ export const SEO = ({
     "author": {
       "@type": "Organization",
       "name": "CodeHubMaster",
-      "url": "https://codehubmaster.lovable.app"
+      "url": "https://codehubmaster.site"
     },
     "publisher": {
       "@type": "Organization",
       "name": "CodeHubMaster",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://codehubmaster.lovable.app/favicon.png"
+        "url": "https://codehubmaster.site/favicon.png"
       }
     },
     "datePublished": articleData.publishedTime || new Date().toISOString(),

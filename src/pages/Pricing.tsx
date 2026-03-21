@@ -155,7 +155,7 @@ const Pricing = () => {
         title="Free AI Coding Assistant - Compare Plans & Pricing | CodeHubMaster"
         description="Get free AI-powered coding help with our Code Free plan. Compare our affordable pricing: Free plan (15 questions/month), Pro (₹99), and Advance (₹499). Start learning Python, JavaScript, and more today!"
         keywords="free AI coding assistant, coding course pricing, python course free, learn programming free, AI code helper free, affordable coding courses, code assistant pricing"
-        canonical="https://codehubmaster.lovable.app/pricing"
+        canonical="https://codehubmaster.site/pricing"
         faqData={[
           { question: "Is CodeHubMaster really free?", answer: "Yes! Our Code Free plan gives you 15 AI-powered coding questions per month at absolutely no cost. No credit card required." },
           { question: "What do I get for free?", answer: "Free users get: 5 questions every 10 days (15/month), AI-powered answers with code examples, access to all programming topics including Python, JavaScript, and more." },
@@ -163,8 +163,8 @@ const Pricing = () => {
           { question: "Can I cancel anytime?", answer: "Yes, all plans are flexible. You can cancel, upgrade, or downgrade at any time with no hidden fees." }
         ]}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "Pricing", url: "https://codehubmaster.lovable.app/pricing" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "Pricing", url: "https://codehubmaster.site/pricing" }
         ]}
       />
       

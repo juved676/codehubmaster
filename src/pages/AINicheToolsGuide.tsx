@@ -104,9 +104,9 @@ const AINicheToolsGuide = () => {
   ];
 
   const breadcrumbs = [
-    { name: 'Home', url: 'https://codehubmaster.lovable.app/' },
-    { name: 'AI Guides', url: 'https://codehubmaster.lovable.app/ai-capabilities-guide' },
-    { name: 'Niche AI Tools 2026', url: 'https://codehubmaster.lovable.app/ai-niche-tools-complete-guide' },
+    { name: 'Home', url: 'https://codehubmaster.site/' },
+    { name: 'AI Guides', url: 'https://codehubmaster.site/ai-capabilities-guide' },
+    { name: 'Niche AI Tools 2026', url: 'https://codehubmaster.site/ai-niche-tools-complete-guide' },
   ];
 
   return (
@@ -115,7 +115,7 @@ const AINicheToolsGuide = () => {
         title="Niche AI Tools for Every Profession: 2026 Industry Guide"
         description="Explore niche AI tools for creative agencies, healthcare, insurance, sustainability & business. 50+ picks across 8 industries. 2026 edition inside."
         keywords="ai marketing automation for doctors, voice ai systems for patient call automation, best voice ai for automating patient intake calls, ai automation for customer onboarding, ai tools for ui/ux design automation 2024, ai avatar tools with integrated scriptwriting assistance, compare ai voiceover options in ugc video tools, gen ai tools to create a low fidelity wireframes, top ai cloud business management platform tools, ai patient education dental tools 2024, best ai interior design tools, ai tools for content gap analysis, ai tools for nonprofits, best ai phishing detection tools, ai tools for instructional design, ai tools for security questionnaires, best ai patent tools, best ai tools for agile teams 2025, best ai-powered fare optimization tools for airlines, diffit ai teacher tools educational technology, governance tools for enterprise ai model lifecycle management, affordable ai meeting assistant tools for startups, ai generative tools with best customer satisfaction 2025, ai image description tool, ai landscaping tool, ai patent tools with best reviews, ai tools for executive search firms, ai tools for multi-channel phishing protection, ai visibility optimization tools, best ai feedback tools for training programs 2025, best ai knowledge management tools for enterprise search, best ai sales training tools for role-playing customer interactions 2025, best ai tools for accountants in b2b saas, best ai tools for sales reps handling objections 2025, best ai tools for sales role-play, best enterprise ai search tool reviews, best tools for managing ai governance in workflows, best-rated ai patent application tools, leading ai patent drafting tool, most recommended ai ad creative analysis tools"
-        canonical="https://codehubmaster.lovable.app/ai-niche-tools-complete-guide"
+        canonical="https://codehubmaster.site/ai-niche-tools-complete-guide"
         faqData={faqData}
         breadcrumbs={breadcrumbs}
         articleData={{

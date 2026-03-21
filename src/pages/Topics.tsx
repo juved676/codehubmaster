@@ -78,15 +78,15 @@ const Topics = () => {
         title="Free Python, JavaScript & React Tutorials - Learn Coding Online | CodeHubMaster"
         description="Browse 500+ free coding tutorials on Python, JavaScript, React, SQL, Machine Learning, and more. Organized by skill level with step-by-step guides and code examples."
         keywords="free python tutorials, javascript course, react tutorial, sql lessons, machine learning guide, coding tutorials online, learn programming free, web development course"
-        canonical="https://codehubmaster.lovable.app/topics"
+        canonical="https://codehubmaster.site/topics"
         faqData={[
           { question: "What programming topics can I learn for free?", answer: "Python, JavaScript, React, SQL, Machine Learning, Data Science, Algorithms, and DevOps - all completely free." },
           { question: "How many tutorials are available?", answer: "Over 500 questions answered across 8 major topic categories, from beginner to advanced." },
           { question: "Which topic should beginners start with?", answer: "Python Basics is the best starting point. It's beginner-friendly and teaches fundamental programming concepts." }
         ]}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "Topics", url: "https://codehubmaster.lovable.app/topics" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "Topics", url: "https://codehubmaster.site/topics" }
         ]}
       />
       

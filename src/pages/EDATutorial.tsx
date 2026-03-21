@@ -121,7 +121,7 @@ const TOCItem = ({ href, children, level = 1 }: { href: string; children: React.
 export default function EDATutorial() {
   const [progress, setProgress] = useState(0);
 
-  const canonicalUrl = "https://codehubmaster.lovable.app/eda-tutorial-python";
+  const canonicalUrl = "https://codehubmaster.site/eda-tutorial-python";
   const pageTitle = "Complete Exploratory Data Analysis (EDA) Tutorial Python 2025 | Step-by-Step Guide with Code";
   const pageDescription = "Master EDA with Python! Step-by-step tutorial with pandas, seaborn. Learn data analysis, visualization, cleaning techniques. Perfect for beginners. Download free code.";
 
@@ -150,9 +150,9 @@ export default function EDATutorial() {
   ];
 
   const breadcrumbs = [
-    { name: "Home", url: "https://codehubmaster.lovable.app" },
-    { name: "Topics", url: "https://codehubmaster.lovable.app/topics" },
-    { name: "Data Science", url: "https://codehubmaster.lovable.app/topic/data-science" },
+    { name: "Home", url: "https://codehubmaster.site" },
+    { name: "Topics", url: "https://codehubmaster.site/topics" },
+    { name: "Data Science", url: "https://codehubmaster.site/topic/data-science" },
     { name: "EDA Tutorial Python", url: canonicalUrl }
   ];
 
@@ -171,7 +171,7 @@ export default function EDATutorial() {
       "name": "CodeHubMaster",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://codehubmaster.lovable.app/favicon.png"
+        "url": "https://codehubmaster.site/favicon.png"
       }
     },
     "datePublished": "2025-01-15T00:00:00Z",

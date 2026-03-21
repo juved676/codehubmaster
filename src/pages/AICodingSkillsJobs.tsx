@@ -74,7 +74,7 @@ const AICodingSkillsJobs = () => {
         title="AI Coding Skills for Jobs 2025 | Developer Career Guide"
         description="Learn AI coding skills for jobs 2025. Discover agentic AI coding tools, AI tools for developers, and AI tools for instructional design. Prepare for the future of tech."
         keywords="AI coding skills for jobs 2025, agentic AI coding tools, AI tools for developers, AI tools for instructional design, future tech careers"
-        canonical="https://codehubmaster.lovable.app/ai-coding-skills-for-jobs-2025"
+        canonical="https://codehubmaster.site/ai-coding-skills-for-jobs-2025"
         articleData={{
           publishedTime: "2026-01-31",
           modifiedTime: "2026-01-31",
@@ -83,8 +83,8 @@ const AICodingSkillsJobs = () => {
         }}
         faqData={faqData}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "AI Coding Skills for Jobs 2025", url: "https://codehubmaster.lovable.app/ai-coding-skills-for-jobs-2025" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "AI Coding Skills for Jobs 2025", url: "https://codehubmaster.site/ai-coding-skills-for-jobs-2025" }
         ]}
       />
 

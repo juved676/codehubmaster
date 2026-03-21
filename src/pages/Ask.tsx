@@ -337,7 +337,7 @@ export default function Ask() {
         title="AI Coding Assistant - Instant Python & JavaScript Help | CodeHubMaster"
         description="Ask any programming question to our advanced AI and get instant, intelligent code solutions. AI-powered Python, JavaScript, React, and web development help with automated code generation."
         keywords="AI coding assistant, AI programming help, artificial intelligence coding, GPT code generator, automated coding, intelligent programming, AI developer tools, machine learning code"
-        canonical="https://codehubmaster.lovable.app/ask"
+        canonical="https://codehubmaster.site/ask"
         isAIContent={true}
         faqData={[
           { question: "What is an AI coding assistant?", answer: "An AI coding assistant uses artificial intelligence and machine learning to understand your programming questions and generate intelligent code solutions instantly." },
@@ -345,8 +345,8 @@ export default function Ask() {
           { question: "What programming languages does the AI support?", answer: "Our AI assistant supports Python, JavaScript, React, HTML, CSS, SQL, and many more programming languages and frameworks with intelligent code generation." }
         ]}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "AI Assistant", url: "https://codehubmaster.lovable.app/ask" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "AI Assistant", url: "https://codehubmaster.site/ask" }
         ]}
       />
       

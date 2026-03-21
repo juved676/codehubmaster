@@ -79,7 +79,7 @@ const AIToolsDataScience = () => {
         title="AI Tools for Data Science Beginners | Learn Data Analysis with AI"
         description="Discover AI tools for data science beginners. Learn Python data analysis with a free AI tutor. Automate data pipelines and build real projects on CodeHubMaster."
         keywords="AI tools for data science beginners, data science AI tutor free, AI tools for automating Python data analysis pipelines, learn data science, Python data analysis"
-        canonical="https://codehubmaster.lovable.app/ai-tools-for-data-science"
+        canonical="https://codehubmaster.site/ai-tools-for-data-science"
         articleData={{
           publishedTime: "2026-01-31",
           modifiedTime: "2026-01-31",
@@ -88,8 +88,8 @@ const AIToolsDataScience = () => {
         }}
         faqData={faqData}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "AI Tools for Data Science", url: "https://codehubmaster.lovable.app/ai-tools-for-data-science" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "AI Tools for Data Science", url: "https://codehubmaster.site/ai-tools-for-data-science" }
         ]}
       />
 
