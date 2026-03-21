@@ -117,7 +117,7 @@ export default function HowAIHelpsInCoding() {
         title="How AI Helps in Coding | Learn Programming with AI Assistance"
         description="Discover how AI helps in coding for beginners. Learn what coding is used for AI, whether coding is required, and how AI removes fear of programming."
         keywords="how ai helps in coding, what coding is used for ai, do ai need coding, is coding required for ai, learn coding with ai, ai coding assistant"
-        canonical="https://codehubmaster.lovable.app/how-ai-helps-in-coding"
+        canonical="https://codehubmaster.site/how-ai-helps-in-coding"
       />
       
       <main className="min-h-screen bg-background">

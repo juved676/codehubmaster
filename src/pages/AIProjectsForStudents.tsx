@@ -106,7 +106,7 @@ export default function AIProjectsForStudents() {
         title="AI Projects for Students | Build Projects with AI Help & Source Code"
         description="Create AI projects for students with complete source code and step-by-step guidance. Build Python AI projects, web apps, and ML projects using AI on this platform."
         keywords="ai projects for students, ai project for student with source code, ai project for student github, ai projects pdf, python ai projects, student ai projects"
-        canonical="https://codehubmaster.lovable.app/ai-projects-for-students"
+        canonical="https://codehubmaster.site/ai-projects-for-students"
       />
       
       <main className="min-h-screen bg-background">

@@ -76,9 +76,9 @@ const AIAge25Stories = () => {
   ];
 
   const breadcrumbs = [
-    { name: 'Home', url: 'https://codehubmaster.lovable.app/' },
-    { name: 'AI Guides', url: 'https://codehubmaster.lovable.app/ai-tools-mega-guide-2025' },
-    { name: 'The AI Age: 25 Stories', url: 'https://codehubmaster.lovable.app/the-ai-age-25-stories' },
+    { name: 'Home', url: 'https://codehubmaster.site/' },
+    { name: 'AI Guides', url: 'https://codehubmaster.site/ai-tools-mega-guide-2025' },
+    { name: 'The AI Age: 25 Stories', url: 'https://codehubmaster.site/the-ai-age-25-stories' },
   ];
 
   return (
@@ -87,7 +87,7 @@ const AIAge25Stories = () => {
         title="The AI Age: 25 Stories of Humans and Machines | CodeHubMaster"
         description="25 real stories about AI automation in finance, healthcare, IT, logistics & more. How humans and machines work together. Read in 5 minutes each."
         keywords="ai tools for automating python data analysis pipelines, retail ai vision automation, ai automation build llm apps, ai logistics automation news 2025, leading ai tax automation companies, claims automation ai news, marketing automation ai news, best it service management software with ai automation, ai automation consulting, automating healthcare tasks with ai, best voice ai for healthcare front-desk automation, automated financial reporting with ai, voice ai systems for patient call automation, ai automation market trends germany 2025, ai sales automation hotels uk statistics 2025"
-        canonical="https://codehubmaster.lovable.app/the-ai-age-25-stories"
+        canonical="https://codehubmaster.site/the-ai-age-25-stories"
         articleData={{
           publishedTime: '2025-06-01T00:00:00Z',
           modifiedTime: '2026-03-04T00:00:00Z',

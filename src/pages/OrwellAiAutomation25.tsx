@@ -37,7 +37,7 @@ const OrwellAiAutomation25 = () => {
         title="The Orwell Files: 25 Stories of AI Automation | CodeHubMaster"
         description="25 critical examinations of AI automation in finance, healthcare, energy, lending, and more. How technology changes work, power, and human judgment."
         keywords={allKeywords}
-        canonical="https://codehubmaster.lovable.app/the-orwell-ai-automation-25"
+        canonical="https://codehubmaster.site/the-orwell-ai-automation-25"
         articleData={{
           publishedTime: '2025-06-01T00:00:00Z',
           modifiedTime: new Date().toISOString(),
@@ -46,8 +46,8 @@ const OrwellAiAutomation25 = () => {
         }}
         faqData={faqData}
         breadcrumbs={[
-          { name: 'Home', url: 'https://codehubmaster.lovable.app/' },
-          { name: 'The Orwell Files', url: 'https://codehubmaster.lovable.app/the-orwell-ai-automation-25' },
+          { name: 'Home', url: 'https://codehubmaster.site/' },
+          { name: 'The Orwell Files', url: 'https://codehubmaster.site/the-orwell-ai-automation-25' },
         ]}
       />
 

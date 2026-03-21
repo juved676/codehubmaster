@@ -38,7 +38,7 @@ export default function QuestionDetail() {
     );
   }
 
-  const canonicalUrl = `https://codehubmaster.lovable.app/question/${topic}/${id}`;
+  const canonicalUrl = `https://codehubmaster.site/question/${topic}/${id}`;
   const pageTitle = `${question.title} - Python Tutorial with Code Example | CodeHubMaster`;
   const pageDescription = `Learn ${question.title.toLowerCase()}. ${question.body.substring(0, 120)}... Free Python tutorial with working code examples.`;
 
@@ -52,8 +52,8 @@ export default function QuestionDetail() {
 
   // Breadcrumb data for navigation schema
   const breadcrumbs = [
-    { name: "Home", url: "https://codehubmaster.lovable.app" },
-    { name: topic?.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) || "Topics", url: `https://codehubmaster.lovable.app/topic/${topic}` },
+    { name: "Home", url: "https://codehubmaster.site" },
+    { name: topic?.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) || "Topics", url: `https://codehubmaster.site/topic/${topic}` },
     { name: question.title, url: canonicalUrl }
   ];
 

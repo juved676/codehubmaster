@@ -141,7 +141,7 @@ export default function Question() {
     );
   }
 
-  const canonicalUrl = `https://codehubmaster.lovable.app/question/${id}`;
+  const canonicalUrl = `https://codehubmaster.site/question/${id}`;
   const pageTitle = `${question.title} - AI Answer | CodeHub`;
   const pageDescription = question.body.substring(0, 155);
 

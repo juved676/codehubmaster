@@ -124,7 +124,7 @@ def smart_sort(
         title="Free AI Coding Assistant - GPT-4, Claude & Gemini Powered | CodeHubMaster"
         description="Get free AI-powered coding help using GPT-4, Claude 3.5, and Gemini Pro. See how our AI generates production-ready code in seconds. Compare with GitHub Copilot. Try free today!"
         keywords="free AI coding assistant, GPT-4 code generator, Claude AI programming, free GitHub Copilot alternative, AI code helper, AI programming assistant free"
-        canonical="https://codehubmaster.lovable.app/ai-technology"
+        canonical="https://codehubmaster.site/ai-technology"
         isAIContent={true}
         faqData={[
           { question: "Is the AI coding assistant free?", answer: "Yes! Get 15 free AI-powered coding questions per month. No credit card required." },
@@ -132,8 +132,8 @@ def smart_sort(
           { question: "How fast are AI responses?", answer: "Most coding questions are answered in 2-5 seconds with complete code examples." }
         ]}
         breadcrumbs={[
-          { name: "Home", url: "https://codehubmaster.lovable.app" },
-          { name: "AI Technology", url: "https://codehubmaster.lovable.app/ai-technology" }
+          { name: "Home", url: "https://codehubmaster.site" },
+          { name: "AI Technology", url: "https://codehubmaster.site/ai-technology" }
         ]}
       />
 

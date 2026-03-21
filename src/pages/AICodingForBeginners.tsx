@@ -44,7 +44,7 @@ const AICodingForBeginners = () => {
         title="AI Coding for Beginners | Learn Programming with AI Assistant"
         description="Start your coding journey with AI assistance. Learn Python, Web Development, and build real projects with our AI-powered platform. Perfect for complete beginners."
         keywords="ai coding for beginners, learn coding with ai, ai programming tutorial, beginner coding ai, ai code helper"
-        canonical="https://codehubmaster.lovable.app/ai-coding-for-beginners"
+        canonical="https://codehubmaster.site/ai-coding-for-beginners"
       />
       
       {/* Hero Section */}

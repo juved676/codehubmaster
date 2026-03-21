@@ -2,11 +2,11 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "CodeHubMaster",
-  "url": "https://codehubmaster.lovable.app/",
+  "url": "https://codehubmaster.site/",
   "description": "Learn coding with AI-powered tutorials",
   "publisher": {
     "@type": "EducationalOrganization",
     "name": "CodeHubMaster",
-    "url": "https://codehubmaster.lovable.app"
+    "url": "https://codehubmaster.site"
   }
 }

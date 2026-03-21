@@ -76,7 +76,7 @@ const PythonWithAI = () => {
         title="Python with AI | Learn Python Programming with AI Assistant"
         description="Master Python programming with AI assistance. Get instant code generation, error debugging, and step-by-step project guidance. Perfect for students and beginners."
         keywords="python with ai, learn python ai, python ai tutorial, python code generator, ai python programming"
-        canonical="https://codehubmaster.lovable.app/python-with-ai"
+        canonical="https://codehubmaster.site/python-with-ai"
       />
       
       {/* Hero Section */}

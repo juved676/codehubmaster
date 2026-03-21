@@ -129,7 +129,7 @@ const HostingGuide = () => {
         title="Launch Your Project - Web Hosting Guide | CodeHubMaster"
         description="Learn how to launch your coding projects online. Get 90% off web hosting with our exclusive Hostinger discount. Step-by-step guide for beginners."
         keywords="web hosting, launch project, deploy website, hostinger, hosting guide, go live"
-        canonical="https://codehubmaster.lovable.app/hosting-guide"
+        canonical="https://codehubmaster.site/hosting-guide"
       />
 
       {/* Hero Section */}

@@ -50,7 +50,7 @@ const Home = () => {
         title="AI Coding Assistant - Intelligent Programming Help | CodeHubMaster"
         description="Advanced AI-powered coding assistant for Python, JavaScript, and web development. Get instant AI-generated code solutions, debugging help, and machine learning tutorials. Free AI coding platform."
         keywords="AI coding assistant, AI programming help, artificial intelligence coding, machine learning code generator, GPT coding assistant, AI developer tools, automated code generation, intelligent programming"
-        canonical="https://codehubmaster.lovable.app"
+        canonical="https://codehubmaster.site"
         isAIContent={true}
       />
       
