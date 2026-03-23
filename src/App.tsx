@@ -39,6 +39,7 @@ const AIToolsMegaGuide = lazy(() => import("./pages/AIToolsMegaGuide"));
 const AINicheToolsGuide = lazy(() => import("./pages/AINicheToolsGuide"));
 const AIAge25Stories = lazy(() => import("./pages/AIAge25Stories"));
 const OrwellAiAutomation25 = lazy(() => import("./pages/OrwellAiAutomation25"));
+const AIAutomationGuides = lazy(() => import("./pages/AIAutomationGuides"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
