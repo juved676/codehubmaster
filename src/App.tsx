@@ -39,6 +39,7 @@ const AIToolsMegaGuide = lazy(() => import("./pages/AIToolsMegaGuide"));
 const AINicheToolsGuide = lazy(() => import("./pages/AINicheToolsGuide"));
 const AIAge25Stories = lazy(() => import("./pages/AIAge25Stories"));
 const OrwellAiAutomation25 = lazy(() => import("./pages/OrwellAiAutomation25"));
+const AIAutomationGuides = lazy(() => import("./pages/AIAutomationGuides"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -85,6 +86,7 @@ const App = () => (
                   <Route path="/ai-niche-tools-complete-guide" element={<AINicheToolsGuide />} />
                   <Route path="/the-ai-age-25-stories" element={<AIAge25Stories />} />
                   <Route path="/the-orwell-ai-automation-25" element={<OrwellAiAutomation25 />} />
+                  <Route path="/ai-automation-guides" element={<AIAutomationGuides />} />
                   <Route path="/auth" element={<Auth />} />
                   
                   {/* Topic pages - consolidated to single dynamic route */}
