@@ -40,6 +40,9 @@ const AINicheToolsGuide = lazy(() => import("./pages/AINicheToolsGuide"));
 const AIAge25Stories = lazy(() => import("./pages/AIAge25Stories"));
 const OrwellAiAutomation25 = lazy(() => import("./pages/OrwellAiAutomation25"));
 const AIAutomationGuides = lazy(() => import("./pages/AIAutomationGuides"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Disclaimer = lazy(() => import("./pages/Disclaimer"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
