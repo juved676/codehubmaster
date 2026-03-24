@@ -90,6 +90,9 @@ const App = () => (
                   <Route path="/the-ai-age-25-stories" element={<AIAge25Stories />} />
                   <Route path="/the-orwell-ai-automation-25" element={<OrwellAiAutomation25 />} />
                   <Route path="/ai-automation-guides" element={<AIAutomationGuides />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/disclaimer" element={<Disclaimer />} />
+                  <Route path="/contact" element={<ContactUs />} />
                   <Route path="/auth" element={<Auth />} />
                   
                   {/* Topic pages - consolidated to single dynamic route */}

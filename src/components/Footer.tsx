@@ -177,8 +177,16 @@ export default function Footer() {
                 Try AI Assistant
               </Link>
               <span className="text-muted-foreground">•</span>
-              <Link to="/about-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Privacy Policy
+              </Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Disclaimer
+              </Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Contact
               </Link>
             </div>
           </div>
