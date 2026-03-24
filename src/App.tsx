@@ -40,6 +40,9 @@ const AINicheToolsGuide = lazy(() => import("./pages/AINicheToolsGuide"));
 const AIAge25Stories = lazy(() => import("./pages/AIAge25Stories"));
 const OrwellAiAutomation25 = lazy(() => import("./pages/OrwellAiAutomation25"));
 const AIAutomationGuides = lazy(() => import("./pages/AIAutomationGuides"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Disclaimer = lazy(() => import("./pages/Disclaimer"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -87,6 +90,9 @@ const App = () => (
                   <Route path="/the-ai-age-25-stories" element={<AIAge25Stories />} />
                   <Route path="/the-orwell-ai-automation-25" element={<OrwellAiAutomation25 />} />
                   <Route path="/ai-automation-guides" element={<AIAutomationGuides />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/disclaimer" element={<Disclaimer />} />
+                  <Route path="/contact" element={<ContactUs />} />
                   <Route path="/auth" element={<Auth />} />
                   
                   {/* Topic pages - consolidated to single dynamic route */}

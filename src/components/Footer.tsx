@@ -109,7 +109,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Topics */}
+          {/* Topics & Legal */}
           <div>
             <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <Code className="h-4 w-4 text-primary" />
@@ -143,7 +143,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/about-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  About & Policy
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Disclaimer
                 </Link>
               </li>
             </ul>
@@ -162,8 +177,16 @@ export default function Footer() {
                 Try AI Assistant
               </Link>
               <span className="text-muted-foreground">•</span>
-              <Link to="/about-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Privacy Policy
+              </Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Disclaimer
+              </Link>
+              <span className="text-muted-foreground">•</span>
+              <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Contact
               </Link>
             </div>
           </div>
